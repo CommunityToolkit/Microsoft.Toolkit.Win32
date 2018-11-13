@@ -11,11 +11,11 @@ using uwpXaml = Windows.UI.Xaml;
 namespace Microsoft.Toolkit.Wpf.UI.XamlHost
 {
     /// <summary>
-    /// Dual interface (<see cref="IValueConverter"/> and <see cref="Windows.UI.Xaml.Data.IValueConverter"/>),
+    /// Dual interface (<see cref="IValueConverter"/> and <see cref="uwpXaml.Data.IValueConverter"/>),
     /// assumes that the conversion is between a <see cref="WindowsXamlHostBase"/> and its wrapped <see cref="UIElement"/>
     /// and attempts to return the correct instance of each.
     /// </summary>
-    public class WindowsXamlHostWrapperConverter : IValueConverter, Windows.UI.Xaml.Data.IValueConverter
+    public class WindowsXamlHostWrapperConverter : IValueConverter, uwpXaml.Data.IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

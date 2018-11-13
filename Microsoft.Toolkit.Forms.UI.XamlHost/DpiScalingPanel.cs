@@ -4,13 +4,15 @@
 
 using System;
 using System.Diagnostics;
+using foundation = Windows.Foundation;
+using uwpXaml = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Forms.UI.XamlHost
 {
     /// <summary>
     /// Panel that implements a scale factor for the XAML content using a render transform
     /// </summary>
-    internal class DpiScalingPanel : Windows.UI.Xaml.Controls.Panel
+    internal class DpiScalingPanel : uwpXaml.Controls.Panel
     {
         public DpiScalingPanel()
         {
@@ -21,17 +23,17 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// </summary>
         /// <param name="availableSize">Available Size</param>
         /// <returns>XAML DesiredSize</returns>
-        protected override Windows.Foundation.Size MeasureOverride(Windows.Foundation.Size availableSize)
+        protected override foundation.Size MeasureOverride(foundation.Size availableSize)
         {
-            Windows.Foundation.Size desiredSize = new Windows.Foundation.Size(0, 0);
+            foundation.Size desiredSize = new foundation.Size(0, 0);
 
-            Windows.UI.Xaml.UIElement element = Child;
+            uwpXaml.UIElement element = Child;
 
             if (element != null)
             {
                 try
                 {
-                    element.Measure(new Windows.Foundation.Size(availableSize.Width / _scalingFactor, availableSize.Height / _scalingFactor));
+                    element.Measure(new foundation.Size(availableSize.Width / _scalingFactor, availableSize.Height / _scalingFactor));
                 }
                 catch (Exception)
                 {
@@ -53,15 +55,15 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// </summary>
         /// <param name="finalSize">Final Size</param>
         /// <returns>Size</returns>
-        protected override Windows.Foundation.Size ArrangeOverride(Windows.Foundation.Size finalSize)
+        protected override foundation.Size ArrangeOverride(foundation.Size finalSize)
         {
-            Windows.UI.Xaml.UIElement element = Child;
+            uwpXaml.UIElement element = Child;
 
             if (element != null)
             {
                 try
                 {
-                    Windows.Foundation.Rect finalRect = new Windows.Foundation.Rect(0, 0, finalSize.Width / _scalingFactor, finalSize.Height / _scalingFactor);
+                    foundation.Rect finalRect = new foundation.Rect(0, 0, finalSize.Width / _scalingFactor, finalSize.Height / _scalingFactor);
                     element.Arrange(finalRect);
                 }
                 catch (Exception)
@@ -76,7 +78,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// <summary>
         ///    Gets or sets XAML content
         /// </summary>
-        public Windows.UI.Xaml.UIElement Child
+        public uwpXaml.UIElement Child
         {
             get
             {
@@ -107,7 +109,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
 
             _scalingFactor = newScalingFactor;
 
-            Windows.UI.Xaml.UIElement element = Child;
+            uwpXaml.UIElement element = Child;
 
             if (element == null)
             {
@@ -120,7 +122,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
                 return;
             }
 
-            Windows.UI.Xaml.Media.ScaleTransform newScaleTransform = new Windows.UI.Xaml.Media.ScaleTransform();
+            uwpXaml.Media.ScaleTransform newScaleTransform = new uwpXaml.Media.ScaleTransform();
             newScaleTransform.ScaleX = newScalingFactor;
             newScaleTransform.ScaleY = newScalingFactor;
 

@@ -11,6 +11,7 @@ using Microsoft.Toolkit.Win32.UI.Controls.Interop.Win32;
 using Microsoft.Toolkit.Win32.UI.XamlHost;
 using Windows.Foundation.Metadata;
 using Windows.UI.Xaml;
+using uwpXaml = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Forms.UI.XamlHost
 {
@@ -24,7 +25,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// <summary>
         /// DesktopWindowXamlSource instance
         /// </summary>
-        protected internal readonly Windows.UI.Xaml.Hosting.DesktopWindowXamlSource _xamlSource;
+        protected internal readonly uwpXaml.Hosting.DesktopWindowXamlSource _xamlSource;
 
         /// <summary>
         ///    A render transform to scale the UWP XAML content should be applied
@@ -37,14 +38,14 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// lifetime.  UWP XAML is spun up on the first WindowsXamlManager creation and
         /// deinitialized when the last instance of WindowsXamlManager is destroyed.
         /// </summary>
-        private readonly Windows.UI.Xaml.Hosting.WindowsXamlManager _windowsXamlManager;
+        private readonly uwpXaml.Hosting.WindowsXamlManager _windowsXamlManager;
 
         /// <summary>
         /// UWP XAML Application instance and root UWP XamlMetadataProvider.  Custom implementation required to
         /// probe at runtime for custom UWP XAML type information.  This must be created before
         /// creating any DesktopWindowXamlSource instances if custom UWP XAML types are required.
         /// </summary>
-        private readonly Windows.UI.Xaml.Application _application;
+        private readonly uwpXaml.Application _application;
 
         /// <summary>
         /// Private field that backs ChildInternal property.
@@ -117,10 +118,10 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             // not been created before creating DesktopWindowXamlSource, DesktopWindowXaml source
             // will create an instance of WindowsXamlManager internally.  (Creation is explicit
             // here to illustrate how to initialize UWP XAML before initializing the DesktopWindowXamlSource.)
-            _windowsXamlManager = Windows.UI.Xaml.Hosting.WindowsXamlManager.InitializeForCurrentThread();
+            _windowsXamlManager = uwpXaml.Hosting.WindowsXamlManager.InitializeForCurrentThread();
 
             // Create DesktopWindowXamlSource, host for UWP XAML content
-            _xamlSource = new Windows.UI.Xaml.Hosting.DesktopWindowXamlSource();
+            _xamlSource = new uwpXaml.Hosting.DesktopWindowXamlSource();
 
             // Hook up method for DesktopWindowXamlSource Focus handling
             _xamlSource.TakeFocusRequested += this.OnTakeFocusRequested;
@@ -156,7 +157,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        protected Windows.UI.Xaml.UIElement ChildInternal
+        protected uwpXaml.UIElement ChildInternal
         {
             get => _childInternal;
 
@@ -169,8 +170,8 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
                         return;
                     }
 
-                    var newFrameworkElement = value as Windows.UI.Xaml.FrameworkElement;
-                    var oldFrameworkElement = ChildInternal as Windows.UI.Xaml.FrameworkElement;
+                    var newFrameworkElement = value as uwpXaml.FrameworkElement;
+                    var oldFrameworkElement = ChildInternal as uwpXaml.FrameworkElement;
 
                     if (oldFrameworkElement != null)
                     {
@@ -202,7 +203,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// Sets the root UWP XAML element on DesktopWindowXamlSource
         /// </summary>
         /// <param name="newValue">A UWP XAML Framework element</param>
-        protected virtual void SetContent(Windows.UI.Xaml.UIElement newValue)
+        protected virtual void SetContent(uwpXaml.UIElement newValue)
         {
             if (_xamlSource != null)
             {

@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using Microsoft.Toolkit.Win32.UI.XamlHost;
 using Windows.UI.Xaml;
+using uwpXaml = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Wpf.UI.XamlHost
 {
@@ -20,19 +21,19 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// probe at runtime for custom UWP XAML type information.  This must be created before
         /// creating any DesktopWindowXamlSource instances if custom UWP XAML types are required.
         /// </summary>
-        private readonly Windows.UI.Xaml.Application _application;
+        private readonly uwpXaml.Application _application;
 
         /// <summary>
         /// UWP XAML DesktopWindowXamlSource instance that hosts XAML content in a win32 application
         /// </summary>
-        private readonly Windows.UI.Xaml.Hosting.DesktopWindowXamlSource _xamlSource;
+        private readonly uwpXaml.Hosting.DesktopWindowXamlSource _xamlSource;
 
         /// <summary>
         /// A reference count on the UWP XAML framework is tied to WindowsXamlManager's
         /// lifetime.  UWP XAML is spun up on the first WindowsXamlManager creation and
         /// deinitialized when the last instance of WindowsXamlManager is destroyed.
         /// </summary>
-        private readonly Windows.UI.Xaml.Hosting.WindowsXamlManager _windowsXamlManager;
+        private readonly uwpXaml.Hosting.WindowsXamlManager _windowsXamlManager;
 
         /// <summary>
         /// Private field that backs ChildInternal property.
@@ -66,10 +67,10 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
             // not been created before creating DesktopWindowXamlSource, DesktopWindowXaml source
             // will create an instance of WindowsXamlManager internally.  (Creation is explicit
             // here to illustrate how to initialize UWP XAML before initializing the DesktopWindowXamlSource.)
-            _windowsXamlManager = Windows.UI.Xaml.Hosting.WindowsXamlManager.InitializeForCurrentThread();
+            _windowsXamlManager = uwpXaml.Hosting.WindowsXamlManager.InitializeForCurrentThread();
 
             // Create DesktopWindowXamlSource, host for UWP XAML content
-            _xamlSource = new Windows.UI.Xaml.Hosting.DesktopWindowXamlSource();
+            _xamlSource = new uwpXaml.Hosting.DesktopWindowXamlSource();
 
             // Hook DesktopWindowXamlSource OnTakeFocus event for Focus processing
             _xamlSource.TakeFocusRequested += OnTakeFocusRequested;
@@ -99,17 +100,17 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// <param name="uwpProperty">the related DependencyProperty of the UWP control</param>
         /// <param name="converter">a converter, if one's needed</param>
         /// <param name="direction">indicates that the binding should be one or two directional.  If one way, the Uwp control is only updated from the wrapper.</param>
-        public void Bind(string propertyName, System.Windows.DependencyProperty wpfProperty, Windows.UI.Xaml.DependencyProperty uwpProperty, object converter = null, System.ComponentModel.BindingDirection direction = System.ComponentModel.BindingDirection.TwoWay)
+        public void Bind(string propertyName, System.Windows.DependencyProperty wpfProperty, uwpXaml.DependencyProperty uwpProperty, object converter = null, System.ComponentModel.BindingDirection direction = System.ComponentModel.BindingDirection.TwoWay)
         {
             if (direction == System.ComponentModel.BindingDirection.TwoWay)
             {
-                var binder = new Windows.UI.Xaml.Data.Binding()
+                var binder = new uwpXaml.Data.Binding()
                 {
                     Source = this,
-                    Path = new Windows.UI.Xaml.PropertyPath(propertyName),
-                    Converter = (Windows.UI.Xaml.Data.IValueConverter)converter
+                    Path = new uwpXaml.PropertyPath(propertyName),
+                    Converter = (uwpXaml.Data.IValueConverter)converter
                 };
-                Windows.UI.Xaml.Data.BindingOperations.SetBinding(ChildInternal, uwpProperty, binder);
+                uwpXaml.Data.BindingOperations.SetBinding(ChildInternal, uwpProperty, binder);
             }
 
             var rebinder = new System.Windows.Data.Binding()
@@ -135,9 +136,9 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// <summary>
         /// Gets or sets the root UWP XAML element displayed in the WPF control instance.
         /// </summary>
-        /// <value>The <see cref="Windows.UI.Xaml.UIElement"/> child.</value>
-        /// <remarks>This UWP XAML element is the root element of the wrapped <see cref="Windows.UI.Xaml.Hosting.DesktopWindowXamlSource" />.</remarks>
-        protected Windows.UI.Xaml.UIElement ChildInternal
+        /// <value>The <see cref="uwpXaml.UIElement"/> child.</value>
+        /// <remarks>This UWP XAML element is the root element of the wrapped <see cref="uwpXaml.Hosting.DesktopWindowXamlSource" />.</remarks>
+        protected uwpXaml.UIElement ChildInternal
         {
             get
             {
@@ -151,7 +152,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
                     return;
                 }
 
-                var currentRoot = (Windows.UI.Xaml.FrameworkElement)ChildInternal;
+                var currentRoot = (uwpXaml.FrameworkElement)ChildInternal;
                 if (currentRoot != null)
                 {
                     currentRoot.SizeChanged -= XamlContentSizeChanged;
@@ -160,7 +161,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
                 _childInternal = value;
                 SetContent();
 
-                var frameworkElement = ChildInternal as Windows.UI.Xaml.FrameworkElement;
+                var frameworkElement = ChildInternal as uwpXaml.FrameworkElement;
                 if (frameworkElement != null)
                 {
                     // If XAML content has changed, check XAML size
@@ -191,8 +192,8 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         protected bool IsDisposed { get; set; }
 
         /// <summary>
-        /// Creates <see cref="Windows.UI.Xaml.Application" /> object, wrapped <see cref="Windows.UI.Xaml.Hosting.DesktopWindowXamlSource" /> instance; creates and
-        /// sets root UWP XAML element on <see cref="Windows.UI.Xaml.Hosting.DesktopWindowXamlSource" />.
+        /// Creates <see cref="uwpXaml.Application" /> object, wrapped <see cref="uwpXaml.Hosting.DesktopWindowXamlSource" /> instance; creates and
+        /// sets root UWP XAML element on <see cref="uwpXaml.Hosting.DesktopWindowXamlSource" />.
         /// </summary>
         /// <param name="hwndParent">Parent window handle</param>
         /// <returns>Handle to XAML window</returns>

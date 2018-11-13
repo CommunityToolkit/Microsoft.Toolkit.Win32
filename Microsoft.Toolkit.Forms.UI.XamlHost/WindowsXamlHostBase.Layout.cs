@@ -5,6 +5,7 @@
 using System;
 using System.Drawing;
 using Microsoft.Toolkit.Forms.UI.XamlHost.Interop.Win32;
+using foundation = Windows.Foundation;
 
 namespace Microsoft.Toolkit.Forms.UI.XamlHost
 {
@@ -51,7 +52,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
                     proposedWidth /= _lastDpi / 96.0f;
                 }
 
-                _xamlSource.Content.Measure(new Windows.Foundation.Size(proposedWidth, proposedHeight));
+                _xamlSource.Content.Measure(new foundation.Size(proposedWidth, proposedHeight));
             }
 
             var preferredSize = Size.Empty;
@@ -165,14 +166,14 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
                     // XamlContenHost Control.Size has changed. XAML must perform an Arrange pass.
                     // The XAML Arrange pass will expand XAML content with 'HorizontalStretch' and
                     // 'VerticalStretch' properties to the bounds of the XamlContentHost Control.
-                    var rect = new Windows.Foundation.Rect(0, 0, Width, Height);
+                    var rect = new foundation.Rect(0, 0, Width, Height);
                     if (_xamlIslandHandlesDpiScaling)
                     {
                         rect.Width /= _lastDpi / 96.0f;
                         rect.Height /= _lastDpi / 96.0f;
                     }
 
-                    _xamlSource.Content.Measure(new Windows.Foundation.Size(rect.Width, rect.Height));
+                    _xamlSource.Content.Measure(new foundation.Size(rect.Width, rect.Height));
                     _xamlSource.Content.Arrange(rect);
                     PerformLayout();
                 }
