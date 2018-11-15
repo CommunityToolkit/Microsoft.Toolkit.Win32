@@ -25,8 +25,7 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
 
         private void inkToolbar_Initialized(object sender, EventArgs e)
         {
-           // Handle ink toolbar initialization events here
-            
+            // Handle ink toolbar initialization events here
         }
 
         private void inkToolbar_ActiveToolChanged(object sender, object e)
@@ -42,6 +41,53 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
 
             // Set the map location.
             await myMap.TrySetViewAsync(cityCenter, 12);
+        }
+
+        private void WindowsXamlHost_Loaded(object sender, RoutedEventArgs e)
+        {
+            var stackPanel = new Windows.UI.Xaml.Controls.StackPanel()
+            {
+                Background = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Black),
+            };
+
+            stackPanel.Children.Add(new Windows.UI.Xaml.Shapes.Rectangle()
+            {
+                Width = 50,
+                Height = 75,
+                Fill = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Blue),
+            });
+
+            stackPanel.Children.Add(new Windows.UI.Xaml.Shapes.Rectangle()
+            {
+                Width = 200,
+                Height = 30,
+                Fill = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red),
+            });
+
+            stackPanel.Children.Add(new Windows.UI.Xaml.Controls.Button()
+            {
+                Width = 160,
+                Height = 60,
+                HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
+                Content = "This is a UWP Button",
+            });
+
+            stackPanel.Children.Add(new Windows.UI.Xaml.Shapes.Rectangle()
+            {
+                Width = 25,
+                Height = 100,
+                Fill = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Green),
+            });
+
+            stackPanel.Children.Add(new Windows.UI.Xaml.Controls.Button()
+            {
+                Width = 300,
+                Height = 40,
+                HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
+                Content = "Another long UWP Button",
+            });
+
+            windowsXamlHost.Child = stackPanel;
         }
     }
 
