@@ -61,6 +61,16 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
                 Content = "Another long UWP Button",
             });
 
+            var comboBox = new Windows.UI.Xaml.Controls.ComboBox()
+            {
+                HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
+            };
+            comboBox.Items.Add("One");
+            comboBox.Items.Add("Two");
+            comboBox.Items.Add("Three");
+            comboBox.Items.Add("Four");
+            stackPanel.Children.Add(comboBox);
+
             windowsXamlHost.Child = stackPanel;
         }
     }

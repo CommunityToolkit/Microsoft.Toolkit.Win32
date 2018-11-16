@@ -5,12 +5,11 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Security.Permissions;
 using System.Windows.Forms;
-using Microsoft.Toolkit.Win32.UI.Controls.Interop.Win32;
 using Microsoft.Toolkit.Win32.UI.XamlHost;
 using Windows.Foundation.Metadata;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 
 namespace Microsoft.Toolkit.Forms.UI.XamlHost
 {
@@ -72,6 +71,15 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         private double _lastDpi = 96.0f;
 
         /// <summary>
+        ///     When a window containing Xaml content moves, Xaml closes all open popups. We need the same behavior for Xaml
+        ///     content in the DesktopWindowXamlSource. Since the DesktopWindowXamlSource itself is not notified when the
+        ///     Form moves, we attach handlers to the Form's SizeChanged and LocationChanged events and use the Xaml
+        ///     VisualTreeHelper API to close all open popups in an event handler. The Form is not reachable until after
+        ///     this control is created. This field tracks the Form so we can detach the event handlers during cleanup.
+        /// </summary>
+        private Form _form;
+
+        /// <summary>
         ///     Fired when XAML content has been updated
         /// </summary>
         [Browsable(true)]
@@ -130,6 +138,8 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
 
             // Add scaling panel as the root XAML element
             _xamlSource.Content = new DpiScalingPanel();
+
+            HandleCreated += WindowsXamlHostBase_HandleCreated;
         }
 
         protected WindowsXamlHostBase(string typeName)
@@ -139,6 +149,34 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             {
                 ChildInternal = UWPTypeFactory.CreateXamlContentByType(typeName);
                 ChildInternal.SetWrapper(this);
+            }
+        }
+
+        /// <summary>
+        /// Attaches event handlers to Form.SizeChanged and Form.LocationChanged to close all popups opened by the
+        /// Xaml content inside the DesktopWindowXamlSource.
+        /// </summary>
+        private void WindowsXamlHostBase_HandleCreated(object sender, EventArgs e)
+        {
+            if (_form == null)
+            {
+                _form = FindForm();
+                _form.SizeChanged += OnFormSizeOrLocationChanged;
+                _form.LocationChanged += OnFormSizeOrLocationChanged;
+            }
+        }
+
+        /// <summary>
+        /// Close all popups opened by the Xaml content inside the DesktopWindowXamlSource.
+        /// </summary>
+        private void OnFormSizeOrLocationChanged(object sender, EventArgs e)
+        {
+#pragma warning disable 8305    // Experimental API
+            ContentRoot contentRoot = ContentRoot.GetForElement(_childInternal);
+            var openPopups = VisualTreeHelper.GetOpenPopupsWithinContentRoot(contentRoot);
+            foreach (Windows.UI.Xaml.Controls.Primitives.Popup popup in openPopups)
+            {
+                popup.IsOpen = false;
             }
         }
 
@@ -246,6 +284,13 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             {
                 SizeChanged -= OnWindowXamlHostSizeChanged;
                 ChildInternal?.ClearWrapper();
+
+                if (_form != null)
+                {
+                    _form.SizeChanged -= OnFormSizeOrLocationChanged;
+                    _form.LocationChanged -= OnFormSizeOrLocationChanged;
+                    _form = null;
+                }
 
                 // Required by CA2213: _xamlSource?.Dispose() is insufficient.
                 if (_xamlSource != null)
