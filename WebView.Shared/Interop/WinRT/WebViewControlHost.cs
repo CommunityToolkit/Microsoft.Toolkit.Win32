@@ -13,6 +13,7 @@ using Microsoft.Toolkit.Win32.UI.Controls.Interop.Win32;
 using Windows.Foundation.Metadata;
 using Windows.Web;
 using Windows.Web.Http;
+using Windows.Web.Http.Headers;
 using Windows.Web.UI;
 using Windows.Web.UI.Interop;
 using Rect = Windows.Foundation.Rect;
@@ -619,7 +620,18 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
             {
                 foreach (var header in headers)
                 {
-                    requestMessage.Headers.Add(header);
+                    // The Content-Type header can only be specified with requests that have content (e.g. POST, PUT, etc.)
+                    // Not setting in this manner results in an exception:
+                    //  "Misused header name. Make sure request headers are used with HttpRequestMessage, response headers with HttpResponseMessage, and content headers with HttpContent objects."
+                    if ("Content-Type".Equals(header.Key, StringComparison.OrdinalIgnoreCase) &&
+                        requestMessage.Content != null)
+                    {
+                        requestMessage.Content.Headers.ContentType = new HttpMediaTypeHeaderValue(header.Value);
+                    }
+                    else
+                    {
+                        requestMessage.Headers.Add(header);
+                    }
                 }
             }
 
