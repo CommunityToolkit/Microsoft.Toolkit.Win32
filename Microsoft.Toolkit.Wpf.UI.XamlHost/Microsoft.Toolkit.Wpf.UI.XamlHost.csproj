@@ -1,10 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
     <RootNamespace>Microsoft.Toolkit.Wpf.UI.XamlHost</RootNamespace>
     <AssemblyName>Microsoft.Toolkit.Wpf.UI.XamlHost</AssemblyName>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
 
     <Title>Windows Community Toolkit XAMLHost for WPF</Title>
     <Description>This library provides XAML islands helpers for WPF. It is part of the Windows Community Toolkit.</Description>
@@ -17,8 +16,22 @@
     <TargetPlatformMinVersion>10.0.17692.0</TargetPlatformMinVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+    <UseWPF>true</UseWPF>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
+    <!--<RunCodeAnalysis>true</RunCodeAnalysis>-->
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(RunCodeAnalysis)' == 'true' ">
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
@@ -40,7 +53,6 @@
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
-    <FrameworkReference Include="Microsoft.DesktopUI" />
     <PackageReference Include="System.Runtime.WindowsRuntime" Version="4.6.0-preview1-27018-01" />
     <PackageReference Include="System.Runtime.WindowsRuntime.UI.Xaml" Version="4.6.0-preview1-27018-01" />
     <Reference Include="Windows">
