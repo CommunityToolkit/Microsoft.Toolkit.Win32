@@ -4,8 +4,7 @@
 
 using System;
 using System.Windows;
-using foundation = Windows.Foundation;
-using uwpXaml = Windows.UI.Xaml;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Wpf.UI.XamlHost
 {
@@ -25,7 +24,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
 
             if (_xamlSource.Content != null)
             {
-                _xamlSource.Content.Measure(new foundation.Size(constraint.Width, constraint.Height));
+                _xamlSource.Content.Measure(new windows.Foundation.Size(constraint.Width, constraint.Height));
                 desiredSize.Width = _xamlSource.Content.DesiredSize.Width;
                 desiredSize.Height = _xamlSource.Content.DesiredSize.Height;
             }
@@ -48,7 +47,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
                 // Arrange is required to support HorizontalAlignment and VerticalAlignment properties
                 // set to 'Stretch'.  The UWP XAML content will be 0 in the stretch alignment direction
                 // until Arrange is called, and the UWP XAML content is expanded to fill the available space.
-                var finalRect = new foundation.Rect(0, 0, finalSize.Width, finalSize.Height);
+                var finalRect = new windows.Foundation.Rect(0, 0, finalSize.Width, finalSize.Height);
                 _xamlSource.Content.Arrange(finalRect);
             }
 
@@ -59,8 +58,8 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// UWP XAML content size changed
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="uwpXaml.SizeChangedEventArgs"/> instance containing the event data.</param>
-        protected void XamlContentSizeChanged(object sender, uwpXaml.SizeChangedEventArgs e)
+        /// <param name="e">The <see cref="windows.UI.Xaml.SizeChangedEventArgs"/> instance containing the event data.</param>
+        protected void XamlContentSizeChanged(object sender, windows.UI.Xaml.SizeChangedEventArgs e)
         {
             InvalidateMeasure();
         }

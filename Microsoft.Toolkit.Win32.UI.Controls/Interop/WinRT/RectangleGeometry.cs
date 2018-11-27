@@ -2,50 +2,52 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Xaml.Media.RectangleGeometry"/>
+    /// <see cref="windows.UI.Xaml.Media.RectangleGeometry"/>
     /// </summary>
     public class RectangleGeometry
     {
-        private Windows.UI.Xaml.Media.RectangleGeometry UwpInstance { get; }
+        private windows.UI.Xaml.Media.RectangleGeometry UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RectangleGeometry"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Xaml.Media.RectangleGeometry"/>
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Xaml.Media.RectangleGeometry"/>
         /// </summary>
-        public RectangleGeometry(Windows.UI.Xaml.Media.RectangleGeometry instance)
+        public RectangleGeometry(windows.UI.Xaml.Media.RectangleGeometry instance)
         {
             this.UwpInstance = instance;
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Media.RectangleGeometry.Rect"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Media.RectangleGeometry.Rect"/>
         /// </summary>
-        public Windows.Foundation.Rect Rect
+        public windows.Foundation.Rect Rect
         {
             get => UwpInstance.Rect;
             set => UwpInstance.Rect = value;
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Xaml.Media.RectangleGeometry"/> to <see cref="RectangleGeometry"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Xaml.Media.RectangleGeometry"/> to <see cref="RectangleGeometry"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Media.RectangleGeometry"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Media.RectangleGeometry"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator RectangleGeometry(
-            Windows.UI.Xaml.Media.RectangleGeometry args)
+            windows.UI.Xaml.Media.RectangleGeometry args)
         {
             return FromRectangleGeometry(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="RectangleGeometry"/> from <see cref="Windows.UI.Xaml.Media.RectangleGeometry"/>.
+        /// Creates a <see cref="RectangleGeometry"/> from <see cref="windows.UI.Xaml.Media.RectangleGeometry"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Media.RectangleGeometry"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Media.RectangleGeometry"/> instance containing the event data.</param>
         /// <returns><see cref="RectangleGeometry"/></returns>
-        public static RectangleGeometry FromRectangleGeometry(Windows.UI.Xaml.Media.RectangleGeometry args)
+        public static RectangleGeometry FromRectangleGeometry(windows.UI.Xaml.Media.RectangleGeometry args)
         {
             return new RectangleGeometry(args);
         }

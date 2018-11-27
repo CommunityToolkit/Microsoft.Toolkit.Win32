@@ -6,7 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using Microsoft.Toolkit.Win32.UI.XamlHost;
-using uwpXaml = Windows.UI.Xaml;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Forms.UI.XamlHost
 {
@@ -65,10 +65,10 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// <summary>
         /// Gets or sets XAML content for XamlContentHost
         /// </summary>
-        /// <value>The <see cref="uwpXaml.UIElement"/>.</value>
+        /// <value>The <see cref="windows.UI.Xaml.UIElement"/>.</value>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public uwpXaml.UIElement Child
+        public windows.UI.Xaml.UIElement Child
         {
             get => ChildInternal;
 

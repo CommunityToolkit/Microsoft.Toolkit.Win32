@@ -4,35 +4,35 @@
 
 using System;
 using System.Collections.Generic;
-using uwpXaml = Windows.UI.Xaml;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
     /// <summary>
-    /// XamlApplication is a custom <see cref="uwpXaml.Application" /> that implements <see cref="uwpXaml.Markup.IXamlMetadataProvider" />. The
+    /// XamlApplication is a custom <see cref="windows.UI.Xaml.Application" /> that implements <see cref="windows.UI.Xaml.Markup.IXamlMetadataProvider" />. The
     /// metadata provider implemented on the application is known as the 'root metadata provider'.  This provider
     /// has the responsibility of loading all other metadata for custom UWP XAML types.  In this implementation,
     /// reflection is used at runtime to probe for metadata providers in the working directory, allowing any
     /// type that includes metadata (compiled in to a .NET framework assembly) to be used without explicit
     /// metadata handling by the developer.
     /// </summary>
-    internal class XamlApplication : uwpXaml.Application, uwpXaml.Markup.IXamlMetadataProvider
+    internal class XamlApplication : windows.UI.Xaml.Application, windows.UI.Xaml.Markup.IXamlMetadataProvider
     {
         private static readonly List<Type> FilteredTypes = new List<Type>
         {
             typeof(XamlApplication),
-            typeof(uwpXaml.Markup.IXamlMetadataProvider)
+            typeof(windows.UI.Xaml.Markup.IXamlMetadataProvider)
         };
 
         // Metadata provider identified by the root metadata provider
-        private List<uwpXaml.Markup.IXamlMetadataProvider> _metadataProviders = null;
+        private List<windows.UI.Xaml.Markup.IXamlMetadataProvider> _metadataProviders = null;
 
         /// <summary>
-        /// Gets XAML <see cref="uwpXaml.Markup.IXamlType"/> interface from all cached metadata providers for the <paramref name="type"/>.
+        /// Gets XAML <see cref="windows.UI.Xaml.Markup.IXamlType"/> interface from all cached metadata providers for the <paramref name="type"/>.
         /// </summary>
         /// <param name="type">Type of requested type</param>
         /// <returns>IXamlType interface or null if type is not found</returns>
-        public uwpXaml.Markup.IXamlType GetXamlType(Type type)
+        public windows.UI.Xaml.Markup.IXamlType GetXamlType(Type type)
         {
             EnsureMetadataProviders();
 
@@ -52,8 +52,8 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         /// Gets XAML IXamlType interface from all cached metadata providers by full type name
         /// </summary>
         /// <param name="fullName">Full name of requested type</param>
-        /// <returns><see cref="uwpXaml.Markup.IXamlType"/> if found; otherwise, null.</returns>
-        public uwpXaml.Markup.IXamlType GetXamlType(string fullName)
+        /// <returns><see cref="windows.UI.Xaml.Markup.IXamlType"/> if found; otherwise, null.</returns>
+        public windows.UI.Xaml.Markup.IXamlType GetXamlType(string fullName)
         {
             EnsureMetadataProviders();
 
@@ -73,11 +73,11 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         /// Gets all XAML namespace definitions from metadata providers
         /// </summary>
         /// <returns>Array of namespace definitions</returns>
-        public uwpXaml.Markup.XmlnsDefinition[] GetXmlnsDefinitions()
+        public windows.UI.Xaml.Markup.XmlnsDefinition[] GetXmlnsDefinitions()
         {
             EnsureMetadataProviders();
 
-            var definitions = new List<uwpXaml.Markup.XmlnsDefinition>();
+            var definitions = new List<windows.UI.Xaml.Markup.XmlnsDefinition>();
             foreach (var provider in _metadataProviders)
             {
                 definitions.AddRange(provider.GetXmlnsDefinitions());
@@ -102,7 +102,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         /// If the current XAML Application instance has not been created for the process (is null),
         /// a new <see cref="Microsoft.Toolkit.Win32.UI.XamlHost.XamlApplication" /> instance is created and returned.
         /// </summary>
-        internal static void GetOrCreateXamlApplicationInstance(ref uwpXaml.Application application)
+        internal static void GetOrCreateXamlApplicationInstance(ref windows.UI.Xaml.Application application)
         {
             // Instantiation of the application object must occur before creating the DesktopWindowXamlSource instance.
             // DesktopWindowXamlSource will create a generic Application object unable to load custom UWP XAML metadata.
@@ -110,9 +110,9 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
             {
                 try
                 {
-                    // Windows.UI.Xaml.Application.Current may throw if DXamlCore has not been initialized.
-                    // Treat the exception as an uninitialized Windows.UI.Xaml.Application condition.
-                    application = uwpXaml.Application.Current;
+                    // windows.UI.Xaml.Application.Current may throw if DXamlCore has not been initialized.
+                    // Treat the exception as an uninitialized windows.UI.Xaml.Application condition.
+                    application = windows.UI.Xaml.Application.Current;
                 }
                 catch
                 {

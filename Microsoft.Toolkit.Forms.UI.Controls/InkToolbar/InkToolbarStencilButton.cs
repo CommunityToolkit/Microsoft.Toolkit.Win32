@@ -7,25 +7,26 @@ using System.ComponentModel;
 using Microsoft.Toolkit.Forms.UI.XamlHost;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 using Windows.UI.Xaml;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
     /// <summary>
-    /// WinForms-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.InkToolbarStencilButton"/>
+    /// WinForms-enabled wrapper for <see cref="windows.UI.Xaml.Controls.InkToolbarStencilButton"/>
     /// </summary>
     [Designer(typeof(InkToolbarToolButtonDesigner))]
     public class InkToolbarStencilButton : WindowsXamlHostBase
     {
-        internal Windows.UI.Xaml.Controls.InkToolbarStencilButton UwpControl => ChildInternal as Windows.UI.Xaml.Controls.InkToolbarStencilButton;
+        internal windows.UI.Xaml.Controls.InkToolbarStencilButton UwpControl => ChildInternal as windows.UI.Xaml.Controls.InkToolbarStencilButton;
 
         private System.Collections.Generic.Dictionary<string, object> DesignerProperties { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InkToolbarStencilButton"/> class, a
-        /// WinForms-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.InkToolbarStencilButton"/>
+        /// WinForms-enabled wrapper for <see cref="windows.UI.Xaml.Controls.InkToolbarStencilButton"/>
         /// </summary>
         public InkToolbarStencilButton()
-            : this(typeof(Windows.UI.Xaml.Controls.InkToolbarStencilButton).FullName)
+            : this(typeof(windows.UI.Xaml.Controls.InkToolbarStencilButton).FullName)
         {
         }
 
@@ -52,38 +53,38 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the underlying Uwp control's IsExtensionGlyphShown property is set <see cref="Windows.UI.Xaml.Controls.InkToolbarToolButton.IsExtensionGlyphShown"/>
+        /// Gets or sets a value indicating whether the underlying Uwp control's IsExtensionGlyphShown property is set <see cref="windows.UI.Xaml.Controls.InkToolbarToolButton.IsExtensionGlyphShown"/>
         /// </summary>
         [DefaultValue(false)]
         public bool IsExtensionGlyphShown { get => (bool)this.GetUwpControlValue(); set => this.SetUwpControlValue(value); }
 
         /// <summary>
-        /// Gets or sets the underlying Uwp Control's SelectedStencil value <see cref="Windows.UI.Xaml.Controls.InkToolbarStencilButton.SelectedStencil"/>
+        /// Gets or sets the underlying Uwp Control's SelectedStencil value <see cref="windows.UI.Xaml.Controls.InkToolbarStencilButton.SelectedStencil"/>
         /// </summary>
         [DefaultValue(InkToolbarStencilKind.Ruler)]
-        public InkToolbarStencilKind SelectedStencil { get => (InkToolbarStencilKind)this.GetUwpControlValue(); set => this.SetUwpControlValue((Windows.UI.Xaml.Controls.InkToolbarStencilKind)value); }
+        public InkToolbarStencilKind SelectedStencil { get => (InkToolbarStencilKind)this.GetUwpControlValue(); set => this.SetUwpControlValue((windows.UI.Xaml.Controls.InkToolbarStencilKind)value); }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the underlying Uwp control's IsRulerItemVisible property is set <see cref="Windows.UI.Xaml.Controls.InkToolbarStencilButton.IsRulerItemVisible"/>
+        /// Gets or sets a value indicating whether the underlying Uwp control's IsRulerItemVisible property is set <see cref="windows.UI.Xaml.Controls.InkToolbarStencilButton.IsRulerItemVisible"/>
         /// </summary>
         [DefaultValue(false)]
         public bool IsRulerItemVisible { get => (bool)this.GetUwpControlValue(); set => this.SetUwpControlValue(value); }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the underlying Uwp control's IsProtractorItemVisible property is set <see cref="Windows.UI.Xaml.Controls.InkToolbarStencilButton.IsProtractorItemVisible"/>
+        /// Gets or sets a value indicating whether the underlying Uwp control's IsProtractorItemVisible property is set <see cref="windows.UI.Xaml.Controls.InkToolbarStencilButton.IsProtractorItemVisible"/>
         /// </summary>
         [DefaultValue(false)]
         public bool IsProtractorItemVisible { get => (bool)this.GetUwpControlValue(); set => this.SetUwpControlValue(value); }
 
         /// <summary>
-        /// Gets the underlying Uwp Control's Protractor value <see cref="Windows.UI.Xaml.Controls.InkToolbarStencilButton.Protractor"/>
+        /// Gets the underlying Uwp Control's Protractor value <see cref="windows.UI.Xaml.Controls.InkToolbarStencilButton.Protractor"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public InkPresenterProtractor Protractor { get => UwpControl?.Protractor; }
 
         /// <summary>
-        /// Gets the underlying Uwp Control's Ruler value <see cref="Windows.UI.Xaml.Controls.InkToolbarStencilButton.Ruler"/>
+        /// Gets the underlying Uwp Control's Ruler value <see cref="windows.UI.Xaml.Controls.InkToolbarStencilButton.Ruler"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

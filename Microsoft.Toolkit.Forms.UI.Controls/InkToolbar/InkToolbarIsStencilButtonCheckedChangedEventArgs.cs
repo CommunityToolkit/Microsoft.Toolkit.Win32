@@ -5,19 +5,20 @@
 using System;
 using Microsoft.Toolkit.Forms.UI.XamlHost;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
     /// <summary>
     /// Provides data for events. This class cannot be inherited.
     /// </summary>
-    /// <remarks>Copy from <see cref="Windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs"/> to avoid requirement to link Windows.winmd</remarks>
-    /// <seealso cref="Windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs"/>
+    /// <remarks>Copy from <see cref="windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs"/> to avoid requirement to link Windows.winmd</remarks>
+    /// <seealso cref="windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs"/>
     public sealed class InkToolbarIsStencilButtonCheckedChangedEventArgs : EventArgs
     {
-        private readonly Windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs _args;
+        private readonly windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs _args;
 
-        internal InkToolbarIsStencilButtonCheckedChangedEventArgs(Windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs args)
+        internal InkToolbarIsStencilButtonCheckedChangedEventArgs(windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs args)
         {
             _args = args;
         }
@@ -27,22 +28,22 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         public InkToolbarStencilKind StencilKind => (InkToolbarStencilKind)_args.StencilKind;
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs"/> to <see cref="Microsoft.Toolkit.Forms.UI.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs"/> to <see cref="Microsoft.Toolkit.Forms.UI.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator InkToolbarIsStencilButtonCheckedChangedEventArgs(
-            Windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs args)
+            windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs args)
         {
             return FromInkToolbarIsStencilButtonCheckedChangedEventArgs(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="InkToolbarIsStencilButtonCheckedChangedEventArgs"/> from <see cref="Windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs"/>.
+        /// Creates a <see cref="InkToolbarIsStencilButtonCheckedChangedEventArgs"/> from <see cref="windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs"/> instance containing the event data.</param>
         /// <returns><see cref="InkToolbarIsStencilButtonCheckedChangedEventArgs"/></returns>
-        public static InkToolbarIsStencilButtonCheckedChangedEventArgs FromInkToolbarIsStencilButtonCheckedChangedEventArgs(Windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs args)
+        public static InkToolbarIsStencilButtonCheckedChangedEventArgs FromInkToolbarIsStencilButtonCheckedChangedEventArgs(windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs args)
         {
             return new InkToolbarIsStencilButtonCheckedChangedEventArgs(args);
         }

@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.Toolkit.Forms.UI.XamlHost;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
@@ -55,7 +56,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
 
         internal static object GetUwpControlValue(this WindowsXamlHostBase wrapper, object defaultValue = null, [CallerMemberName]string propName = null)
         {
-            Windows.UI.Xaml.UIElement control = wrapper.GetUwpInternalObject() as Windows.UI.Xaml.UIElement;
+            windows.UI.Xaml.UIElement control = wrapper.GetUwpInternalObject() as windows.UI.Xaml.UIElement;
             if (control != null)
             {
                 return control.GetType().GetRuntimeProperty(propName).GetValue(control);
@@ -74,7 +75,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
 
         internal static void SetUwpControlValue(this WindowsXamlHostBase wrapper, object value, [CallerMemberName]string propName = null)
         {
-            Windows.UI.Xaml.UIElement control = wrapper.GetUwpInternalObject() as Windows.UI.Xaml.UIElement;
+            windows.UI.Xaml.UIElement control = wrapper.GetUwpInternalObject() as windows.UI.Xaml.UIElement;
             if (control != null)
             {
                 control.GetType().GetRuntimeProperty(propName).SetValue(control, value);

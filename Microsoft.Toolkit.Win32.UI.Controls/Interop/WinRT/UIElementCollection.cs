@@ -2,41 +2,43 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Xaml.Controls.UIElementCollection"/>
+    /// <see cref="windows.UI.Xaml.Controls.UIElementCollection"/>
     /// </summary>
     public class UIElementCollection
     {
-        private Windows.UI.Xaml.Controls.UIElementCollection UwpInstance { get; }
+        private windows.UI.Xaml.Controls.UIElementCollection UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UIElementCollection"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.UIElementCollection"/>
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Xaml.Controls.UIElementCollection"/>
         /// </summary>
-        public UIElementCollection(Windows.UI.Xaml.Controls.UIElementCollection instance)
+        public UIElementCollection(windows.UI.Xaml.Controls.UIElementCollection instance)
         {
             this.UwpInstance = instance;
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Xaml.Controls.UIElementCollection"/> to <see cref="UIElementCollection"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Xaml.Controls.UIElementCollection"/> to <see cref="UIElementCollection"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.UIElementCollection"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.UIElementCollection"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator UIElementCollection(
-            Windows.UI.Xaml.Controls.UIElementCollection args)
+            windows.UI.Xaml.Controls.UIElementCollection args)
         {
             return FromUIElementCollection(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="UIElementCollection"/> from <see cref="Windows.UI.Xaml.Controls.UIElementCollection"/>.
+        /// Creates a <see cref="UIElementCollection"/> from <see cref="windows.UI.Xaml.Controls.UIElementCollection"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.UIElementCollection"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.UIElementCollection"/> instance containing the event data.</param>
         /// <returns><see cref="UIElementCollection"/></returns>
-        public static UIElementCollection FromUIElementCollection(Windows.UI.Xaml.Controls.UIElementCollection args)
+        public static UIElementCollection FromUIElementCollection(windows.UI.Xaml.Controls.UIElementCollection args)
         {
             return new UIElementCollection(args);
         }

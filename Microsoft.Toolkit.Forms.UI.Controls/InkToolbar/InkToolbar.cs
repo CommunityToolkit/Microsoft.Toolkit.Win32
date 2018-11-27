@@ -7,16 +7,17 @@ using System.ComponentModel;
 using Microsoft.Toolkit.Forms.UI.XamlHost;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 using Windows.UI.Xaml;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
     /// <summary>
-    /// WinForms-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.InkToolbar"/>
+    /// WinForms-enabled wrapper for <see cref="windows.UI.Xaml.Controls.InkToolbar"/>
     /// </summary>
     [Designer(typeof(InkToolbarDesigner))]
     public class InkToolbar : WindowsXamlHostBase
     {
-        protected Windows.UI.Xaml.Controls.InkToolbar UwpControl => GetUwpInternalObject() as Windows.UI.Xaml.Controls.InkToolbar;
+        protected windows.UI.Xaml.Controls.InkToolbar UwpControl => GetUwpInternalObject() as windows.UI.Xaml.Controls.InkToolbar;
 
         private InkCanvas _targetInkCanvas;
         private WindowsXamlHostBase _activeTool;
@@ -25,16 +26,16 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InkToolbar"/> class, a
-        /// WinForms-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.InkToolbar"/>
+        /// WinForms-enabled wrapper for <see cref="windows.UI.Xaml.Controls.InkToolbar"/>
         /// </summary>
         public InkToolbar()
-            : this(typeof(global::Windows.UI.Xaml.Controls.InkToolbar).FullName)
+            : this(typeof(windows.UI.Xaml.Controls.InkToolbar).FullName)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InkToolbar"/> class, a
-        /// WinForms-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.InkToolbar"/>
+        /// WinForms-enabled wrapper for <see cref="windows.UI.Xaml.Controls.InkToolbar"/>
         /// </summary>
         protected InkToolbar(string name)
             : base(name)
@@ -55,7 +56,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
                 UwpControl.InkDrawingAttributesChanged += OnInkDrawingAttributesChanged;
                 UwpControl.IsRulerButtonCheckedChanged += OnIsRulerButtonCheckedChanged;
                 UwpControl.IsStencilButtonCheckedChanged += OnIsStencilButtonCheckedChanged;
-                UwpControl.Visibility = Windows.UI.Xaml.Visibility.Collapsed; // supports a workaround for a bug:  InkToolbar won't initialize if it's not initially collapsed.
+                UwpControl.Visibility = windows.UI.Xaml.Visibility.Collapsed; // supports a workaround for a bug:  InkToolbar won't initialize if it's not initially collapsed.
                 UwpControl.Loaded += OnUwpControlLoaded;
             }
         }
@@ -70,9 +71,9 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         /// </summary>
         /// <param name="sender">event sender</param>
         /// <param name="e">event parameters</param>
-        private void OnUwpControlLoaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void OnUwpControlLoaded(object sender, windows.UI.Xaml.RoutedEventArgs e)
         {
-            UwpControl.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            UwpControl.Visibility = windows.UI.Xaml.Visibility.Visible;
             UwpControl.Loaded -= OnUwpControlLoaded;
         }
 
@@ -93,7 +94,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets the underlying Uwp control's TargetInkCanvas property <see cref="Windows.UI.Xaml.Controls.InkToolbar.TargetInkCanvas"/>
+        /// Gets or sets the underlying Uwp control's TargetInkCanvas property <see cref="windows.UI.Xaml.Controls.InkToolbar.TargetInkCanvas"/>
         /// </summary>
         [DefaultValue(null)]
         public InkCanvas TargetInkCanvas
@@ -129,7 +130,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.InkToolbar.IsRulerButtonChecked"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.InkToolbar.IsRulerButtonChecked"/>
         /// </summary>
         [DefaultValue(false)]
         public bool IsRulerButtonChecked
@@ -139,17 +140,17 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.InkToolbar.InitialControls"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.InkToolbar.InitialControls"/>
         /// </summary>
         [DefaultValue(InkToolbarInitialControls.All)]
         public InkToolbarInitialControls InitialControls
         {
             get => (InkToolbarInitialControls)this.GetUwpControlValue();
-            set => this.SetUwpControlValue((Windows.UI.Xaml.Controls.InkToolbarInitialControls)value);
+            set => this.SetUwpControlValue((windows.UI.Xaml.Controls.InkToolbarInitialControls)value);
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.InkToolbar.ActiveTool"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.InkToolbar.ActiveTool"/>
         /// </summary>
         [DefaultValue(null)]
         public WindowsXamlHostBase ActiveTool
@@ -172,7 +173,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
                     return;
                 }
 
-                UwpControl.ActiveTool = value?.GetUwpInternalObject() as Windows.UI.Xaml.Controls.InkToolbarToolButton;
+                UwpControl.ActiveTool = value?.GetUwpInternalObject() as windows.UI.Xaml.Controls.InkToolbarToolButton;
             }
         }
 
@@ -206,7 +207,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.InkToolbar.InkDrawingAttributes"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.InkToolbar.InkDrawingAttributes"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -216,17 +217,17 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.InkToolbar.Orientation"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.InkToolbar.Orientation"/>
         /// </summary>
         [DefaultValue(Orientation.Horizontal)]
         public Orientation Orientation
         {
             get => (Orientation)this.GetUwpControlValue();
-            set => this.SetUwpControlValue((Windows.UI.Xaml.Controls.Orientation)value);
+            set => this.SetUwpControlValue((windows.UI.Xaml.Controls.Orientation)value);
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.InkToolbar.IsStencilButtonChecked"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.InkToolbar.IsStencilButtonChecked"/>
         /// </summary>
         [DefaultValue(false)]
         public bool IsStencilButtonChecked
@@ -236,61 +237,61 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.InkToolbar.ButtonFlyoutPlacement"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.InkToolbar.ButtonFlyoutPlacement"/>
         /// </summary>
         [DefaultValue(InkToolbarButtonFlyoutPlacement.Auto)]
         public InkToolbarButtonFlyoutPlacement ButtonFlyoutPlacement
         {
             get => (InkToolbarButtonFlyoutPlacement)this.GetUwpControlValue();
-            set => this.SetUwpControlValue((Windows.UI.Xaml.Controls.InkToolbarButtonFlyoutPlacement)value);
+            set => this.SetUwpControlValue((windows.UI.Xaml.Controls.InkToolbarButtonFlyoutPlacement)value);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.InkToolbar.ActiveToolChanged"/>
+        /// <see cref="windows.UI.Xaml.Controls.InkToolbar.ActiveToolChanged"/>
         /// </summary>
         public event EventHandler<object> ActiveToolChanged = (sender, args) => { };
 
-        private void OnActiveToolChanged(Windows.UI.Xaml.Controls.InkToolbar sender, object args)
+        private void OnActiveToolChanged(windows.UI.Xaml.Controls.InkToolbar sender, object args)
         {
             ActiveToolChanged?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.InkToolbar.EraseAllClicked"/>
+        /// <see cref="windows.UI.Xaml.Controls.InkToolbar.EraseAllClicked"/>
         /// </summary>
         public event EventHandler<object> EraseAllClicked = (sender, args) => { };
 
-        private void OnEraseAllClicked(Windows.UI.Xaml.Controls.InkToolbar sender, object args)
+        private void OnEraseAllClicked(windows.UI.Xaml.Controls.InkToolbar sender, object args)
         {
             EraseAllClicked?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.InkToolbar.InkDrawingAttributesChanged"/>
+        /// <see cref="windows.UI.Xaml.Controls.InkToolbar.InkDrawingAttributesChanged"/>
         /// </summary>
         public event EventHandler<object> InkDrawingAttributesChanged = (sender, args) => { };
 
-        private void OnInkDrawingAttributesChanged(Windows.UI.Xaml.Controls.InkToolbar sender, object args)
+        private void OnInkDrawingAttributesChanged(windows.UI.Xaml.Controls.InkToolbar sender, object args)
         {
             InkDrawingAttributesChanged?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.InkToolbar.IsRulerButtonCheckedChanged"/>
+        /// <see cref="windows.UI.Xaml.Controls.InkToolbar.IsRulerButtonCheckedChanged"/>
         /// </summary>
         public event EventHandler<object> IsRulerButtonCheckedChanged = (sender, args) => { };
 
-        private void OnIsRulerButtonCheckedChanged(Windows.UI.Xaml.Controls.InkToolbar sender, object args)
+        private void OnIsRulerButtonCheckedChanged(windows.UI.Xaml.Controls.InkToolbar sender, object args)
         {
             IsRulerButtonCheckedChanged?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.InkToolbar.IsStencilButtonCheckedChanged"/>
+        /// <see cref="windows.UI.Xaml.Controls.InkToolbar.IsStencilButtonCheckedChanged"/>
         /// </summary>
         public event EventHandler<Microsoft.Toolkit.Forms.UI.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs> IsStencilButtonCheckedChanged = (sender, args) => { };
 
-        private void OnIsStencilButtonCheckedChanged(Windows.UI.Xaml.Controls.InkToolbar sender, Windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs args)
+        private void OnIsStencilButtonCheckedChanged(windows.UI.Xaml.Controls.InkToolbar sender, windows.UI.Xaml.Controls.InkToolbarIsStencilButtonCheckedChangedEventArgs args)
         {
             IsStencilButtonCheckedChanged?.Invoke(this, args);
         }

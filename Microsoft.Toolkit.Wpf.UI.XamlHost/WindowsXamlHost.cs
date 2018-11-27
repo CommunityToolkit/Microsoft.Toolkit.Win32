@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows;
 using Microsoft.Toolkit.Win32.UI.XamlHost;
-using uwpXaml = Windows.UI.Xaml;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Wpf.UI.XamlHost
 {
@@ -41,7 +41,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// </summary>
         /// <remarks>This UWP XAML element is the root element of the wrapped DesktopWindowXamlSource.</remarks>
         [Browsable(true)]
-        public uwpXaml.UIElement Child
+        public windows.UI.Xaml.UIElement Child
         {
             get => ChildInternal;
 
@@ -49,7 +49,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         }
 
         /// <summary>
-        /// Creates <see cref="uwpXaml.Application" /> object, wrapped <see cref="uwpXaml.Hosting.DesktopWindowXamlSource" /> instance; creates and
+        /// Creates <see cref="windows.UI.Xaml.Application" /> object, wrapped <see cref="windows.UI.Xaml.Hosting.DesktopWindowXamlSource" /> instance; creates and
         /// sets root UWP XAML element on DesktopWindowXamlSource.
         /// </summary>
         /// <param name="hwndParent">Parent window handle</param>
@@ -61,13 +61,13 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
             {
                 Child = UWPTypeFactory.CreateXamlContentByType(InitialTypeName);
 
-                var frameworkElement = Child as uwpXaml.FrameworkElement;
+                var frameworkElement = Child as windows.UI.Xaml.FrameworkElement;
 
                 // Default to stretch : UWP XAML content will conform to the size of WindowsXamlHost
                 if (frameworkElement != null)
                 {
-                    frameworkElement.HorizontalAlignment = uwpXaml.HorizontalAlignment.Stretch;
-                    frameworkElement.VerticalAlignment = uwpXaml.VerticalAlignment.Stretch;
+                    frameworkElement.HorizontalAlignment = windows.UI.Xaml.HorizontalAlignment.Stretch;
+                    frameworkElement.VerticalAlignment = windows.UI.Xaml.VerticalAlignment.Stretch;
                 }
             }
 
@@ -79,7 +79,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         {
             if (disposing && !IsDisposed)
             {
-                if (Child is uwpXaml.FrameworkElement frameworkElement)
+                if (Child is windows.UI.Xaml.FrameworkElement frameworkElement)
                 {
                     frameworkElement.SizeChanged -= XamlContentSizeChanged;
                 }

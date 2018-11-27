@@ -3,11 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Core.CoreInputDeviceTypes"/>
+    /// <see cref="windows.UI.Core.CoreInputDeviceTypes"/>
     /// </summary>
     [Flags]
     public enum CoreInputDeviceTypes : uint

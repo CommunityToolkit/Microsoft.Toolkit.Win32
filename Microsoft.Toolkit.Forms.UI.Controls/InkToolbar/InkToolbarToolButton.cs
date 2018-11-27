@@ -7,25 +7,26 @@ using System.ComponentModel;
 using Microsoft.Toolkit.Forms.UI.XamlHost;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 using Windows.UI.Xaml;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
     /// <summary>
-    /// WinForms-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.InkToolbarToolButton"/>
+    /// WinForms-enabled wrapper for <see cref="windows.UI.Xaml.Controls.InkToolbarToolButton"/>
     /// </summary>
     [Designer(typeof(InkToolbarToolButtonDesigner))]
     public class InkToolbarToolButton : WindowsXamlHostBase
     {
-        internal Windows.UI.Xaml.Controls.InkToolbarToolButton UwpControl => ChildInternal as Windows.UI.Xaml.Controls.InkToolbarToolButton;
+        internal windows.UI.Xaml.Controls.InkToolbarToolButton UwpControl => ChildInternal as windows.UI.Xaml.Controls.InkToolbarToolButton;
 
         private System.Collections.Generic.Dictionary<string, object> DesignerProperties { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InkToolbarToolButton"/> class, a
-        /// WinForms-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.InkToolbarToolButton"/>
+        /// WinForms-enabled wrapper for <see cref="windows.UI.Xaml.Controls.InkToolbarToolButton"/>
         /// </summary>
         public InkToolbarToolButton()
-            : this(typeof(Windows.UI.Xaml.Controls.InkToolbarToolButton).FullName)
+            : this(typeof(windows.UI.Xaml.Controls.InkToolbarToolButton).FullName)
         {
         }
 
@@ -52,13 +53,13 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the underlying Uwp control's IsExtensionGlyphShown property is set <see cref="Windows.UI.Xaml.Controls.InkToolbarToolButton.IsExtensionGlyphShown"/>
+        /// Gets or sets a value indicating whether the underlying Uwp control's IsExtensionGlyphShown property is set <see cref="windows.UI.Xaml.Controls.InkToolbarToolButton.IsExtensionGlyphShown"/>
         /// </summary>
         [DefaultValue(false)]
         public bool IsExtensionGlyphShown { get => (bool)this.GetUwpControlValue(); set => this.SetUwpControlValue(value); }
 
         /// <summary>
-        /// Gets the underlying Uwp control's Toolkind property <see cref="Windows.UI.Xaml.Controls.InkToolbarToolButton.ToolKind"/>
+        /// Gets the underlying Uwp control's Toolkind property <see cref="windows.UI.Xaml.Controls.InkToolbarToolButton.ToolKind"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

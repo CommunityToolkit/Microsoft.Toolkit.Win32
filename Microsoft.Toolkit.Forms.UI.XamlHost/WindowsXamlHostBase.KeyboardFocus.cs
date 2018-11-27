@@ -6,8 +6,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Microsoft.Toolkit.Forms.UI.XamlHost.Interop.Win32;
-using foundation = Windows.Foundation;
-using uwpXaml = Windows.UI.Xaml;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Forms.UI.XamlHost
 {
@@ -71,8 +70,8 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             if (!_xamlSource.HasFocus || _forceFocusNavigation)
             {
                 _forceFocusNavigation = false;
-                var reason = forward ? uwpXaml.Hosting.XamlSourceFocusNavigationReason.First : uwpXaml.Hosting.XamlSourceFocusNavigationReason.Last;
-                var request = new uwpXaml.Hosting.XamlSourceFocusNavigationRequest(reason, default(foundation.Rect));
+                var reason = forward ? windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.First : windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Last;
+                var request = new windows.UI.Xaml.Hosting.XamlSourceFocusNavigationRequest(reason, default(windows.Foundation.Rect));
                 _lastFocusRequest = request.CorrelationId;
                 var result = _xamlSource.NavigateFocus(request);
                 if (result.WasFocusMoved)
@@ -86,11 +85,11 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             {
                 // Temporary Focus handling for Redstone 5
 
-                // Call Windows.UI.Xaml.Input.FocusManager.TryMoveFocus Next or Previous and return
-                uwpXaml.Input.FocusNavigationDirection navigationDirection =
-                    forward ? uwpXaml.Input.FocusNavigationDirection.Next : uwpXaml.Input.FocusNavigationDirection.Previous;
+                // Call windows.UI.Xaml.Input.FocusManager.TryMoveFocus Next or Previous and return
+                windows.UI.Xaml.Input.FocusNavigationDirection navigationDirection =
+                    forward ? windows.UI.Xaml.Input.FocusNavigationDirection.Next : windows.UI.Xaml.Input.FocusNavigationDirection.Previous;
 
-                return uwpXaml.Input.FocusManager.TryMoveFocus(navigationDirection);
+                return windows.UI.Xaml.Input.FocusManager.TryMoveFocus(navigationDirection);
             }
         }
 
@@ -99,15 +98,15 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// </summary>
         /// <param name="sender">DesktopWindowsXamlSource</param>
         /// <param name="args">DesktopWindowXamlSourceTakeFocusRequestedEventArgs</param>
-        private void OnTakeFocusRequested(uwpXaml.Hosting.DesktopWindowXamlSource sender, uwpXaml.Hosting.DesktopWindowXamlSourceTakeFocusRequestedEventArgs args)
+        private void OnTakeFocusRequested(windows.UI.Xaml.Hosting.DesktopWindowXamlSource sender, windows.UI.Xaml.Hosting.DesktopWindowXamlSourceTakeFocusRequestedEventArgs args)
         {
             if (_lastFocusRequest == args.Request.CorrelationId)
             {
                 // If we've arrived at this point, then focus is being move back to us
                 // therefore, we should complete the operation to avoid an infinite recursion
                 // by "Restoring" the focus back to us under a new correlationId
-                var newRequest = new uwpXaml.Hosting.XamlSourceFocusNavigationRequest(
-                    uwpXaml.Hosting.XamlSourceFocusNavigationReason.Restore);
+                var newRequest = new windows.UI.Xaml.Hosting.XamlSourceFocusNavigationRequest(
+                    windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Restore);
                 _xamlSource.NavigateFocus(newRequest);
                 _lastFocusRequest = newRequest.CorrelationId;
             }
@@ -115,9 +114,9 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             {
                 // Focus was not initiated by WindowsXamlHost. Continue processing the Focus request.
                 var reason = args.Request.Reason;
-                if (reason == uwpXaml.Hosting.XamlSourceFocusNavigationReason.First || reason == uwpXaml.Hosting.XamlSourceFocusNavigationReason.Last)
+                if (reason == windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.First || reason == windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Last)
                 {
-                    var forward = reason == uwpXaml.Hosting.XamlSourceFocusNavigationReason.First;
+                    var forward = reason == windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.First;
                     _forceFocusNavigation = true;
                     try
                     {

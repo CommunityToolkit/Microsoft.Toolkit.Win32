@@ -6,13 +6,14 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 using Windows.Media.Core;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Wpf.UI.Controls
 {
     /// <summary>
     /// Dual interface IValueConverter, converts a uri string to UWP MediaSource and back on behalf of both WPF and UWP bindings.
     /// </summary>
-    internal class MediaSourceConverter : IValueConverter, Windows.UI.Xaml.Data.IValueConverter
+    internal class MediaSourceConverter : IValueConverter, windows.UI.Xaml.Data.IValueConverter
     {
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -29,7 +30,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
             throw new NotImplementedException();
         }
 
-        object Windows.UI.Xaml.Data.IValueConverter.Convert(object value, Type targetType, object parameter, string language)
+        object windows.UI.Xaml.Data.IValueConverter.Convert(object value, Type targetType, object parameter, string language)
         {
             if (value == null)
             {
@@ -40,7 +41,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
             return MediaSource.CreateFromUri(new Uri(value as string));
         }
 
-        object Windows.UI.Xaml.Data.IValueConverter.ConvertBack(object value, Type targetType, object parameter, string language)
+        object windows.UI.Xaml.Data.IValueConverter.ConvertBack(object value, Type targetType, object parameter, string language)
         {
             throw new NotImplementedException();
         }

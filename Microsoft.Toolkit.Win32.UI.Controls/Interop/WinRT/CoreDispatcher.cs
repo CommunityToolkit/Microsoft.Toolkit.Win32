@@ -2,26 +2,28 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Core.CoreDispatcher"/>
+    /// <see cref="windows.UI.Core.CoreDispatcher"/>
     /// </summary>
     public class CoreDispatcher
     {
-        private Windows.UI.Core.CoreDispatcher UwpInstance { get; }
+        private windows.UI.Core.CoreDispatcher UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CoreDispatcher"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Core.CoreDispatcher"/>
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Core.CoreDispatcher"/>
         /// </summary>
-        public CoreDispatcher(Windows.UI.Core.CoreDispatcher instance)
+        public CoreDispatcher(windows.UI.Core.CoreDispatcher instance)
         {
             this.UwpInstance = instance;
         }
 
         /// <summary>
-        /// Gets a value indicating whether <see cref="Windows.UI.Core.CoreDispatcher.HasThreadAccess"/>
+        /// Gets a value indicating whether <see cref="windows.UI.Core.CoreDispatcher.HasThreadAccess"/>
         /// </summary>
         public bool HasThreadAccess
         {
@@ -29,31 +31,31 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Core.CoreDispatcher.CurrentPriority"/>
+        /// Gets or sets <see cref="windows.UI.Core.CoreDispatcher.CurrentPriority"/>
         /// </summary>
-        public Windows.UI.Core.CoreDispatcherPriority CurrentPriority
+        public windows.UI.Core.CoreDispatcherPriority CurrentPriority
         {
             get => UwpInstance.CurrentPriority;
             set => UwpInstance.CurrentPriority = value;
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Core.CoreDispatcher"/> to <see cref="CoreDispatcher"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Core.CoreDispatcher"/> to <see cref="CoreDispatcher"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Core.CoreDispatcher"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Core.CoreDispatcher"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator CoreDispatcher(
-            Windows.UI.Core.CoreDispatcher args)
+            windows.UI.Core.CoreDispatcher args)
         {
             return FromCoreDispatcher(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="CoreDispatcher"/> from <see cref="Windows.UI.Core.CoreDispatcher"/>.
+        /// Creates a <see cref="CoreDispatcher"/> from <see cref="windows.UI.Core.CoreDispatcher"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Core.CoreDispatcher"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Core.CoreDispatcher"/> instance containing the event data.</param>
         /// <returns><see cref="CoreDispatcher"/></returns>
-        public static CoreDispatcher FromCoreDispatcher(Windows.UI.Core.CoreDispatcher args)
+        public static CoreDispatcher FromCoreDispatcher(windows.UI.Core.CoreDispatcher args)
         {
             return new CoreDispatcher(args);
         }

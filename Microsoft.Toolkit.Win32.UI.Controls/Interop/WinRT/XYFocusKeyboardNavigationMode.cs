@@ -2,10 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Xaml.Input.XYFocusKeyboardNavigationMode"/>
+    /// <see cref="windows.UI.Xaml.Input.XYFocusKeyboardNavigationMode"/>
     /// </summary>
     public enum XYFocusKeyboardNavigationMode
     {

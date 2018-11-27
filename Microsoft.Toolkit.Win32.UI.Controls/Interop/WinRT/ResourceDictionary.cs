@@ -3,27 +3,28 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Linq;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Xaml.ResourceDictionary"/>
+    /// <see cref="windows.UI.Xaml.ResourceDictionary"/>
     /// </summary>
     public class ResourceDictionary
     {
-        private Windows.UI.Xaml.ResourceDictionary UwpInstance { get; }
+        private windows.UI.Xaml.ResourceDictionary UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ResourceDictionary"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Xaml.ResourceDictionary"/>
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Xaml.ResourceDictionary"/>
         /// </summary>
-        public ResourceDictionary(Windows.UI.Xaml.ResourceDictionary instance)
+        public ResourceDictionary(windows.UI.Xaml.ResourceDictionary instance)
         {
             this.UwpInstance = instance;
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.ResourceDictionary.Source"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.ResourceDictionary.Source"/>
         /// </summary>
         public System.Uri Source
         {
@@ -32,7 +33,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.ResourceDictionary.MergedDictionaries"/>
+        /// Gets <see cref="windows.UI.Xaml.ResourceDictionary.MergedDictionaries"/>
         /// </summary>
         public System.Collections.Generic.IList<ResourceDictionary> MergedDictionaries
         {
@@ -40,7 +41,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.ResourceDictionary.ThemeDictionaries"/>
+        /// Gets <see cref="windows.UI.Xaml.ResourceDictionary.ThemeDictionaries"/>
         /// </summary>
         public System.Collections.Generic.IDictionary<object, object> ThemeDictionaries
         {
@@ -48,22 +49,22 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Xaml.ResourceDictionary"/> to <see cref="ResourceDictionary"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Xaml.ResourceDictionary"/> to <see cref="ResourceDictionary"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.ResourceDictionary"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.ResourceDictionary"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator ResourceDictionary(
-            Windows.UI.Xaml.ResourceDictionary args)
+            windows.UI.Xaml.ResourceDictionary args)
         {
             return FromResourceDictionary(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="ResourceDictionary"/> from <see cref="Windows.UI.Xaml.ResourceDictionary"/>.
+        /// Creates a <see cref="ResourceDictionary"/> from <see cref="windows.UI.Xaml.ResourceDictionary"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.ResourceDictionary"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.ResourceDictionary"/> instance containing the event data.</param>
         /// <returns><see cref="ResourceDictionary"/></returns>
-        public static ResourceDictionary FromResourceDictionary(Windows.UI.Xaml.ResourceDictionary args)
+        public static ResourceDictionary FromResourceDictionary(windows.UI.Xaml.ResourceDictionary args)
         {
             return new ResourceDictionary(args);
         }

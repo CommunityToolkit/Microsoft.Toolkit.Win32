@@ -2,35 +2,37 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Xaml.BringIntoViewOptions"/>
+    /// <see cref="windows.UI.Xaml.BringIntoViewOptions"/>
     /// </summary>
     public class BringIntoViewOptions
     {
-        private Windows.UI.Xaml.BringIntoViewOptions UwpInstance { get; }
+        private windows.UI.Xaml.BringIntoViewOptions UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BringIntoViewOptions"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Xaml.BringIntoViewOptions"/>
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Xaml.BringIntoViewOptions"/>
         /// </summary>
-        public BringIntoViewOptions(Windows.UI.Xaml.BringIntoViewOptions instance)
+        public BringIntoViewOptions(windows.UI.Xaml.BringIntoViewOptions instance)
         {
             UwpInstance = instance;
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.BringIntoViewOptions.TargetRect"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.BringIntoViewOptions.TargetRect"/>
         /// </summary>
-        public Windows.Foundation.Rect? TargetRect
+        public windows.Foundation.Rect? TargetRect
         {
             get => UwpInstance.TargetRect;
             set => UwpInstance.TargetRect = value;
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.BringIntoViewOptions.AnimationDesired"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.BringIntoViewOptions.AnimationDesired"/>
         /// </summary>
         public bool AnimationDesired
         {
@@ -39,7 +41,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.BringIntoViewOptions.VerticalOffset"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.BringIntoViewOptions.VerticalOffset"/>
         /// </summary>
         public double VerticalOffset
         {
@@ -48,7 +50,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.BringIntoViewOptions.VerticalAlignmentRatio"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.BringIntoViewOptions.VerticalAlignmentRatio"/>
         /// </summary>
         public double VerticalAlignmentRatio
         {
@@ -57,7 +59,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.BringIntoViewOptions.HorizontalOffset"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.BringIntoViewOptions.HorizontalOffset"/>
         /// </summary>
         public double HorizontalOffset
         {
@@ -66,7 +68,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.BringIntoViewOptions.HorizontalAlignmentRatio"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.BringIntoViewOptions.HorizontalAlignmentRatio"/>
         /// </summary>
         public double HorizontalAlignmentRatio
         {
@@ -75,22 +77,22 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Xaml.BringIntoViewOptions"/> to <see cref="BringIntoViewOptions"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Xaml.BringIntoViewOptions"/> to <see cref="BringIntoViewOptions"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.BringIntoViewOptions"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.BringIntoViewOptions"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator BringIntoViewOptions(
-            Windows.UI.Xaml.BringIntoViewOptions args)
+            windows.UI.Xaml.BringIntoViewOptions args)
         {
             return FromBringIntoViewOptions(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="BringIntoViewOptions"/> from <see cref="Windows.UI.Xaml.BringIntoViewOptions"/>.
+        /// Creates a <see cref="BringIntoViewOptions"/> from <see cref="windows.UI.Xaml.BringIntoViewOptions"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.BringIntoViewOptions"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.BringIntoViewOptions"/> instance containing the event data.</param>
         /// <returns><see cref="BringIntoViewOptions"/></returns>
-        public static BringIntoViewOptions FromBringIntoViewOptions(Windows.UI.Xaml.BringIntoViewOptions args)
+        public static BringIntoViewOptions FromBringIntoViewOptions(windows.UI.Xaml.BringIntoViewOptions args)
         {
             return new BringIntoViewOptions(args);
         }

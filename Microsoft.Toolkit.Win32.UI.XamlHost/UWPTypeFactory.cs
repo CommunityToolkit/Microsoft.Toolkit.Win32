@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using xaml = Windows.UI.Xaml;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
@@ -19,16 +19,16 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         /// <param name="xamlTypeName">UWP XAML type name</param>
         /// <exception cref="InvalidOperationException">Condition.</exception>
         /// <returns>Instance of UWP XAML type described by xamlTypeName string</returns>
-        public static xaml.FrameworkElement CreateXamlContentByType(string xamlTypeName)
+        public static windows.UI.Xaml.FrameworkElement CreateXamlContentByType(string xamlTypeName)
         {
-            xaml.Markup.IXamlType xamlType = null;
+            windows.UI.Xaml.Markup.IXamlType xamlType = null;
             Type systemType = null;
 
             // If a root metadata provider has been defined on the application object,
             // use it to probe for custom UWP XAML type metadata.  If the root metadata
             // provider has not been implemented on the current application object, assume
             // the caller wants a built-in UWP XAML type, not a custom UWP XAML type.
-            var xamlRootMetadataProvider = xaml.Application.Current as xaml.Markup.IXamlMetadataProvider;
+            var xamlRootMetadataProvider = windows.UI.Xaml.Application.Current as windows.UI.Xaml.Markup.IXamlMetadataProvider;
             if (xamlRootMetadataProvider != null)
             {
                 xamlType = xamlRootMetadataProvider.GetXamlType(xamlTypeName);
@@ -39,13 +39,13 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
             if (systemType != null)
             {
                 // Create built-in UWP XAML type
-                return (xaml.FrameworkElement)Activator.CreateInstance(systemType);
+                return (windows.UI.Xaml.FrameworkElement)Activator.CreateInstance(systemType);
             }
 
             if (xamlType != null)
             {
                 // Create custom UWP XAML type
-                return (xaml.FrameworkElement)xamlType.ActivateInstance();
+                return (windows.UI.Xaml.FrameworkElement)xamlType.ActivateInstance();
             }
 
             throw new InvalidOperationException("Microsoft.Windows.Interop.UWPTypeFactory: Could not create type: " + xamlTypeName);

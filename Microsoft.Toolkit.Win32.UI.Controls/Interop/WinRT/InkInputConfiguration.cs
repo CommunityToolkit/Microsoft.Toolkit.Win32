@@ -2,26 +2,28 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Input.Inking.InkInputConfiguration"/>
+    /// <see cref="windows.UI.Input.Inking.InkInputConfiguration"/>
     /// </summary>
     public class InkInputConfiguration
     {
-        private Windows.UI.Input.Inking.InkInputConfiguration uwpInstance;
+        private windows.UI.Input.Inking.InkInputConfiguration uwpInstance;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InkInputConfiguration"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Input.Inking.InkInputConfiguration"/>
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Input.Inking.InkInputConfiguration"/>
         /// </summary>
-        public InkInputConfiguration(Windows.UI.Input.Inking.InkInputConfiguration instance)
+        public InkInputConfiguration(windows.UI.Input.Inking.InkInputConfiguration instance)
         {
             this.uwpInstance = instance;
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Input.Inking.InkInputConfiguration.IsPrimaryBarrelButtonInputEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Input.Inking.InkInputConfiguration.IsPrimaryBarrelButtonInputEnabled"/>
         /// </summary>
         public bool IsPrimaryBarrelButtonInputEnabled
         {
@@ -30,7 +32,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Input.Inking.InkInputConfiguration.IsEraserInputEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Input.Inking.InkInputConfiguration.IsEraserInputEnabled"/>
         /// </summary>
         public bool IsEraserInputEnabled
         {
@@ -39,22 +41,22 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Input.Inking.InkInputConfiguration"/> to <see cref="InkInputConfiguration"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Input.Inking.InkInputConfiguration"/> to <see cref="InkInputConfiguration"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Input.Inking.InkInputConfiguration"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Input.Inking.InkInputConfiguration"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator InkInputConfiguration(
-            Windows.UI.Input.Inking.InkInputConfiguration args)
+            windows.UI.Input.Inking.InkInputConfiguration args)
         {
             return FromInkInputConfiguration(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="InkInputConfiguration"/> from <see cref="Windows.UI.Input.Inking.InkInputConfiguration"/>.
+        /// Creates a <see cref="InkInputConfiguration"/> from <see cref="windows.UI.Input.Inking.InkInputConfiguration"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Input.Inking.InkInputConfiguration"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Input.Inking.InkInputConfiguration"/> instance containing the event data.</param>
         /// <returns><see cref="InkInputConfiguration"/></returns>
-        public static InkInputConfiguration FromInkInputConfiguration(Windows.UI.Input.Inking.InkInputConfiguration args)
+        public static InkInputConfiguration FromInkInputConfiguration(windows.UI.Input.Inking.InkInputConfiguration args)
         {
             return new InkInputConfiguration(args);
         }
