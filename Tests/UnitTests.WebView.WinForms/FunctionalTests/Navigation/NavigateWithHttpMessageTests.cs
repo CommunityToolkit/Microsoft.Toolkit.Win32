@@ -74,4 +74,39 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTe
             _success.ShouldBeTrue();
         }
     }
+
+    [TestClass]
+    [TestCategory(TestConstants.Categories.Nav)]
+    public class HTTP_POST_CONTENT : HostFormWebViewContextSpecification
+    {
+        private bool _success;
+        private Uri _uri = new Uri(TestConstants.Uris.HttpBin, "/post");
+
+        protected override void Given()
+        {
+            base.Given();
+            WebView.NavigationCompleted += (o, e) =>
+            {
+                _success = e.IsSuccess;
+                Form.Close();
+            };
+        }
+
+        protected override void When()
+        {
+
+            NavigateAndWaitForFormClose(
+                _uri,
+                HttpMethod.Post,
+                "say=Hello&to=World",
+                new[] { new KeyValuePair<string, string>("Content-Type", "application/x-www-form-urlencoded"), });
+        }
+
+        [TestMethod]
+        [Timeout(TestConstants.Timeouts.Longest)]
+        public void NavigationShouldComplete()
+        {
+            _success.ShouldBeTrue();
+        }
+    }
 }
