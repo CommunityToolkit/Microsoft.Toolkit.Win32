@@ -789,15 +789,6 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
 
                     Verify.IsNotNull(_webViewControl);
 
-                    if (!Dispatcher.CheckAccess())
-                    {
-                        Dispatcher.Invoke(() => UpdateSize(RenderSize));
-                    }
-                    else
-                    {
-                        UpdateSize(RenderSize);
-                    }
-
                     DestroyWindowCore(ChildWindow);
 
                     SubscribeEvents();
@@ -831,6 +822,16 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
 
                     _initializationState = InitializationState.IsInitialized;
                     _initializationComplete.Set();
+
+                    // Ensures the size is correctly updated after the initialization as UpdateSize gates on control initialization
+                    if (!Dispatcher.CheckAccess())
+                    {
+                        Dispatcher.Invoke(() => UpdateSize(RenderSize));
+                    }
+                    else
+                    {
+                        UpdateSize(RenderSize);
+                    }
                 },
                 DispatcherPriority.Send);
         }
