@@ -1205,7 +1205,20 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
             width *= DpiScale.DpiScaleX;
             height *= DpiScale.DpiScaleY;
 
-            // HACK: looks like the vertical pos is counted twice, giving a gap
+            // The vertical and horizontal coordinates are relative to the window, not the containing control
+            // Given a Grid with three columns 200px wide each, e.g.
+            // <Grid>
+            //  <Grid.ColumnDefinitions>
+            //    <ColumnDefinition Width="200" />
+            //    <ColumnDefinition Width="200" />
+            //    <ColumnDefinition Width="200" />
+            //  </Grid.ColumnDefinitions>
+            // </Grid>
+            //
+            // A WebView in the second column would have an X value of 200, placing it in the third column of the grid
+            //
+            // HACK: Looks like the vertical and horizontal pos are counted twice, giving gaps
+            x = 0;
             y = 0;
 
 #if DEBUG_LAYOUT
