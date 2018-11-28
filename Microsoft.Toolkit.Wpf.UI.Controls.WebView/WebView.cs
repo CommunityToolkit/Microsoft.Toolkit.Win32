@@ -1198,7 +1198,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
 #if DEBUG_LAYOUT
             Debug.WriteLine($"{Name}::{nameof(UpdateBounds)}");
             Debug.Indent();
-            Debug.WriteLine($"oldBounds={{x={x:F0} y={y:F0} width={width:F0} height={height:F0}}}");
+            Debug.WriteLine($"oldBounds={{x={x:F0} y={y:F0} width={width:F0} height={height:F0} }}");
 #endif
 
             // Update bounds here to ensure correct draw position
@@ -1222,7 +1222,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
             y = 0;
 
 #if DEBUG_LAYOUT
-            Debug.WriteLine($"newBounds={{x={x:F0} y={y:F0} width={width:F0} height={height:F0}}}");
+            Debug.WriteLine($"newBounds={{x={x:F0} y={y:F0} width={width:F0} height={height:F0} }}");
 #endif
             if (WebViewControlInitialized)
             {
