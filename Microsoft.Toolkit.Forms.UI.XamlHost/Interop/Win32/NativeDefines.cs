@@ -31,5 +31,13 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost.Interop.Win32
         public static IntPtr HWND_TOP { get; } = IntPtr.Zero;
 
         public static IntPtr HWND_TOPMOST { get; } = IntPtr.Zero - 1;
+
+        // SetWindowPos flags
+        public const int SWP_NOCOPYBITS = 0x0100;
+        public const int SWP_SHOWWINDOW = 0x0040;
+        public const int SWP_NOACTIVATE = 0x0010;
+
+        // ShowWindow commands
+        public const int SW_SHOW = 0x5;
     }
 }

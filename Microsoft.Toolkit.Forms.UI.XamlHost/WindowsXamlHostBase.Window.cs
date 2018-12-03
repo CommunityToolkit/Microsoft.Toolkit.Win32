@@ -19,10 +19,12 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         {
             if (_xamlIslandWindowHandle != IntPtr.Zero && Width != 0 && Height != 0)
             {
-                if (SafeNativeMethods.SetWindowPos(_xamlIslandWindowHandle, NativeDefines.HWND_TOP, 0, 0, Width, Height, SetWindowPosFlags.SHOWWINDOW) == IntPtr.Zero)
+                if (SafeNativeMethods.SetWindowPos(_xamlIslandWindowHandle, NativeDefines.HWND_TOP, 0, 0, Width, Height, NativeDefines.SWP_NOCOPYBITS | NativeDefines.SWP_NOACTIVATE) == IntPtr.Zero)
                 {
                     throw new InvalidOperationException($"{nameof(WindowsXamlHostBase)}::{nameof(SetDesktopWindowXamlSourceWindowPos)} failed to set UWP XAML window position.");
                 }
+
+                SafeNativeMethods.ShowWindow(_xamlIslandWindowHandle, NativeDefines.SW_SHOW);
             }
         }
     }
