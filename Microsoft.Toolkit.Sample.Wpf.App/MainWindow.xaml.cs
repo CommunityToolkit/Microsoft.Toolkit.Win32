@@ -117,7 +117,6 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
             {
                 Width = 50,
                 Height = 50,
-                ShouldConstrainToRootBounds = false,
             };
             grid.Children.Add(popup);
 
