@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:xamlhost="clr-namespace:Microsoft.Toolkit.Sample.Wpf.XamlHost;assembly=Microsoft.Toolkit.Sample.Wpf.XamlHost"
+        xmlns:xamlhost="clr-namespace:Microsoft.Toolkit.Wpf.UI.XamlHost;assembly=Microsoft.Toolkit.Wpf.UI.XamlHost"
         xmlns:controls="clr-namespace:Microsoft.Toolkit.Wpf.UI.Controls;assembly=Microsoft.Toolkit.Wpf.UI.Controls"
         xmlns:controls1="clr-namespace:Microsoft.Toolkit.Wpf.UI.Controls;assembly=Microsoft.Toolkit.Wpf.UI.Controls.WebView"
         mc:Ignorable="d"
@@ -22,13 +22,7 @@
             </TabItem>
             <TabItem>
                 <TabItem.Header>Samples</TabItem.Header>
-                <StackPanel Background="Azure">
-                    <xamlhost:WrappedRectangle Width="50" Height="75" Fill="Blue"/>
-                    <xamlhost:WrappedRectangle Width="200" Height="100" Fill="Red"/>
-                    <xamlhost:WrappedButton Content="This is a UWP Button" Height="60" Width="160"/>
-                    <xamlhost:WrappedRectangle Width="25" Height="100" Fill="Green"/>
-                    <xamlhost:WrappedButton Content="Another long UWP Button" Height="40" Width="300"/>
-                </StackPanel>
+                <xamlhost:WindowsXamlHost x:Name="windowsXamlHost" Loaded="WindowsXamlHost_Loaded" />
             </TabItem>
             <TabItem>
                 <TabItem.Header>MediaPlayerElement</TabItem.Header>
