@@ -122,8 +122,8 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         private void OnWindowSizeOrLocationChanged(object sender, EventArgs e)
         {
 #pragma warning disable 8305    // Experimental API
-            ContentRoot contentRoot = ContentRoot.GetForElement(_childInternal);
-            var openPopups = VisualTreeHelper.GetOpenPopupsWithinContentRoot(contentRoot);
+            XamlRoot xamlRoot = _childInternal.XamlRoot;
+            var openPopups = VisualTreeHelper.GetOpenPopupsForXamlRoot(xamlRoot);
             foreach (Windows.UI.Xaml.Controls.Primitives.Popup popup in openPopups)
             {
                 popup.IsOpen = false;

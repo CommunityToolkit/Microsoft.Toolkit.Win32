@@ -12,9 +12,10 @@
     <PackageId>Microsoft.Toolkit.Wpf.UI.XamlHost</PackageId>
 
     <!--
-    Need class WIndows.UI.Xaml.Hosting.DesktopWindowXamlSource, which was introduced in Insiders SDK 17692 on 19-Jun 2018
+    Needs the XamlRoot API, which is available in Insiders SDK 18298 on 19-Dec 2018
+    https://blogs.windows.com/buildingapps/2018/12/19/windows-10-sdk-preview-build-18298-available-now
     -->
-    <TargetPlatformMinVersion>10.0.17692.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.18298.0</TargetPlatformMinVersion>
   </PropertyGroup>
 
   <ItemGroup>
