@@ -6,8 +6,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using Microsoft.Toolkit.Win32.UI.XamlHost;
-using Windows.UI.Xaml;
-using windows = Windows;
+using xaml = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Wpf.UI.XamlHost
 {
@@ -21,29 +20,38 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// probe at runtime for custom UWP XAML type information.  This must be created before
         /// creating any DesktopWindowXamlSource instances if custom UWP XAML types are required.
         /// </summary>
-        private readonly windows.UI.Xaml.Application _application;
+        private readonly xaml.Application _application;
 
         /// <summary>
         /// UWP XAML DesktopWindowXamlSource instance that hosts XAML content in a win32 application
         /// </summary>
-        private readonly windows.UI.Xaml.Hosting.DesktopWindowXamlSource _xamlSource;
+        private readonly xaml.Hosting.DesktopWindowXamlSource _xamlSource;
 
         /// <summary>
         /// A reference count on the UWP XAML framework is tied to WindowsXamlManager's
         /// lifetime.  UWP XAML is spun up on the first WindowsXamlManager creation and
         /// deinitialized when the last instance of WindowsXamlManager is destroyed.
         /// </summary>
-        private readonly windows.UI.Xaml.Hosting.WindowsXamlManager _windowsXamlManager;
+        private readonly xaml.Hosting.WindowsXamlManager _windowsXamlManager;
 
         /// <summary>
         /// Private field that backs ChildInternal property.
         /// </summary>
-        private UIElement _childInternal;
+        private xaml.UIElement _childInternal;
 
         /// <summary>
         ///     Fired when WindowsXamlHost root UWP XAML content has been updated
         /// </summary>
         public event EventHandler ChildChanged;
+
+        /// <summary>
+        ///     When a window containing Xaml content moves, Xaml closes all open popups. We need the same behavior for Xaml
+        ///     content in the DesktopWindowXamlSource. Since the DesktopWindowXamlSource itself is not notified when the WPF
+        ///     Window moves, we attach handlers to the WPF Window's SizeChanged and LocationChanged events and use the Xaml
+        ///     VisualTreeHelper API to close all open popups in an event handler. The WPF Window is not reachable until after
+        ///     this control is created. This field tracks the WPF Window so we can detach the event handlers during cleanup.
+        /// </summary>
+        private System.Windows.Window _window;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WindowsXamlHostBase"/> class.
@@ -57,7 +65,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
             // Windows.UI.Xaml.Application object is required for loading custom control metadata.  If a custom
             // Application object is not provided by the application, the host control will create one (XamlApplication).
             // Instantiation of the application object must occur before creating the DesktopWindowXamlSource instance.
-            // If no Application object is created before DesktopWindowXamlSource is created, DestkopWindowXamlSource
+            // If no Application object is created before DesktopWindowXamlSource is created, DesktopWindowXamlSource
             // will create a generic Application object unable to load custom UWP XAML metadata.
             Microsoft.Toolkit.Win32.UI.XamlHost.XamlApplication.GetOrCreateXamlApplicationInstance(ref _application);
 
@@ -67,13 +75,15 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
             // not been created before creating DesktopWindowXamlSource, DesktopWindowXaml source
             // will create an instance of WindowsXamlManager internally.  (Creation is explicit
             // here to illustrate how to initialize UWP XAML before initializing the DesktopWindowXamlSource.)
-            _windowsXamlManager = windows.UI.Xaml.Hosting.WindowsXamlManager.InitializeForCurrentThread();
+            _windowsXamlManager = xaml.Hosting.WindowsXamlManager.InitializeForCurrentThread();
 
             // Create DesktopWindowXamlSource, host for UWP XAML content
-            _xamlSource = new windows.UI.Xaml.Hosting.DesktopWindowXamlSource();
+            _xamlSource = new xaml.Hosting.DesktopWindowXamlSource();
 
             // Hook DesktopWindowXamlSource OnTakeFocus event for Focus processing
             _xamlSource.TakeFocusRequested += OnTakeFocusRequested;
+
+            Loaded += WindowsXamlHostBase_Loaded;
         }
 
         /// <summary>
@@ -92,6 +102,34 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         }
 
         /// <summary>
+        /// Attaches event handlers to Window.SizeChanged and Window.LocationChanged to close all popups opened by the
+        /// Xaml content inside the DesktopWindowXamlSource.
+        /// </summary>
+        private void WindowsXamlHostBase_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (_window == null)
+            {
+                _window = System.Windows.Window.GetWindow(this);
+                _window.SizeChanged += OnWindowSizeOrLocationChanged;
+                _window.LocationChanged += OnWindowSizeOrLocationChanged;
+            }
+        }
+
+        /// <summary>
+        /// Close all popups opened by the Xaml content inside the DesktopWindowXamlSource.
+        /// </summary>
+        private void OnWindowSizeOrLocationChanged(object sender, EventArgs e)
+        {
+#pragma warning disable 8305    // Experimental API
+            xaml.XamlRoot xamlRoot = _childInternal.XamlRoot;
+            var openPopups = xaml.Media.VisualTreeHelper.GetOpenPopupsForXamlRoot(xamlRoot);
+            foreach (xaml.Controls.Primitives.Popup popup in openPopups)
+            {
+                popup.IsOpen = false;
+            }
+        }
+
+        /// <summary>
         /// Binds this wrapper object's exposed WPF DependencyProperty with the wrapped UWP object's DependencyProperty
         /// for what effectively works as a regular one- or two-way binding.
         /// </summary>
@@ -100,17 +138,17 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// <param name="uwpProperty">the related DependencyProperty of the UWP control</param>
         /// <param name="converter">a converter, if one's needed</param>
         /// <param name="direction">indicates that the binding should be one or two directional.  If one way, the Uwp control is only updated from the wrapper.</param>
-        public void Bind(string propertyName, System.Windows.DependencyProperty wpfProperty, windows.UI.Xaml.DependencyProperty uwpProperty, object converter = null, System.ComponentModel.BindingDirection direction = System.ComponentModel.BindingDirection.TwoWay)
+        public void Bind(string propertyName, System.Windows.DependencyProperty wpfProperty, xaml.DependencyProperty uwpProperty, object converter = null, System.ComponentModel.BindingDirection direction = System.ComponentModel.BindingDirection.TwoWay)
         {
             if (direction == System.ComponentModel.BindingDirection.TwoWay)
             {
-                var binder = new windows.UI.Xaml.Data.Binding()
+                var binder = new xaml.Data.Binding()
                 {
                     Source = this,
-                    Path = new windows.UI.Xaml.PropertyPath(propertyName),
-                    Converter = (windows.UI.Xaml.Data.IValueConverter)converter
+                    Path = new xaml.PropertyPath(propertyName),
+                    Converter = (xaml.Data.IValueConverter)converter
                 };
-                windows.UI.Xaml.Data.BindingOperations.SetBinding(ChildInternal, uwpProperty, binder);
+                xaml.Data.BindingOperations.SetBinding(ChildInternal, uwpProperty, binder);
             }
 
             var rebinder = new System.Windows.Data.Binding()
@@ -136,9 +174,9 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// <summary>
         /// Gets or sets the root UWP XAML element displayed in the WPF control instance.
         /// </summary>
-        /// <value>The <see cref="windows.UI.Xaml.UIElement"/> child.</value>
-        /// <remarks>This UWP XAML element is the root element of the wrapped <see cref="windows.UI.Xaml.Hosting.DesktopWindowXamlSource" />.</remarks>
-        protected windows.UI.Xaml.UIElement ChildInternal
+        /// <value>The <see cref="xaml.UIElement"/> child.</value>
+        /// <remarks>This UWP XAML element is the root element of the wrapped <see cref="xaml.Hosting.DesktopWindowXamlSource" />.</remarks>
+        protected xaml.UIElement ChildInternal
         {
             get
             {
@@ -152,7 +190,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
                     return;
                 }
 
-                var currentRoot = (windows.UI.Xaml.FrameworkElement)ChildInternal;
+                var currentRoot = (xaml.FrameworkElement)ChildInternal;
                 if (currentRoot != null)
                 {
                     currentRoot.SizeChanged -= XamlContentSizeChanged;
@@ -161,7 +199,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
                 _childInternal = value;
                 SetContent();
 
-                var frameworkElement = ChildInternal as windows.UI.Xaml.FrameworkElement;
+                var frameworkElement = ChildInternal as xaml.FrameworkElement;
                 if (frameworkElement != null)
                 {
                     // If XAML content has changed, check XAML size
@@ -192,8 +230,8 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         protected bool IsDisposed { get; set; }
 
         /// <summary>
-        /// Creates <see cref="windows.UI.Xaml.Application" /> object, wrapped <see cref="windows.UI.Xaml.Hosting.DesktopWindowXamlSource" /> instance; creates and
-        /// sets root UWP XAML element on <see cref="windows.UI.Xaml.Hosting.DesktopWindowXamlSource" />.
+        /// Creates <see cref="xaml.Application" /> object, wrapped <see cref="xaml.Hosting.DesktopWindowXamlSource" /> instance; creates and
+        /// sets root UWP XAML element on <see cref="xaml.Hosting.DesktopWindowXamlSource" />.
         /// </summary>
         /// <param name="hwndParent">Parent window handle</param>
         /// <returns>Handle to XAML window</returns>
@@ -245,6 +283,13 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
             if (disposing)
             {
                 ChildInternal = null;
+
+                if (_window != null)
+                {
+                    _window.SizeChanged -= OnWindowSizeOrLocationChanged;
+                    _window.LocationChanged -= OnWindowSizeOrLocationChanged;
+                    _window = null;
+                }
 
                 // Required by CA2213: _xamlSource?.Dispose() is insufficient.
                 if (_xamlSource != null)

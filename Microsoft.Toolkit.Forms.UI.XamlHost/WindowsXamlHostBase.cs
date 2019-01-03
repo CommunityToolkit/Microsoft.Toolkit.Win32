@@ -5,13 +5,10 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Security.Permissions;
 using System.Windows.Forms;
-using Microsoft.Toolkit.Win32.UI.Controls.Interop.Win32;
 using Microsoft.Toolkit.Win32.UI.XamlHost;
 using Windows.Foundation.Metadata;
-using Windows.UI.Xaml;
-using windows = Windows;
+using xaml = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Forms.UI.XamlHost
 {
@@ -25,7 +22,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// <summary>
         /// DesktopWindowXamlSource instance
         /// </summary>
-        protected internal readonly windows.UI.Xaml.Hosting.DesktopWindowXamlSource _xamlSource;
+        protected internal readonly xaml.Hosting.DesktopWindowXamlSource _xamlSource;
 
         /// <summary>
         ///    A render transform to scale the UWP XAML content should be applied
@@ -38,19 +35,19 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// lifetime.  UWP XAML is spun up on the first WindowsXamlManager creation and
         /// deinitialized when the last instance of WindowsXamlManager is destroyed.
         /// </summary>
-        private readonly windows.UI.Xaml.Hosting.WindowsXamlManager _windowsXamlManager;
+        private readonly xaml.Hosting.WindowsXamlManager _windowsXamlManager;
 
         /// <summary>
         /// UWP XAML Application instance and root UWP XamlMetadataProvider.  Custom implementation required to
         /// probe at runtime for custom UWP XAML type information.  This must be created before
         /// creating any DesktopWindowXamlSource instances if custom UWP XAML types are required.
         /// </summary>
-        private readonly windows.UI.Xaml.Application _application;
+        private readonly xaml.Application _application;
 
         /// <summary>
         /// Private field that backs ChildInternal property.
         /// </summary>
-        private UIElement _childInternal;
+        private xaml.UIElement _childInternal;
 
         /// <summary>
         ///    Last preferredSize returned by UWP XAML during WinForms layout pass
@@ -71,6 +68,15 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         ///    The last dpi value retrieved from the system
         /// </summary>
         private double _lastDpi = 96.0f;
+
+        /// <summary>
+        ///     When a window containing Xaml content moves, Xaml closes all open popups. We need the same behavior for Xaml
+        ///     content in the DesktopWindowXamlSource. Since the DesktopWindowXamlSource itself is not notified when the
+        ///     Form moves, we attach handlers to the Form's SizeChanged and LocationChanged events and use the Xaml
+        ///     VisualTreeHelper API to close all open popups in an event handler. The Form is not reachable until after
+        ///     this control is created. This field tracks the Form so we can detach the event handlers during cleanup.
+        /// </summary>
+        private Form _form;
 
         /// <summary>
         ///     Fired when XAML content has been updated
@@ -118,10 +124,10 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             // not been created before creating DesktopWindowXamlSource, DesktopWindowXaml source
             // will create an instance of WindowsXamlManager internally.  (Creation is explicit
             // here to illustrate how to initialize UWP XAML before initializing the DesktopWindowXamlSource.)
-            _windowsXamlManager = windows.UI.Xaml.Hosting.WindowsXamlManager.InitializeForCurrentThread();
+            _windowsXamlManager = xaml.Hosting.WindowsXamlManager.InitializeForCurrentThread();
 
             // Create DesktopWindowXamlSource, host for UWP XAML content
-            _xamlSource = new windows.UI.Xaml.Hosting.DesktopWindowXamlSource();
+            _xamlSource = new xaml.Hosting.DesktopWindowXamlSource();
 
             // Hook up method for DesktopWindowXamlSource Focus handling
             _xamlSource.TakeFocusRequested += this.OnTakeFocusRequested;
@@ -131,6 +137,8 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
 
             // Add scaling panel as the root XAML element
             _xamlSource.Content = new DpiScalingPanel();
+
+            HandleCreated += WindowsXamlHostBase_HandleCreated;
         }
 
         protected WindowsXamlHostBase(string typeName)
@@ -140,6 +148,34 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             {
                 ChildInternal = UWPTypeFactory.CreateXamlContentByType(typeName);
                 ChildInternal.SetWrapper(this);
+            }
+        }
+
+        /// <summary>
+        /// Attaches event handlers to Form.SizeChanged and Form.LocationChanged to close all popups opened by the
+        /// Xaml content inside the DesktopWindowXamlSource.
+        /// </summary>
+        private void WindowsXamlHostBase_HandleCreated(object sender, EventArgs e)
+        {
+            if (_form == null)
+            {
+                _form = FindForm();
+                _form.SizeChanged += OnFormSizeOrLocationChanged;
+                _form.LocationChanged += OnFormSizeOrLocationChanged;
+            }
+        }
+
+        /// <summary>
+        /// Close all popups opened by the Xaml content inside the DesktopWindowXamlSource.
+        /// </summary>
+        private void OnFormSizeOrLocationChanged(object sender, EventArgs e)
+        {
+#pragma warning disable 8305    // Experimental API
+            xaml.XamlRoot xamlRoot = _childInternal.XamlRoot;
+            var openPopups = xaml.Media.VisualTreeHelper.GetOpenPopupsForXamlRoot(xamlRoot);
+            foreach (xaml.Controls.Primitives.Popup popup in openPopups)
+            {
+                popup.IsOpen = false;
             }
         }
 
@@ -157,7 +193,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        protected windows.UI.Xaml.UIElement ChildInternal
+        protected xaml.UIElement ChildInternal
         {
             get => _childInternal;
 
@@ -170,8 +206,8 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
                         return;
                     }
 
-                    var newFrameworkElement = value as windows.UI.Xaml.FrameworkElement;
-                    var oldFrameworkElement = ChildInternal as windows.UI.Xaml.FrameworkElement;
+                    var newFrameworkElement = value as xaml.FrameworkElement;
+                    var oldFrameworkElement = ChildInternal as xaml.FrameworkElement;
 
                     if (oldFrameworkElement != null)
                     {
@@ -203,7 +239,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// Sets the root UWP XAML element on DesktopWindowXamlSource
         /// </summary>
         /// <param name="newValue">A UWP XAML Framework element</param>
-        protected virtual void SetContent(windows.UI.Xaml.UIElement newValue)
+        protected virtual void SetContent(xaml.UIElement newValue)
         {
             if (_xamlSource != null)
             {
@@ -247,6 +283,13 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             {
                 SizeChanged -= OnWindowXamlHostSizeChanged;
                 ChildInternal?.ClearWrapper();
+
+                if (_form != null)
+                {
+                    _form.SizeChanged -= OnFormSizeOrLocationChanged;
+                    _form.LocationChanged -= OnFormSizeOrLocationChanged;
+                    _form = null;
+                }
 
                 // Required by CA2213: _xamlSource?.Dispose() is insufficient.
                 if (_xamlSource != null)

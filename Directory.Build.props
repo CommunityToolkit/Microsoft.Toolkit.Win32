@@ -18,7 +18,7 @@
     <IsWpfProject Condition="'$(IsDesignProject)' != 'true'">$(MSBuildProjectName.Contains('Wpf'))</IsWpfProject>
     <IsFormsProject Condition="'$(IsDesignProject)' != 'true'">$(MSBuildProjectName.Contains('Forms'))</IsFormsProject>
     <IsSampleProject>$(MSBuildProjectName.Contains('Sample'))</IsSampleProject>
-    <DefaultTargetPlatformVersion>17763</DefaultTargetPlatformVersion>
+    <DefaultTargetPlatformVersion>18298</DefaultTargetPlatformVersion>
     <DefaultTargetPlatformMinVersion>16299</DefaultTargetPlatformMinVersion>
     <PackageOutputPath>$(MSBuildThisFileDirectory)bin\nupkg</PackageOutputPath>
   </PropertyGroup>
@@ -46,8 +46,8 @@
           ./build/Install-WindowsSDKISO.ps1 18298
         -->
         <TargetPlatformVersion>10.0.18298.0</TargetPlatformVersion>
-		<!-- XAML Islands require SDK 18226 -->
-        <TargetPlatformMinVersion>10.0.18226.0</TargetPlatformMinVersion>
+		<!-- XAML Islands require SDK 18298-->
+        <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
 
         <!-- Compiler -->
         <FileAlignment>512</FileAlignment>
