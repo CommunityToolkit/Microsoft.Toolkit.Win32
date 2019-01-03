@@ -23,6 +23,7 @@ using Microsoft.Toolkit.Win32.UI.Controls.Interop.Win32;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 using Point = Windows.Foundation.Point;
 using Size = Windows.Foundation.Size;
+using windows = Windows;
 
 /*
 
@@ -782,7 +783,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
                     if (_webViewControl == null)
                     {
                         var handle = ChildWindow.Handle;
-                        var bounds = new Windows.Foundation.Rect(0, 0, RenderSize.Width * DpiScale.DpiScaleX, RenderSize.Height * DpiScale.DpiScaleY);
+                        var bounds = new windows.Foundation.Rect(0, 0, RenderSize.Width * DpiScale.DpiScaleX, RenderSize.Height * DpiScale.DpiScaleY);
 
                         _webViewControl = await _process.CreateWebViewControlHostAsync(handle, bounds).ConfigureAwait(false);
                     }
@@ -1212,7 +1213,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
 #endif
             if (WebViewControlInitialized)
             {
-                var rect = new Windows.Foundation.Rect(
+                var rect = new windows.Foundation.Rect(
                     new Point(x, y),
                     new Size(width, height));
 

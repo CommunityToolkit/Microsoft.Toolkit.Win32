@@ -4,20 +4,21 @@
 
 using System;
 using System.Security;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
     /// Represents a deferred request for permissions in an <see cref="IWebView"/>. This class cannot be inherited.
     /// </summary>
-    /// <remarks>Copy from <see cref="Windows.Web.UI.WebViewControlDeferredPermissionRequest"/> to avoid requirement to link Windows.winmd</remarks>
-    /// <seealso cref="Windows.Web.UI.WebViewControlDeferredPermissionRequest"/>
+    /// <remarks>Copy from <see cref="windows.Web.UI.WebViewControlDeferredPermissionRequest"/> to avoid requirement to link Windows.winmd</remarks>
+    /// <seealso cref="windows.Web.UI.WebViewControlDeferredPermissionRequest"/>
     public sealed class WebViewControlDeferredPermissionRequest
     {
         [SecurityCritical]
-        private readonly Windows.Web.UI.WebViewControlDeferredPermissionRequest _webViewControlDeferredPermissionRequest;
+        private readonly windows.Web.UI.WebViewControlDeferredPermissionRequest _webViewControlDeferredPermissionRequest;
 
-        internal WebViewControlDeferredPermissionRequest(Windows.Web.UI.WebViewControlDeferredPermissionRequest webViewControlDeferredPermissionRequest)
+        internal WebViewControlDeferredPermissionRequest(windows.Web.UI.WebViewControlDeferredPermissionRequest webViewControlDeferredPermissionRequest)
         {
             _webViewControlDeferredPermissionRequest = webViewControlDeferredPermissionRequest;
         }
@@ -38,18 +39,18 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         public Uri Uri => _webViewControlDeferredPermissionRequest.Uri;
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.Web.UI.WebViewControlDeferredPermissionRequest"/> to <see cref="WebViewControlDeferredPermissionRequest"/>.
+        /// Performs an implicit conversion from <see cref="windows.Web.UI.WebViewControlDeferredPermissionRequest"/> to <see cref="WebViewControlDeferredPermissionRequest"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Web.UI.WebViewControlDeferredPermissionRequest"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.Web.UI.WebViewControlDeferredPermissionRequest"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator WebViewControlDeferredPermissionRequest(Windows.Web.UI.WebViewControlDeferredPermissionRequest args) => ToWebViewControlDeferredPermissionRequest(args);
+        public static implicit operator WebViewControlDeferredPermissionRequest(windows.Web.UI.WebViewControlDeferredPermissionRequest args) => ToWebViewControlDeferredPermissionRequest(args);
 
         /// <summary>
-        /// Creates a <see cref="WebViewControlDeferredPermissionRequest"/> from <see cref="Windows.Web.UI.WebViewControlDeferredPermissionRequest"/>.
+        /// Creates a <see cref="WebViewControlDeferredPermissionRequest"/> from <see cref="windows.Web.UI.WebViewControlDeferredPermissionRequest"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Web.UI.WebViewControlDeferredPermissionRequest"/> instance containing the deferred permission request.</param>
+        /// <param name="args">The <see cref="windows.Web.UI.WebViewControlDeferredPermissionRequest"/> instance containing the deferred permission request.</param>
         /// <returns><see cref="WebViewControlDeferredPermissionRequest"/>.</returns>
-        public static WebViewControlDeferredPermissionRequest ToWebViewControlDeferredPermissionRequest(Windows.Web.UI.WebViewControlDeferredPermissionRequest args) => new WebViewControlDeferredPermissionRequest(args);
+        public static WebViewControlDeferredPermissionRequest ToWebViewControlDeferredPermissionRequest(windows.Web.UI.WebViewControlDeferredPermissionRequest args) => new WebViewControlDeferredPermissionRequest(args);
 
         /// <summary>
         /// Grants the requested permission.

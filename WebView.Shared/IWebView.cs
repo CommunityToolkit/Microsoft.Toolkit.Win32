@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls
 {
@@ -15,7 +16,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls
     /// </summary>
     /// <seealso cref="T:System.IDisposable" />
     /// <remarks>
-    /// Subset of functionality from <see cref="T:Windows.Web.UI.IWebViewControl" />
+    /// Subset of functionality from <see cref="T:windows.Web.UI.IWebViewControl" />
     /// </remarks>
     public interface IWebView
     {
@@ -100,7 +101,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls
         /// Occurs when an action in a <see cref="IWebView"/> requires that permission be granted.
         /// </summary>
         /// <remarks>
-        /// The types of permission that can be requested are defined in the <see cref="Windows.Web.UI.WebViewControlPermissionType"/> enumeration.
+        /// The types of permission that can be requested are defined in the <see cref="windows.Web.UI.WebViewControlPermissionType"/> enumeration.
         ///
         /// If you don't handle the <see cref="PermissionRequested"/> event, the <see cref="IWebView"/> denies permission by default.
         ///
@@ -361,7 +362,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls
         /// <remarks>
         /// This method only supports <see cref="HttpMethod.Get"/> and <see cref="HttpMethod.Post"/> for the <paramref name="httpMethod"/> parameter.
         /// </remarks>
-        /// <seealso cref="Windows.Web.UI.Interop.WebViewControl.NavigateWithHttpRequestMessage"/>
+        /// <seealso cref="windows.Web.UI.Interop.WebViewControl.NavigateWithHttpRequestMessage"/>
         void Navigate(
             Uri requestUri,
             HttpMethod httpMethod,

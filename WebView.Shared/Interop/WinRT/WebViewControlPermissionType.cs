@@ -2,13 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
     /// Defines constants that specify the state of a <see cref="IWebView.PermissionRequested"/> event.
     /// </summary>
-    /// <remarks>Copy from <see cref="Windows.Web.UI.WebViewControlPermissionType"/> to avoid requirement to link Windows.winmd</remarks>
-    /// <seealso cref="Windows.Web.UI.WebViewControlPermissionType"/>
+    /// <remarks>Copy from <see cref="windows.Web.UI.WebViewControlPermissionType"/> to avoid requirement to link Windows.winmd</remarks>
+    /// <seealso cref="windows.Web.UI.WebViewControlPermissionType"/>
     public enum WebViewControlPermissionType
     {
         /// <summary>

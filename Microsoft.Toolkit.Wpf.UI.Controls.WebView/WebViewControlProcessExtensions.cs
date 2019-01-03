@@ -10,6 +10,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using Microsoft.Toolkit.Win32.UI.Controls;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Wpf.UI.Controls
 {
@@ -169,7 +170,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
             Verify.IsNotNull(process);
             Verify.IsFalse(hostWindowHandle == IntPtr.Zero);
 
-            var rect = new Windows.Foundation.Rect(bounds.X, bounds.Y, bounds.Width, bounds.Height);
+            var rect = new windows.Foundation.Rect(bounds.X, bounds.Y, bounds.Width, bounds.Height);
             return process
                     .CreateWebViewControlHostAsync(hostWindowHandle, rect)
                     .GetAwaiter()
@@ -185,7 +186,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
             Verify.IsNotNull(process);
             Verify.IsFalse(hostWindowHandle == IntPtr.Zero);
 
-            var rect = new Windows.Foundation.Rect(bounds.X, bounds.Y, bounds.Width, bounds.Height);
+            var rect = new windows.Foundation.Rect(bounds.X, bounds.Y, bounds.Width, bounds.Height);
             return process.CreateWebViewControlHostAsync(hostWindowHandle, rect);
         }
     }

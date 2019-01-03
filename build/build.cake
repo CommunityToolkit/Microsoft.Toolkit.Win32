@@ -41,6 +41,11 @@ string Version = null;
 var inheritDoc = toolsDir + "/InheritDoc/tools/InheritDoc.exe";
 var inheritDocExclude = "Foo.*";
 
+DirectoryPath vsLatest  = VSWhereLatest(new VSWhereLatestSettings { IncludePrerelease = true });
+FilePath msBuildPathX64 = (vsLatest==null)
+                    ? null
+                    : vsLatest.CombineWithFilePath("./MSBuild/Current/Bin/amd64/MSBuild.exe");
+
 //////////////////////////////////////////////////////////////////////
 // METHODS
 //////////////////////////////////////////////////////////////////////
@@ -148,7 +153,8 @@ Task("Build")
     Information("\nBuilding Solution");
     var buildSettings = new MSBuildSettings
     {
-        MaxCpuCount = 0
+        MaxCpuCount = 0,
+		ToolPath = msBuildPathX64
     }
     .SetConfiguration("Release")
     .WithTarget("Restore");
@@ -160,7 +166,8 @@ Task("Build")
 	// Build once with normal dependency ordering
     buildSettings = new MSBuildSettings
     {
-        MaxCpuCount = 0
+        MaxCpuCount = 0,
+		ToolPath = msBuildPathX64
     }
     .SetConfiguration("Release")
     .WithTarget("Build")
@@ -205,7 +212,8 @@ Task("Package")
 {
 	// Invoke the pack target in the end
     var buildSettings = new MSBuildSettings {
-        MaxCpuCount = 0
+        MaxCpuCount = 0,
+		ToolPath = msBuildPathX64
     }
     .SetConfiguration("Release")
     .WithTarget("Pack")

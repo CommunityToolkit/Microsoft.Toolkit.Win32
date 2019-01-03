@@ -43,10 +43,11 @@
           - /azure-pipelines.yml
 
         This also needs to be installed on your local machine. Can do this with PowerShell:
-          ./build/Install-WindowsSDKISO.ps1 17763
+          ./build/Install-WindowsSDKISO.ps1 18298
         -->
-        <TargetPlatformVersion>10.0.17763.0</TargetPlatformVersion>
-        <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
+        <TargetPlatformVersion>10.0.18298.0</TargetPlatformVersion>
+		<!-- XAML Islands require SDK 18226 -->
+        <TargetPlatformMinVersion>10.0.18226.0</TargetPlatformMinVersion>
 
         <!-- Compiler -->
         <FileAlignment>512</FileAlignment>

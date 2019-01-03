@@ -20,16 +20,26 @@ namespace Microsoft.Toolkit.Win32.UI.Controls
             [SecurityCritical]
             get
             {
+#if NET462
                 return _webBrowserPermission ?? (_webBrowserPermission = new WebBrowserPermission(PermissionState.Unrestricted));
+#else
+                // TODO: Fix
+                return _webBrowserPermission ?? (_webBrowserPermission = new WebBrowserPermission());
+#endif
             }
         }
 
         [SecuritySafeCritical]
         internal static bool AppDomainHasPermission(IPermission permissionToCheck)
         {
+#if NET462
             var psToCheck = new PermissionSet(PermissionState.None);
             psToCheck.AddPermission(permissionToCheck);
             return psToCheck.IsSubsetOf(AppDomain.CurrentDomain.PermissionSet);
+#else
+            // TODO: Fix
+            return true;
+#endif
         }
 
         [SecuritySafeCritical]

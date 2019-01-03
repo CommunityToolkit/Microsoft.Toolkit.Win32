@@ -5,6 +5,7 @@
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 using System;
 using System.Windows.Forms;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
 {
@@ -19,45 +20,45 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
         {
             inkCanvas1.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Pen | CoreInputDeviceTypes.Mouse | CoreInputDeviceTypes.Touch;
             
-            var stackPanel = new Windows.UI.Xaml.Controls.StackPanel()
+            var stackPanel = new windows.UI.Xaml.Controls.StackPanel()
             {
-                Background = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Black),
+                Background = new windows.UI.Xaml.Media.SolidColorBrush(windows.UI.Colors.Black),
             };
 
-            stackPanel.Children.Add(new Windows.UI.Xaml.Shapes.Rectangle()
+            stackPanel.Children.Add(new windows.UI.Xaml.Shapes.Rectangle()
             {
                 Width = 50,
                 Height = 75,
-                Fill = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Blue),
+                Fill = new windows.UI.Xaml.Media.SolidColorBrush(windows.UI.Colors.Blue),
             });
 
-            stackPanel.Children.Add(new Windows.UI.Xaml.Shapes.Rectangle()
+            stackPanel.Children.Add(new windows.UI.Xaml.Shapes.Rectangle()
             {
                 Width = 200,
                 Height = 30,
-                Fill = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Red),
+                Fill = new windows.UI.Xaml.Media.SolidColorBrush(windows.UI.Colors.Red),
             });
 
-            stackPanel.Children.Add(new Windows.UI.Xaml.Controls.Button()
+            stackPanel.Children.Add(new windows.UI.Xaml.Controls.Button()
             {
                 Width = 160,
                 Height = 60,
-                HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
+                HorizontalAlignment = windows.UI.Xaml.HorizontalAlignment.Center,
                 Content = "This is a UWP Button",
             });
 
-            stackPanel.Children.Add(new Windows.UI.Xaml.Shapes.Rectangle()
+            stackPanel.Children.Add(new windows.UI.Xaml.Shapes.Rectangle()
             {
                 Width = 25,
                 Height = 100,
-                Fill = new Windows.UI.Xaml.Media.SolidColorBrush(Windows.UI.Colors.Green),
+                Fill = new windows.UI.Xaml.Media.SolidColorBrush(windows.UI.Colors.Green),
             });
 
-            stackPanel.Children.Add(new Windows.UI.Xaml.Controls.Button()
+            stackPanel.Children.Add(new windows.UI.Xaml.Controls.Button()
             {
                 Width = 300,
                 Height = 40,
-                HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center,
+                HorizontalAlignment = windows.UI.Xaml.HorizontalAlignment.Center,
                 Content = "Another long UWP Button",
             });
 

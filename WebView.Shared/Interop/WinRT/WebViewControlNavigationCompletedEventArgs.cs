@@ -5,25 +5,26 @@
 using System;
 using System.Security;
 using System.Windows.Forms;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
     /// Provides data for the <see cref="IWebView.NavigationCompleted"/> and <see cref="IWebView.FrameNavigationCompleted"/> events. This class cannot be inherited.
     /// </summary>
-    /// <remarks>Copy from <see cref="Windows.Web.UI.WebViewControlNavigationCompletedEventArgs"/> to avoid requirement to link Windows.winmd</remarks>
+    /// <remarks>Copy from <see cref="windows.Web.UI.WebViewControlNavigationCompletedEventArgs"/> to avoid requirement to link Windows.winmd</remarks>
     /// <seealso cref="System.EventArgs" />
-    /// <seealso cref="Windows.Web.UI.WebViewControlNavigationCompletedEventArgs"/>
+    /// <seealso cref="windows.Web.UI.WebViewControlNavigationCompletedEventArgs"/>
     public sealed class WebViewControlNavigationCompletedEventArgs : EventArgs
     {
-        internal WebViewControlNavigationCompletedEventArgs(Windows.Web.UI.WebViewControlNavigationCompletedEventArgs args)
+        internal WebViewControlNavigationCompletedEventArgs(windows.Web.UI.WebViewControlNavigationCompletedEventArgs args)
         {
             IsSuccess = args.IsSuccess;
             Uri = args.Uri;
             WebErrorStatus = (WebErrorStatus)args.WebErrorStatus;
         }
 
-        internal WebViewControlNavigationCompletedEventArgs(Windows.Web.UI.WebViewControlNavigationCompletedEventArgs args, Uri uri)
+        internal WebViewControlNavigationCompletedEventArgs(windows.Web.UI.WebViewControlNavigationCompletedEventArgs args, Uri uri)
         : this(args)
         {
             Uri = uri;
@@ -63,19 +64,19 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         public WebErrorStatus WebErrorStatus { get; }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.Web.UI.WebViewControlNavigationCompletedEventArgs"/> to <see cref="WebViewControlNavigationCompletedEventArgs"/>.
+        /// Performs an implicit conversion from <see cref="windows.Web.UI.WebViewControlNavigationCompletedEventArgs"/> to <see cref="WebViewControlNavigationCompletedEventArgs"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Web.UI.WebViewControlNavigationCompletedEventArgs"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.Web.UI.WebViewControlNavigationCompletedEventArgs"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator WebViewControlNavigationCompletedEventArgs(Windows.Web.UI.WebViewControlNavigationCompletedEventArgs args) => ToWebViewControlNavigationCompletedEventArgs(args);
+        public static implicit operator WebViewControlNavigationCompletedEventArgs(windows.Web.UI.WebViewControlNavigationCompletedEventArgs args) => ToWebViewControlNavigationCompletedEventArgs(args);
 
         /// <summary>
-        /// Creates a <see cref="WebViewControlNavigationCompletedEventArgs"/> from <see cref="Windows.Web.UI.WebViewControlNavigationCompletedEventArgs"/>.
+        /// Creates a <see cref="WebViewControlNavigationCompletedEventArgs"/> from <see cref="windows.Web.UI.WebViewControlNavigationCompletedEventArgs"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Web.UI.WebViewControlNavigationCompletedEventArgs"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.Web.UI.WebViewControlNavigationCompletedEventArgs"/> instance containing the event data.</param>
         /// <returns><see cref="WebViewControlNavigationCompletedEventArgs"/></returns>
         public static WebViewControlNavigationCompletedEventArgs ToWebViewControlNavigationCompletedEventArgs(
-            Windows.Web.UI.WebViewControlNavigationCompletedEventArgs args) =>
+            windows.Web.UI.WebViewControlNavigationCompletedEventArgs args) =>
             new WebViewControlNavigationCompletedEventArgs(args);
 #if WPF
         /// <summary>

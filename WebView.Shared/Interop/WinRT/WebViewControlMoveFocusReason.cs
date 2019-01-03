@@ -2,13 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
     /// An enum that describes the reason for moving the focus.
     /// </summary>
-    /// <remarks>Copy from <see cref="Windows.Web.UI.Interop.WebViewControlMoveFocusReason"/> to avoid requirement to link Windows.winmd</remarks>
-    /// <seealso cref="Windows.Web.UI.Interop.WebViewControlMoveFocusReason"/>
+    /// <remarks>Copy from <see cref="windows.Web.UI.Interop.WebViewControlMoveFocusReason"/> to avoid requirement to link Windows.winmd</remarks>
+    /// <seealso cref="windows.Web.UI.Interop.WebViewControlMoveFocusReason"/>
     public enum WebViewControlMoveFocusReason
     {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
