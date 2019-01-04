@@ -14,7 +14,9 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
     {
         protected WebBaseCompatibilityAdapter()
         {
+#pragma warning disable CA2214 // Do not call overridable methods in constructors
             Initialize();
+#pragma warning restore CA2214 // Do not call overridable methods in constructors
         }
 
         public static DependencyProperty SourceProperty { get; } = DependencyProperty.Register(nameof(Source), typeof(Uri), typeof(WebBaseCompatibilityAdapter));

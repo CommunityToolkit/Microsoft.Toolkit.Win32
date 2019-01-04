@@ -125,7 +125,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
 
             Verify.IsNotNull(sourceHwnd);
 
-            var webViewControlHost = await process.CreateWebViewControlHostAsync(sourceHwnd?.Handle ?? IntPtr.Zero, bounds);
+            var webViewControlHost = await process.CreateWebViewControlHostAsync(sourceHwnd?.Handle ?? IntPtr.Zero, bounds).ConfigureAwait(true);
 
             return !visual.Dispatcher.CheckAccess()
                 ? visual.Dispatcher.Invoke(() => new WebView(webViewControlHost))
