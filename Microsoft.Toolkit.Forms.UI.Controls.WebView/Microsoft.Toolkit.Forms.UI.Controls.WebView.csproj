@@ -16,12 +16,6 @@
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
     <UseWindowsForms>true</UseWindowsForms>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
-    <!--<RunCodeAnalysis>true</RunCodeAnalysis>-->
-    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -39,10 +33,10 @@
     <Compile Update="..\WebView.Shared\DesignerUI.Designer.cs" Link="DesignerUI.Designer.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(RunCodeAnalysis)' == 'true' ">
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" />
+  <ItemGroup>
+    <!--<PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" />-->
   </ItemGroup>
-
+  
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="System" />
     <Reference Include="System.Core" />

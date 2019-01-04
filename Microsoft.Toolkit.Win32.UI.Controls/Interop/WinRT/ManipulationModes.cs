@@ -11,7 +11,9 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
     /// <see cref="windows.UI.Xaml.Input.ManipulationModes"/>
     /// </summary>
     [Flags]
+#pragma warning disable CA1028 // Enum storage should be Int32
     public enum ManipulationModes : uint
+#pragma warning restore CA1028 // Enum storage should be Int32
     {
         None = 0,
         TranslateX = 1,

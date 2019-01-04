@@ -40,7 +40,9 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         [Browsable(true)]
         [Category("Layout")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+#pragma warning disable CA1721 // Property names should not match get methods
         public AutoSizeMode AutoSizeMode
+#pragma warning restore CA1721 // Property names should not match get methods
         {
             get => GetAutoSizeMode();
 
@@ -76,9 +78,9 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         }
 
         /// <summary>
-        /// Raises the <see cref="E:System.Windows.Forms.Control.HandleCreated" /> event.
+        /// Raises the <see cref="System.Windows.Forms.Control.HandleCreated" /> event.
         /// </summary>
-        /// <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+        /// <param name="e">An <see cref="System.EventArgs" /> that contains the event data.</param>
         /// <remarks>Assign window render target to UWP XAML content.</remarks>
         protected override void OnHandleCreated(EventArgs e)
         {

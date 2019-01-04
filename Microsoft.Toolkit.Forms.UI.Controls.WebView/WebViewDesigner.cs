@@ -83,7 +83,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
                 nameof(WebView.IsPrivateNetworkClientServerCapabilityEnabled)
             };
             PropertyDescriptor prop;
-            Attribute[] empty = new Attribute[0];
+            Attribute[] empty = Array.Empty<Attribute>();
 
             for (var i = 0; i < shadowProps.Length; i++)
             {

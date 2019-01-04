@@ -20,26 +20,16 @@ namespace Microsoft.Toolkit.Win32.UI.Controls
             [SecurityCritical]
             get
             {
-#if NET462
                 return _webBrowserPermission ?? (_webBrowserPermission = new WebBrowserPermission(PermissionState.Unrestricted));
-#else
-                // TODO: Fix
-                return _webBrowserPermission ?? (_webBrowserPermission = new WebBrowserPermission());
-#endif
             }
         }
 
         [SecuritySafeCritical]
         internal static bool AppDomainHasPermission(IPermission permissionToCheck)
         {
-#if NET462
             var psToCheck = new PermissionSet(PermissionState.None);
             psToCheck.AddPermission(permissionToCheck);
             return psToCheck.IsSubsetOf(AppDomain.CurrentDomain.PermissionSet);
-#else
-            // TODO: Fix
-            return true;
-#endif
         }
 
         [SecuritySafeCritical]
@@ -81,7 +71,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls
         /// <summary>
         /// Demands <see cref="SecurityPermission"/> for <see cref="SecurityPermissionFlag.UnmanagedCode"/>
         /// </summary>
-        /// <exception cref="SecurityException">A caller higher in the call stack does not have the permission specified by the current instance.-or- A caller higher in the call stack has called <see cref="M:System.Security.CodeAccessPermission.Deny" /> on the current permission object.</exception>
+        /// <exception cref="SecurityException">A caller higher in the call stack does not have the permission specified by the current instance.-or- A caller higher in the call stack has called <see cref="System.Security.CodeAccessPermission.Deny" /> on the current permission object.</exception>
         [SecurityCritical]
         internal static void DemandUnmanagedCode()
         {

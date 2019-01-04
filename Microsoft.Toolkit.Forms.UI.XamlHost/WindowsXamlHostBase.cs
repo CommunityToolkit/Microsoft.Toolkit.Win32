@@ -21,6 +21,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
     [System.ComponentModel.DesignerCategory("code")]
     public abstract partial class WindowsXamlHostBase : ContainerControl
     {
+#pragma warning disable CA1051 // Do not declare visible instance fields
 #pragma warning disable SA1401 // Fields must be private
         /// <summary>
         /// DesktopWindowXamlSource instance
@@ -32,6 +33,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// </summary>
         protected internal bool _dpiScalingRenderTransformEnabled = false;
 #pragma warning restore SA1401 // Fields must be private
+#pragma warning restore CA1051 // Do not declare visible instance fields
 
         /// <summary>
         /// A reference count on the UWP XAML framework is tied to WindowsXamlManager's

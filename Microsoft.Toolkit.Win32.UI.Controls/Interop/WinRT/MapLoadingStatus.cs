@@ -9,7 +9,9 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
     /// <summary>
     /// <see cref="windows.UI.Xaml.Controls.Maps.MapLoadingStatus"/>
     /// </summary>
+#pragma warning disable CA1717 // Only FlagsAttribute enums should have plural names
     public enum MapLoadingStatus
+#pragma warning restore CA1717 // Only FlagsAttribute enums should have plural names
     {
         Loading = 0,
         Loaded = 1,

@@ -14,19 +14,13 @@
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
     <UseWPF>true</UseWPF>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
-    <!--<RunCodeAnalysis>true</RunCodeAnalysis>-->
-    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;NET47;DEV_DEBUG;DEBUG_LAYOUT</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(RunCodeAnalysis)' == 'true' ">
+  <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" />
   </ItemGroup>
 

@@ -43,7 +43,7 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
             var cityCenter = new Geopoint(cityPosition);
 
             // Set the map location.
-            await myMap.TrySetViewAsync(cityCenter, 12);
+            await myMap.TrySetViewAsync(cityCenter, 12).ConfigureAwait(false);
         }
 
         private void WindowsXamlHost_Loaded(object sender, RoutedEventArgs e)

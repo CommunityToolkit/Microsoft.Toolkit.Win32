@@ -11,6 +11,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
     /// </summary>
     public struct BasicGeoposition
     {
+#pragma warning disable CA1051 // Do not declare visible instance fields
         /// <summary>
         /// Latitude
         /// </summary>
@@ -25,6 +26,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         /// Altitude
         /// </summary>
         public double Altitude;
+#pragma warning restore CA1051 // Do not declare visible instance fields
 
         /// <summary>
         /// Performs an implicit conversion from <see cref="windows.Devices.Geolocation.BasicGeoposition"/> to <see cref="BasicGeoposition"/>.

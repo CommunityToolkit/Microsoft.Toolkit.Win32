@@ -14,7 +14,7 @@
             <TabItem>
                 <TabItem.Header>Ink Controls (Canvas / Toolbar)</TabItem.Header>
                 <DockPanel LastChildFill="True" >
-                    <controls:InkToolbar  DockPanel.Dock="Top" x:Name="inkToolbar" Grid.Row="0" TargetInkCanvas="{x1:Reference Name=inkCanvas}" Initialized="inkToolbar_Initialized" ActiveToolChanged="inkToolbar_ActiveToolChanged"                                  >
+                    <controls:InkToolbar  DockPanel.Dock="Top" x:Name="inkToolbar" Grid.Row="0" TargetInkCanvas="{x1:Reference Name=inkCanvas}" Initialized="inkToolbar_Initialized" ActiveToolChanged="inkToolbar_ActiveToolChanged">
                         <controls:InkToolbarCustomToolButton x:Name="toolButtonLasso" />
                     </controls:InkToolbar>
                     <!--Inking area -->

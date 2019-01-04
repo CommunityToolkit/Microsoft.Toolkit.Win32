@@ -9,6 +9,6 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost.Interop.Win32
     /// </summary>
     internal static partial class SetWindowPosFlags
     {
-        public static readonly int SHOWWINDOW = 0x0040;
+        public const int SHOWWINDOW = 0x0040;
     }
 }

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.Toolkit.Forms.UI.XamlHost;
@@ -42,13 +43,13 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
             PropertyDescriptor descriptor = TypeDescriptor.GetProperties(wrapper).Find(propName, false);
             if (descriptor == null)
             {
-                throw new MissingMethodException("Wrapper class does not contain property " + propName.ToString());
+                throw new MissingMethodException("Wrapper class does not contain property " + propName.ToString(CultureInfo.InvariantCulture));
             }
 
             DefaultValueAttribute attribute = descriptor.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
             if (attribute == null)
             {
-                throw new ArgumentException("Wrapper class does not define a DefaultValue attribute for property " + propName.ToString());
+                throw new ArgumentException("Wrapper class does not define a DefaultValue attribute for property " + propName.ToString(CultureInfo.InvariantCulture));
             }
 
             return attribute.Value;

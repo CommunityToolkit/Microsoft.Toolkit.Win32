@@ -15,7 +15,9 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
+#pragma warning disable CA1724 // Type names should not match namespaces
     public partial class App : Application
+#pragma warning restore CA1724 // Type names should not match namespaces
     {
     }
 }

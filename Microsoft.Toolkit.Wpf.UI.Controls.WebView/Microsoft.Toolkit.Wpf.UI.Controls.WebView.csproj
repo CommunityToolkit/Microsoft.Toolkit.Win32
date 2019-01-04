@@ -16,12 +16,6 @@
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
     <UseWPF>true</UseWPF>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
-    <!--<RunCodeAnalysis>true</RunCodeAnalysis>-->
-    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -37,10 +31,10 @@
     <Compile Include="..\Microsoft.Toolkit.Win32.UI.Controls\Interop\WinRT\VirtualKey.cs" LinkBase="Interop/WinRT" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(RunCodeAnalysis)' == 'true' ">
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" />
+  <ItemGroup>
+    <!--<PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" />-->
   </ItemGroup>
-
+  
   <ItemGroup>
     <Compile Remove="Support\**" />
     <EmbeddedResource Remove="Support\**" />

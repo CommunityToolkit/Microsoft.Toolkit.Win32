@@ -13,7 +13,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.Win32
     /// Wrapper for common Win32 status codes.
     /// </summary>
     [StructLayout(LayoutKind.Explicit)]
-    internal struct Win32Error
+    internal struct Win32Error : IEquatable<Win32Error>
     {
         [FieldOffset(0)]
         private readonly int _value;
@@ -148,14 +148,17 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.Win32
 
         public override bool Equals(object obj)
         {
-            try
+            if (obj is Win32Error win32Error)
             {
-                return ((Win32Error)obj)._value == _value;
+                return Equals(win32Error);
             }
-            catch (InvalidCastException)
-            {
-                return false;
-            }
+
+            return false;
+        }
+
+        public bool Equals(Win32Error other)
+        {
+            return other._value == _value;
         }
 
         public override int GetHashCode()

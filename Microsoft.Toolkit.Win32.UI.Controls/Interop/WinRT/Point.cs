@@ -10,7 +10,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
     /// <summary>
     /// <see cref="Point"/>
     /// </summary>
-    public struct Point : IFormattable
+    public struct Point : IFormattable, IEquatable<Point>
     {
         internal windows.Foundation.Point UwpInstance { get; set; }
 
@@ -71,7 +71,9 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 
         public override string ToString()
         {
+#pragma warning disable CA1305 // Specify IFormatProvider
             return UwpInstance.ToString();
+#pragma warning restore CA1305 // Specify IFormatProvider
         }
 
         public string ToString(string format, IFormatProvider formatProvider)

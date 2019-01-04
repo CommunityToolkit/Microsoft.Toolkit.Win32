@@ -298,7 +298,9 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.Style"/>
         /// </summary>
         [DefaultValue(MapStyle.Road)]
+#pragma warning disable CA1721 // Property names should not match get methods
         public MapStyle Style
+#pragma warning restore CA1721 // Property names should not match get methods
         {
             get => UwpControl != null ? (MapStyle)UwpControl.Style : (MapStyle)this.GetUwpControlValue(); // Style property is ambiguous
             set

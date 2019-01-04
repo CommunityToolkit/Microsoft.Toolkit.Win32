@@ -283,9 +283,6 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        public ObservableCollection<DependencyObject> Children
-        {
-            get; set;
-        }
+        public ObservableCollection<DependencyObject> Children { get; }
     }
 }

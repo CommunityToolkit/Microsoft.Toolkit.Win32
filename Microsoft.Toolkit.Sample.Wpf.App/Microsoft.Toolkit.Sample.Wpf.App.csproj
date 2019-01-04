@@ -4,7 +4,6 @@
     <OutputType>WinExe</OutputType>
     <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <AssemblyTitle>Windows Community Toolkit Controls (Sample Xaml Island Wrapper Controls for .NET WPF)</AssemblyTitle>
     <Description>Sample Code for Windows Community Toolkit Controls</Description>

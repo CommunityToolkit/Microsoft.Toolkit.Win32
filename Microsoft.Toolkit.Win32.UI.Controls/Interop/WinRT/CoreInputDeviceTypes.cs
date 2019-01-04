@@ -11,7 +11,9 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
     /// <see cref="windows.UI.Core.CoreInputDeviceTypes"/>
     /// </summary>
     [Flags]
+#pragma warning disable CA1028 // Enum storage should be Int32
     public enum CoreInputDeviceTypes : uint
+#pragma warning restore CA1028 // Enum storage should be Int32
     {
         None = 0,
         Touch = 1,

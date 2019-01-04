@@ -13,19 +13,13 @@
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
     <UseWPF>true</UseWPF>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
-    <!--<RunCodeAnalysis>true</RunCodeAnalysis>-->
-    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(RunCodeAnalysis)' == 'true' ">
+  <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" />
   </ItemGroup>
 

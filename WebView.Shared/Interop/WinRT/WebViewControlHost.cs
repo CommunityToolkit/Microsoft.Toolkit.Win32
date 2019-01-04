@@ -516,8 +516,8 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <exception cref="UriFormatException">
-        ///                 In the .NET for Windows Store apps or the Portable Class Library, catch the base class exception, <see cref="T:System.FormatException" />, instead.
-        ///               <paramref name="source" /> is empty.-or- The scheme specified in <paramref name="source" /> is not correctly formed. See <see cref="M:System.Uri.CheckSchemeName(System.String)" />.-or-
+        ///                 In the .NET for Windows Store apps or the Portable Class Library, catch the base class exception, <see cref="System.FormatException" />, instead.
+        ///               <paramref name="source" /> is empty.-or- The scheme specified in <paramref name="source" /> is not correctly formed. See <see cref="System.Uri.CheckSchemeName(string)" />.-or-
         ///               <paramref name="source" /> contains too many slashes.-or- The password specified in <paramref name="source" /> is not valid.-or- The host name specified in <paramref name="source" /> is not valid.-or- The file name specified in <paramref name="source" /> is not valid. -or- The user name specified in <paramref name="source" /> is not valid.-or- The host or authority name specified in <paramref name="source" /> cannot be terminated by backslashes.-or- The port number specified in <paramref name="source" /> is not valid or cannot be parsed.-or- The length of <paramref name="source" /> exceeds 65519 characters.-or- The length of the scheme specified in <paramref name="source" /> exceeds 1023 characters.-or- There is an invalid character sequence in <paramref name="source" />.-or- The MS-DOS path specified in <paramref name="source" /> must start with c:\\.</exception>
         internal void Navigate(string source)
         {
@@ -603,7 +603,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
                 }
 
                 // For compatabilty with WebView.NavigateWithHttpRequestMessage, this only supports POST and GET
-                throw new ArgumentOutOfRangeException(nameof(httpMethod));
+                throw new ArgumentOutOfRangeException(nameof(method));
             }
 
             var requestMessage = new HttpRequestMessage

@@ -14,7 +14,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.Win32
 {
     /// <summary>Wrapper for HRESULT status codes.</summary>
     [StructLayout(LayoutKind.Explicit)]
-    internal struct HRESULT
+    internal struct HRESULT : IEquatable<HRESULT>
     {
         [FieldOffset(0)]
         private readonly uint _value;
@@ -225,14 +225,17 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.Win32
 
         public override bool Equals(object obj)
         {
-            try
+            if (obj is HRESULT hresult)
             {
-                return ((HRESULT)obj)._value == _value;
+                return Equals(hresult);
             }
-            catch (InvalidCastException)
-            {
-                return false;
-            }
+
+            return false;
+        }
+
+        public bool Equals(HRESULT other)
+        {
+            return other._value == _value;
         }
 
         public override int GetHashCode()

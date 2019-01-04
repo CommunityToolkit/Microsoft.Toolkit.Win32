@@ -8,7 +8,9 @@ using System.Windows.Forms.Design;
 
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
+#pragma warning disable CA1812 // Avoid uninstantiated internal classes
     internal class MediaPlayerElementDesigner : ControlDesigner
+#pragma warning restore CA1812 // Avoid uninstantiated internal classes
     {
         public override void InitializeNewComponent(IDictionary defaultValues)
         {

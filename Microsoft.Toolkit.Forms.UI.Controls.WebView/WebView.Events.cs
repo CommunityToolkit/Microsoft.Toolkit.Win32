@@ -27,7 +27,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
 
         /// <inheritdoc />
         /// <summary>
-        /// Occurs when the status of whether the <see cref="T:Microsoft.Toolkit.Forms.UI.Controls.WebView" /> current contains a full screen element or not changes.
+        /// Occurs when the status of whether the <see cref="Microsoft.Toolkit.Forms.UI.Controls.WebView" /> current contains a full screen element or not changes.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1009:DeclareEventHandlersCorrectly", Justification = "Declaration of WinRT type")]
         [StringResourceCategory(Constants.CategoryAction)]

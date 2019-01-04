@@ -6,12 +6,14 @@ using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
+#pragma warning disable CA1717 // Only FlagsAttribute enums should have plural names
     /// <summary>
     /// Defines errors encountered during operations involving web services, such as authentication, proxy configuration, and destination URIs.
     /// </summary>
     /// <remarks>Copy from <see cref="windows.Web.WebErrorStatus"/> to avoid requirement to link Windows.winmd</remarks>
     /// <seealso cref="windows.Web.WebErrorStatus" />
     public enum WebErrorStatus
+#pragma warning restore CA1717 // Only FlagsAttribute enums should have plural names
     {
         /// <summary>
         /// An unknown error has occurred.

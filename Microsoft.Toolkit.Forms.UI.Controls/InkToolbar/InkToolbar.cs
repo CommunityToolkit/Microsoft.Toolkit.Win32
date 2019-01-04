@@ -199,7 +199,9 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         [Browsable(true)]
         [Category("Layout")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+#pragma warning disable CA1721 // Property names should not match get methods
         public System.Windows.Forms.AutoSizeMode AutoSizeMode
+#pragma warning restore CA1721 // Property names should not match get methods
         {
             get => GetAutoSizeMode();
 

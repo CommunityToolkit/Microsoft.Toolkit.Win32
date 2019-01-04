@@ -13,7 +13,9 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
     /// <summary>
     /// Wpf-enabled wrapper for <see cref="windows.UI.Xaml.Controls.SwapChainPanel"/>
     /// </summary>
+#pragma warning disable CA1812 // Avoid uninstantiated internal classes
     internal class SwapChainPanel : WindowsXamlHostBase
+#pragma warning restore CA1812 // Avoid uninstantiated internal classes
     {
         internal windows.UI.Xaml.Controls.SwapChainPanel UwpControl => ChildInternal as windows.UI.Xaml.Controls.SwapChainPanel;
 

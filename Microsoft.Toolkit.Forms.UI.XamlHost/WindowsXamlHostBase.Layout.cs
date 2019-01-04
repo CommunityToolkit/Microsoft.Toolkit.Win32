@@ -19,7 +19,9 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         ///     correct layout behavior for the hosted XAML content.
         /// </summary>
         /// <returns>preferred size</returns>
+#pragma warning disable CA1721 // Property names should not match get methods
         public override Size GetPreferredSize(Size proposedSize)
+#pragma warning restore CA1721 // Property names should not match get methods
         {
             if (DesignMode)
             {

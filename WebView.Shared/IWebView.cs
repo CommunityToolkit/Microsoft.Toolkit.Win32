@@ -14,9 +14,9 @@ namespace Microsoft.Toolkit.Win32.UI.Controls
     /// <summary>
     /// Provides a control that hosts HTML content in an app.
     /// </summary>
-    /// <seealso cref="T:System.IDisposable" />
+    /// <seealso cref="System.IDisposable" />
     /// <remarks>
-    /// Subset of functionality from <see cref="T:windows.Web.UI.IWebViewControl" />
+    /// Subset of functionality from <see cref="windows.Web.UI.IWebViewControl" />
     /// </remarks>
     public interface IWebView
     {

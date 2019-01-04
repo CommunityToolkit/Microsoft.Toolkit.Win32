@@ -132,7 +132,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         }
 
         /// <summary>
-        /// Handles the <see cref="E:TakeFocusRequested" /> event.
+        /// Handles the <see cref="windows.UI.Xaml.Hosting.DesktopWindowXamlSource.TakeFocusRequested" /> event.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="windows.UI.Xaml.Hosting.DesktopWindowXamlSourceTakeFocusRequestedEventArgs"/> instance containing the event data.</param>
