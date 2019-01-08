@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using Microsoft.Toolkit.Win32.UI.XamlHost;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 using windows = Windows;
 
 namespace Microsoft.Toolkit.Wpf.UI.XamlHost
@@ -46,6 +47,15 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         public event EventHandler ChildChanged;
 
         /// <summary>
+        ///     When a window containing Xaml content moves, Xaml closes all open popups. We need the same behavior for Xaml
+        ///     content in the DesktopWindowXamlSource. Since the DesktopWindowXamlSource itself is not notified when the WPF
+        ///     Window moves, we attach handlers to the WPF Window's SizeChanged and LocationChanged events and use the Xaml
+        ///     VisualTreeHelper API to close all open popups in an event handler. The WPF Window is not reachable until after
+        ///     this control is created. This field tracks the WPF Window so we can detach the event handlers during cleanup.
+        /// </summary>
+        private System.Windows.Window _window;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="WindowsXamlHostBase"/> class.
         /// </summary>
         /// <remarks>
@@ -57,7 +67,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
             // Windows.UI.Xaml.Application object is required for loading custom control metadata.  If a custom
             // Application object is not provided by the application, the host control will create one (XamlApplication).
             // Instantiation of the application object must occur before creating the DesktopWindowXamlSource instance.
-            // If no Application object is created before DesktopWindowXamlSource is created, DestkopWindowXamlSource
+            // If no Application object is created before DesktopWindowXamlSource is created, DesktopWindowXamlSource
             // will create a generic Application object unable to load custom UWP XAML metadata.
             Microsoft.Toolkit.Win32.UI.XamlHost.XamlApplication.GetOrCreateXamlApplicationInstance(ref _application);
 
@@ -74,6 +84,8 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
 
             // Hook DesktopWindowXamlSource OnTakeFocus event for Focus processing
             _xamlSource.TakeFocusRequested += OnTakeFocusRequested;
+
+            Loaded += WindowsXamlHostBase_Loaded;
         }
 
         /// <summary>
@@ -89,6 +101,34 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         {
             ChildInternal = UWPTypeFactory.CreateXamlContentByType(typeName);
             ChildInternal.SetWrapper(this);
+        }
+
+        /// <summary>
+        /// Attaches event handlers to Window.SizeChanged and Window.LocationChanged to close all popups opened by the
+        /// Xaml content inside the DesktopWindowXamlSource.
+        /// </summary>
+        private void WindowsXamlHostBase_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (_window == null)
+            {
+                _window = System.Windows.Window.GetWindow(this);
+                _window.SizeChanged += OnWindowSizeOrLocationChanged;
+                _window.LocationChanged += OnWindowSizeOrLocationChanged;
+            }
+        }
+
+        /// <summary>
+        /// Close all popups opened by the Xaml content inside the DesktopWindowXamlSource.
+        /// </summary>
+        private void OnWindowSizeOrLocationChanged(object sender, EventArgs e)
+        {
+#pragma warning disable 8305    // Experimental API
+            XamlRoot xamlRoot = _childInternal.XamlRoot;
+            var openPopups = VisualTreeHelper.GetOpenPopupsForXamlRoot(xamlRoot);
+            foreach (windows.UI.Xaml.Controls.Primitives.Popup popup in openPopups)
+            {
+                popup.IsOpen = false;
+            }
         }
 
         /// <summary>
@@ -245,6 +285,13 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
             if (disposing)
             {
                 ChildInternal = null;
+
+                if (_window != null)
+                {
+                    _window.SizeChanged -= OnWindowSizeOrLocationChanged;
+                    _window.LocationChanged -= OnWindowSizeOrLocationChanged;
+                    _window = null;
+                }
 
                 // Required by CA2213: _xamlSource?.Dispose() is insufficient.
                 if (_xamlSource != null)

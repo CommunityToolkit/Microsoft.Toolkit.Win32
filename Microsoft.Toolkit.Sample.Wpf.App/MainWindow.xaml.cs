@@ -118,16 +118,10 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
             {
                 Width = 50,
                 Height = 50,
+                ShouldConstrainToRootBounds = false,
+                Child = new windows.UI.Xaml.Controls.TextBlock() { Text = "Popup child", },
             };
             grid.Children.Add(popup);
-
-            var canvas = new windows.UI.Xaml.Controls.Canvas()
-            {
-                Width = 50,
-                Height = 50,
-                Background = new windows.UI.Xaml.Media.SolidColorBrush(windows.UI.Colors.Green),
-            };
-            popup.Child = canvas;
 
             windowsXamlHost.Child = stackPanel;
             popup.IsOpen = true;

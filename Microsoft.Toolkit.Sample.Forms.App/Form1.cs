@@ -11,6 +11,8 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
 {
     public partial class Form1 : Form
     {
+        private windows.UI.Xaml.Controls.ContentDialog _contentDialog;
+
         public Form1()
         {
             InitializeComponent();
@@ -19,8 +21,8 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
         private void Form1_Load(object sender, EventArgs e)
         {
             inkCanvas1.InkPresenter.InputDeviceTypes = CoreInputDeviceTypes.Pen | CoreInputDeviceTypes.Mouse | CoreInputDeviceTypes.Touch;
-            
-            var stackPanel = new windows.UI.Xaml.Controls.StackPanel()
+
+            windows.UI.Xaml.Controls.StackPanel stackPanel = new windows.UI.Xaml.Controls.StackPanel()
             {
                 Background = new windows.UI.Xaml.Media.SolidColorBrush(windows.UI.Colors.Black),
             };
@@ -39,13 +41,15 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
                 Fill = new windows.UI.Xaml.Media.SolidColorBrush(windows.UI.Colors.Red),
             });
 
-            stackPanel.Children.Add(new windows.UI.Xaml.Controls.Button()
+            var button = new windows.UI.Xaml.Controls.Button
             {
                 Width = 160,
                 Height = 60,
                 HorizontalAlignment = windows.UI.Xaml.HorizontalAlignment.Center,
-                Content = "This is a UWP Button",
-            });
+                Content = "ContentDialog UWP Button",
+            };
+            button.Tapped += Button_Tapped;
+            stackPanel.Children.Add(button);
 
             stackPanel.Children.Add(new windows.UI.Xaml.Shapes.Rectangle()
             {
@@ -54,15 +58,51 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
                 Fill = new windows.UI.Xaml.Media.SolidColorBrush(windows.UI.Colors.Green),
             });
 
-            stackPanel.Children.Add(new windows.UI.Xaml.Controls.Button()
+            windows.UI.Xaml.Controls.Flyout flyout = new windows.UI.Xaml.Controls.Flyout();
+            flyout.Content = new windows.UI.Xaml.Controls.TextBlock() { Text = "Flyout content", };
+
+            var button2 = new windows.UI.Xaml.Controls.Button()
             {
                 Width = 300,
                 Height = 40,
                 HorizontalAlignment = windows.UI.Xaml.HorizontalAlignment.Center,
-                Content = "Another long UWP Button",
-            });
+                Content = "Long UWP Button with Flyout",
+                Flyout = flyout,
+            };
+            stackPanel.Children.Add(button2);
+
+            var comboBox = new windows.UI.Xaml.Controls.ComboBox()
+            {
+                HorizontalAlignment = windows.UI.Xaml.HorizontalAlignment.Center,
+            };
+            comboBox.Items.Add("One");
+            comboBox.Items.Add("Two");
+            comboBox.Items.Add("Three");
+            comboBox.Items.Add("Four");
+            stackPanel.Children.Add(comboBox);
+
+            windows.UI.Xaml.Controls.Grid grid = new windows.UI.Xaml.Controls.Grid();
+            stackPanel.Children.Add(grid);
+
+            _contentDialog = new windows.UI.Xaml.Controls.ContentDialog();
+            _contentDialog.Content = new windows.UI.Xaml.Controls.TextBlock() { Text = "ContentDialog content", };
+            stackPanel.Children.Add(_contentDialog);
+
+            var popup = new windows.UI.Xaml.Controls.Primitives.Popup()
+            {
+                Width = 50,
+                Height = 50,
+                ShouldConstrainToRootBounds = false,
+                Child = new windows.UI.Xaml.Controls.TextBlock() { Text = "Popup child", },
+            };
+            grid.Children.Add(popup);
 
             windowsXamlHost.Child = stackPanel;
+            popup.IsOpen = true;
+        }
+        private async void Button_Tapped(object sender, windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            await _contentDialog.ShowAsync(windows.UI.Xaml.Controls.ContentDialogPlacement.Popup);
         }
     }
 }
