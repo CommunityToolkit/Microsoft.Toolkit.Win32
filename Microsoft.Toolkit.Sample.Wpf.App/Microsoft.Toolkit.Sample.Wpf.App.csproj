@@ -42,11 +42,6 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Toolkit.Wpf.UI.Controls.WebView\Microsoft.Toolkit.Wpf.UI.Controls.WebView.csproj" />
-    <ProjectReference Include="..\Microsoft.Toolkit.Wpf.UI.Controls\Microsoft.Toolkit.Wpf.UI.Controls.csproj" />
-    <ProjectReference Include="..\Microsoft.Toolkit.Wpf.UI.XamlHost\Microsoft.Toolkit.Wpf.UI.XamlHost.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\storelogo-sdk.png" />
   </ItemGroup>
 </Project>

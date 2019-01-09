@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <RootNamespace>Microsoft.Toolkit.Forms.UI.XamlHost</RootNamespace>
     <AssemblyName>Microsoft.Toolkit.Forms.UI.XamlHost</AssemblyName>
 
     <Title>Windows Community Toolkit XAMLHost for Windows Forms</Title>
     <Description>This library provides XAML islands interop helpers for Windows Forms. It is part of the Windows Community Toolkit.</Description>
     <PackageTags>XAML Islands Win32 Forms WindowsForms WinForms XamlHost</PackageTags>
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
@@ -40,12 +41,6 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="WindowsBase" />
-    <Reference Include="System.Runtime.WindowsRuntime">
-      <HintPath>$(WINDIR)\Microsoft.NET\Framework\v4.0.30319\System.Runtime.WindowsRuntime.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.WindowsRuntime.UI.Xaml">
-      <HintPath>$(WINDIR)\Microsoft.NET\Framework\v4.0.30319\System.Runtime.WindowsRuntime.UI.Xaml.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>
@@ -67,6 +62,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="winsdk.metadata.apt7.en" Version="10.0.18312.1000" />
   </ItemGroup>
 
 </Project>
