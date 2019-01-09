@@ -11,10 +11,6 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
-    <UseWindowsForms>true</UseWindowsForms>
-  </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Shared\**" />
     <Compile Remove="WPF\**" />
@@ -30,17 +26,6 @@
     <Compile Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\**\*.cs" />
     <Compile Include="..\Microsoft.Toolkit.Win32.UI.Controls\Interop\Win32\ExternDll.cs" Link="Interop\Win32\ExternDll.cs" />
     <Compile Include="..\Microsoft.Toolkit.Win32.UI.Controls\Interop\Win32\WM.cs" Link="Interop\Win32\WM.cs" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-    <Reference Include="System" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
   </ItemGroup>
 
   <ItemGroup>
