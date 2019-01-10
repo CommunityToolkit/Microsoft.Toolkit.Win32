@@ -35,7 +35,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls
         [SecuritySafeCritical]
         internal static bool CallerAndAppDomainHaveUnrestrictedWebBrowserPermission()
         {
-            // TODO: Remove ifdef when .Net Core supports this (https://github.com/dotnet/corefx/issues/34368)
+            // Not supported on .Net Core (https://github.com/dotnet/corefx/issues/34368#issuecomment-453155739)
 #if NET462
             if (!AppDomainHasPermission(CachedWebBrowserPermission))
             {

@@ -28,7 +28,7 @@ steps:
 - task: DotNetCoreInstaller@0
   inputs:
     packageType: 'sdk'
-    version: '3.0.100-preview-009996'
+    version: '3.0.100-preview-010046'
   displayName: Install Dot Net Core SDK 3.0
     
 - task: DotNetCoreCLI@2  

@@ -146,29 +146,38 @@ Task("Build")
     .Does(() =>
 {
     Information("\nBuilding Solution");
-    var buildSettings = new MSBuildSettings
-    {
-        MaxCpuCount = 0
-    }
-	.UseToolVersion(MSBuildToolVersion.VS2019)
-    .SetConfiguration("Release")
-    .WithTarget("Restore");
-
-    MSBuild(win32Solution, buildSettings);
+	
+	var msbuildSettings = new DotNetCoreMSBuildSettings
+	{
+		MaxCpuCount = 0
+	}
+	.WithTarget("Restore");
+		
+	var buildSettings = new DotNetCoreBuildSettings
+	{
+		Configuration = "Release",
+		MSBuildSettings = msbuildSettings
+	};
+	
+    DotNetCoreBuild(win32Solution, buildSettings);
 
     EnsureDirectoryExists(nupkgDir);
 
 	// Build once with normal dependency ordering
-    buildSettings = new MSBuildSettings
+    msbuildSettings = new DotNetCoreMSBuildSettings
     {
         MaxCpuCount = 0
     }
-	.UseToolVersion(MSBuildToolVersion.VS2019)
-    .SetConfiguration("Release")
     .WithTarget("Build")
     .WithProperty("GenerateLibraryLayout", "true");
+	
+	buildSettings = new DotNetCoreBuildSettings
+	{
+		Configuration = "Release",
+		MSBuildSettings = msbuildSettings
+	};
 
-    MSBuild(win32Solution, buildSettings);
+    DotNetCoreBuild(win32Solution, buildSettings);
 });
 
 Task("InheritDoc")
@@ -206,16 +215,21 @@ Task("Package")
 	.Does(() =>
 {
 	// Invoke the pack target in the end
-    var buildSettings = new MSBuildSettings {
+	var msbuildSettings = new DotNetCoreMSBuildSettings
+    {
         MaxCpuCount = 0
     }
-	.UseToolVersion(MSBuildToolVersion.VS2019)
-    .SetConfiguration("Release")
     .WithTarget("Pack")
-    .WithProperty("GenerateLibraryLayout", "true")
+	.WithProperty("GenerateLibraryLayout", "true")
 	.WithProperty("PackageOutputPath", nupkgDir);
+	
+	var buildSettings = new DotNetCoreBuildSettings
+	{
+		Configuration = "Release",
+		MSBuildSettings = msbuildSettings
+	};
 
-    MSBuild(win32Solution, buildSettings);
+    DotNetCoreBuild(win32Solution, buildSettings);
 });
 
 
