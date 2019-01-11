@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -60,7 +61,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTe
 
         protected override void Given()
         {
-            var fileName = Guid.NewGuid().ToString("N") + ".txt";
+            var fileName = Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture) + ".txt";
             path = Path.Combine(TestContext.TestRunResultsDirectory, fileName);
 
             File.WriteAllText(

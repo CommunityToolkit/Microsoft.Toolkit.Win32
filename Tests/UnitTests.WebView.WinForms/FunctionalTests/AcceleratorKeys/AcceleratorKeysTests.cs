@@ -7,6 +7,7 @@ using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 using Microsoft.Toolkit.Win32.UI.Controls.Test.WebView.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Should;
+using System;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTests.AcceleratorKeys
 {
@@ -86,12 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 WriteLine($"ScriptNotify received: '{e.Value ?? string.Empty}'");
 
-                if ("generateKeyPress".Equals(e.Value))
+                if ("generateKeyPress".Equals(e.Value, StringComparison.InvariantCulture))
                 {
                     Form.InputSimulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_A);
                     WriteLine("Keyboard input generated.");
                 }
-                else if ("keyboardInputFound".Equals(e.Value))
+                else if ("keyboardInputFound".Equals(e.Value, StringComparison.InvariantCulture))
                 {
                     WriteLine("Keyboard input received in WebView");
                 }
