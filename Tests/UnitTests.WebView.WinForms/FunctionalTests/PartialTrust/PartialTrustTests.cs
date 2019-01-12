@@ -11,6 +11,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTests.PartialTrust
 {
+    // App domain creation is only supported on .Net Framework
+#if NET462
     [TestClass]
     public class PartialTrustTest : ContextSpecification
     {
@@ -84,4 +86,5 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTe
 
         }
     }
+#endif
 }

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
-    <RootNamespace>Microsoft.Toolkit.Wpf.UI.Controls</RootNamespace>
+    <RootNamespace>Microsoft.Toolkit.Win32.UI.Controls</RootNamespace>
     <AssemblyName>Microsoft.Toolkit.Wpf.UI.Controls.WebView</AssemblyName>
 
     <Title>Windows Community Toolkit WPF WebView Control</Title>

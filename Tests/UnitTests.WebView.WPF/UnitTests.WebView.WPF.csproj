@@ -1,6 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
     <RootNamespace>Microsoft.Toolkit.Win32.UI.Controls.Test.WPF.WebView</RootNamespace>
     <AssemblyName>Microsoft.Toolkit.Win32.UI.Controls.Test.WPF.WebView</AssemblyName>
     <AssemblyTitle>UnitTests.WebView.WPF</AssemblyTitle>
@@ -12,7 +12,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Microsoft.Toolkit.Win32.UI.Controls.Test.WPF.WebView</RootNamespace>
     <AssemblyName>Microsoft.Toolkit.Win32.UI.Controls.Test.WPF.WebView</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
@@ -22,6 +21,15 @@
     <TargetFrameworkProfile />
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile />
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <DebugSymbols>true</DebugSymbols>
@@ -48,13 +56,18 @@
     <ProjectReference Include="..\UnitTests.WebView.Shared\UnitTests.WebView.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="InputSimulator" Version="1.0.4" />
-    <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
-    <PackageReference Include="MSTest.TestFramework" Version="1.3.2" />
-    <PackageReference Include="Should" Version="1.1.20" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
+    <PackageReference Include="Should-DotNetStandard" Version="1.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
+    <PackageReference Include="InputSimulator" Version="1.0.4" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+    <PackageReference Include="InputSimulatorCore" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System.Management" />

@@ -54,6 +54,8 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTe
         }
     }
 
+    // TestContext.TestRunResultsDirectory is only supported on .Net Framework
+#if NET462
     [TestClass]
     public class NavigateFilePath : HostFormWebViewContextSpecification
     {
@@ -87,6 +89,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTe
             });
         }
     }
+#endif
 
     [TestClass]
     public class Navigate2Tests : HostFormWebViewContextSpecification
