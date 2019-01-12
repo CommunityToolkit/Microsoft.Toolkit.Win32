@@ -7,22 +7,16 @@
       </PropertyGroup>
       <ItemGroup>
         <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" PrivateAssets="all"/>
-      </ItemGroup>
-      <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
         <Reference Include="Windows">
           <HintPath Condition="Exists('$(MSBuildProgramFiles32)\Windows Kits\10\UnionMetadata\$(TargetPlatformMinVersion)\Windows.winmd')">$(MSBuildProgramFiles32)\Windows Kits\10\UnionMetadata\$(TargetPlatformMinVersion)\Windows.winmd</HintPath>
           <HintPath Condition="Exists('$(MSBuildProgramFiles32)\Windows Kits\10\UnionMetadata\$(TargetPlatformVersion)\Windows.winmd')">$(MSBuildProgramFiles32)\Windows Kits\10\UnionMetadata\$(TargetPlatformVersion)\Windows.winmd</HintPath>
+          <IsWinMDFile>true</IsWinMDFile>
           <Private>False</Private>
         </Reference>
       </ItemGroup>
       <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
         <PackageReference Include="System.Runtime.WindowsRuntime" Version="4.6.0-preview.18571.3" />
         <PackageReference Include="System.Runtime.WindowsRuntime.UI.Xaml" Version="4.6.0-preview.18571.3" />
-        <Reference Include="Windows">
-          <HintPath>$(MSBuildProgramFiles32)\Windows Kits\10\UnionMetadata\$(TargetPlatformVersion)\Windows.winmd</HintPath>
-          <IsWinMDFile>true</IsWinMDFile>
-          <Private>false</Private>
-        </Reference>
       </ItemGroup>
     </When>
   </Choose>
