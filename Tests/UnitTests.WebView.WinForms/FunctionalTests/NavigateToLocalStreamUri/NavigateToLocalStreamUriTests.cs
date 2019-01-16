@@ -11,7 +11,6 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTe
 {
     [TestClass]
     [TestCategory(TestConstants.Categories.Nav)]
-    [DeploymentItem("FunctionalTests\\NavigateToLocalStreamUri\\async.htm")]
     public class Given_a_local_htm_file : HostFormWebViewContextSpecification
     {
         private bool _success;
@@ -42,7 +41,6 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTe
 
     [TestClass]
     [TestCategory(TestConstants.Categories.Nav)]
-    [DeploymentItem("FunctionalTests\\NavigateToLocalStreamUri\\async.htm")]
     public class Given_a_local_htm_file_with_async_XHR_for_local_content : HostFormWebViewContextSpecification
     {
         private string _scriptNotifyResult;
@@ -75,7 +73,6 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTe
 
     [TestClass]
     [TestCategory(TestConstants.Categories.Nav)]
-    [DeploymentItem("FunctionalTests\\NavigateToLocalStreamUri\\sync.htm")]
     public class Given_a_local_htm_file_with_sync_XHR_for_local_content : HostFormWebViewContextSpecification
     {
         private string _scriptNotifyResult;

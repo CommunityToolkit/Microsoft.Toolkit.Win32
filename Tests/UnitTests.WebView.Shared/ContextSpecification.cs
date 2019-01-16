@@ -112,10 +112,25 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WebView.Shared
     {
         public TestContext TestContext { get; set; }
 
+#if NETCOREAPP
+        TestFx.STAExtensions.STAThreadManager _threadManager = new TestFx.STAExtensions.STAThreadManager();
+#endif
+
         [TestCleanup]
         public void TestCleanup()
         {
+#if NETCOREAPP
+            if (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)
+            {
+                Cleanup();
+            }
+            else
+            {
+                _threadManager.Execute(Cleanup);
+            }
+#else
             Cleanup();
+#endif
         }
 
         [TestInitialize]
@@ -136,10 +151,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WebView.Shared
             }
             else
             {
-                var thread = new Thread(Action);
-                thread.SetApartmentState(ApartmentState.STA);
-                thread.Start();
-                thread.Join();
+                _threadManager.Execute(Action);
             }
 #else
             Action();
