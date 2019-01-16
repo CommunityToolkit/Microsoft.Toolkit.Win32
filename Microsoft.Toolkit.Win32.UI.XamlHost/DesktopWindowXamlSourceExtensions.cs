@@ -4,29 +4,31 @@
 
 using System;
 using System.Runtime.InteropServices;
-using windows = Windows;
+using WUX = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
     /// <summary>
-    /// COM wrapper required to access native-only methods on <see cref="windows.UI.Xaml.Hosting.DesktopWindowXamlSource" />
+    /// COM wrapper required to access native-only methods on <see cref="Windows.UI.Xaml.Hosting.DesktopWindowXamlSource" />
     /// </summary>
-    public static class DesktopWindowXamlSourceExtensions
+    static partial class DesktopWindowXamlSourceExtensions
     {
         /// <summary>
-        /// Gets the <see cref="IDesktopWindowXamlSourceNative" /> interface from a <see cref="windows.UI.Xaml.Hosting.DesktopWindowXamlSource" /> instance.
+        /// Gets the <see cref="IDesktopWindowXamlSourceNative" /> interface from a <see cref="Windows.UI.Xaml.Hosting.DesktopWindowXamlSource" /> instance.
         /// </summary>
+        /// <typeparam name="TInterface">The interface to cast to</typeparam>
         /// <param name="desktopWindowXamlSource">The DesktopWindowXamlSource instance to get the interface from</param>
         /// <returns><see cref="IDesktopWindowXamlSourceNative" /> interface pointer</returns>
         /// <remarks>
         /// This interface is the only way to set DesktopWindowXamlSource's target window for rendering.
         /// </remarks>
-        public static IDesktopWindowXamlSourceNative GetInterop(this windows.UI.Xaml.Hosting.DesktopWindowXamlSource desktopWindowXamlSource)
+        public static TInterface GetInterop<TInterface>(this WUX.Hosting.DesktopWindowXamlSource desktopWindowXamlSource)
+            where TInterface : class
         {
             var win32XamlSourceIntPtr = Marshal.GetIUnknownForObject(desktopWindowXamlSource);
             try
             {
-                var win32XamlSource = Marshal.GetTypedObjectForIUnknown(win32XamlSourceIntPtr, typeof(IDesktopWindowXamlSourceNative)) as IDesktopWindowXamlSourceNative;
+                var win32XamlSource = Marshal.GetTypedObjectForIUnknown(win32XamlSourceIntPtr, typeof(TInterface)) as TInterface;
                 return win32XamlSource;
             }
             finally

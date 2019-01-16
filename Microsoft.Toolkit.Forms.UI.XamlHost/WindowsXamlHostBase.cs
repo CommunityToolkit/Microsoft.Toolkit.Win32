@@ -332,7 +332,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             if (!DesignMode)
             {
                 // Attach window to DesktopWindowXamSource as a render target
-                var desktopWindowXamlSourceNative = _xamlSource.GetInterop();
+                var desktopWindowXamlSourceNative = _xamlSource.GetInterop<IDesktopWindowXamlSourceNative>();
                 desktopWindowXamlSourceNative.AttachToWindow(Handle);
                 _xamlIslandWindowHandle = desktopWindowXamlSourceNative.WindowHandle;
 
