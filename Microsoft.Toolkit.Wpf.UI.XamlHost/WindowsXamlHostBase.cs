@@ -112,22 +112,36 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
             if (_window == null)
             {
                 _window = System.Windows.Window.GetWindow(this);
-                _window.SizeChanged += OnWindowSizeOrLocationChanged;
-                _window.LocationChanged += OnWindowSizeOrLocationChanged;
+                _window.LocationChanged += OnWindowLocationChanged;
             }
         }
 
         /// <summary>
         /// Close all popups opened by the Xaml content inside the DesktopWindowXamlSource.
         /// </summary>
-        private void OnWindowSizeOrLocationChanged(object sender, EventArgs e)
+        private void OnWindowLocationChanged(object sender, EventArgs e)
         {
 #pragma warning disable 8305    // Experimental API
             XamlRoot xamlRoot = _childInternal.XamlRoot;
             var openPopups = VisualTreeHelper.GetOpenPopupsForXamlRoot(xamlRoot);
             foreach (windows.UI.Xaml.Controls.Primitives.Popup popup in openPopups)
             {
-                popup.IsOpen = false;
+                // Toggle the CompositeMode property, which will force all windowed Popups
+                // to reposition themselves relative to the new position of the host window.
+                var compositeMode = popup.CompositeMode;
+
+                // Set CompositeMode to some value it currently isn't set to.
+                if (compositeMode == ElementCompositeMode.SourceOver)
+                {
+                    popup.CompositeMode = ElementCompositeMode.MinBlend;
+                }
+                else
+                {
+                    popup.CompositeMode = ElementCompositeMode.SourceOver;
+                }
+
+                // Restore CompositeMode to whatever it was originally set to.
+                popup.CompositeMode = compositeMode;
             }
         }
 
@@ -288,8 +302,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
 
                 if (_window != null)
                 {
-                    _window.SizeChanged -= OnWindowSizeOrLocationChanged;
-                    _window.LocationChanged -= OnWindowSizeOrLocationChanged;
+                    _window.LocationChanged -= OnWindowLocationChanged;
                     _window = null;
                 }
 
