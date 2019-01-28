@@ -63,7 +63,7 @@ document.getElementById('state').textContent = 'wheel requested';
       {
         WriteLine($"ScriptNotify received: {e.Value ?? String.Empty}");
 
-        if ("generatedMouseWheelInput".Equals(e.Value))
+        if ("generatedMouseWheelInput".Equals(e.Value, StringComparison.InvariantCulture))
         {
           // When the page is loaded and attached its mouse wheel event listener it signals us to send mouse wheel input
           if (!WebView.Focused)
@@ -80,7 +80,7 @@ document.getElementById('state').textContent = 'wheel requested';
           Form.InputSimulator.Mouse.VerticalScroll(-500);
 
         }
-        else if ("mouseWheelInputFound".Equals(e.Value))
+        else if ("mouseWheelInputFound".Equals(e.Value, StringComparison.InvariantCulture))
         {
           Form.Close();
         }

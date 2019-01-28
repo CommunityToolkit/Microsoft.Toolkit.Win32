@@ -2,26 +2,28 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Xaml.Controls.Maps.MapElement"/>
+    /// <see cref="windows.UI.Xaml.Controls.Maps.MapElement"/>
     /// </summary>
     public class MapElement
     {
-        private Windows.UI.Xaml.Controls.Maps.MapElement UwpInstance { get; }
+        private windows.UI.Xaml.Controls.Maps.MapElement UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MapElement"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.Maps.MapElement"/>
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Xaml.Controls.Maps.MapElement"/>
         /// </summary>
-        public MapElement(Windows.UI.Xaml.Controls.Maps.MapElement instance)
+        public MapElement(windows.UI.Xaml.Controls.Maps.MapElement instance)
         {
             this.UwpInstance = instance;
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapElement.ZIndex"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapElement.ZIndex"/>
         /// </summary>
         public int ZIndex
         {
@@ -30,7 +32,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.Maps.MapElement.Visible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.Maps.MapElement.Visible"/>
         /// </summary>
         public bool Visible
         {
@@ -39,7 +41,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapElement.MapTabIndex"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapElement.MapTabIndex"/>
         /// </summary>
         public int MapTabIndex
         {
@@ -48,7 +50,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapElement.Tag"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapElement.Tag"/>
         /// </summary>
         public object Tag
         {
@@ -57,7 +59,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapElement.MapStyleSheetEntryState"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapElement.MapStyleSheetEntryState"/>
         /// </summary>
         public string MapStyleSheetEntryState
         {
@@ -66,7 +68,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapElement.MapStyleSheetEntry"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapElement.MapStyleSheetEntry"/>
         /// </summary>
         public string MapStyleSheetEntry
         {
@@ -75,7 +77,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.Maps.MapElement.IsEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.Maps.MapElement.IsEnabled"/>
         /// </summary>
         public bool IsEnabled
         {
@@ -84,22 +86,22 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Xaml.Controls.Maps.MapElement"/> to <see cref="MapElement"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Xaml.Controls.Maps.MapElement"/> to <see cref="MapElement"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.Maps.MapElement"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.Maps.MapElement"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator MapElement(
-            Windows.UI.Xaml.Controls.Maps.MapElement args)
+            windows.UI.Xaml.Controls.Maps.MapElement args)
         {
             return FromMapElement(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="MapElement"/> from <see cref="Windows.UI.Xaml.Controls.Maps.MapElement"/>.
+        /// Creates a <see cref="MapElement"/> from <see cref="windows.UI.Xaml.Controls.Maps.MapElement"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.Maps.MapElement"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.Maps.MapElement"/> instance containing the event data.</param>
         /// <returns><see cref="MapElement"/></returns>
-        public static MapElement FromMapElement(Windows.UI.Xaml.Controls.Maps.MapElement args)
+        public static MapElement FromMapElement(windows.UI.Xaml.Controls.Maps.MapElement args)
         {
             return new MapElement(args);
         }

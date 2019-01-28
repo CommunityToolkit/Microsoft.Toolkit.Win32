@@ -11,7 +11,9 @@ using System.Windows.Forms.Design;
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
     /// <inheritdoc />
+#pragma warning disable CA1812 // Avoid uninstantiated internal classes
     internal class WebViewDesigner : ControlDesigner
+#pragma warning restore CA1812 // Avoid uninstantiated internal classes
     {
         public Uri Source
         {
@@ -83,7 +85,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
                 nameof(WebView.IsPrivateNetworkClientServerCapabilityEnabled)
             };
             PropertyDescriptor prop;
-            Attribute[] empty = new Attribute[0];
+            Attribute[] empty = Array.Empty<Attribute>();
 
             for (var i = 0; i < shadowProps.Length; i++)
             {

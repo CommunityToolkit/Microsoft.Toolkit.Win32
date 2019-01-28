@@ -2,26 +2,28 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Xaml.Controls.Maps.MapCamera"/>
+    /// <see cref="windows.UI.Xaml.Controls.Maps.MapCamera"/>
     /// </summary>
     public class MapCamera
     {
-        private Windows.UI.Xaml.Controls.Maps.MapCamera UwpInstance { get; }
+        private windows.UI.Xaml.Controls.Maps.MapCamera UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MapCamera"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.Maps.MapCamera"/>
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Xaml.Controls.Maps.MapCamera"/>
         /// </summary>
-        public MapCamera(Windows.UI.Xaml.Controls.Maps.MapCamera instance)
+        public MapCamera(windows.UI.Xaml.Controls.Maps.MapCamera instance)
         {
             this.UwpInstance = instance;
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapCamera.Roll"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapCamera.Roll"/>
         /// </summary>
         public double Roll
         {
@@ -30,7 +32,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapCamera.Pitch"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapCamera.Pitch"/>
         /// </summary>
         public double Pitch
         {
@@ -39,7 +41,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapCamera.Location"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapCamera.Location"/>
         /// </summary>
         public Geopoint Location
         {
@@ -48,7 +50,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapCamera.Heading"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapCamera.Heading"/>
         /// </summary>
         public double Heading
         {
@@ -57,7 +59,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapCamera.FieldOfView"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapCamera.FieldOfView"/>
         /// </summary>
         public double FieldOfView
         {
@@ -66,22 +68,22 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Xaml.Controls.Maps.MapCamera"/> to <see cref="MapCamera"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Xaml.Controls.Maps.MapCamera"/> to <see cref="MapCamera"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.Maps.MapCamera"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.Maps.MapCamera"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator MapCamera(
-            Windows.UI.Xaml.Controls.Maps.MapCamera args)
+            windows.UI.Xaml.Controls.Maps.MapCamera args)
         {
             return FromMapCamera(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="MapCamera"/> from <see cref="Windows.UI.Xaml.Controls.Maps.MapCamera"/>.
+        /// Creates a <see cref="MapCamera"/> from <see cref="windows.UI.Xaml.Controls.Maps.MapCamera"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.Maps.MapCamera"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.Maps.MapCamera"/> instance containing the event data.</param>
         /// <returns><see cref="MapCamera"/></returns>
-        public static MapCamera FromMapCamera(Windows.UI.Xaml.Controls.Maps.MapCamera args)
+        public static MapCamera FromMapCamera(windows.UI.Xaml.Controls.Maps.MapCamera args)
         {
             return new MapCamera(args);
         }

@@ -9,30 +9,31 @@ using System.Threading.Tasks;
 using Microsoft.Toolkit.Forms.UI.XamlHost;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 using Windows.UI.Xaml;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
     /// <summary>
-    /// Forms-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.Maps.MapControl"/>
+    /// Forms-enabled wrapper for <see cref="windows.UI.Xaml.Controls.Maps.MapControl"/>
     /// </summary>
     public class MapControl : WindowsXamlHostBase
     {
-        internal Windows.UI.Xaml.Controls.Maps.MapControl UwpControl => GetUwpInternalObject() as Windows.UI.Xaml.Controls.Maps.MapControl;
+        internal windows.UI.Xaml.Controls.Maps.MapControl UwpControl => GetUwpInternalObject() as windows.UI.Xaml.Controls.Maps.MapControl;
 
         private System.Collections.Generic.Dictionary<string, object> DesignerProperties { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MapControl"/> class, a
-        /// Forms-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.Maps.MapControl"/>
+        /// Forms-enabled wrapper for <see cref="windows.UI.Xaml.Controls.Maps.MapControl"/>
         /// </summary>
         public MapControl()
-            : this(typeof(Windows.UI.Xaml.Controls.Maps.MapControl).FullName)
+            : this(typeof(windows.UI.Xaml.Controls.Maps.MapControl).FullName)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MapControl"/> class, a
-        /// Forms-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.Maps.MapControl"/>.
+        /// Forms-enabled wrapper for <see cref="windows.UI.Xaml.Controls.Maps.MapControl"/>.
         /// Intended for internal framework use only.
         /// </summary>
         internal MapControl(string typeName)
@@ -92,229 +93,231 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TryTiltAsync"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TryTiltAsync"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
         public Task<bool> TryTiltAsync(double degrees) => UwpControl.TryTiltAsync(degrees).AsTask();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TryTiltToAsync"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TryTiltToAsync"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
         public Task<bool> TryTiltToAsync(double angleInDegrees) => UwpControl.TryTiltToAsync(angleInDegrees).AsTask();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TryZoomInAsync"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TryZoomInAsync"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
         public Task<bool> TryZoomInAsync() => UwpControl.TryZoomInAsync().AsTask();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TryZoomOutAsync"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TryZoomOutAsync"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
         public Task<bool> TryZoomOutAsync() => UwpControl.TryZoomOutAsync().AsTask();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TryZoomToAsync"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TryZoomToAsync"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
         public Task<bool> TryZoomToAsync(double zoomLevel) => UwpControl.TryZoomToAsync(zoomLevel).AsTask();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
         public Task<bool> TrySetSceneAsync(MapScene scene) => UwpControl.TrySetSceneAsync(scene.UwpInstance).AsTask();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
-        public Task<bool> TrySetSceneAsync(MapScene scene, MapAnimationKind animationKind) => UwpControl.TrySetSceneAsync(scene.UwpInstance, (Windows.UI.Xaml.Controls.Maps.MapAnimationKind)animationKind).AsTask();
+        public Task<bool> TrySetSceneAsync(MapScene scene, MapAnimationKind animationKind) => UwpControl.TrySetSceneAsync(scene.UwpInstance, (windows.UI.Xaml.Controls.Maps.MapAnimationKind)animationKind).AsTask();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.GetVisibleRegion"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.GetVisibleRegion"/>
         /// </summary>
         /// <returns>Geopath</returns>
-        public Geopath GetVisibleRegion(MapVisibleRegionKind region) => UwpControl.GetVisibleRegion((Windows.UI.Xaml.Controls.Maps.MapVisibleRegionKind)region);
+        public Geopath GetVisibleRegion(MapVisibleRegionKind region) => UwpControl.GetVisibleRegion((windows.UI.Xaml.Controls.Maps.MapVisibleRegionKind)region);
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl"/>
         /// </summary>
         /// <returns>IReadOnlyList</returns>
         public System.Collections.Generic.IReadOnlyList<MapElement> FindMapElementsAtOffset(Point offset, double radius) => (System.Collections.Generic.IReadOnlyList<MapElement>)UwpControl.FindMapElementsAtOffset(offset.UwpInstance, radius);
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl"/>
         /// </summary>
-        public void GetLocationFromOffset(Point offset, AltitudeReferenceSystem desiredReferenceSystem, out Windows.Devices.Geolocation.Geopoint location) => UwpControl.GetLocationFromOffset(offset.UwpInstance, (Windows.Devices.Geolocation.AltitudeReferenceSystem)desiredReferenceSystem, out location);
+        public void GetLocationFromOffset(Point offset, AltitudeReferenceSystem desiredReferenceSystem, out windows.Devices.Geolocation.Geopoint location) => UwpControl.GetLocationFromOffset(offset.UwpInstance, (windows.Devices.Geolocation.AltitudeReferenceSystem)desiredReferenceSystem, out location);
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.StartContinuousPan"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.StartContinuousPan"/>
         /// </summary>
         public void StartContinuousPan(double horizontalPixelsPerSecond, double verticalPixelsPerSecond) => UwpControl.StartContinuousPan(horizontalPixelsPerSecond, verticalPixelsPerSecond);
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.StopContinuousPan"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.StopContinuousPan"/>
         /// </summary>
         public void StopContinuousPan() => UwpControl.StopContinuousPan();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TryPanAsync"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TryPanAsync"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
         public Task<bool> TryPanAsync(double horizontalPixels, double verticalPixels) => UwpControl.TryPanAsync(horizontalPixels, verticalPixels).AsTask();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TryPanToAsync"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TryPanToAsync"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
         public Task<bool> TryPanToAsync(Geopoint location) => UwpControl.TryPanToAsync(location.UwpInstance).AsTask();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl"/>
         /// </summary>
         /// <returns>bool</returns>
-        public bool TryGetLocationFromOffset(Point offset, out Windows.Devices.Geolocation.Geopoint location) => UwpControl.TryGetLocationFromOffset(offset.UwpInstance, out location);
+        public bool TryGetLocationFromOffset(Point offset, out windows.Devices.Geolocation.Geopoint location) => UwpControl.TryGetLocationFromOffset(offset.UwpInstance, out location);
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl"/>
         /// </summary>
         /// <returns>bool</returns>
-        public bool TryGetLocationFromOffset(Point offset, AltitudeReferenceSystem desiredReferenceSystem, out Windows.Devices.Geolocation.Geopoint location) => UwpControl.TryGetLocationFromOffset(offset.UwpInstance, (Windows.Devices.Geolocation.AltitudeReferenceSystem)(int)desiredReferenceSystem, out location);
+        public bool TryGetLocationFromOffset(Point offset, AltitudeReferenceSystem desiredReferenceSystem, out windows.Devices.Geolocation.Geopoint location) => UwpControl.TryGetLocationFromOffset(offset.UwpInstance, (windows.Devices.Geolocation.AltitudeReferenceSystem)(int)desiredReferenceSystem, out location);
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl"/>
         /// </summary>
         /// <returns>bool</returns>
         public System.Collections.Generic.IReadOnlyList<MapElement> FindMapElementsAtOffset(Point offset) => (System.Collections.Generic.IReadOnlyList<MapElement>)UwpControl.FindMapElementsAtOffset(offset.UwpInstance);
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl"/>
         /// </summary>
-        public void GetLocationFromOffset(Point offset, out Windows.Devices.Geolocation.Geopoint location) => UwpControl.GetLocationFromOffset(offset.UwpInstance, out location);
+        public void GetLocationFromOffset(Point offset, out windows.Devices.Geolocation.Geopoint location) => UwpControl.GetLocationFromOffset(offset.UwpInstance, out location);
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.GetOffsetFromLocation"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.GetOffsetFromLocation"/>
         /// </summary>
         public void GetOffsetFromLocation(Geopoint location, out Point offset)
         {
-            UwpControl.GetOffsetFromLocation(location.UwpInstance, out Windows.Foundation.Point uwpOffset);
+            UwpControl.GetOffsetFromLocation(location.UwpInstance, out windows.Foundation.Point uwpOffset);
             offset = new Point(uwpOffset);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.IsLocationInView"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.IsLocationInView"/>
         /// </summary>
         public void IsLocationInView(Geopoint location, out bool isInView) => UwpControl.IsLocationInView(location.UwpInstance, out isInView);
 
         /*
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TrySetViewBoundsAsync"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TrySetViewBoundsAsync"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
-        public Task<bool> TrySetViewBoundsAsync(GeoboundingBox bounds, Windows.UI.Xaml.Thickness? margin, MapAnimationKind animation) => UwpControl.TrySetViewBoundsAsync(bounds, margin, animation);
+        public Task<bool> TrySetViewBoundsAsync(GeoboundingBox bounds, windows.UI.Xaml.Thickness? margin, MapAnimationKind animation) => UwpControl.TrySetViewBoundsAsync(bounds, margin, animation);
         */
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
         public Task<bool> TrySetViewAsync(Geopoint center) => UwpControl.TrySetViewAsync(center.UwpInstance).AsTask();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
         public Task<bool> TrySetViewAsync(Geopoint center, double? zoomLevel) => UwpControl.TrySetViewAsync(center.UwpInstance, zoomLevel).AsTask();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
         public Task<bool> TrySetViewAsync(Geopoint center, double? zoomLevel, double? heading, double? desiredPitch) => UwpControl.TrySetViewAsync(center.UwpInstance, zoomLevel, heading, desiredPitch).AsTask();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
-        public Task<bool> TrySetViewAsync(Geopoint center, double? zoomLevel, double? heading, double? desiredPitch, MapAnimationKind animation) => UwpControl.TrySetViewAsync(center.UwpInstance, zoomLevel, heading, desiredPitch, (Windows.UI.Xaml.Controls.Maps.MapAnimationKind)(int)animation).AsTask();
+        public Task<bool> TrySetViewAsync(Geopoint center, double? zoomLevel, double? heading, double? desiredPitch, MapAnimationKind animation) => UwpControl.TrySetViewAsync(center.UwpInstance, zoomLevel, heading, desiredPitch, (windows.UI.Xaml.Controls.Maps.MapAnimationKind)(int)animation).AsTask();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.StartContinuousRotate"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.StartContinuousRotate"/>
         /// </summary>
         public void StartContinuousRotate(double rateInDegreesPerSecond) => UwpControl.StartContinuousRotate(rateInDegreesPerSecond);
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.StopContinuousRotate"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.StopContinuousRotate"/>
         /// </summary>
         public void StopContinuousRotate() => UwpControl.StopContinuousRotate();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.StartContinuousTilt"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.StartContinuousTilt"/>
         /// </summary>
         public void StartContinuousTilt(double rateInDegreesPerSecond) => UwpControl.StartContinuousTilt(rateInDegreesPerSecond);
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.StopContinuousTilt"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.StopContinuousTilt"/>
         /// </summary>
         public void StopContinuousTilt() => UwpControl.StopContinuousTilt();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.StartContinuousZoom"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.StartContinuousZoom"/>
         /// </summary>
         public void StartContinuousZoom(double rateOfChangePerSecond) => UwpControl.StartContinuousZoom(rateOfChangePerSecond);
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.StopContinuousZoom"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.StopContinuousZoom"/>
         /// </summary>
         public void StopContinuousZoom() => UwpControl.StopContinuousZoom();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TryRotateAsync"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TryRotateAsync"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
         public Task<bool> TryRotateAsync(double degrees) => UwpControl.TryRotateAsync(degrees).AsTask();
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TryRotateToAsync"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TryRotateToAsync"/>
         /// </summary>
         /// <returns>IAsyncOperation</returns>
         public Task<bool> TryRotateToAsync(double angleInDegrees) => UwpControl.TryRotateToAsync(angleInDegrees).AsTask();
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.WatermarkMode"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.WatermarkMode"/>
         /// </summary>
         [DefaultValue(MapWatermarkMode.Automatic)]
         public MapWatermarkMode WatermarkMode
         {
             get => (MapWatermarkMode)this.GetUwpControlValue();
-            set => this.SetUwpControlValue((Windows.UI.Xaml.Controls.Maps.MapWatermarkMode)value);
+            set => this.SetUwpControlValue((windows.UI.Xaml.Controls.Maps.MapWatermarkMode)value);
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.Style"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.Style"/>
         /// </summary>
         [DefaultValue(MapStyle.Road)]
+#pragma warning disable CA1721 // Property names should not match get methods
         public MapStyle Style
+#pragma warning restore CA1721 // Property names should not match get methods
         {
             get => UwpControl != null ? (MapStyle)UwpControl.Style : (MapStyle)this.GetUwpControlValue(); // Style property is ambiguous
             set
             {
                 if (UwpControl != null)
                 {
-                    UwpControl.Style = (Windows.UI.Xaml.Controls.Maps.MapStyle)value;
+                    UwpControl.Style = (windows.UI.Xaml.Controls.Maps.MapStyle)value;
                 }
                 else
                 {
-                    this.SetUwpControlValue((Windows.UI.Xaml.Controls.Maps.MapStyle)value);
+                    this.SetUwpControlValue((windows.UI.Xaml.Controls.Maps.MapStyle)value);
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.MapServiceToken"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapServiceToken"/>
         /// </summary>
         [DefaultValue("")]
         public string MapServiceToken
@@ -324,7 +327,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TransformOrigin"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TransformOrigin"/>
         /// </summary>
         public Point TransformOrigin
         {
@@ -333,7 +336,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TrafficFlowVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TrafficFlowVisible"/>
         /// </summary>
         [DefaultValue(false)]
         public bool TrafficFlowVisible
@@ -343,7 +346,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.LandmarksVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.Maps.MapControl.LandmarksVisible"/>
         /// </summary>
         [DefaultValue(true)]
         public bool LandmarksVisible
@@ -353,7 +356,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.Heading"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.Heading"/>
         /// </summary>
         [DefaultValue((double)0)]
         public double Heading
@@ -363,7 +366,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.DesiredPitch"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.DesiredPitch"/>
         /// </summary>
         [DefaultValue((double)0)]
         public double DesiredPitch
@@ -373,17 +376,17 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.ColorScheme"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.ColorScheme"/>
         /// </summary>
         [DefaultValue(MapColorScheme.Light)]
         public MapColorScheme ColorScheme
         {
             get => (MapColorScheme)this.GetUwpControlValue();
-            set => this.SetUwpControlValue((Windows.UI.Xaml.Controls.Maps.MapColorScheme)value);
+            set => this.SetUwpControlValue((windows.UI.Xaml.Controls.Maps.MapColorScheme)value);
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.PedestrianFeaturesVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.Maps.MapControl.PedestrianFeaturesVisible"/>
         /// </summary>
         [DefaultValue(false)]
         public bool PedestrianFeaturesVisible
@@ -393,7 +396,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.ZoomLevel"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.ZoomLevel"/>
         /// </summary>
         [DefaultValue((double)2)]
         public double ZoomLevel
@@ -403,16 +406,16 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.Center"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.Center"/>
         /// </summary>
         public Geopoint Center
         {
-            get => (Geopoint)this.GetUwpControlValue(new Geopoint(new Windows.Devices.Geolocation.Geopoint(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = 0, Longitude = 23.383333 })));
+            get => (Geopoint)this.GetUwpControlValue(new Geopoint(new windows.Devices.Geolocation.Geopoint(new windows.Devices.Geolocation.BasicGeoposition() { Latitude = 0, Longitude = 23.383333 })));
             set => this.SetUwpControlValue(value.UwpInstance);
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.LoadingStatus"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.LoadingStatus"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -422,7 +425,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.MapElements"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapElements"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -432,7 +435,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.MaxZoomLevel"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MaxZoomLevel"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -442,7 +445,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.MinZoomLevel"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MinZoomLevel"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -452,7 +455,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.Pitch"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.Pitch"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -462,37 +465,37 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.Routes"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.Routes"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public System.Collections.Generic.IList<Windows.UI.Xaml.Controls.Maps.MapRouteView> Routes
+        public System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapRouteView> Routes
         {
             get => UwpControl.Routes;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TileSources"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TileSources"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public System.Collections.Generic.IList<Windows.UI.Xaml.Controls.Maps.MapTileSource> TileSources
+        public System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapTileSource> TileSources
         {
             get => UwpControl.TileSources;
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.ZoomInteractionMode"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.ZoomInteractionMode"/>
         /// </summary>
         [DefaultValue(MapInteractionMode.Auto)]
         public MapInteractionMode ZoomInteractionMode
         {
             get => (MapInteractionMode)this.GetUwpControlValue();
-            set => this.SetUwpControlValue((Windows.UI.Xaml.Controls.Maps.MapInteractionMode)value);
+            set => this.SetUwpControlValue((windows.UI.Xaml.Controls.Maps.MapInteractionMode)value);
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TransitFeaturesVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TransitFeaturesVisible"/>
         /// </summary>
         [DefaultValue(true)]
         public bool TransitFeaturesVisible
@@ -502,17 +505,17 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TiltInteractionMode"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TiltInteractionMode"/>
         /// </summary>
         [DefaultValue(MapInteractionMode.Auto)]
         public MapInteractionMode TiltInteractionMode
         {
             get => (MapInteractionMode)this.GetUwpControlValue();
-            set => this.SetUwpControlValue((Windows.UI.Xaml.Controls.Maps.MapInteractionMode)value);
+            set => this.SetUwpControlValue((windows.UI.Xaml.Controls.Maps.MapInteractionMode)value);
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.Scene"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.Scene"/>
         /// </summary>
         [DefaultValue(null)]
         public MapScene Scene
@@ -522,27 +525,27 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.RotateInteractionMode"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.RotateInteractionMode"/>
         /// </summary>
         [DefaultValue(MapInteractionMode.Auto)]
         public MapInteractionMode RotateInteractionMode
         {
             get => (MapInteractionMode)this.GetUwpControlValue();
-            set => this.SetUwpControlValue((Windows.UI.Xaml.Controls.Maps.MapInteractionMode)value);
+            set => this.SetUwpControlValue((windows.UI.Xaml.Controls.Maps.MapInteractionMode)value);
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.PanInteractionMode"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.PanInteractionMode"/>
         /// </summary>
         [DefaultValue(MapPanInteractionMode.Auto)]
         public MapPanInteractionMode PanInteractionMode
         {
             get => (MapPanInteractionMode)this.GetUwpControlValue();
-            set => this.SetUwpControlValue((Windows.UI.Xaml.Controls.Maps.MapPanInteractionMode)value);
+            set => this.SetUwpControlValue((windows.UI.Xaml.Controls.Maps.MapPanInteractionMode)value);
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.CustomExperience"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.CustomExperience"/>
         /// </summary>
         [DefaultValue(null)]
         public MapCustomExperience CustomExperience
@@ -552,7 +555,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.BusinessLandmarksVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.Maps.MapControl.BusinessLandmarksVisible"/>
         /// </summary>
         [DefaultValue(true)]
         public bool BusinessLandmarksVisible
@@ -562,7 +565,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.ActualCamera"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.ActualCamera"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -572,7 +575,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets a value indicating whether <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.Is3DSupported"/>
+        /// Gets a value indicating whether <see cref="windows.UI.Xaml.Controls.Maps.MapControl.Is3DSupported"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -582,7 +585,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets a value indicating whether <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.IsStreetsideSupported"/>
+        /// Gets a value indicating whether <see cref="windows.UI.Xaml.Controls.Maps.MapControl.IsStreetsideSupported"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -592,7 +595,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TargetCamera"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TargetCamera"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -602,7 +605,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TransitFeaturesEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TransitFeaturesEnabled"/>
         /// </summary>
         [DefaultValue(false)]
         public bool TransitFeaturesEnabled
@@ -612,7 +615,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.BusinessLandmarksEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.Maps.MapControl.BusinessLandmarksEnabled"/>
         /// </summary>
         [DefaultValue(false)]
         public bool BusinessLandmarksEnabled
@@ -623,17 +626,17 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
 
         /*
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.ViewPadding"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.ViewPadding"/>
         /// </summary>
-        public Windows.UI.Xaml.Thickness ViewPadding
+        public windows.UI.Xaml.Thickness ViewPadding
         {
-            get => (Windows.UI.Xaml.Thickness)GetValue(ViewPaddingProperty);
+            get => (windows.UI.Xaml.Thickness)GetValue(ViewPaddingProperty);
             set => UwpControl.ViewPadding = value;
         }
         */
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.StyleSheet"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.StyleSheet"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -644,27 +647,27 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.MapProjection"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapProjection"/>
         /// </summary>
         [DefaultValue(MapProjection.WebMercator)]
         public MapProjection MapProjection
         {
             get => (MapProjection)this.GetUwpControlValue();
-            set => this.SetUwpControlValue((Windows.UI.Xaml.Controls.Maps.MapProjection)value);
+            set => this.SetUwpControlValue((windows.UI.Xaml.Controls.Maps.MapProjection)value);
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.Layers"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.Layers"/>
         /// </summary>
         [DefaultValue(null)]
-        public System.Collections.Generic.IList<Windows.UI.Xaml.Controls.Maps.MapLayer> Layers
+        public System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapLayer> Layers
         {
-            get => (System.Collections.Generic.IList<Windows.UI.Xaml.Controls.Maps.MapLayer>)this.GetUwpControlValue();
+            get => (System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapLayer>)this.GetUwpControlValue();
             set => this.SetUwpControlValue(value);
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.Region"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.Region"/>
         /// </summary>
         [DefaultValue("")]
         public new string Region
@@ -674,181 +677,181 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.CenterChanged"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.CenterChanged"/>
         /// </summary>
         public event EventHandler<object> CenterChanged = (sender, args) => { };
 
-        private void OnCenterChanged(Windows.UI.Xaml.Controls.Maps.MapControl sender, object args)
+        private void OnCenterChanged(windows.UI.Xaml.Controls.Maps.MapControl sender, object args)
         {
             this.CenterChanged?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.HeadingChanged"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.HeadingChanged"/>
         /// </summary>
         public event EventHandler<object> HeadingChanged = (sender, args) => { };
 
-        private void OnHeadingChanged(Windows.UI.Xaml.Controls.Maps.MapControl sender, object args)
+        private void OnHeadingChanged(windows.UI.Xaml.Controls.Maps.MapControl sender, object args)
         {
             this.HeadingChanged?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.LoadingStatusChanged"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.LoadingStatusChanged"/>
         /// </summary>
         public event EventHandler<object> LoadingStatusChanged = (sender, args) => { };
 
-        private void OnLoadingStatusChanged(Windows.UI.Xaml.Controls.Maps.MapControl sender, object args)
+        private void OnLoadingStatusChanged(windows.UI.Xaml.Controls.Maps.MapControl sender, object args)
         {
             this.LoadingStatusChanged?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.MapDoubleTapped"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapDoubleTapped"/>
         /// </summary>
         public event EventHandler<MapInputEventArgs> MapDoubleTapped = (sender, args) => { };
 
-        private void OnMapDoubleTapped(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapInputEventArgs args)
+        private void OnMapDoubleTapped(windows.UI.Xaml.Controls.Maps.MapControl sender, windows.UI.Xaml.Controls.Maps.MapInputEventArgs args)
         {
             this.MapDoubleTapped?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.MapHolding"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapHolding"/>
         /// </summary>
         public event EventHandler<MapInputEventArgs> MapHolding = (sender, args) => { };
 
-        private void OnMapHolding(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapInputEventArgs args)
+        private void OnMapHolding(windows.UI.Xaml.Controls.Maps.MapControl sender, windows.UI.Xaml.Controls.Maps.MapInputEventArgs args)
         {
             this.MapHolding?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.MapTapped"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapTapped"/>
         /// </summary>
         public event EventHandler<MapInputEventArgs> MapTapped = (sender, args) => { };
 
-        private void OnMapTapped(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapInputEventArgs args)
+        private void OnMapTapped(windows.UI.Xaml.Controls.Maps.MapControl sender, windows.UI.Xaml.Controls.Maps.MapInputEventArgs args)
         {
             this.MapTapped?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.PitchChanged"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.PitchChanged"/>
         /// </summary>
         public event EventHandler<object> PitchChanged = (sender, args) => { };
 
-        private void OnPitchChanged(Windows.UI.Xaml.Controls.Maps.MapControl sender, object args)
+        private void OnPitchChanged(windows.UI.Xaml.Controls.Maps.MapControl sender, object args)
         {
             this.PitchChanged?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TransformOriginChanged"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TransformOriginChanged"/>
         /// </summary>
         public event EventHandler<object> TransformOriginChanged = (sender, args) => { };
 
-        private void OnTransformOriginChanged(Windows.UI.Xaml.Controls.Maps.MapControl sender, object args)
+        private void OnTransformOriginChanged(windows.UI.Xaml.Controls.Maps.MapControl sender, object args)
         {
             this.TransformOriginChanged?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.ZoomLevelChanged"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.ZoomLevelChanged"/>
         /// </summary>
         public event EventHandler<object> ZoomLevelChanged = (sender, args) => { };
 
-        private void OnZoomLevelChanged(Windows.UI.Xaml.Controls.Maps.MapControl sender, object args)
+        private void OnZoomLevelChanged(windows.UI.Xaml.Controls.Maps.MapControl sender, object args)
         {
             this.ZoomLevelChanged?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.ActualCameraChanged"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.ActualCameraChanged"/>
         /// </summary>
         public event EventHandler<MapActualCameraChangedEventArgs> ActualCameraChanged = (sender, args) => { };
 
-        private void OnActualCameraChanged(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapActualCameraChangedEventArgs args)
+        private void OnActualCameraChanged(windows.UI.Xaml.Controls.Maps.MapControl sender, windows.UI.Xaml.Controls.Maps.MapActualCameraChangedEventArgs args)
         {
             this.ActualCameraChanged?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.ActualCameraChanging"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.ActualCameraChanging"/>
         /// </summary>
         public event EventHandler<MapActualCameraChangingEventArgs> ActualCameraChanging = (sender, args) => { };
 
-        private void OnActualCameraChanging(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapActualCameraChangingEventArgs args)
+        private void OnActualCameraChanging(windows.UI.Xaml.Controls.Maps.MapControl sender, windows.UI.Xaml.Controls.Maps.MapActualCameraChangingEventArgs args)
         {
             this.ActualCameraChanging?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.CustomExperienceChanged"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.CustomExperienceChanged"/>
         /// </summary>
         public event EventHandler<MapCustomExperienceChangedEventArgs> CustomExperienceChanged = (sender, args) => { };
 
-        private void OnCustomExperienceChanged(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapCustomExperienceChangedEventArgs args)
+        private void OnCustomExperienceChanged(windows.UI.Xaml.Controls.Maps.MapControl sender, windows.UI.Xaml.Controls.Maps.MapCustomExperienceChangedEventArgs args)
         {
             this.CustomExperienceChanged?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.MapElementClick"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapElementClick"/>
         /// </summary>
         public event EventHandler<MapElementClickEventArgs> MapElementClick = (sender, args) => { };
 
-        private void OnMapElementClick(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapElementClickEventArgs args)
+        private void OnMapElementClick(windows.UI.Xaml.Controls.Maps.MapControl sender, windows.UI.Xaml.Controls.Maps.MapElementClickEventArgs args)
         {
             this.MapElementClick?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.MapElementPointerEntered"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapElementPointerEntered"/>
         /// </summary>
         public event EventHandler<MapElementPointerEnteredEventArgs> MapElementPointerEntered = (sender, args) => { };
 
-        private void OnMapElementPointerEntered(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapElementPointerEnteredEventArgs args)
+        private void OnMapElementPointerEntered(windows.UI.Xaml.Controls.Maps.MapControl sender, windows.UI.Xaml.Controls.Maps.MapElementPointerEnteredEventArgs args)
         {
             this.MapElementPointerEntered?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.MapElementPointerExited"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapElementPointerExited"/>
         /// </summary>
         public event EventHandler<MapElementPointerExitedEventArgs> MapElementPointerExited = (sender, args) => { };
 
-        private void OnMapElementPointerExited(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs args)
+        private void OnMapElementPointerExited(windows.UI.Xaml.Controls.Maps.MapControl sender, windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs args)
         {
             this.MapElementPointerExited?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.TargetCameraChanged"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TargetCameraChanged"/>
         /// </summary>
         public event EventHandler<MapTargetCameraChangedEventArgs> TargetCameraChanged = (sender, args) => { };
 
-        private void OnTargetCameraChanged(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapTargetCameraChangedEventArgs args)
+        private void OnTargetCameraChanged(windows.UI.Xaml.Controls.Maps.MapControl sender, windows.UI.Xaml.Controls.Maps.MapTargetCameraChangedEventArgs args)
         {
             this.TargetCameraChanged?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.MapRightTapped"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapRightTapped"/>
         /// </summary>
         public event EventHandler<MapRightTappedEventArgs> MapRightTapped = (sender, args) => { };
 
-        private void OnMapRightTapped(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapRightTappedEventArgs args)
+        private void OnMapRightTapped(windows.UI.Xaml.Controls.Maps.MapControl sender, windows.UI.Xaml.Controls.Maps.MapRightTappedEventArgs args)
         {
             this.MapRightTapped?.Invoke(this, args);
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.Maps.MapControl.MapContextRequested"/>
+        /// <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapContextRequested"/>
         /// </summary>
         public event EventHandler<MapContextRequestedEventArgs> MapContextRequested = (sender, args) => { };
 
-        private void OnMapContextRequested(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs args)
+        private void OnMapContextRequested(windows.UI.Xaml.Controls.Maps.MapControl sender, windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs args)
         {
             this.MapContextRequested?.Invoke(this, args);
         }

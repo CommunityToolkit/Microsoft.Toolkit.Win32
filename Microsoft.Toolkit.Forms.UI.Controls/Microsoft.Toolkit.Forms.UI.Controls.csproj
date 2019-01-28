@@ -1,17 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
     <RootNamespace>Microsoft.Toolkit.Forms.UI.Controls</RootNamespace>
     <AssemblyName>Microsoft.Toolkit.Forms.UI.Controls</AssemblyName>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
 
     <Title>Windows Community Toolkit Windows Forms Controls</Title>
     <Description>This library provides XAML user controls for Windows Forms. It is part of the Windows Community Toolkit.</Description>
     <PackageTags>Win32 WindowsForms UWP XAML</PackageTags>
+  </PropertyGroup>
 
-    <!--XamlHost requires 17692 -->
-    <TargetPlatformMinVersion>10.0.17692.0</TargetPlatformMinVersion>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -26,7 +26,7 @@
     <Compile Update="..\WebView.Shared\DesignerUI.Designer.cs" Link="DesignerUI.Designer.cs" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />

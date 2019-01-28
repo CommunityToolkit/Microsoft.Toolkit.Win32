@@ -5,15 +5,16 @@
 using System.ComponentModel;
 using Microsoft.Toolkit.Forms.UI.XamlHost;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
     public class InkCanvas : WindowsXamlHostBase
     {
-        internal Windows.UI.Xaml.Controls.InkCanvas UwpControl => GetUwpInternalObject() as Windows.UI.Xaml.Controls.InkCanvas;
+        internal windows.UI.Xaml.Controls.InkCanvas UwpControl => GetUwpInternalObject() as windows.UI.Xaml.Controls.InkCanvas;
 
         public InkCanvas()
-            : this(typeof(Windows.UI.Xaml.Controls.InkCanvas).FullName)
+            : this(typeof(windows.UI.Xaml.Controls.InkCanvas).FullName)
         {
         }
 
@@ -29,7 +30,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.InkCanvas.InkPresenter"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.InkCanvas.InkPresenter"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

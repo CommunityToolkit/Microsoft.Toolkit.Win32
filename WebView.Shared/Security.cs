@@ -35,10 +35,13 @@ namespace Microsoft.Toolkit.Win32.UI.Controls
         [SecuritySafeCritical]
         internal static bool CallerAndAppDomainHaveUnrestrictedWebBrowserPermission()
         {
+            // Not supported on .Net Core (https://github.com/dotnet/corefx/issues/34368#issuecomment-453155739)
+#if NET462
             if (!AppDomainHasPermission(CachedWebBrowserPermission))
             {
                 return false;
             }
+#endif
 
             try
             {
@@ -71,7 +74,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls
         /// <summary>
         /// Demands <see cref="SecurityPermission"/> for <see cref="SecurityPermissionFlag.UnmanagedCode"/>
         /// </summary>
-        /// <exception cref="SecurityException">A caller higher in the call stack does not have the permission specified by the current instance.-or- A caller higher in the call stack has called <see cref="M:System.Security.CodeAccessPermission.Deny" /> on the current permission object.</exception>
+        /// <exception cref="SecurityException">A caller higher in the call stack does not have the permission specified by the current instance.-or- A caller higher in the call stack has called <see cref="System.Security.CodeAccessPermission.Deny" /> on the current permission object.</exception>
         [SecurityCritical]
         internal static void DemandUnmanagedCode()
         {

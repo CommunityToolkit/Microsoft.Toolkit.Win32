@@ -4,21 +4,22 @@
 
 using System;
 using System.Security;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
     /// Provides data for the <see cref="IWebView.ScriptNotify"/> event. This class cannot be inherited.
     /// </summary>
-    /// <remarks>Copy from <see cref="Windows.Web.UI.WebViewControlScriptNotifyEventArgs"/> to avoid requirement to link Windows.winmd</remarks>
+    /// <remarks>Copy from <see cref="windows.Web.UI.WebViewControlScriptNotifyEventArgs"/> to avoid requirement to link Windows.winmd</remarks>
     /// <seealso cref="System.EventArgs" />
-    /// <seealso cref="Windows.Web.UI.WebViewControlScriptNotifyEventArgs"/>
+    /// <seealso cref="windows.Web.UI.WebViewControlScriptNotifyEventArgs"/>
     public sealed class WebViewControlScriptNotifyEventArgs : EventArgs
     {
         [SecurityCritical]
-        private readonly Windows.Web.UI.WebViewControlScriptNotifyEventArgs _args;
+        private readonly windows.Web.UI.WebViewControlScriptNotifyEventArgs _args;
 
-        internal WebViewControlScriptNotifyEventArgs(Windows.Web.UI.WebViewControlScriptNotifyEventArgs args)
+        internal WebViewControlScriptNotifyEventArgs(windows.Web.UI.WebViewControlScriptNotifyEventArgs args)
         {
             _args = args;
         }
@@ -36,18 +37,18 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         public string Value => _args.Value;
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.Web.UI.WebViewControlScriptNotifyEventArgs"/> to <see cref="WebViewControlScriptNotifyEventArgs"/>.
+        /// Performs an implicit conversion from <see cref="windows.Web.UI.WebViewControlScriptNotifyEventArgs"/> to <see cref="WebViewControlScriptNotifyEventArgs"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Web.UI.WebViewControlScriptNotifyEventArgs"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.Web.UI.WebViewControlScriptNotifyEventArgs"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator WebViewControlScriptNotifyEventArgs(Windows.Web.UI.WebViewControlScriptNotifyEventArgs args) => ToWebViewControlScriptNotifyEventArgs(args);
+        public static implicit operator WebViewControlScriptNotifyEventArgs(windows.Web.UI.WebViewControlScriptNotifyEventArgs args) => ToWebViewControlScriptNotifyEventArgs(args);
 
         /// <summary>
-        /// Creates a <see cref="WebViewControlScriptNotifyEventArgs"/> from <see cref="Windows.Web.UI.WebViewControlScriptNotifyEventArgs"/>.
+        /// Creates a <see cref="WebViewControlScriptNotifyEventArgs"/> from <see cref="windows.Web.UI.WebViewControlScriptNotifyEventArgs"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Web.UI.WebViewControlScriptNotifyEventArgs"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.Web.UI.WebViewControlScriptNotifyEventArgs"/> instance containing the event data.</param>
         /// <returns><see cref="WebViewControlScriptNotifyEventArgs"/></returns>
         public static WebViewControlScriptNotifyEventArgs ToWebViewControlScriptNotifyEventArgs(
-            Windows.Web.UI.WebViewControlScriptNotifyEventArgs args) => new WebViewControlScriptNotifyEventArgs(args);
+            windows.Web.UI.WebViewControlScriptNotifyEventArgs args) => new WebViewControlScriptNotifyEventArgs(args);
     }
 }

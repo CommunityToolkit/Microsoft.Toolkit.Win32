@@ -2,26 +2,28 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Xaml.Controls.MediaTransportControls"/>
+    /// <see cref="windows.UI.Xaml.Controls.MediaTransportControls"/>
     /// </summary>
     public class MediaTransportControls
     {
-        internal Windows.UI.Xaml.Controls.MediaTransportControls UwpInstance { get; }
+        internal windows.UI.Xaml.Controls.MediaTransportControls UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MediaTransportControls"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.MediaTransportControls"/>
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Xaml.Controls.MediaTransportControls"/>
         /// </summary>
-        public MediaTransportControls(Windows.UI.Xaml.Controls.MediaTransportControls instance)
+        public MediaTransportControls(windows.UI.Xaml.Controls.MediaTransportControls instance)
         {
             this.UwpInstance = instance;
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsZoomEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsZoomEnabled"/>
         /// </summary>
         public bool IsZoomEnabled
         {
@@ -30,7 +32,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsZoomButtonVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsZoomButtonVisible"/>
         /// </summary>
         public bool IsZoomButtonVisible
         {
@@ -39,7 +41,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsVolumeEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsVolumeEnabled"/>
         /// </summary>
         public bool IsVolumeEnabled
         {
@@ -48,7 +50,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsVolumeButtonVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsVolumeButtonVisible"/>
         /// </summary>
         public bool IsVolumeButtonVisible
         {
@@ -57,7 +59,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsStopEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsStopEnabled"/>
         /// </summary>
         public bool IsStopEnabled
         {
@@ -66,7 +68,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsStopButtonVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsStopButtonVisible"/>
         /// </summary>
         public bool IsStopButtonVisible
         {
@@ -75,7 +77,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsSeekEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsSeekEnabled"/>
         /// </summary>
         public bool IsSeekEnabled
         {
@@ -84,7 +86,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsSeekBarVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsSeekBarVisible"/>
         /// </summary>
         public bool IsSeekBarVisible
         {
@@ -93,7 +95,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsPlaybackRateEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsPlaybackRateEnabled"/>
         /// </summary>
         public bool IsPlaybackRateEnabled
         {
@@ -102,7 +104,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsPlaybackRateButtonVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsPlaybackRateButtonVisible"/>
         /// </summary>
         public bool IsPlaybackRateButtonVisible
         {
@@ -111,7 +113,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsFullWindowEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsFullWindowEnabled"/>
         /// </summary>
         public bool IsFullWindowEnabled
         {
@@ -120,7 +122,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsFullWindowButtonVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsFullWindowButtonVisible"/>
         /// </summary>
         public bool IsFullWindowButtonVisible
         {
@@ -129,7 +131,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsFastRewindEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsFastRewindEnabled"/>
         /// </summary>
         public bool IsFastRewindEnabled
         {
@@ -138,7 +140,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsFastRewindButtonVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsFastRewindButtonVisible"/>
         /// </summary>
         public bool IsFastRewindButtonVisible
         {
@@ -147,7 +149,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsFastForwardEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsFastForwardEnabled"/>
         /// </summary>
         public bool IsFastForwardEnabled
         {
@@ -156,7 +158,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsFastForwardButtonVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsFastForwardButtonVisible"/>
         /// </summary>
         public bool IsFastForwardButtonVisible
         {
@@ -165,7 +167,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsCompact"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsCompact"/>
         /// </summary>
         public bool IsCompact
         {
@@ -174,7 +176,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsSkipForwardEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsSkipForwardEnabled"/>
         /// </summary>
         public bool IsSkipForwardEnabled
         {
@@ -183,7 +185,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsSkipForwardButtonVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsSkipForwardButtonVisible"/>
         /// </summary>
         public bool IsSkipForwardButtonVisible
         {
@@ -192,7 +194,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsSkipBackwardEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsSkipBackwardEnabled"/>
         /// </summary>
         public bool IsSkipBackwardEnabled
         {
@@ -201,7 +203,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsSkipBackwardButtonVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsSkipBackwardButtonVisible"/>
         /// </summary>
         public bool IsSkipBackwardButtonVisible
         {
@@ -210,7 +212,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsPreviousTrackButtonVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsPreviousTrackButtonVisible"/>
         /// </summary>
         public bool IsPreviousTrackButtonVisible
         {
@@ -219,7 +221,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsNextTrackButtonVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsNextTrackButtonVisible"/>
         /// </summary>
         public bool IsNextTrackButtonVisible
         {
@@ -228,16 +230,16 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.FastPlayFallbackBehaviour"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.MediaTransportControls.FastPlayFallbackBehaviour"/>
         /// </summary>
-        public Windows.UI.Xaml.Media.FastPlayFallbackBehaviour FastPlayFallbackBehaviour
+        public windows.UI.Xaml.Media.FastPlayFallbackBehaviour FastPlayFallbackBehaviour
         {
             get => UwpInstance.FastPlayFallbackBehaviour;
             set => UwpInstance.FastPlayFallbackBehaviour = value;
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.ShowAndHideAutomatically"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.ShowAndHideAutomatically"/>
         /// </summary>
         public bool ShowAndHideAutomatically
         {
@@ -246,7 +248,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsRepeatEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsRepeatEnabled"/>
         /// </summary>
         public bool IsRepeatEnabled
         {
@@ -255,7 +257,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsRepeatButtonVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsRepeatButtonVisible"/>
         /// </summary>
         public bool IsRepeatButtonVisible
         {
@@ -264,7 +266,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsCompactOverlayEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsCompactOverlayEnabled"/>
         /// </summary>
         public bool IsCompactOverlayEnabled
         {
@@ -273,7 +275,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaTransportControls.IsCompactOverlayButtonVisible"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaTransportControls.IsCompactOverlayButtonVisible"/>
         /// </summary>
         public bool IsCompactOverlayButtonVisible
         {
@@ -282,22 +284,22 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Xaml.Controls.MediaTransportControls"/> to <see cref="MediaTransportControls"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Xaml.Controls.MediaTransportControls"/> to <see cref="MediaTransportControls"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.MediaTransportControls"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.MediaTransportControls"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator MediaTransportControls(
-            Windows.UI.Xaml.Controls.MediaTransportControls args)
+            windows.UI.Xaml.Controls.MediaTransportControls args)
         {
             return FromMediaTransportControls(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="MediaTransportControls"/> from <see cref="Windows.UI.Xaml.Controls.MediaTransportControls"/>.
+        /// Creates a <see cref="MediaTransportControls"/> from <see cref="windows.UI.Xaml.Controls.MediaTransportControls"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.MediaTransportControls"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.MediaTransportControls"/> instance containing the event data.</param>
         /// <returns><see cref="MediaTransportControls"/></returns>
-        public static MediaTransportControls FromMediaTransportControls(Windows.UI.Xaml.Controls.MediaTransportControls args)
+        public static MediaTransportControls FromMediaTransportControls(windows.UI.Xaml.Controls.MediaTransportControls args)
         {
             return new MediaTransportControls(args);
         }

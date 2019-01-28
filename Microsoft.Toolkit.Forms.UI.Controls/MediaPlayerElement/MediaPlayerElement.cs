@@ -6,20 +6,21 @@ using System;
 using System.ComponentModel;
 using Microsoft.Toolkit.Forms.UI.XamlHost;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
     [Designer(typeof(MediaPlayerElementDesigner))]
     public class MediaPlayerElement : WindowsXamlHostBase
     {
-        internal Windows.UI.Xaml.Controls.MediaPlayerElement UwpControl => GetUwpInternalObject() as Windows.UI.Xaml.Controls.MediaPlayerElement;
+        internal windows.UI.Xaml.Controls.MediaPlayerElement UwpControl => GetUwpInternalObject() as windows.UI.Xaml.Controls.MediaPlayerElement;
 
         private string _source;
 
         private System.Collections.Generic.Dictionary<string, object> DesignerProperties { get; set; }
 
         public MediaPlayerElement()
-            : this(typeof(Windows.UI.Xaml.Controls.MediaPlayerElement).FullName)
+            : this(typeof(windows.UI.Xaml.Controls.MediaPlayerElement).FullName)
         {
         }
 
@@ -44,12 +45,12 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.SetMediaPlayer"/>
+        /// <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.SetMediaPlayer"/>
         /// </summary>
         public void SetMediaPlayer(MediaPlayer mediaPlayer) => UwpControl.SetMediaPlayer(mediaPlayer.UwpInstance);
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.TransportControls"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.TransportControls"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -60,18 +61,18 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.Stretch"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.Stretch"/>
         /// </summary>
         [DefaultValue(Stretch.Uniform)]
         [Category("Appearance")]
         public Stretch Stretch
         {
             get => (Stretch)this.GetUwpControlValue();
-            set => this.SetUwpControlValue((Windows.UI.Xaml.Media.Stretch)value);
+            set => this.SetUwpControlValue((windows.UI.Xaml.Media.Stretch)value);
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.Source"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.Source"/>
         /// </summary>
         [DisplayName("Source")]
         public string Source
@@ -83,7 +84,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
                     return _source;
                 }
 
-                return ((Windows.Media.Core.MediaSource)UwpControl.Source)?.Uri?.ToString();
+                return ((windows.Media.Core.MediaSource)UwpControl.Source)?.Uri?.ToString();
             }
 
             set
@@ -100,23 +101,23 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
                 }
                 else
                 {
-                    UwpControl.Source = Windows.Media.Core.MediaSource.CreateFromUri(new Uri(value));
+                    UwpControl.Source = windows.Media.Core.MediaSource.CreateFromUri(new Uri(value));
                 }
             }
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.PosterSource"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.PosterSource"/>
         /// </summary>
         [DefaultValue(null)]
         public ImageSource PosterSource
         {
-            get => (Windows.UI.Xaml.Media.ImageSource)this.GetUwpControlValue();
+            get => (windows.UI.Xaml.Media.ImageSource)this.GetUwpControlValue();
             set => this.SetUwpControlValue(value.UwpInstance);
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.IsFullWindow"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.IsFullWindow"/>
         /// </summary>
         [DefaultValue(false)]
         public bool IsFullWindow
@@ -126,7 +127,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.AutoPlay"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.AutoPlay"/>
         /// </summary>
         [DefaultValue(true)]
         public bool AutoPlay
@@ -136,7 +137,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.AreTransportControlsEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.AreTransportControlsEnabled"/>
         /// </summary>
         [DefaultValue(false)]
         public bool AreTransportControlsEnabled
@@ -146,7 +147,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.MediaPlayer"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.MediaPlayer"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

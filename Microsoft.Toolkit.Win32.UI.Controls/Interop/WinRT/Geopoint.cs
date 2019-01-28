@@ -2,40 +2,42 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.Devices.Geolocation.Geopoint"/>
+    /// <see cref="windows.Devices.Geolocation.Geopoint"/>
     /// </summary>
     public class Geopoint
     {
-        private Windows.Devices.Geolocation.BasicGeoposition basicGeoposition;
+        private windows.Devices.Geolocation.BasicGeoposition basicGeoposition;
 
-        internal Windows.Devices.Geolocation.Geopoint UwpInstance { get; }
+        internal windows.Devices.Geolocation.Geopoint UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Geopoint"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.Devices.Geolocation.Geopoint"/>
+        /// Wpf-enabled wrapper for <see cref="windows.Devices.Geolocation.Geopoint"/>
         /// </summary>
-        internal Geopoint(Windows.Devices.Geolocation.Geopoint instance)
+        internal Geopoint(windows.Devices.Geolocation.Geopoint instance)
         {
             this.UwpInstance = instance;
         }
 
         public Geopoint(BasicGeoposition basicGeoposition)
         {
-            this.basicGeoposition = new Windows.Devices.Geolocation.BasicGeoposition()
+            this.basicGeoposition = new windows.Devices.Geolocation.BasicGeoposition()
             {
                 Latitude = basicGeoposition.Latitude,
                 Longitude = basicGeoposition.Longitude,
                 Altitude = basicGeoposition.Altitude
             };
 
-            UwpInstance = new Windows.Devices.Geolocation.Geopoint(this.basicGeoposition);
+            UwpInstance = new windows.Devices.Geolocation.Geopoint(this.basicGeoposition);
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.Devices.Geolocation.Geopoint.Position"/>
+        /// Gets <see cref="windows.Devices.Geolocation.Geopoint.Position"/>
         /// </summary>
         public BasicGeoposition Position
         {
@@ -43,7 +45,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.Devices.Geolocation.Geopoint.AltitudeReferenceSystem"/>
+        /// Gets <see cref="windows.Devices.Geolocation.Geopoint.AltitudeReferenceSystem"/>
         /// </summary>
         public AltitudeReferenceSystem AltitudeReferenceSystem
         {
@@ -51,7 +53,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.Devices.Geolocation.Geopoint.GeoshapeType"/>
+        /// Gets <see cref="windows.Devices.Geolocation.Geopoint.GeoshapeType"/>
         /// </summary>
         public GeoshapeType GeoshapeType
         {
@@ -59,7 +61,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.Devices.Geolocation.Geopoint.SpatialReferenceId"/>
+        /// Gets <see cref="windows.Devices.Geolocation.Geopoint.SpatialReferenceId"/>
         /// </summary>
         public uint SpatialReferenceId
         {
@@ -67,22 +69,22 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.Devices.Geolocation.Geopoint"/> to <see cref="Geopoint"/>.
+        /// Performs an implicit conversion from <see cref="windows.Devices.Geolocation.Geopoint"/> to <see cref="Geopoint"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Devices.Geolocation.Geopoint"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.Devices.Geolocation.Geopoint"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator Geopoint(
-            Windows.Devices.Geolocation.Geopoint args)
+            windows.Devices.Geolocation.Geopoint args)
         {
             return FromGeopoint(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="Geopoint"/> from <see cref="Windows.Devices.Geolocation.Geopoint"/>.
+        /// Creates a <see cref="Geopoint"/> from <see cref="windows.Devices.Geolocation.Geopoint"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Devices.Geolocation.Geopoint"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.Devices.Geolocation.Geopoint"/> instance containing the event data.</param>
         /// <returns><see cref="Geopoint"/></returns>
-        public static Geopoint FromGeopoint(Windows.Devices.Geolocation.Geopoint args)
+        public static Geopoint FromGeopoint(windows.Devices.Geolocation.Geopoint args)
         {
             return new Geopoint(args);
         }

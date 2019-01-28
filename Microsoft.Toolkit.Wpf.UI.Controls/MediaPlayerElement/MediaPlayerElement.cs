@@ -6,28 +6,29 @@ using System;
 using System.Windows;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 using Microsoft.Toolkit.Wpf.UI.XamlHost;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Wpf.UI.Controls
 {
     /// <summary>
-    /// Wpf-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement"/>
+    /// Wpf-enabled wrapper for <see cref="windows.UI.Xaml.Controls.MediaPlayerElement"/>
     /// </summary>
     public class MediaPlayerElement : WindowsXamlHostBase
     {
-        internal Windows.UI.Xaml.Controls.MediaPlayerElement UwpControl => ChildInternal as Windows.UI.Xaml.Controls.MediaPlayerElement;
+        internal windows.UI.Xaml.Controls.MediaPlayerElement UwpControl => ChildInternal as windows.UI.Xaml.Controls.MediaPlayerElement;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MediaPlayerElement"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement"/>
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Xaml.Controls.MediaPlayerElement"/>
         /// </summary>
         public MediaPlayerElement()
-            : this(typeof(Windows.UI.Xaml.Controls.MediaPlayerElement).FullName)
+            : this(typeof(windows.UI.Xaml.Controls.MediaPlayerElement).FullName)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MediaPlayerElement"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement"/>.
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Xaml.Controls.MediaPlayerElement"/>.
         /// </summary>
         protected MediaPlayerElement(string typeName)
             : base(typeName)
@@ -39,30 +40,30 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         {
             // Bind dependency properties across controls
             // properties of FrameworkElement
-            Bind(nameof(Style), StyleProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.StyleProperty);
-            Bind(nameof(MaxHeight), MaxHeightProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.MaxHeightProperty);
-            Bind(nameof(FlowDirection), FlowDirectionProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.FlowDirectionProperty);
-            Bind(nameof(Margin), MarginProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.MarginProperty);
-            Bind(nameof(HorizontalAlignment), HorizontalAlignmentProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.HorizontalAlignmentProperty);
-            Bind(nameof(VerticalAlignment), VerticalAlignmentProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.VerticalAlignmentProperty);
-            Bind(nameof(MinHeight), MinHeightProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.MinHeightProperty);
-            Bind(nameof(Height), HeightProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.HeightProperty);
-            Bind(nameof(MinWidth), MinWidthProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.MinWidthProperty);
-            Bind(nameof(MaxWidth), MaxWidthProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.MaxWidthProperty);
-            Bind(nameof(UseLayoutRounding), UseLayoutRoundingProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.UseLayoutRoundingProperty);
-            Bind(nameof(Name), NameProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.NameProperty);
-            Bind(nameof(Tag), TagProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.TagProperty);
-            Bind(nameof(DataContext), DataContextProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.DataContextProperty);
-            Bind(nameof(Width), WidthProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.WidthProperty);
+            Bind(nameof(Style), StyleProperty, windows.UI.Xaml.Controls.MediaPlayerElement.StyleProperty);
+            Bind(nameof(MaxHeight), MaxHeightProperty, windows.UI.Xaml.Controls.MediaPlayerElement.MaxHeightProperty);
+            Bind(nameof(FlowDirection), FlowDirectionProperty, windows.UI.Xaml.Controls.MediaPlayerElement.FlowDirectionProperty);
+            Bind(nameof(Margin), MarginProperty, windows.UI.Xaml.Controls.MediaPlayerElement.MarginProperty);
+            Bind(nameof(HorizontalAlignment), HorizontalAlignmentProperty, windows.UI.Xaml.Controls.MediaPlayerElement.HorizontalAlignmentProperty);
+            Bind(nameof(VerticalAlignment), VerticalAlignmentProperty, windows.UI.Xaml.Controls.MediaPlayerElement.VerticalAlignmentProperty);
+            Bind(nameof(MinHeight), MinHeightProperty, windows.UI.Xaml.Controls.MediaPlayerElement.MinHeightProperty);
+            Bind(nameof(Height), HeightProperty, windows.UI.Xaml.Controls.MediaPlayerElement.HeightProperty);
+            Bind(nameof(MinWidth), MinWidthProperty, windows.UI.Xaml.Controls.MediaPlayerElement.MinWidthProperty);
+            Bind(nameof(MaxWidth), MaxWidthProperty, windows.UI.Xaml.Controls.MediaPlayerElement.MaxWidthProperty);
+            Bind(nameof(UseLayoutRounding), UseLayoutRoundingProperty, windows.UI.Xaml.Controls.MediaPlayerElement.UseLayoutRoundingProperty);
+            Bind(nameof(Name), NameProperty, windows.UI.Xaml.Controls.MediaPlayerElement.NameProperty);
+            Bind(nameof(Tag), TagProperty, windows.UI.Xaml.Controls.MediaPlayerElement.TagProperty);
+            Bind(nameof(DataContext), DataContextProperty, windows.UI.Xaml.Controls.MediaPlayerElement.DataContextProperty);
+            Bind(nameof(Width), WidthProperty, windows.UI.Xaml.Controls.MediaPlayerElement.WidthProperty);
 
             // MediaPlayerElement specific properties
-            Bind(nameof(Stretch), StretchProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.StretchProperty);
-            Bind(nameof(Source), SourceProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.SourceProperty, new MediaSourceConverter());
-            Bind(nameof(PosterSource), PosterSourceProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.PosterSourceProperty);
-            Bind(nameof(IsFullWindow), IsFullWindowProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.IsFullWindowProperty);
-            Bind(nameof(AutoPlay), AutoPlayProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.AutoPlayProperty);
-            Bind(nameof(AreTransportControlsEnabled), AreTransportControlsEnabledProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.AreTransportControlsEnabledProperty);
-            Bind(nameof(MediaPlayer), MediaPlayerProperty, Windows.UI.Xaml.Controls.MediaPlayerElement.MediaPlayerProperty, null, System.ComponentModel.BindingDirection.OneWay);
+            Bind(nameof(Stretch), StretchProperty, windows.UI.Xaml.Controls.MediaPlayerElement.StretchProperty);
+            Bind(nameof(Source), SourceProperty, windows.UI.Xaml.Controls.MediaPlayerElement.SourceProperty, new MediaSourceConverter());
+            Bind(nameof(PosterSource), PosterSourceProperty, windows.UI.Xaml.Controls.MediaPlayerElement.PosterSourceProperty);
+            Bind(nameof(IsFullWindow), IsFullWindowProperty, windows.UI.Xaml.Controls.MediaPlayerElement.IsFullWindowProperty);
+            Bind(nameof(AutoPlay), AutoPlayProperty, windows.UI.Xaml.Controls.MediaPlayerElement.AutoPlayProperty);
+            Bind(nameof(AreTransportControlsEnabled), AreTransportControlsEnabledProperty, windows.UI.Xaml.Controls.MediaPlayerElement.AreTransportControlsEnabledProperty);
+            Bind(nameof(MediaPlayer), MediaPlayerProperty, windows.UI.Xaml.Controls.MediaPlayerElement.MediaPlayerProperty, null, System.ComponentModel.BindingDirection.OneWay);
 
             // Full-screen not supported yet.
             UwpControl.TransportControls.IsFullWindowButtonVisible = false;
@@ -71,47 +72,47 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.AreTransportControlsEnabledProperty"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.AreTransportControlsEnabledProperty"/>
         /// </summary>
         public static DependencyProperty AreTransportControlsEnabledProperty { get; } = DependencyProperty.Register(nameof(AreTransportControlsEnabled), typeof(bool), typeof(MediaPlayerElement));
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.AutoPlayProperty"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.AutoPlayProperty"/>
         /// </summary>
         public static DependencyProperty AutoPlayProperty { get; } = DependencyProperty.Register(nameof(AutoPlay), typeof(bool), typeof(MediaPlayerElement));
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.IsFullWindowProperty"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.IsFullWindowProperty"/>
         /// </summary>
         public static DependencyProperty IsFullWindowProperty { get; } = DependencyProperty.Register(nameof(IsFullWindow), typeof(bool), typeof(MediaPlayerElement));
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.MediaPlayerProperty"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.MediaPlayerProperty"/>
         /// </summary>
         public static DependencyProperty MediaPlayerProperty { get; } = DependencyProperty.Register(nameof(MediaPlayer), typeof(MediaPlayer), typeof(MediaPlayerElement));
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.PosterSourceProperty"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.PosterSourceProperty"/>
         /// </summary>
         public static DependencyProperty PosterSourceProperty { get; } = DependencyProperty.Register(nameof(PosterSource), typeof(ImageSource), typeof(MediaPlayerElement));
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.SourceProperty"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.SourceProperty"/>
         /// </summary>
         public static DependencyProperty SourceProperty { get; } = DependencyProperty.Register(nameof(Source), typeof(string), typeof(MediaPlayerElement));
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.StretchProperty"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.StretchProperty"/>
         /// </summary>
         public static DependencyProperty StretchProperty { get; } = DependencyProperty.Register(nameof(Stretch), typeof(Stretch), typeof(MediaPlayerElement));
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.SetMediaPlayer"/>
+        /// <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.SetMediaPlayer"/>
         /// </summary>
         public void SetMediaPlayer(MediaPlayer mediaPlayer) => UwpControl.SetMediaPlayer(mediaPlayer.UwpInstance);
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.TransportControls"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.TransportControls"/>
         /// </summary>
         public MediaTransportControls TransportControls
         {
@@ -120,7 +121,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.Stretch"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.Stretch"/>
         /// </summary>
         public Stretch Stretch
         {
@@ -129,7 +130,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.Source"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.Source"/>
         /// </summary>
         public string Source
         {
@@ -138,7 +139,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.PosterSource"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.PosterSource"/>
         /// </summary>
         public ImageSource PosterSource
         {
@@ -147,7 +148,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.IsFullWindow"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.IsFullWindow"/>
         /// </summary>
         public bool IsFullWindow
         {
@@ -156,7 +157,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.AutoPlay"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.AutoPlay"/>
         /// </summary>
         public bool AutoPlay
         {
@@ -165,7 +166,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.AreTransportControlsEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.AreTransportControlsEnabled"/>
         /// </summary>
         public bool AreTransportControlsEnabled
         {
@@ -174,7 +175,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.MediaPlayerElement.MediaPlayer"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.MediaPlayer"/>
         /// </summary>
         public MediaPlayer MediaPlayer
         {

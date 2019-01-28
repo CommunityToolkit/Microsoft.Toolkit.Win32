@@ -2,35 +2,37 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Input.Inking.InkPresenter"/>
+    /// <see cref="windows.UI.Input.Inking.InkPresenter"/>
     /// </summary>
     public class InkPresenter
     {
-        private Windows.UI.Input.Inking.InkPresenter UwpInstance { get; }
+        private windows.UI.Input.Inking.InkPresenter UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InkPresenter"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Input.Inking.InkPresenter"/>
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Input.Inking.InkPresenter"/>
         /// </summary>
-        public InkPresenter(Windows.UI.Input.Inking.InkPresenter instance)
+        public InkPresenter(windows.UI.Input.Inking.InkPresenter instance)
         {
             this.UwpInstance = instance;
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Input.Inking.InkPresenter.StrokeContainer"/>
+        /// Gets or sets <see cref="windows.UI.Input.Inking.InkPresenter.StrokeContainer"/>
         /// </summary>
-        public Windows.UI.Input.Inking.InkStrokeContainer StrokeContainer
+        public windows.UI.Input.Inking.InkStrokeContainer StrokeContainer
         {
             get => UwpInstance.StrokeContainer;
             set => UwpInstance.StrokeContainer = value;
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="Windows.UI.Input.Inking.InkPresenter.IsInputEnabled"/>
+        /// Gets or sets a value indicating whether <see cref="windows.UI.Input.Inking.InkPresenter.IsInputEnabled"/>
         /// </summary>
         public bool IsInputEnabled
         {
@@ -39,72 +41,72 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Input.Inking.InkPresenter.InputDeviceTypes"/>
+        /// Gets or sets <see cref="windows.UI.Input.Inking.InkPresenter.InputDeviceTypes"/>
         /// </summary>
         public CoreInputDeviceTypes InputDeviceTypes
         {
             get => (CoreInputDeviceTypes)(uint)UwpInstance.InputDeviceTypes;
-            set => UwpInstance.InputDeviceTypes = (Windows.UI.Core.CoreInputDeviceTypes)(uint)value;
+            set => UwpInstance.InputDeviceTypes = (windows.UI.Core.CoreInputDeviceTypes)(uint)value;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Input.Inking.InkPresenter.InputProcessingConfiguration"/>
+        /// Gets <see cref="windows.UI.Input.Inking.InkPresenter.InputProcessingConfiguration"/>
         /// </summary>
-        public Windows.UI.Input.Inking.InkInputProcessingConfiguration InputProcessingConfiguration
+        public windows.UI.Input.Inking.InkInputProcessingConfiguration InputProcessingConfiguration
         {
             get => UwpInstance.InputProcessingConfiguration;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Input.Inking.InkPresenter.StrokeInput"/>
+        /// Gets <see cref="windows.UI.Input.Inking.InkPresenter.StrokeInput"/>
         /// </summary>
-        public Windows.UI.Input.Inking.InkStrokeInput StrokeInput
+        public windows.UI.Input.Inking.InkStrokeInput StrokeInput
         {
             get => UwpInstance.StrokeInput;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Input.Inking.InkPresenter.UnprocessedInput"/>
+        /// Gets <see cref="windows.UI.Input.Inking.InkPresenter.UnprocessedInput"/>
         /// </summary>
-        public Windows.UI.Input.Inking.InkUnprocessedInput UnprocessedInput
+        public windows.UI.Input.Inking.InkUnprocessedInput UnprocessedInput
         {
             get => UwpInstance.UnprocessedInput;
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Input.Inking.InkPresenter.HighContrastAdjustment"/>
+        /// Gets or sets <see cref="windows.UI.Input.Inking.InkPresenter.HighContrastAdjustment"/>
         /// </summary>
-        public Windows.UI.Input.Inking.InkHighContrastAdjustment HighContrastAdjustment
+        public windows.UI.Input.Inking.InkHighContrastAdjustment HighContrastAdjustment
         {
             get => UwpInstance.HighContrastAdjustment;
             set => UwpInstance.HighContrastAdjustment = value;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Input.Inking.InkPresenter.InputConfiguration"/>
+        /// Gets <see cref="windows.UI.Input.Inking.InkPresenter.InputConfiguration"/>
         /// </summary>
-        public Windows.UI.Input.Inking.InkInputConfiguration InputConfiguration
+        public windows.UI.Input.Inking.InkInputConfiguration InputConfiguration
         {
             get => UwpInstance.InputConfiguration;
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Input.Inking.InkPresenter"/> to <see cref="InkPresenter"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Input.Inking.InkPresenter"/> to <see cref="InkPresenter"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Input.Inking.InkPresenter"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Input.Inking.InkPresenter"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator InkPresenter(
-            Windows.UI.Input.Inking.InkPresenter args)
+            windows.UI.Input.Inking.InkPresenter args)
         {
             return FromInkPresenter(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="InkPresenter"/> from <see cref="Windows.UI.Input.Inking.InkPresenter"/>.
+        /// Creates a <see cref="InkPresenter"/> from <see cref="windows.UI.Input.Inking.InkPresenter"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Input.Inking.InkPresenter"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Input.Inking.InkPresenter"/> instance containing the event data.</param>
         /// <returns><see cref="InkPresenter"/></returns>
-        public static InkPresenter FromInkPresenter(Windows.UI.Input.Inking.InkPresenter args)
+        public static InkPresenter FromInkPresenter(windows.UI.Input.Inking.InkPresenter args)
         {
             return new InkPresenter(args);
         }

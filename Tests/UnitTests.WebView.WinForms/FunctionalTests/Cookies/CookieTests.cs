@@ -95,8 +95,8 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTe
             {
                 if (SecondWebView == null)
                 {
-                    await SetCookieAsync(wv);
-                    Webview1Cookie = await GetCookiesAsync(wv);
+                    await SetCookieAsync(wv).ConfigureAwait(true);
+                    Webview1Cookie = await GetCookiesAsync(wv).ConfigureAwait(true);
 
 
                     // Once the session cookie is set
@@ -106,7 +106,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTe
                 }
                 else
                 {
-                    Webview2Cookie = await GetCookiesAsync(wv);
+                    Webview2Cookie = await GetCookiesAsync(wv).ConfigureAwait(true);
                     Form.Close();
                 }
             }

@@ -11,7 +11,9 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
     /// <summary>
     /// Designer for most of the WinForms-wrapped WPF InkToolbar sub-controls such as InkToolbarToolButton
     /// </summary>
+#pragma warning disable CA1812 // Avoid uninstantiated internal classes
     internal class InkToolbarToolButtonDesigner : ControlDesigner
+#pragma warning restore CA1812 // Avoid uninstantiated internal classes
     {
         public override void InitializeNewComponent(IDictionary defaultValues)
         {

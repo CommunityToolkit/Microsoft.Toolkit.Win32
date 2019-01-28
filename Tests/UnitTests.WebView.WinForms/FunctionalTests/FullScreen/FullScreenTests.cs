@@ -7,6 +7,7 @@ using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 using Microsoft.Toolkit.Win32.UI.Controls.Test.WebView.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Should;
+using System;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTests.FullScreen
 {
@@ -69,7 +70,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTe
             {
                 WriteLine($"ScriptNotify received: '{e.Value ?? string.Empty}");
 
-                if ("generateKeyPress".Equals(e.Value))
+                if ("generateKeyPress".Equals(e.Value, StringComparison.InvariantCulture))
                 {
                     Form.Focus();
                     Form.InputSimulator.Keyboard.KeyPress(VirtualKeyCode.TAB);

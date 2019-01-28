@@ -2,41 +2,43 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Xaml.Controls.Maps.MapStyleSheet"/>
+    /// <see cref="windows.UI.Xaml.Controls.Maps.MapStyleSheet"/>
     /// </summary>
     public class MapStyleSheet
     {
-        internal Windows.UI.Xaml.Controls.Maps.MapStyleSheet UwpInstance { get; }
+        internal windows.UI.Xaml.Controls.Maps.MapStyleSheet UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MapStyleSheet"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.Maps.MapStyleSheet"/>
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Xaml.Controls.Maps.MapStyleSheet"/>
         /// </summary>
-        public MapStyleSheet(Windows.UI.Xaml.Controls.Maps.MapStyleSheet instance)
+        public MapStyleSheet(windows.UI.Xaml.Controls.Maps.MapStyleSheet instance)
         {
             this.UwpInstance = instance;
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Xaml.Controls.Maps.MapStyleSheet"/> to <see cref="MapStyleSheet"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Xaml.Controls.Maps.MapStyleSheet"/> to <see cref="MapStyleSheet"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.Maps.MapStyleSheet"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.Maps.MapStyleSheet"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator MapStyleSheet(
-            Windows.UI.Xaml.Controls.Maps.MapStyleSheet args)
+            windows.UI.Xaml.Controls.Maps.MapStyleSheet args)
         {
             return FromMapStyleSheet(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="MapStyleSheet"/> from <see cref="Windows.UI.Xaml.Controls.Maps.MapStyleSheet"/>.
+        /// Creates a <see cref="MapStyleSheet"/> from <see cref="windows.UI.Xaml.Controls.Maps.MapStyleSheet"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.Maps.MapStyleSheet"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.Maps.MapStyleSheet"/> instance containing the event data.</param>
         /// <returns><see cref="MapStyleSheet"/></returns>
-        public static MapStyleSheet FromMapStyleSheet(Windows.UI.Xaml.Controls.Maps.MapStyleSheet args)
+        public static MapStyleSheet FromMapStyleSheet(windows.UI.Xaml.Controls.Maps.MapStyleSheet args)
         {
             return new MapStyleSheet(args);
         }

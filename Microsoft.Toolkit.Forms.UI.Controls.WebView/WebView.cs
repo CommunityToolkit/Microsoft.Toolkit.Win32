@@ -264,9 +264,9 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether <see cref="E:Microsoft.Toolkit.Forms.UI.Controls.WebView.ScriptNotify" /> is allowed;
+        /// Gets or sets a value indicating whether <see cref="Microsoft.Toolkit.Forms.UI.Controls.WebView.ScriptNotify" /> is allowed;
         /// </summary>
-        /// <value><c>true</c> if <see cref="E:Microsoft.Toolkit.Forms.UI.Controls.WebView.ScriptNotify" /> is allowed; otherwise, <c>false</c>.</value>
+        /// <value><c>true</c> if <see cref="Microsoft.Toolkit.Forms.UI.Controls.WebView.ScriptNotify" /> is allowed; otherwise, <c>false</c>.</value>
         /// <inheritdoc />
         [StringResourceCategory(Constants.CategoryBehavior)]
         [DefaultValue(WebViewDefaults.IsScriptNotifyEnabled)]
@@ -307,7 +307,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         /// Gets or sets a value indicating whether this instance is private network client server capability enabled.
         /// </summary>
         /// <value><see langword="true" /> if this instance is private network client server capability enabled; otherwise, <see langword="false" />.</value>
-        /// <exception cref="T:System.InvalidOperationException">Value cannot be set once the control is initialized.</exception>
+        /// <exception cref="System.InvalidOperationException">Value cannot be set once the control is initialized.</exception>
         [StringResourceCategory(Constants.CategoryBehavior)]
         [DefaultValue(WebViewDefaults.IsPrivateNetworkEnabled)]
         public bool IsPrivateNetworkClientServerCapabilityEnabled
@@ -506,7 +506,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         public void MoveFocus(WebViewControlMoveFocusReason reason) => _webViewControl?.MoveFocus(reason);
 
         /// <summary>
-        /// Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.Control" /> and its child controls and optionally releases the managed resources.
+        /// Releases the unmanaged resources used by the <see cref="System.Windows.Forms.Control" /> and its child controls and optionally releases the managed resources.
         /// </summary>
         /// <param name="disposing"><see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)

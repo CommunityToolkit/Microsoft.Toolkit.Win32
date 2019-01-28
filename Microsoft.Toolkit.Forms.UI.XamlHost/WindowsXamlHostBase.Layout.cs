@@ -5,6 +5,7 @@
 using System;
 using System.Drawing;
 using Microsoft.Toolkit.Forms.UI.XamlHost.Interop.Win32;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Forms.UI.XamlHost
 {
@@ -18,7 +19,9 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         ///     correct layout behavior for the hosted XAML content.
         /// </summary>
         /// <returns>preferred size</returns>
+#pragma warning disable CA1721 // Property names should not match get methods
         public override Size GetPreferredSize(Size proposedSize)
+#pragma warning restore CA1721 // Property names should not match get methods
         {
             if (DesignMode)
             {
@@ -51,7 +54,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
                     proposedWidth /= _lastDpi / 96.0f;
                 }
 
-                _xamlSource.Content.Measure(new Windows.Foundation.Size(proposedWidth, proposedHeight));
+                _xamlSource.Content.Measure(new windows.Foundation.Size(proposedWidth, proposedHeight));
             }
 
             var preferredSize = Size.Empty;
@@ -165,14 +168,14 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
                     // XamlContenHost Control.Size has changed. XAML must perform an Arrange pass.
                     // The XAML Arrange pass will expand XAML content with 'HorizontalStretch' and
                     // 'VerticalStretch' properties to the bounds of the XamlContentHost Control.
-                    var rect = new Windows.Foundation.Rect(0, 0, Width, Height);
+                    var rect = new windows.Foundation.Rect(0, 0, Width, Height);
                     if (_xamlIslandHandlesDpiScaling)
                     {
                         rect.Width /= _lastDpi / 96.0f;
                         rect.Height /= _lastDpi / 96.0f;
                     }
 
-                    _xamlSource.Content.Measure(new Windows.Foundation.Size(rect.Width, rect.Height));
+                    _xamlSource.Content.Measure(new windows.Foundation.Size(rect.Width, rect.Height));
                     _xamlSource.Content.Arrange(rect);
                     PerformLayout();
                 }

@@ -2,26 +2,28 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Input.PointerPoint"/>
+    /// <see cref="windows.UI.Input.PointerPoint"/>
     /// </summary>
     public class PointerPoint
     {
-        private Windows.UI.Input.PointerPoint UwpInstance { get; }
+        private windows.UI.Input.PointerPoint UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PointerPoint"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Input.PointerPoint"/>
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Input.PointerPoint"/>
         /// </summary>
-        public PointerPoint(Windows.UI.Input.PointerPoint instance)
+        public PointerPoint(windows.UI.Input.PointerPoint instance)
         {
             this.UwpInstance = instance;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Input.PointerPoint.FrameId"/>
+        /// Gets <see cref="windows.UI.Input.PointerPoint.FrameId"/>
         /// </summary>
         public uint FrameId
         {
@@ -29,7 +31,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets a value indicating whether <see cref="Windows.UI.Input.PointerPoint.IsInContact"/>
+        /// Gets a value indicating whether <see cref="windows.UI.Input.PointerPoint.IsInContact"/>
         /// </summary>
         public bool IsInContact
         {
@@ -37,15 +39,15 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Input.PointerPoint.PointerDevice"/>
+        /// Gets <see cref="windows.UI.Input.PointerPoint.PointerDevice"/>
         /// </summary>
-        public Windows.Devices.Input.PointerDevice PointerDevice
+        public windows.Devices.Input.PointerDevice PointerDevice
         {
             get => UwpInstance.PointerDevice;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Input.PointerPoint.PointerId"/>
+        /// Gets <see cref="windows.UI.Input.PointerPoint.PointerId"/>
         /// </summary>
         public uint PointerId
         {
@@ -53,31 +55,31 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Input.PointerPoint.Position"/>
+        /// Gets <see cref="windows.UI.Input.PointerPoint.Position"/>
         /// </summary>
-        public Windows.Foundation.Point Position
+        public windows.Foundation.Point Position
         {
             get => UwpInstance.Position;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Input.PointerPoint.Properties"/>
+        /// Gets <see cref="windows.UI.Input.PointerPoint.Properties"/>
         /// </summary>
-        public Windows.UI.Input.PointerPointProperties Properties
+        public windows.UI.Input.PointerPointProperties Properties
         {
             get => UwpInstance.Properties;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Input.PointerPoint.RawPosition"/>
+        /// Gets <see cref="windows.UI.Input.PointerPoint.RawPosition"/>
         /// </summary>
-        public Windows.Foundation.Point RawPosition
+        public windows.Foundation.Point RawPosition
         {
             get => UwpInstance.RawPosition;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Input.PointerPoint.Timestamp"/>
+        /// Gets <see cref="windows.UI.Input.PointerPoint.Timestamp"/>
         /// </summary>
         public ulong Timestamp
         {
@@ -85,22 +87,22 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Input.PointerPoint"/> to <see cref="PointerPoint"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Input.PointerPoint"/> to <see cref="PointerPoint"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Input.PointerPoint"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Input.PointerPoint"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator PointerPoint(
-            Windows.UI.Input.PointerPoint args)
+            windows.UI.Input.PointerPoint args)
         {
             return FromPointerPoint(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="PointerPoint"/> from <see cref="Windows.UI.Input.PointerPoint"/>.
+        /// Creates a <see cref="PointerPoint"/> from <see cref="windows.UI.Input.PointerPoint"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Input.PointerPoint"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Input.PointerPoint"/> instance containing the event data.</param>
         /// <returns><see cref="PointerPoint"/></returns>
-        public static PointerPoint FromPointerPoint(Windows.UI.Input.PointerPoint args)
+        public static PointerPoint FromPointerPoint(windows.UI.Input.PointerPoint args)
         {
             return new PointerPoint(args);
         }

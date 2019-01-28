@@ -8,6 +8,7 @@ using System.Security;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.Win32;
 using Windows.Foundation.Metadata;
 using Windows.Security.EnterpriseData;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop
 {

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Wpf.UI.XamlHost
 {
@@ -16,33 +17,33 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// <summary>
         /// Dictionary that maps WPF (host framework) FocusNavigationDirection to UWP XAML XxamlSourceFocusNavigationReason
         /// </summary>
-        private static readonly Dictionary<System.Windows.Input.FocusNavigationDirection, Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason>
+        private static readonly Dictionary<System.Windows.Input.FocusNavigationDirection, windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason>
             MapDirectionToReason =
-                new Dictionary<System.Windows.Input.FocusNavigationDirection, Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason>
+                new Dictionary<System.Windows.Input.FocusNavigationDirection, windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason>
                 {
-                    { System.Windows.Input.FocusNavigationDirection.Next,     Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.First },
-                    { System.Windows.Input.FocusNavigationDirection.First,   Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.First },
-                    { System.Windows.Input.FocusNavigationDirection.Previous, Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Last },
-                    { System.Windows.Input.FocusNavigationDirection.Last,     Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Last },
-                    { System.Windows.Input.FocusNavigationDirection.Up,       Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Up },
-                    { System.Windows.Input.FocusNavigationDirection.Down,    Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Down },
-                    { System.Windows.Input.FocusNavigationDirection.Left,     Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Left },
-                    { System.Windows.Input.FocusNavigationDirection.Right,   Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Right },
+                    { System.Windows.Input.FocusNavigationDirection.Next,     windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.First },
+                    { System.Windows.Input.FocusNavigationDirection.First,   windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.First },
+                    { System.Windows.Input.FocusNavigationDirection.Previous, windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Last },
+                    { System.Windows.Input.FocusNavigationDirection.Last,     windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Last },
+                    { System.Windows.Input.FocusNavigationDirection.Up,       windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Up },
+                    { System.Windows.Input.FocusNavigationDirection.Down,    windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Down },
+                    { System.Windows.Input.FocusNavigationDirection.Left,     windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Left },
+                    { System.Windows.Input.FocusNavigationDirection.Right,   windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Right },
                 };
 
         /// <summary>
         /// Dictionary that maps UWP XAML XamlSourceFocusNavigationReason to WPF (host framework) FocusNavigationDirection
         /// </summary>
-        private static readonly Dictionary<Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason, System.Windows.Input.FocusNavigationDirection>
+        private static readonly Dictionary<windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason, System.Windows.Input.FocusNavigationDirection>
             MapReasonToDirection =
-                new Dictionary<Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason, System.Windows.Input.FocusNavigationDirection>()
+                new Dictionary<windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason, System.Windows.Input.FocusNavigationDirection>()
                 {
-                    { Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.First, System.Windows.Input.FocusNavigationDirection.Next },
-                    { Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Last,  System.Windows.Input.FocusNavigationDirection.Previous },
-                    { Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Up,    System.Windows.Input.FocusNavigationDirection.Up },
-                    { Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Down,  System.Windows.Input.FocusNavigationDirection.Down },
-                    { Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Left,  System.Windows.Input.FocusNavigationDirection.Left },
-                    { Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Right, System.Windows.Input.FocusNavigationDirection.Right },
+                    { windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.First, System.Windows.Input.FocusNavigationDirection.Next },
+                    { windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Last,  System.Windows.Input.FocusNavigationDirection.Previous },
+                    { windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Up,    System.Windows.Input.FocusNavigationDirection.Up },
+                    { windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Down,  System.Windows.Input.FocusNavigationDirection.Down },
+                    { windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Left,  System.Windows.Input.FocusNavigationDirection.Left },
+                    { windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Right, System.Windows.Input.FocusNavigationDirection.Right },
                 };
 
         /// <summary>
@@ -61,8 +62,8 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
             if (!_xamlSource.HasFocus)
             {
                 _xamlSource.NavigateFocus(
-                    new Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationRequest(
-                        Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Programmatic));
+                    new windows.UI.Xaml.Hosting.XamlSourceFocusNavigationRequest(
+                        windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Programmatic));
             }
         }
 
@@ -84,7 +85,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
                 _lastFocusRequest = Guid.NewGuid();
             }
 
-            var sourceFocusNavigationRequest = new Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationRequest(reason, origin, _lastFocusRequest);
+            var sourceFocusNavigationRequest = new windows.UI.Xaml.Hosting.XamlSourceFocusNavigationRequest(reason, origin, _lastFocusRequest);
             try
             {
                 var result = _xamlSource.NavigateFocus(sourceFocusNavigationRequest);
@@ -105,9 +106,9 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// <param name="sibling1">base rectangle</param>
         /// <param name="sibling2">second of pair to transform</param>
         /// <returns>result of transformed rectangle</returns>
-        private static Windows.Foundation.Rect BoundsRelativeTo(FrameworkElement sibling1, System.Windows.Media.Visual sibling2)
+        private static windows.Foundation.Rect BoundsRelativeTo(FrameworkElement sibling1, System.Windows.Media.Visual sibling2)
         {
-            Windows.Foundation.Rect origin = default(Windows.Foundation.Rect);
+            windows.Foundation.Rect origin = default(windows.Foundation.Rect);
 
             if (sibling1 != null)
             {
@@ -131,19 +132,19 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         }
 
         /// <summary>
-        /// Handles the <see cref="E:TakeFocusRequested" /> event.
+        /// Handles the <see cref="windows.UI.Xaml.Hosting.DesktopWindowXamlSource.TakeFocusRequested" /> event.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Windows.UI.Xaml.Hosting.DesktopWindowXamlSourceTakeFocusRequestedEventArgs"/> instance containing the event data.</param>
-        private void OnTakeFocusRequested(object sender, Windows.UI.Xaml.Hosting.DesktopWindowXamlSourceTakeFocusRequestedEventArgs e)
+        /// <param name="e">The <see cref="windows.UI.Xaml.Hosting.DesktopWindowXamlSourceTakeFocusRequestedEventArgs"/> instance containing the event data.</param>
+        private void OnTakeFocusRequested(object sender, windows.UI.Xaml.Hosting.DesktopWindowXamlSourceTakeFocusRequestedEventArgs e)
         {
             if (_lastFocusRequest == e.Request.CorrelationId)
             {
                 // If we've arrived at this point, then focus is being move back to us
                 // therefore, we should complete the operation to avoid an infinite recursion
                 // by "Restoring" the focus back to us under a new correctationId
-                var newRequest = new Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationRequest(
-                    Windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Restore);
+                var newRequest = new windows.UI.Xaml.Hosting.XamlSourceFocusNavigationRequest(
+                    windows.UI.Xaml.Hosting.XamlSourceFocusNavigationReason.Restore);
                 _xamlSource.NavigateFocus(newRequest);
             }
             else

@@ -1,35 +1,32 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
     <RootNamespace>Microsoft.Toolkit.Wpf.UI.XamlHost</RootNamespace>
     <AssemblyName>Microsoft.Toolkit.Wpf.UI.XamlHost</AssemblyName>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
 
     <Title>Windows Community Toolkit XAMLHost for WPF</Title>
     <Description>This library provides XAML islands helpers for WPF. It is part of the Windows Community Toolkit.</Description>
     <PackageTags>XAML Islands Win32 WPF XAMLHost</PackageTags>
     <PackageId>Microsoft.Toolkit.Wpf.UI.XamlHost</PackageId>
+  </PropertyGroup>
 
-    <!--
-    Needs the XamlRoot API, which is available in Insiders SDK 18298 on 19-Dec 2018
-    https://blogs.windows.com/buildingapps/2018/12/19/windows-10-sdk-preview-build-18298-available-now
-    -->
-    <TargetPlatformMinVersion>10.0.18298.0</TargetPlatformMinVersion>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\**\*.cs" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.WindowsRuntime">
       <HintPath>$(WINDIR)\Microsoft.NET\Framework\v4.0.30319\System.Runtime.WindowsRuntime.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.WindowsRuntime.UI.Xaml" >
+    <Reference Include="System.Runtime.WindowsRuntime.UI.Xaml">
       <HintPath>$(WINDIR)\Microsoft.NET\Framework\v4.0.30319\System.Runtime.WindowsRuntime.UI.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml">
@@ -39,7 +36,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

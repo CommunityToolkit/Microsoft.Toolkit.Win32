@@ -1,19 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
     <RootNamespace>Microsoft.Toolkit.Wpf.UI.Controls</RootNamespace>
     <AssemblyName>Microsoft.Toolkit.Wpf.UI.Controls</AssemblyName>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
 
     <Title>Windows Community Toolkit WPF Controls</Title>
     <Description>This library provides XAML controls for WPF. It is part of the Windows Community Toolkit.</Description>
     <PackageTags>Win32 WPF UWP XAML</PackageTags>
 
     <DefineConstants>$(DefineConstants);WPF</DefineConstants>
+  </PropertyGroup>
 
-    <!--XamlHost requires 17692 -->
-    <TargetPlatformMinVersion>10.0.17692.0</TargetPlatformMinVersion>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -59,7 +59,7 @@
     <Compile Remove="InkCanvas\VirtualKeyModifiers.cs" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />

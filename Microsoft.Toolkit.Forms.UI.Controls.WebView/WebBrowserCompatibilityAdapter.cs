@@ -59,7 +59,9 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
 
         public override void Navigate(string url)
         {
+#pragma warning disable CA2234 // Pass system uri objects instead of strings
             _browser.Navigate(url);
+#pragma warning restore CA2234 // Pass system uri objects instead of strings
         }
 
         public override void NavigateToString(string text)

@@ -7,25 +7,26 @@ using System.ComponentModel;
 using Microsoft.Toolkit.Forms.UI.XamlHost;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 using Windows.UI.Xaml;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
     /// <summary>
-    /// WinForms-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.InkToolbarCustomToolButton"/>
+    /// WinForms-enabled wrapper for <see cref="windows.UI.Xaml.Controls.InkToolbarCustomToolButton"/>
     /// </summary>
     [Designer(typeof(InkToolbarToolButtonDesigner))]
     public class InkToolbarCustomToolButton : WindowsXamlHostBase
     {
-        internal Windows.UI.Xaml.Controls.InkToolbarCustomToolButton UwpControl => ChildInternal as Windows.UI.Xaml.Controls.InkToolbarCustomToolButton;
+        internal windows.UI.Xaml.Controls.InkToolbarCustomToolButton UwpControl => ChildInternal as windows.UI.Xaml.Controls.InkToolbarCustomToolButton;
 
         private System.Collections.Generic.Dictionary<string, object> DesignerProperties { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InkToolbarCustomToolButton"/> class, a
-        /// WinForms-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.InkToolbarCustomToolButton"/>
+        /// WinForms-enabled wrapper for <see cref="windows.UI.Xaml.Controls.InkToolbarCustomToolButton"/>
         /// </summary>
         public InkToolbarCustomToolButton()
-            : this(typeof(Windows.UI.Xaml.Controls.InkToolbarCustomToolButton).FullName)
+            : this(typeof(windows.UI.Xaml.Controls.InkToolbarCustomToolButton).FullName)
         {
         }
 
@@ -52,7 +53,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the underlying Uwp control's IsExtensionGlyphShown property is set <see cref="Windows.UI.Xaml.Controls.InkToolbarToolButton.IsExtensionGlyphShown"/>
+        /// Gets or sets a value indicating whether the underlying Uwp control's IsExtensionGlyphShown property is set <see cref="windows.UI.Xaml.Controls.InkToolbarToolButton.IsExtensionGlyphShown"/>
         /// </summary>
         [DefaultValue(false)]
         public bool IsExtensionGlyphShown
@@ -62,20 +63,20 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets the underlying Uwp control's Toolkind property <see cref="Windows.UI.Xaml.Controls.InkToolbarToolButton.ToolKind"/>
+        /// Gets the underlying Uwp control's Toolkind property <see cref="windows.UI.Xaml.Controls.InkToolbarToolButton.ToolKind"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public InkToolbarTool ToolKind { get => (InkToolbarTool)UwpControl?.ToolKind; }
 
         /// <summary>
-        /// Gets or sets the underlying Uwp control's ConfigurationContent property <see cref="Windows.UI.Xaml.Controls.InkToolbarCustomToolButton.ConfigurationContent"/>
+        /// Gets or sets the underlying Uwp control's ConfigurationContent property <see cref="windows.UI.Xaml.Controls.InkToolbarCustomToolButton.ConfigurationContent"/>
         /// </summary>
         [DefaultValue(null)]
         public object ConfigurationContent
         {
             get => this.GetUwpControlValue();
-            set => this.SetUwpControlValue(value as Windows.UI.Xaml.UIElement);
+            set => this.SetUwpControlValue(value as windows.UI.Xaml.UIElement);
         }
     }
 }

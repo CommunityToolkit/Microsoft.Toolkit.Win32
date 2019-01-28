@@ -3,14 +3,17 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Xaml.Input.ManipulationModes"/>
+    /// <see cref="windows.UI.Xaml.Input.ManipulationModes"/>
     /// </summary>
     [Flags]
+#pragma warning disable CA1028 // Enum storage should be Int32
     public enum ManipulationModes : uint
+#pragma warning restore CA1028 // Enum storage should be Int32
     {
         None = 0,
         TranslateX = 1,

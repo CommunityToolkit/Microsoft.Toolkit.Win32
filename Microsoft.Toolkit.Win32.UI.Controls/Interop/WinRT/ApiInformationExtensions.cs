@@ -4,6 +4,7 @@
 
 using System;
 using Windows.Foundation.Metadata;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {

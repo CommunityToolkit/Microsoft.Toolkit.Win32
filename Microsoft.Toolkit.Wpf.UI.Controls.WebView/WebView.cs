@@ -23,6 +23,7 @@ using Microsoft.Toolkit.Win32.UI.Controls.Interop.Win32;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 using Point = Windows.Foundation.Point;
 using Size = Windows.Foundation.Size;
+using windows = Windows;
 
 /*
 
@@ -782,7 +783,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
                     if (_webViewControl == null)
                     {
                         var handle = ChildWindow.Handle;
-                        var bounds = new Windows.Foundation.Rect(0, 0, RenderSize.Width * DpiScale.DpiScaleX, RenderSize.Height * DpiScale.DpiScaleY);
+                        var bounds = new windows.Foundation.Rect(0, 0, RenderSize.Width * DpiScale.DpiScaleX, RenderSize.Height * DpiScale.DpiScaleY);
 
                         _webViewControl = await _process.CreateWebViewControlHostAsync(handle, bounds).ConfigureAwait(false);
                     }
@@ -836,7 +837,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         }
 
         /// <summary>
-        /// Invoked whenever the effective value of any dependency property on this <see cref="T:System.Windows.FrameworkElement" /> has been updated. The specific dependency property that changed is reported in the arguments parameter. Overrides <see cref="M:System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)" />.
+        /// Invoked whenever the effective value of any dependency property on this <see cref="System.Windows.FrameworkElement" /> has been updated. The specific dependency property that changed is reported in the arguments parameter. Overrides <see cref="System.Windows.DependencyObject.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)" />.
         /// </summary>
         /// <param name="e">The event data that describes the property that changed, as well as old and new values.</param>
         /// <inheritdoc />
@@ -1212,7 +1213,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
 #endif
             if (WebViewControlInitialized)
             {
-                var rect = new Windows.Foundation.Rect(
+                var rect = new windows.Foundation.Rect(
                     new Point(x, y),
                     new Size(width, height));
 

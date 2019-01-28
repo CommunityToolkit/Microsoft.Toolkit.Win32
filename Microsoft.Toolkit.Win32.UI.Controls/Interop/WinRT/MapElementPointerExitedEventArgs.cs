@@ -3,55 +3,56 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
     /// Provides data for events. This class cannot be inherited.
     /// </summary>
-    /// <remarks>Copy from <see cref="global::Windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs"/> to avoid requirement to link Windows.winmd</remarks>
-    /// <seealso cref="global::Windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs"/>
+    /// <remarks>Copy from <see cref="windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs"/> to avoid requirement to link Windows.winmd</remarks>
+    /// <seealso cref="windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs"/>
     public sealed class MapElementPointerExitedEventArgs : EventArgs
     {
-        private readonly global::Windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs _args;
+        private readonly windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs _args;
 
-        internal MapElementPointerExitedEventArgs(global::Windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs args)
+        internal MapElementPointerExitedEventArgs(windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs args)
         {
             _args = args;
         }
 
-        public global::Windows.Devices.Geolocation.Geopoint Location
+        public windows.Devices.Geolocation.Geopoint Location
         {
-            get => (global::Windows.Devices.Geolocation.Geopoint)_args.Location;
+            get => (windows.Devices.Geolocation.Geopoint)_args.Location;
         }
 
-        public global::Windows.UI.Xaml.Controls.Maps.MapElement MapElement
+        public windows.UI.Xaml.Controls.Maps.MapElement MapElement
         {
-            get => (global::Windows.UI.Xaml.Controls.Maps.MapElement)_args.MapElement;
+            get => (windows.UI.Xaml.Controls.Maps.MapElement)_args.MapElement;
         }
 
-        public global::Windows.Foundation.Point Position
+        public windows.Foundation.Point Position
         {
-            get => (global::Windows.Foundation.Point)_args.Position;
+            get => (windows.Foundation.Point)_args.Position;
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="global::Windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs"/> to <see cref="Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.MapElementPointerExitedEventArgs"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs"/> to <see cref="Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.MapElementPointerExitedEventArgs"/>.
         /// </summary>
-        /// <param name="args">The <see cref="global::Windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator MapElementPointerExitedEventArgs(
-            global::Windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs args)
+            windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs args)
         {
             return FromMapElementPointerExitedEventArgs(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="MapElementPointerExitedEventArgs"/> from <see cref="global::Windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs"/>.
+        /// Creates a <see cref="MapElementPointerExitedEventArgs"/> from <see cref="windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs"/>.
         /// </summary>
-        /// <param name="args">The <see cref="global::Windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs"/> instance containing the event data.</param>
         /// <returns><see cref="MapElementPointerExitedEventArgs"/></returns>
-        public static MapElementPointerExitedEventArgs FromMapElementPointerExitedEventArgs(global::Windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs args)
+        public static MapElementPointerExitedEventArgs FromMapElementPointerExitedEventArgs(windows.UI.Xaml.Controls.Maps.MapElementPointerExitedEventArgs args)
         {
             return new MapElementPointerExitedEventArgs(args);
         }

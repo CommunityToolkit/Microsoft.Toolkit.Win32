@@ -4,23 +4,24 @@
 
 using System;
 using System.Runtime.InteropServices;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
     /// <summary>
-    /// COM wrapper required to access native-only methods on <see cref="Windows.UI.Xaml.Hosting.DesktopWindowXamlSource" />
+    /// COM wrapper required to access native-only methods on <see cref="windows.UI.Xaml.Hosting.DesktopWindowXamlSource" />
     /// </summary>
     public static class DesktopWindowXamlSourceExtensions
     {
         /// <summary>
-        /// Gets the <see cref="IDesktopWindowXamlSourceNative" /> interface from a <see cref="Windows.UI.Xaml.Hosting.DesktopWindowXamlSource" /> instance.
+        /// Gets the <see cref="IDesktopWindowXamlSourceNative" /> interface from a <see cref="windows.UI.Xaml.Hosting.DesktopWindowXamlSource" /> instance.
         /// </summary>
         /// <param name="desktopWindowXamlSource">The DesktopWindowXamlSource instance to get the interface from</param>
         /// <returns><see cref="IDesktopWindowXamlSourceNative" /> interface pointer</returns>
         /// <remarks>
         /// This interface is the only way to set DesktopWindowXamlSource's target window for rendering.
         /// </remarks>
-        public static IDesktopWindowXamlSourceNative GetInterop(this Windows.UI.Xaml.Hosting.DesktopWindowXamlSource desktopWindowXamlSource)
+        public static IDesktopWindowXamlSourceNative GetInterop(this windows.UI.Xaml.Hosting.DesktopWindowXamlSource desktopWindowXamlSource)
         {
             var win32XamlSourceIntPtr = Marshal.GetIUnknownForObject(desktopWindowXamlSource);
             try

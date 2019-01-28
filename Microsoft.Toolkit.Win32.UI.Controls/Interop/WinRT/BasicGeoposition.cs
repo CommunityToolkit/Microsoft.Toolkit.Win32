@@ -2,13 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.Devices.Geolocation.BasicGeoposition"/>
+    /// <see cref="windows.Devices.Geolocation.BasicGeoposition"/>
     /// </summary>
     public struct BasicGeoposition
     {
+#pragma warning disable CA1051 // Do not declare visible instance fields
         /// <summary>
         /// Latitude
         /// </summary>
@@ -23,24 +26,25 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         /// Altitude
         /// </summary>
         public double Altitude;
+#pragma warning restore CA1051 // Do not declare visible instance fields
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.Devices.Geolocation.BasicGeoposition"/> to <see cref="BasicGeoposition"/>.
+        /// Performs an implicit conversion from <see cref="windows.Devices.Geolocation.BasicGeoposition"/> to <see cref="BasicGeoposition"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Devices.Geolocation.BasicGeoposition"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.Devices.Geolocation.BasicGeoposition"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator BasicGeoposition(
-            Windows.Devices.Geolocation.BasicGeoposition args)
+            windows.Devices.Geolocation.BasicGeoposition args)
         {
             return FromBasicGeoposition(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="BasicGeoposition"/> from <see cref="Windows.Devices.Geolocation.BasicGeoposition"/>.
+        /// Creates a <see cref="BasicGeoposition"/> from <see cref="windows.Devices.Geolocation.BasicGeoposition"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Devices.Geolocation.BasicGeoposition"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.Devices.Geolocation.BasicGeoposition"/> instance containing the event data.</param>
         /// <returns><see cref="BasicGeoposition"/></returns>
-        public static BasicGeoposition FromBasicGeoposition(Windows.Devices.Geolocation.BasicGeoposition args)
+        public static BasicGeoposition FromBasicGeoposition(windows.Devices.Geolocation.BasicGeoposition args)
         {
             return new BasicGeoposition() { Latitude = args.Latitude, Longitude = args.Longitude, Altitude = args.Altitude };
         }

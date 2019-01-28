@@ -4,21 +4,22 @@
 
 using System;
 using System.Security;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
     /// Provides data for the <see cref="IWebView.UnsupportedUriSchemeIdentified" /> event. This class cannot be inherited.
     /// </summary>
-    /// <remarks>Copy from <see cref="Windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/> to avoid requirement to link Windows.winmd</remarks>
+    /// <remarks>Copy from <see cref="windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/> to avoid requirement to link Windows.winmd</remarks>
     /// <seealso cref="System.EventArgs" />
-    /// <seealso cref="Windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/>
+    /// <seealso cref="windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/>
     public sealed class WebViewControlUnsupportedUriSchemeIdentifiedEventArgs : EventArgs
     {
         [SecurityCritical]
-        private readonly Windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs _args;
+        private readonly windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs _args;
 
-        internal WebViewControlUnsupportedUriSchemeIdentifiedEventArgs(Windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs args)
+        internal WebViewControlUnsupportedUriSchemeIdentifiedEventArgs(windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs args)
         {
             _args = args ?? throw new ArgumentNullException(nameof(args));
         }
@@ -40,19 +41,19 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         public Uri Uri => _args.Uri;
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/> to <see cref="WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/>.
+        /// Performs an implicit conversion from <see cref="windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/> to <see cref="WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator WebViewControlUnsupportedUriSchemeIdentifiedEventArgs(Windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs args) => ToWebViewControlUnsupportedUriSchemeIdentifiedEventArgs(args);
+        public static implicit operator WebViewControlUnsupportedUriSchemeIdentifiedEventArgs(windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs args) => ToWebViewControlUnsupportedUriSchemeIdentifiedEventArgs(args);
 
         /// <summary>
-        /// Creates a <see cref="WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/> from <see cref="Windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/>.
+        /// Creates a <see cref="WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/> from <see cref="windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/> instance containing the event data.</param>
         /// <returns><see cref="WebViewControlUnsupportedUriSchemeIdentifiedEventArgs"/></returns>
         public static WebViewControlUnsupportedUriSchemeIdentifiedEventArgs ToWebViewControlUnsupportedUriSchemeIdentifiedEventArgs(
-            Windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs args) =>
+            windows.Web.UI.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs args) =>
             new WebViewControlUnsupportedUriSchemeIdentifiedEventArgs(args);
     }
 }

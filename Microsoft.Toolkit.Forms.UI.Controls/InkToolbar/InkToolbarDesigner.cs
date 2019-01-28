@@ -14,7 +14,9 @@ using System.Windows.Forms.Design.Behavior;
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+#pragma warning disable CA1812 // Avoid uninstantiated internal classes
     internal class InkToolbarDesigner : ParentControlDesigner
+#pragma warning restore CA1812 // Avoid uninstantiated internal classes
     {
         public override void InitializeNewComponent(IDictionary defaultValues)
         {

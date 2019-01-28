@@ -6,28 +6,31 @@ using System;
 using System.ComponentModel;
 using Microsoft.Toolkit.Forms.UI.XamlHost;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
     /// <summary>
-    /// Forms-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.SwapChainPanel"/>
+    /// Forms-enabled wrapper for <see cref="windows.UI.Xaml.Controls.SwapChainPanel"/>
     /// </summary>
+#pragma warning disable CA1812 // Avoid uninstantiated internal classes
     internal class SwapChainPanel : WindowsXamlHostBase
+#pragma warning restore CA1812 // Avoid uninstantiated internal classes
     {
-        internal Windows.UI.Xaml.Controls.SwapChainPanel UwpControl => GetUwpInternalObject() as Windows.UI.Xaml.Controls.SwapChainPanel;
+        internal windows.UI.Xaml.Controls.SwapChainPanel UwpControl => GetUwpInternalObject() as windows.UI.Xaml.Controls.SwapChainPanel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SwapChainPanel"/> class, a
-        /// Forms-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.SwapChainPanel"/>
+        /// Forms-enabled wrapper for <see cref="windows.UI.Xaml.Controls.SwapChainPanel"/>
         /// </summary>
         public SwapChainPanel()
-            : this(typeof(Windows.UI.Xaml.Controls.SwapChainPanel).FullName)
+            : this(typeof(windows.UI.Xaml.Controls.SwapChainPanel).FullName)
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SwapChainPanel"/> class, a
-        /// Forms-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.SwapChainPanel"/>.
+        /// Forms-enabled wrapper for <see cref="windows.UI.Xaml.Controls.SwapChainPanel"/>.
         /// Intended for internal framework use only.
         /// </summary>
         public SwapChainPanel(string typeName)
@@ -47,13 +50,13 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.SwapChainPanel.CreateCoreIndependentInputSource"/>
+        /// <see cref="windows.UI.Xaml.Controls.SwapChainPanel.CreateCoreIndependentInputSource"/>
         /// </summary>
         /// <returns>CoreIndependentInputSource</returns>
-        public CoreIndependentInputSource CreateCoreIndependentInputSource(CoreInputDeviceTypes deviceTypes) => UwpControl.CreateCoreIndependentInputSource((Windows.UI.Core.CoreInputDeviceTypes)deviceTypes);
+        public CoreIndependentInputSource CreateCoreIndependentInputSource(CoreInputDeviceTypes deviceTypes) => UwpControl.CreateCoreIndependentInputSource((windows.UI.Core.CoreInputDeviceTypes)deviceTypes);
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.SwapChainPanel.CompositionScaleX"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.SwapChainPanel.CompositionScaleX"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -63,7 +66,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.SwapChainPanel.CompositionScaleY"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.SwapChainPanel.CompositionScaleY"/>
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -73,11 +76,11 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         }
 
         /// <summary>
-        /// <see cref="Windows.UI.Xaml.Controls.SwapChainPanel.CompositionScaleChanged"/>
+        /// <see cref="windows.UI.Xaml.Controls.SwapChainPanel.CompositionScaleChanged"/>
         /// </summary>
         public event EventHandler<object> CompositionScaleChanged = (sender, args) => { };
 
-        private void OnCompositionScaleChanged(Windows.UI.Xaml.Controls.SwapChainPanel sender, object args)
+        private void OnCompositionScaleChanged(windows.UI.Xaml.Controls.SwapChainPanel sender, object args)
         {
             this.CompositionScaleChanged?.Invoke(this, args);
         }

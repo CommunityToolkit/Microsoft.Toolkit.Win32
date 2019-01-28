@@ -3,55 +3,56 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
     /// Provides data for events. This class cannot be inherited.
     /// </summary>
-    /// <remarks>Copy from <see cref="Windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs"/> to avoid requirement to link Windows.winmd</remarks>
-    /// <seealso cref="Windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs"/>
+    /// <remarks>Copy from <see cref="windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs"/> to avoid requirement to link Windows.winmd</remarks>
+    /// <seealso cref="windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs"/>
     public sealed class MapContextRequestedEventArgs : EventArgs
     {
-        private readonly Windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs _args;
+        private readonly windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs _args;
 
-        internal MapContextRequestedEventArgs(Windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs args)
+        internal MapContextRequestedEventArgs(windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs args)
         {
             _args = args;
         }
 
-        public Windows.Devices.Geolocation.Geopoint Location
+        public windows.Devices.Geolocation.Geopoint Location
         {
-            get => (Windows.Devices.Geolocation.Geopoint)_args.Location;
+            get => (windows.Devices.Geolocation.Geopoint)_args.Location;
         }
 
-        public System.Collections.Generic.IReadOnlyList<Windows.UI.Xaml.Controls.Maps.MapElement> MapElements
+        public System.Collections.Generic.IReadOnlyList<windows.UI.Xaml.Controls.Maps.MapElement> MapElements
         {
-            get => (System.Collections.Generic.IReadOnlyList<Windows.UI.Xaml.Controls.Maps.MapElement>)_args.MapElements;
+            get => (System.Collections.Generic.IReadOnlyList<windows.UI.Xaml.Controls.Maps.MapElement>)_args.MapElements;
         }
 
-        public Windows.Foundation.Point Position
+        public windows.Foundation.Point Position
         {
-            get => (Windows.Foundation.Point)_args.Position;
+            get => (windows.Foundation.Point)_args.Position;
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs"/> to <see cref="Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.MapContextRequestedEventArgs"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs"/> to <see cref="Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.MapContextRequestedEventArgs"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator MapContextRequestedEventArgs(
-            Windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs args)
+            windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs args)
         {
             return FromMapContextRequestedEventArgs(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="MapContextRequestedEventArgs"/> from <see cref="Windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs"/>.
+        /// Creates a <see cref="MapContextRequestedEventArgs"/> from <see cref="windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs"/> instance containing the event data.</param>
         /// <returns><see cref="MapContextRequestedEventArgs"/></returns>
-        public static MapContextRequestedEventArgs FromMapContextRequestedEventArgs(Windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs args)
+        public static MapContextRequestedEventArgs FromMapContextRequestedEventArgs(windows.UI.Xaml.Controls.Maps.MapContextRequestedEventArgs args)
         {
             return new MapContextRequestedEventArgs(args);
         }

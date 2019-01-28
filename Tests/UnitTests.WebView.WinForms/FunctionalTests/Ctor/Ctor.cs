@@ -6,19 +6,40 @@ using System.ComponentModel;
 using Microsoft.Toolkit.Win32.UI.Controls.Test.WebView.Shared;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Should;
+using System.Threading;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTests.Ctor
 {
     [TestClass]
     public class CreationTests
     {
+#if NETCOREAPP
+        TestFx.STAExtensions.STAThreadManager _threadManager = new TestFx.STAExtensions.STAThreadManager();
+#endif
+
         [TestMethod]
         [TestCategory(TestConstants.Categories.Init)]
         public void CanInitializeCtorBeginEndInit()
         {
-            var wv = new Forms.UI.Controls.WebView();
-            ((ISupportInitialize)wv).BeginInit();
-            ((ISupportInitialize)wv).EndInit();
+            void Action()
+            {
+                var wv = new Forms.UI.Controls.WebView();
+                ((ISupportInitialize)wv).BeginInit();
+                ((ISupportInitialize)wv).EndInit();
+            }
+
+#if NETCOREAPP
+            if (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)
+            {
+                Action();
+            }
+            else
+            {
+                _threadManager.Execute(Action);
+            }
+#else
+            Action();
+#endif
         }
 
         [TestMethod]
@@ -33,14 +54,28 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTe
         [TestCategory(TestConstants.Categories.Init)]
         public void DesignerPropertyEqualsSettingsProperty()
         {
-            var wv = new Forms.UI.Controls.WebView();
-            ((ISupportInitialize)wv).BeginInit();
-            wv.IsScriptNotifyAllowed = !wv.IsScriptNotifyAllowed;
-            ((ISupportInitialize)wv).EndInit();
+            void Action()
+            {
+                var wv = new Forms.UI.Controls.WebView();
+                ((ISupportInitialize)wv).BeginInit();
+                wv.IsScriptNotifyAllowed = !wv.IsScriptNotifyAllowed;
+                ((ISupportInitialize)wv).EndInit();
 
-            wv.IsScriptNotifyAllowed.ShouldEqual(wv.Settings.IsScriptNotifyAllowed);
+                wv.IsScriptNotifyAllowed.ShouldEqual(wv.Settings.IsScriptNotifyAllowed);
+            }
+
+#if NETCOREAPP
+            if (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)
+            {
+                Action();
+            }
+            else
+            {
+                _threadManager.Execute(Action);
+            }
+#else
+            Action();
+#endif
         }
-
-
     }
 }

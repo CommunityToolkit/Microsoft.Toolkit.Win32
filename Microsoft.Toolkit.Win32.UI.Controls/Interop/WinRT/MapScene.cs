@@ -2,26 +2,28 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Xaml.Controls.Maps.MapScene"/>
+    /// <see cref="windows.UI.Xaml.Controls.Maps.MapScene"/>
     /// </summary>
     public class MapScene
     {
-        internal Windows.UI.Xaml.Controls.Maps.MapScene UwpInstance { get; }
+        internal windows.UI.Xaml.Controls.Maps.MapScene UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MapScene"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Xaml.Controls.Maps.MapScene"/>
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Xaml.Controls.Maps.MapScene"/>
         /// </summary>
-        public MapScene(Windows.UI.Xaml.Controls.Maps.MapScene instance)
+        public MapScene(windows.UI.Xaml.Controls.Maps.MapScene instance)
         {
             this.UwpInstance = instance;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.UI.Xaml.Controls.Maps.MapScene.TargetCamera"/>
+        /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapScene.TargetCamera"/>
         /// </summary>
         public MapCamera TargetCamera
         {
@@ -29,22 +31,22 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Xaml.Controls.Maps.MapScene"/> to <see cref="MapScene"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Xaml.Controls.Maps.MapScene"/> to <see cref="MapScene"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.Maps.MapScene"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.Maps.MapScene"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator MapScene(
-            Windows.UI.Xaml.Controls.Maps.MapScene args)
+            windows.UI.Xaml.Controls.Maps.MapScene args)
         {
             return FromMapScene(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="MapScene"/> from <see cref="Windows.UI.Xaml.Controls.Maps.MapScene"/>.
+        /// Creates a <see cref="MapScene"/> from <see cref="windows.UI.Xaml.Controls.Maps.MapScene"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.Controls.Maps.MapScene"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.Controls.Maps.MapScene"/> instance containing the event data.</param>
         /// <returns><see cref="MapScene"/></returns>
-        public static MapScene FromMapScene(Windows.UI.Xaml.Controls.Maps.MapScene args)
+        public static MapScene FromMapScene(windows.UI.Xaml.Controls.Maps.MapScene args)
         {
             return new MapScene(args);
         }

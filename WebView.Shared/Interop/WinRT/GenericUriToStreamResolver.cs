@@ -7,13 +7,14 @@ using System.IO;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Storage.Streams;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// An adapter converting <see cref="IUriToStreamResolver"/> to <see cref="Windows.Web.IUriToStreamResolver"/>.
+    /// An adapter converting <see cref="IUriToStreamResolver"/> to <see cref="windows.Web.IUriToStreamResolver"/>.
     /// </summary>
-    internal sealed class GenericUriToStreamResolver : Windows.Web.IUriToStreamResolver, IUriToStreamResolver
+    internal sealed class GenericUriToStreamResolver : windows.Web.IUriToStreamResolver, IUriToStreamResolver
     {
         private readonly IUriToStreamResolver _streamResolver;
 

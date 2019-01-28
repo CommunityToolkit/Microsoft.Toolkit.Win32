@@ -3,22 +3,23 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
     /// <see cref="Point"/>
     /// </summary>
-    public struct Point : IFormattable
+    public struct Point : IFormattable, IEquatable<Point>
     {
-        internal Windows.Foundation.Point UwpInstance { get; set; }
+        internal windows.Foundation.Point UwpInstance { get; set; }
 
         public Point(double x, double y)
         {
-            UwpInstance = new Windows.Foundation.Point(x, y);
+            UwpInstance = new windows.Foundation.Point(x, y);
         }
 
-        internal Point(Windows.Foundation.Point instance)
+        internal Point(windows.Foundation.Point instance)
         {
             UwpInstance = instance;
         }
@@ -29,7 +30,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         public double X
         {
             get => UwpInstance.X;
-            set => UwpInstance = new Windows.Foundation.Point(value, Y);
+            set => UwpInstance = new windows.Foundation.Point(value, Y);
         }
 
         /// <summary>
@@ -38,25 +39,25 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         public double Y
         {
             get => UwpInstance.Y;
-            set => UwpInstance = new Windows.Foundation.Point(X, value);
+            set => UwpInstance = new windows.Foundation.Point(X, value);
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.Devices.Geolocation.BasicGeoposition"/> to <see cref="BasicGeoposition"/>.
+        /// Performs an implicit conversion from <see cref="windows.Devices.Geolocation.BasicGeoposition"/> to <see cref="BasicGeoposition"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Devices.Geolocation.BasicGeoposition"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.Devices.Geolocation.BasicGeoposition"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator Point(Windows.Foundation.Point args)
+        public static implicit operator Point(windows.Foundation.Point args)
         {
             return FromPoint(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="BasicGeoposition"/> from <see cref="Windows.Devices.Geolocation.BasicGeoposition"/>.
+        /// Creates a <see cref="BasicGeoposition"/> from <see cref="windows.Devices.Geolocation.BasicGeoposition"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Devices.Geolocation.BasicGeoposition"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.Devices.Geolocation.BasicGeoposition"/> instance containing the event data.</param>
         /// <returns><see cref="BasicGeoposition"/></returns>
-        public static Point FromPoint(Windows.Foundation.Point args)
+        public static Point FromPoint(windows.Foundation.Point args)
         {
             return new Point(args);
         }
@@ -70,7 +71,9 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 
         public override string ToString()
         {
+#pragma warning disable CA1305 // Specify IFormatProvider
             return UwpInstance.ToString();
+#pragma warning restore CA1305 // Specify IFormatProvider
         }
 
         public string ToString(string format, IFormatProvider formatProvider)

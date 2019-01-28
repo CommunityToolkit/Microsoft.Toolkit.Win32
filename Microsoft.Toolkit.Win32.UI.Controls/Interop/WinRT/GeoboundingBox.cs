@@ -2,34 +2,36 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.Devices.Geolocation.GeoboundingBox"/>
+    /// <see cref="windows.Devices.Geolocation.GeoboundingBox"/>
     /// </summary>
     public class GeoboundingBox
     {
-        private Windows.Devices.Geolocation.GeoboundingBox UwpInstance { get; }
+        private windows.Devices.Geolocation.GeoboundingBox UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GeoboundingBox"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.Devices.Geolocation.GeoboundingBox"/>
+        /// Wpf-enabled wrapper for <see cref="windows.Devices.Geolocation.GeoboundingBox"/>
         /// </summary>
-        public GeoboundingBox(Windows.Devices.Geolocation.GeoboundingBox instance)
+        public GeoboundingBox(windows.Devices.Geolocation.GeoboundingBox instance)
         {
             this.UwpInstance = instance;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.Devices.Geolocation.GeoboundingBox.Center"/>
+        /// Gets <see cref="windows.Devices.Geolocation.GeoboundingBox.Center"/>
         /// </summary>
-        public Windows.Devices.Geolocation.BasicGeoposition Center
+        public windows.Devices.Geolocation.BasicGeoposition Center
         {
             get => UwpInstance.Center;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.Devices.Geolocation.GeoboundingBox.MaxAltitude"/>
+        /// Gets <see cref="windows.Devices.Geolocation.GeoboundingBox.MaxAltitude"/>
         /// </summary>
         public double MaxAltitude
         {
@@ -37,7 +39,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.Devices.Geolocation.GeoboundingBox.MinAltitude"/>
+        /// Gets <see cref="windows.Devices.Geolocation.GeoboundingBox.MinAltitude"/>
         /// </summary>
         public double MinAltitude
         {
@@ -45,23 +47,23 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.Devices.Geolocation.GeoboundingBox.NorthwestCorner"/>
+        /// Gets <see cref="windows.Devices.Geolocation.GeoboundingBox.NorthwestCorner"/>
         /// </summary>
-        public Windows.Devices.Geolocation.BasicGeoposition NorthwestCorner
+        public windows.Devices.Geolocation.BasicGeoposition NorthwestCorner
         {
             get => UwpInstance.NorthwestCorner;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.Devices.Geolocation.GeoboundingBox.SoutheastCorner"/>
+        /// Gets <see cref="windows.Devices.Geolocation.GeoboundingBox.SoutheastCorner"/>
         /// </summary>
-        public Windows.Devices.Geolocation.BasicGeoposition SoutheastCorner
+        public windows.Devices.Geolocation.BasicGeoposition SoutheastCorner
         {
             get => UwpInstance.SoutheastCorner;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.Devices.Geolocation.GeoboundingBox.AltitudeReferenceSystem"/>
+        /// Gets <see cref="windows.Devices.Geolocation.GeoboundingBox.AltitudeReferenceSystem"/>
         /// </summary>
         public Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.AltitudeReferenceSystem AltitudeReferenceSystem
         {
@@ -69,15 +71,15 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.Devices.Geolocation.GeoboundingBox.GeoshapeType"/>
+        /// Gets <see cref="windows.Devices.Geolocation.GeoboundingBox.GeoshapeType"/>
         /// </summary>
-        public Windows.Devices.Geolocation.GeoshapeType GeoshapeType
+        public windows.Devices.Geolocation.GeoshapeType GeoshapeType
         {
             get => UwpInstance.GeoshapeType;
         }
 
         /// <summary>
-        /// Gets <see cref="Windows.Devices.Geolocation.GeoboundingBox.SpatialReferenceId"/>
+        /// Gets <see cref="windows.Devices.Geolocation.GeoboundingBox.SpatialReferenceId"/>
         /// </summary>
         public uint SpatialReferenceId
         {
@@ -85,22 +87,22 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.Devices.Geolocation.GeoboundingBox"/> to <see cref="GeoboundingBox"/>.
+        /// Performs an implicit conversion from <see cref="windows.Devices.Geolocation.GeoboundingBox"/> to <see cref="GeoboundingBox"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Devices.Geolocation.GeoboundingBox"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.Devices.Geolocation.GeoboundingBox"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator GeoboundingBox(
-            Windows.Devices.Geolocation.GeoboundingBox args)
+            windows.Devices.Geolocation.GeoboundingBox args)
         {
             return FromGeoboundingBox(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="GeoboundingBox"/> from <see cref="Windows.Devices.Geolocation.GeoboundingBox"/>.
+        /// Creates a <see cref="GeoboundingBox"/> from <see cref="windows.Devices.Geolocation.GeoboundingBox"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.Devices.Geolocation.GeoboundingBox"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.Devices.Geolocation.GeoboundingBox"/> instance containing the event data.</param>
         /// <returns><see cref="GeoboundingBox"/></returns>
-        public static GeoboundingBox FromGeoboundingBox(Windows.Devices.Geolocation.GeoboundingBox args)
+        public static GeoboundingBox FromGeoboundingBox(windows.Devices.Geolocation.GeoboundingBox args)
         {
             return new GeoboundingBox(args);
         }

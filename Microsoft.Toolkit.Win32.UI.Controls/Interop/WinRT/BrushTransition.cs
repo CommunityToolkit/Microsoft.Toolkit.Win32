@@ -2,26 +2,28 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// <see cref="Windows.UI.Xaml.BrushTransition"/>
+    /// <see cref="windows.UI.Xaml.BrushTransition"/>
     /// </summary>
     public class BrushTransition
     {
-        private Windows.UI.Xaml.BrushTransition UwpInstance { get; }
+        private windows.UI.Xaml.BrushTransition UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BrushTransition"/> class, a
-        /// Wpf-enabled wrapper for <see cref="Windows.UI.Xaml.BrushTransition"/>
+        /// Wpf-enabled wrapper for <see cref="windows.UI.Xaml.BrushTransition"/>
         /// </summary>
-        public BrushTransition(Windows.UI.Xaml.BrushTransition instance)
+        public BrushTransition(windows.UI.Xaml.BrushTransition instance)
         {
             UwpInstance = instance;
         }
 
         /// <summary>
-        /// Gets or sets <see cref="Windows.UI.Xaml.BrushTransition.Duration"/>
+        /// Gets or sets <see cref="windows.UI.Xaml.BrushTransition.Duration"/>
         /// </summary>
         public System.TimeSpan Duration
         {
@@ -30,22 +32,22 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Windows.UI.Xaml.BrushTransition"/> to <see cref="BrushTransition"/>.
+        /// Performs an implicit conversion from <see cref="windows.UI.Xaml.BrushTransition"/> to <see cref="BrushTransition"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.BrushTransition"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.BrushTransition"/> instance containing the event data.</param>
         /// <returns>The result of the conversion.</returns>
         public static implicit operator BrushTransition(
-            Windows.UI.Xaml.BrushTransition args)
+            windows.UI.Xaml.BrushTransition args)
         {
             return FromBrushTransition(args);
         }
 
         /// <summary>
-        /// Creates a <see cref="BrushTransition"/> from <see cref="Windows.UI.Xaml.BrushTransition"/>.
+        /// Creates a <see cref="BrushTransition"/> from <see cref="windows.UI.Xaml.BrushTransition"/>.
         /// </summary>
-        /// <param name="args">The <see cref="Windows.UI.Xaml.BrushTransition"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="windows.UI.Xaml.BrushTransition"/> instance containing the event data.</param>
         /// <returns><see cref="BrushTransition"/></returns>
-        public static BrushTransition FromBrushTransition(Windows.UI.Xaml.BrushTransition args)
+        public static BrushTransition FromBrushTransition(windows.UI.Xaml.BrushTransition args)
         {
             return new BrushTransition(args);
         }

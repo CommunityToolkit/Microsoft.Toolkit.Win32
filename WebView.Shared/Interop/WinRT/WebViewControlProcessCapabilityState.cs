@@ -2,13 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using windows = Windows;
+
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
     /// Represents the state of the <see cref="WebViewControlProcess"/>.
     /// </summary>
-    /// <remarks>Copy from <see cref="Windows.Web.UI.Interop.WebViewControlProcessCapabilityState"/> to avoid requirement to link Windows.winmd</remarks>
-    /// <seealso cref="Windows.Web.UI.Interop.WebViewControlProcessCapabilityState"/>
+    /// <remarks>Copy from <see cref="windows.Web.UI.Interop.WebViewControlProcessCapabilityState"/> to avoid requirement to link Windows.winmd</remarks>
+    /// <seealso cref="windows.Web.UI.Interop.WebViewControlProcessCapabilityState"/>
     public enum WebViewControlProcessCapabilityState
     {
         /// <summary>

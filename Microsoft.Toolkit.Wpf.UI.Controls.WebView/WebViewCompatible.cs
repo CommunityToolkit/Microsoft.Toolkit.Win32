@@ -70,7 +70,9 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
 
         public void Navigate(Uri url) => _implementation.Navigate(url);
 
+#pragma warning disable CA2234 // Pass system uri objects instead of strings
         public void Navigate(string url) => _implementation.Navigate(url);
+#pragma warning restore CA2234 // Pass system uri objects instead of strings
 
         public void NavigateToString(string text) => _implementation.NavigateToString(text);
 

@@ -3,6 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WebView.Shared
@@ -110,19 +112,50 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WebView.Shared
     {
         public TestContext TestContext { get; set; }
 
+#if NETCOREAPP
+        TestFx.STAExtensions.STAThreadManager _threadManager = new TestFx.STAExtensions.STAThreadManager();
+#endif
+
         [TestCleanup]
         public void TestCleanup()
         {
+#if NETCOREAPP
+            if (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)
+            {
+                Cleanup();
+            }
+            else
+            {
+                _threadManager.Execute(Cleanup);
+            }
+#else
             Cleanup();
+#endif
         }
 
         [TestInitialize]
         public void TestInitialize()
         {
-            // Arrange
-            Given();
-            // Act
-            When();
+            void Action()
+            {
+                // Arrange
+                Given();
+                // Act
+                When();
+            }
+
+#if NETCOREAPP
+            if (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)
+            {
+                Action();
+            }
+            else
+            {
+                _threadManager.Execute(Action);
+            }
+#else
+            Action();
+#endif
         }
 
         protected virtual void Cleanup()

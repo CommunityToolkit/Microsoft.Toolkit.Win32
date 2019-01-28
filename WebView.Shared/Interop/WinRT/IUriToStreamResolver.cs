@@ -4,13 +4,14 @@
 
 using System;
 using System.IO;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
     /// Provides a method to translate a Uniform Resource I (URI) to a <see cref="Stream"/> for use by the <see cref="IWebView.NavigateToLocal(string)"/> method.
     /// </summary>
-    /// <seealso cref="Windows.Web.IUriToStreamResolver"/>
+    /// <seealso cref="windows.Web.IUriToStreamResolver"/>
     public interface IUriToStreamResolver
     {
         Stream UriToStream(Uri uri);

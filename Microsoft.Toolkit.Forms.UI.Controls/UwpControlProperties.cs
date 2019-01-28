@@ -5,9 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.Toolkit.Forms.UI.XamlHost;
+using windows = Windows;
 
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
@@ -41,13 +43,13 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
             PropertyDescriptor descriptor = TypeDescriptor.GetProperties(wrapper).Find(propName, false);
             if (descriptor == null)
             {
-                throw new MissingMethodException("Wrapper class does not contain property " + propName.ToString());
+                throw new MissingMethodException("Wrapper class does not contain property " + propName.ToString(CultureInfo.InvariantCulture));
             }
 
             DefaultValueAttribute attribute = descriptor.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
             if (attribute == null)
             {
-                throw new ArgumentException("Wrapper class does not define a DefaultValue attribute for property " + propName.ToString());
+                throw new ArgumentException("Wrapper class does not define a DefaultValue attribute for property " + propName.ToString(CultureInfo.InvariantCulture));
             }
 
             return attribute.Value;
@@ -55,7 +57,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
 
         internal static object GetUwpControlValue(this WindowsXamlHostBase wrapper, object defaultValue = null, [CallerMemberName]string propName = null)
         {
-            Windows.UI.Xaml.UIElement control = wrapper.GetUwpInternalObject() as Windows.UI.Xaml.UIElement;
+            windows.UI.Xaml.UIElement control = wrapper.GetUwpInternalObject() as windows.UI.Xaml.UIElement;
             if (control != null)
             {
                 return control.GetType().GetRuntimeProperty(propName).GetValue(control);
@@ -74,7 +76,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
 
         internal static void SetUwpControlValue(this WindowsXamlHostBase wrapper, object value, [CallerMemberName]string propName = null)
         {
-            Windows.UI.Xaml.UIElement control = wrapper.GetUwpInternalObject() as Windows.UI.Xaml.UIElement;
+            windows.UI.Xaml.UIElement control = wrapper.GetUwpInternalObject() as windows.UI.Xaml.UIElement;
             if (control != null)
             {
                 control.GetType().GetRuntimeProperty(propName).SetValue(control, value);

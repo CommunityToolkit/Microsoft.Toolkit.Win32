@@ -17,7 +17,6 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
     [Description("Embeds a view into your application that renders web content using the a rendering engine")]
     public class WebViewCompatible : Control, IWebViewCompatible
     {
-        private const string WinRtType = "Windows.Web.UI.Interop.WebViewControl";
         private readonly IWebViewCompatibleAdapter _implementation;
 
         public WebViewCompatible()
@@ -64,7 +63,9 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
 
         public void Navigate(Uri url) => _implementation.Navigate(url);
 
+#pragma warning disable CA2234 // Pass system uri objects instead of strings
         public void Navigate(string url) => _implementation.Navigate(url);
+#pragma warning restore CA2234 // Pass system uri objects instead of strings
 
         public void NavigateToString(string text) => _implementation.NavigateToString(text);
 

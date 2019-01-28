@@ -1,10 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
-    <RootNamespace>Microsoft.Toolkit.Wpf.UI.Controls</RootNamespace>
+    <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
+    <RootNamespace>Microsoft.Toolkit.Win32.UI.Controls</RootNamespace>
     <AssemblyName>Microsoft.Toolkit.Wpf.UI.Controls.WebView</AssemblyName>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
 
     <Title>Windows Community Toolkit WPF WebView Control</Title>
     <Description>This library provides XAML controls for WPF WebView. It is part of the Windows Community Toolkit.</Description>
@@ -13,6 +12,10 @@
     <DefineConstants>$(DefineConstants);WPF</DefineConstants>
 
     <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -28,6 +31,7 @@
     <Compile Include="..\Microsoft.Toolkit.Win32.UI.Controls\Interop\WinRT\VirtualKey.cs" LinkBase="Interop/WinRT" />
   </ItemGroup>
 
+ 
   <ItemGroup>
     <Compile Remove="Support\**" />
     <EmbeddedResource Remove="Support\**" />
@@ -40,7 +44,7 @@
     <Compile Update="..\WebView.Shared\DesignerUI.Designer.cs" Link="DesignerUI.Designer.cs" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
