@@ -70,9 +70,6 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="System.Runtime.WindowsRuntime">
-      <HintPath>$(WINDIR)\Microsoft.NET\Framework\v4.0.30319\System.Runtime.WindowsRuntime.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>

@@ -44,8 +44,5 @@
     <Reference Include="System.Net.Http">
       <HintPath>$(WINDIR)\Microsoft.NET\Framework\v4.0.30319\System.Net.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.WindowsRuntime">
-      <HintPath>$(WINDIR)\Microsoft.NET\Framework\v4.0.30319\System.Runtime.WindowsRuntime.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>
