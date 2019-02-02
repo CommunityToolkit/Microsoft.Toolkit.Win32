@@ -6,6 +6,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using Microsoft.Toolkit.Win32.UI.XamlHost;
+using Windows.Foundation.Metadata;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using windows = Windows;
@@ -104,12 +105,13 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         }
 
         /// <summary>
-        /// Attaches event handlers to Window.SizeChanged and Window.LocationChanged to close all popups opened by the
-        /// Xaml content inside the DesktopWindowXamlSource.
+        /// Attaches an event handler to Window.LocationChanged to close all popups opened by the
+        /// Xaml content inside the DesktopWindowXamlSource (Only if <code>Windows.UI.Xaml.XamlRoot</code> is present,
+        /// because this type is needed in the event handler).
         /// </summary>
         private void WindowsXamlHostBase_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (_window == null)
+            if (_window == null && ApiInformation.IsTypePresent("Windows.UI.Xaml.XamlRoot"))
             {
                 _window = System.Windows.Window.GetWindow(this);
                 _window.LocationChanged += OnWindowLocationChanged;
