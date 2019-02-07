@@ -18,7 +18,7 @@
     <IsWpfProject Condition="'$(IsDesignProject)' != 'true'">$(MSBuildProjectName.Contains('Wpf'))</IsWpfProject>
     <IsFormsProject Condition="'$(IsDesignProject)' != 'true'">$(MSBuildProjectName.Contains('Forms'))</IsFormsProject>
     <IsSampleProject>$(MSBuildProjectName.Contains('Sample'))</IsSampleProject>
-    <DefaultTargetPlatformVersion>18298</DefaultTargetPlatformVersion>
+    <DefaultTargetPlatformVersion>18327</DefaultTargetPlatformVersion>
     <DefaultTargetPlatformMinVersion>18226</DefaultTargetPlatformMinVersion>
     <PackageOutputPath>$(MSBuildThisFileDirectory)bin\nupkg</PackageOutputPath>
   </PropertyGroup>
@@ -43,9 +43,9 @@
           - /azure-pipelines.yml
 
         This also needs to be installed on your local machine. Can do this with PowerShell:
-          ./build/Install-WindowsSDKISO.ps1 18298
+          ./build/Install-WindowsSDKISO.ps1 18327
         -->
-        <TargetPlatformVersion>10.0.18298.0</TargetPlatformVersion>
+        <TargetPlatformVersion>10.0.18327.0</TargetPlatformVersion>
 		<!-- XAML Islands require SDK 18226 -->
         <TargetPlatformMinVersion>10.0.18226.0</TargetPlatformMinVersion>
 
