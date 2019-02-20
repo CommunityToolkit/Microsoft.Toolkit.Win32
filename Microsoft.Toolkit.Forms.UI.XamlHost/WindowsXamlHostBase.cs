@@ -83,6 +83,11 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         private Form _form;
 
         /// <summary>
+        /// Fired when a new <see cref="windows.UI.Xaml.Application"/> instance was created.
+        /// </summary>
+        public static event EventHandler ApplicationCreated;
+
+        /// <summary>
         ///     Fired when XAML content has been updated
         /// </summary>
         [Browsable(true)]
@@ -120,7 +125,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             // Instantiation of the application object must occur before creating the DesktopWindowXamlSource instance.
             // If no Application object is created before DesktopWindowXamlSource is created, DestkopWindowXamlSource
             // will create a generic Application object unable to load custom UWP XAML metadata.
-            Microsoft.Toolkit.Win32.UI.XamlHost.XamlApplication.GetOrCreateXamlApplicationInstance(ref _application);
+            bool applicationCreated = Microsoft.Toolkit.Win32.UI.XamlHost.XamlApplication.GetOrCreateXamlApplicationInstance(ref _application);
 
             // Create an instance of the WindowsXamlManager. This initializes and holds a
             // reference on the UWP XAML DXamlCore and must be explicitly created before
@@ -129,6 +134,11 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             // will create an instance of WindowsXamlManager internally.  (Creation is explicit
             // here to illustrate how to initialize UWP XAML before initializing the DesktopWindowXamlSource.)
             _windowsXamlManager = windows.UI.Xaml.Hosting.WindowsXamlManager.InitializeForCurrentThread();
+
+            if (applicationCreated)
+            {
+                ApplicationCreated?.Invoke(_application, EventArgs.Empty);
+            }
 
             // Create DesktopWindowXamlSource, host for UWP XAML content
             _xamlSource = new windows.UI.Xaml.Hosting.DesktopWindowXamlSource();

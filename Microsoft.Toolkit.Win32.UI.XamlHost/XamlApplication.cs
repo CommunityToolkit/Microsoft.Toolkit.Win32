@@ -102,7 +102,8 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         /// If the current XAML Application instance has not been created for the process (is null),
         /// a new <see cref="Microsoft.Toolkit.Win32.UI.XamlHost.XamlApplication" /> instance is created and returned.
         /// </summary>
-        internal static void GetOrCreateXamlApplicationInstance(ref windows.UI.Xaml.Application application)
+        /// <returns>true, if a new instance was created; otherwise, false.</returns>
+        internal static bool GetOrCreateXamlApplicationInstance(ref windows.UI.Xaml.Application application)
         {
             // Instantiation of the application object must occur before creating the DesktopWindowXamlSource instance.
             // DesktopWindowXamlSource will create a generic Application object unable to load custom UWP XAML metadata.
@@ -118,8 +119,11 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
                 {
                     // Create a custom UWP XAML Application object that implements reflection-based XAML metadata probing.
                     application = new XamlApplication();
+                    return true;
                 }
             }
+
+            return false;
         }
     }
 }
