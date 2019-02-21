@@ -7,7 +7,10 @@ using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
-    public static class UWPTypeFactory
+    /// <summary>
+    /// Provides factory methods for type registered with <seealso cref="Windows.UI.Xaml.Application"/>
+    /// </summary>
+    static partial class UWPTypeFactory
     {
         /// <summary>
         /// Creates UWP XAML type instance from WinRT type name

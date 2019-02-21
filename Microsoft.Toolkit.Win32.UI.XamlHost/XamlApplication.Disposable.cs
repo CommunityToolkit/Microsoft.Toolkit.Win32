@@ -20,6 +20,9 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         private static XamlApplication _application;
         private readonly Windows.UI.Xaml.Hosting.WindowsXamlManager windowsXamlManager;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XamlApplication"/> class.
+        /// </summary>
         public XamlApplication()
         {
             if (_application != null)
@@ -31,16 +34,24 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
             this.windowsXamlManager = Windows.UI.Xaml.Hosting.WindowsXamlManager.InitializeForCurrentThread();
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the instance has already been disposed
+        /// </summary>
         public bool IsDisposed { get; private set; }
 
-        // Public implementation of Dispose pattern callable by consumers.
+        /// <summary>
+        /// Disposes the instance
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        // Protected implementation of Dispose pattern.
+        /// <summary>
+        /// Called when the instance is getting finalized or disposed.
+        /// </summary>
+        /// <param name="disposing">True when disposing</param>
         protected virtual void Dispose(bool disposing)
         {
             if (this.IsDisposed)
