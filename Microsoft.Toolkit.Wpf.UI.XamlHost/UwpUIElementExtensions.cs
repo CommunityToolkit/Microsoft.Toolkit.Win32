@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Security;
 
 namespace Microsoft.Toolkit.Wpf.UI.XamlHost
 {
@@ -12,7 +11,6 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
     /// </summary>
     public static class UwpUIElementExtensions
     {
-        [SecurityCritical]
         private static bool IsDesktopWindowsXamlSourcePresent() => Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.UI.Xaml.Hosting.HostingContract", 3);
 
         private static Windows.UI.Xaml.DependencyProperty WrapperProperty
