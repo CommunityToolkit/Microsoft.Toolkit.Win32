@@ -19,7 +19,14 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (value as uwpXaml.UIElement)?.GetWrapper();
+            try
+            {
+                return (value as uwpXaml.UIElement)?.GetWrapper();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -29,7 +36,14 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
 
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return (value as WindowsXamlHostBase)?.GetUwpInternalObject();
+            try
+            {
+                return (value as WindowsXamlHostBase)?.GetUwpInternalObject();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
