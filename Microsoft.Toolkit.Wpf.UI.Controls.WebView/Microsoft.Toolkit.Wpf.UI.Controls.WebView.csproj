@@ -26,7 +26,6 @@
     <Compile Include="..\Microsoft.Toolkit.Win32.UI.Controls\Interop\WinRT\ApiInformationExtensions.cs" LinkBase="Interop/WinRT" />
     <Compile Include="..\Microsoft.Toolkit.Win32.UI.Controls\Interop\WinRT\CoreAcceleratorKeyEventType.cs" LinkBase="Interop/WinRT" />
     <Compile Include="..\Microsoft.Toolkit.Win32.UI.Controls\Interop\WinRT\VirtualKey.cs" LinkBase="Interop/WinRT" />
-    <Compile Include="F:\Repos\MT.Win32\WebView.Shared\Interop\OSVersionHelper.cs" Link="OSVersionHelper.cs" />
   </ItemGroup>
 
   <ItemGroup>
