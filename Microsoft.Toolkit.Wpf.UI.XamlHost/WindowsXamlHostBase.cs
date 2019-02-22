@@ -20,7 +20,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// probe at runtime for custom UWP XAML type information.  This must be created before
         /// creating any DesktopWindowXamlSource instances if custom UWP XAML types are required.
         /// </summary>
-        private static readonly XamlApplication _application;
+        private static readonly IXamlMetadataContainer _metadataContainer;
 
         static WindowsXamlHostBase()
         {
@@ -29,7 +29,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
             // Instantiation of the application object must occur before creating the DesktopWindowXamlSource instance.
             // If no Application object is created before DesktopWindowXamlSource is created, DestkopWindowXamlSource
             // will create a generic Application object unable to load custom UWP XAML metadata.
-            _application = XamlApplication.GetOrCreateXamlApplicationInstance() as XamlApplication;
+            _metadataContainer = XamlApplication.GetOrCreateXamlMetadataContainer();
         }
 
         /// <summary>
@@ -81,11 +81,11 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// <summary>
         /// Gets the current instance of <seealso cref="XamlApplication"/>
         /// </summary>
-        protected static XamlApplication Application
+        protected static IXamlMetadataContainer MetadataContainer
         {
             get
             {
-                return _application;
+                return _metadataContainer;
             }
         }
 

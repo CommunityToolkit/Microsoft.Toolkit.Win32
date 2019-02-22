@@ -20,13 +20,20 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
     /// </summary>
     internal static class MetadataProviderDiscovery
     {
+        private static readonly List<Type> FilteredTypes = new List<Type>
+        {
+            typeof(XamlApplication),
+            typeof(Windows.UI.Xaml.Markup.IXamlMetadataProvider)
+        };
+
         /// <summary>
         /// Probes working directory for all available metadata providers
         /// </summary>
-        /// <param name="filteredTypes">Types to ignore</param>
         /// <returns>List of UWP XAML metadata providers</returns>
-        internal static List<IXamlMetadataProvider> DiscoverMetadataProviders(List<Type> filteredTypes)
+        internal static List<IXamlMetadataProvider> DiscoverMetadataProviders()
         {
+            var filteredTypes = FilteredTypes;
+
             // List of discovered UWP XAML metadata providers
             var metadataProviders = new List<IXamlMetadataProvider>();
 

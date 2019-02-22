@@ -17,14 +17,20 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
     /// </summary>
     partial class XamlApplication : Windows.UI.Xaml.Application, Windows.UI.Xaml.Markup.IXamlMetadataProvider
     {
-        private static readonly List<Type> FilteredTypes = new List<Type>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XamlApplication"/> class.
+        /// </summary>
+        public XamlApplication()
         {
-            typeof(XamlApplication),
-            typeof(Windows.UI.Xaml.Markup.IXamlMetadataProvider)
-        };
+            if (_metadataContainer != null)
+            {
+                throw new InvalidOperationException("Instance already exist");
+            }
 
-        // Metadata provider identified by the root metadata provider
-        private List<Windows.UI.Xaml.Markup.IXamlMetadataProvider> _metadataProviders = null;
+            _metadataContainer = this;
+            this.metadataProviders = new List<Windows.UI.Xaml.Markup.IXamlMetadataProvider>();
+            this.windowsXamlManager = Windows.UI.Xaml.Hosting.WindowsXamlManager.InitializeForCurrentThread();
+        }
 
         /// <summary>
         /// Gets XAML <see cref="Windows.UI.Xaml.Markup.IXamlType"/> interface from all cached metadata providers for the <paramref name="type"/>.
@@ -77,22 +83,6 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
             }
 
             return definitions.ToArray();
-        }
-
-        /// <summary>
-        /// Gets the registered set of <seealso cref="Windows.UI.Xaml.Markup.IXamlMetadataProvider"/>
-        /// </summary>
-        public IList<Windows.UI.Xaml.Markup.IXamlMetadataProvider> MetadataProviders
-        {
-            get
-            {
-                if (_metadataProviders == null)
-                {
-                    _metadataProviders = MetadataProviderDiscovery.DiscoverMetadataProviders(FilteredTypes);
-                }
-
-                return _metadataProviders;
-            }
         }
     }
 }

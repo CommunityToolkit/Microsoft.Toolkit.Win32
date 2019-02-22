@@ -17,22 +17,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
     /// </summary>
     partial class XamlApplication : IDisposable
     {
-        private static Windows.UI.Xaml.Application _application;
         private readonly Windows.UI.Xaml.Hosting.WindowsXamlManager windowsXamlManager;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="XamlApplication"/> class.
-        /// </summary>
-        public XamlApplication()
-        {
-            if (_application != null)
-            {
-                throw new InvalidOperationException("Instance already exist");
-            }
-
-            _application = this;
-            this.windowsXamlManager = Windows.UI.Xaml.Hosting.WindowsXamlManager.InitializeForCurrentThread();
-        }
 
         /// <summary>
         /// Gets a value indicating whether the instance has already been disposed
@@ -76,38 +61,6 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
             {
                 return this.windowsXamlManager;
             }
-        }
-
-        /// <summary>
-        /// Gets and returns the current UWP XAML Application instance in a reference parameter.
-        /// If the current XAML Application instance has not been created for the process (is null),
-        /// a new <see cref="Microsoft.Toolkit.Win32.UI.XamlHost.XamlApplication" /> instance is created and returned.
-        /// </summary>
-        /// <returns>The instance of <seealso cref="XamlApplication"/></returns>
-        public static Windows.UI.Xaml.Application GetOrCreateXamlApplicationInstance()
-        {
-            // Instantiation of the application object must occur before creating the DesktopWindowXamlSource instance.
-            // DesktopWindowXamlSource will create a generic Application object unable to load custom UWP XAML metadata.
-            if (_application == null)
-            {
-                // Create a custom UWP XAML Application object that implements reflection-based XAML metadata probing.
-                try
-                {
-                    return new XamlApplication();
-                }
-                catch
-                {
-                    _application = Windows.UI.Xaml.Application.Current;
-                }
-            }
-
-            var xamlApplication = _application as XamlApplication;
-            if (xamlApplication != null && xamlApplication.IsDisposed)
-            {
-                throw new ObjectDisposedException(typeof(XamlApplication).FullName);
-            }
-
-            return _application;
         }
     }
 }

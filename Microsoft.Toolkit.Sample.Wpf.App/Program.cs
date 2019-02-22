@@ -65,13 +65,13 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
         {
             static MyControl()
             {
-                if (Application != null)
+                if (MetadataContainer != null)
                 {
-                    Application.MetadataProviders.Add(new MyMetadataProvider());
+                    MetadataContainer.MetadataProviders.Add(new MyMetadataProvider());
                 }
                 else
                 {
-                    throw new InvalidOperationException($"{typeof(MyControl).Name} only supported when Windows.UI.Xaml.Application.Current is {typeof(Win32.UI.XamlHost.XamlApplication).FullName}");
+                    throw new InvalidOperationException($"{typeof(MyControl).Name} only supported when for Windows.UI.Xaml.Application instances that implements {typeof(Win32.UI.XamlHost.IXamlMetadataContainer).FullName}");
                 }
             }
 
