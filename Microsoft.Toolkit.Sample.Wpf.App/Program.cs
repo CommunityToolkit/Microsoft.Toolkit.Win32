@@ -55,7 +55,6 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
             }
             else
             {
-                new MyControl();
                 var app = new Microsoft.Toolkit.Sample.Wpf.App.App();
                 app.InitializeComponent();
                 app.Run();
