@@ -29,7 +29,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
             // Instantiation of the application object must occur before creating the DesktopWindowXamlSource instance.
             // If no Application object is created before DesktopWindowXamlSource is created, DestkopWindowXamlSource
             // will create a generic Application object unable to load custom UWP XAML metadata.
-            _application = XamlApplication.GetOrCreateXamlApplicationInstance();
+            _application = XamlApplication.GetOrCreateXamlApplicationInstance() as XamlApplication;
         }
 
         /// <summary>
