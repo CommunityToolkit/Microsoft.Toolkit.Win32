@@ -3,12 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using WUX = Windows.UI.Xaml;
+using System.Collections.Generic;
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
     /// <summary>
-    /// XamlApplication is a custom <see cref="WUX.Application" /> that implements <see cref="WUX.Markup.IXamlMetadataProvider" />. The
+    /// XamlApplication is a custom <see cref="Windows.UI.Xaml.Application" /> that implements <see cref="Windows.UI.Xaml.Markup.IXamlMetadataProvider" />. The
     /// metadata provider implemented on the application is known as the 'root metadata provider'.  This provider
     /// has the responsibility of loading all other metadata for custom UWP XAML types.  In this implementation,
     /// reflection is used at runtime to probe for metadata providers in the working directory, allowing any
@@ -17,7 +17,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
     /// </summary>
     partial class XamlApplication : IDisposable
     {
-        private readonly WUX.Hosting.WindowsXamlManager windowsXamlManager;
+        private readonly Windows.UI.Xaml.Hosting.WindowsXamlManager windowsXamlManager;
 
         /// <summary>
         /// Gets a value indicating whether the instance has already been disposed
@@ -53,9 +53,9 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         }
 
         /// <summary>
-        /// Gets the instance of the <seealso cref="WUX.Hosting.WindowsXamlManager"/>
+        /// Gets the instance of the <seealso cref="Windows.UI.Xaml.Hosting.WindowsXamlManager"/>
         /// </summary>
-        public WUX.Hosting.WindowsXamlManager WindowsXamlManager
+        public Windows.UI.Xaml.Hosting.WindowsXamlManager WindowsXamlManager
         {
             get
             {

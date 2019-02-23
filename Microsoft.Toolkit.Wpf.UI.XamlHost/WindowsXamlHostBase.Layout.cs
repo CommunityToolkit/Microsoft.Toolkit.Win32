@@ -5,7 +5,6 @@
 using System;
 using System.Windows;
 using windows = Windows;
-using WUX = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Wpf.UI.XamlHost
 {
@@ -66,7 +65,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
                 return false;
             }
 
-            if (WUX.Media.VisualTreeHelper.GetParent(_xamlSource.Content) == null)
+            if (Windows.UI.Xaml.Media.VisualTreeHelper.GetParent(_xamlSource.Content) == null)
             {
                 // If there's no parent to this content, it's not "live" or "loaded" in the tree yet.
                 // Performing a measure or arrange in this state may cause unexpected results.

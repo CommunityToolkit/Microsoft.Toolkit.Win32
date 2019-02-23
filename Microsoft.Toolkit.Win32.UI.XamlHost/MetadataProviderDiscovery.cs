@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using WUX = Windows.UI.Xaml;
+using Windows.UI.Xaml.Markup;
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
@@ -23,19 +23,19 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         private static readonly List<Type> FilteredTypes = new List<Type>
         {
             typeof(XamlApplication),
-            typeof(WUX.Markup.IXamlMetadataProvider)
+            typeof(Windows.UI.Xaml.Markup.IXamlMetadataProvider)
         };
 
         /// <summary>
         /// Probes working directory for all available metadata providers
         /// </summary>
         /// <returns>List of UWP XAML metadata providers</returns>
-        internal static List<WUX.Markup.IXamlMetadataProvider> DiscoverMetadataProviders()
+        internal static List<IXamlMetadataProvider> DiscoverMetadataProviders()
         {
             var filteredTypes = FilteredTypes;
 
             // List of discovered UWP XAML metadata providers
-            var metadataProviders = new List<WUX.Markup.IXamlMetadataProvider>();
+            var metadataProviders = new List<IXamlMetadataProvider>();
 
             // Get all assemblies loaded in app domain and placed side-by-side from all DLL and EXE
             var loadedAssemblies = GetAssemblies();
@@ -108,7 +108,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         /// <param name="assembly">Target assembly to load types from</param>
         /// <param name="metadataProviders">List of metadata providers</param>
         /// <param name="filteredTypes">List of types to ignore</param>
-        private static void LoadTypesFromAssembly(Assembly assembly, ref List<WUX.Markup.IXamlMetadataProvider> metadataProviders, ref List<Type> filteredTypes)
+        private static void LoadTypesFromAssembly(Assembly assembly, ref List<IXamlMetadataProvider> metadataProviders, ref List<Type> filteredTypes)
         {
             // Load types inside the executing assembly
             foreach (var type in GetLoadableTypes(assembly))
@@ -120,9 +120,9 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
 
                 // TODO: More type checking here
                 // Not interface, not abstract, not generic, etc.
-                if (typeof(WUX.Markup.IXamlMetadataProvider).IsAssignableFrom(type))
+                if (typeof(IXamlMetadataProvider).IsAssignableFrom(type))
                 {
-                    var provider = (WUX.Markup.IXamlMetadataProvider)Activator.CreateInstance(type);
+                    var provider = (IXamlMetadataProvider)Activator.CreateInstance(type);
                     metadataProviders.Add(provider);
                 }
             }

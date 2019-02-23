@@ -9,12 +9,12 @@ using WUX = Windows.UI.Xaml;
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
     /// <summary>
-    /// COM wrapper required to access native-only methods on <see cref="WUX.Hosting.DesktopWindowXamlSource" />
+    /// COM wrapper required to access native-only methods on <see cref="Windows.UI.Xaml.Hosting.DesktopWindowXamlSource" />
     /// </summary>
     static partial class DesktopWindowXamlSourceExtensions
     {
         /// <summary>
-        /// Gets the <see cref="IDesktopWindowXamlSourceNative" /> interface from a <see cref="WUX.Hosting.DesktopWindowXamlSource" /> instance.
+        /// Gets the <see cref="IDesktopWindowXamlSourceNative" /> interface from a <see cref="Windows.UI.Xaml.Hosting.DesktopWindowXamlSource" /> instance.
         /// </summary>
         /// <typeparam name="TInterface">The interface to cast to</typeparam>
         /// <param name="desktopWindowXamlSource">The DesktopWindowXamlSource instance to get the interface from</param>

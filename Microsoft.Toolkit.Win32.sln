@@ -45,6 +45,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.targets = Directory.Build.targets
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9486F6B2-92C6-4F3D-9BE0-A2F4A56A5AF9}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
+	EndProjectSection
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit.Win32.UI.XamlHost", "Microsoft.Toolkit.Win32.UI.XamlHost\Microsoft.Toolkit.Win32.UI.XamlHost.csproj", "{F87EDD34-AF48-45C7-9342-49023B882DA1}"
 EndProject
 Global

@@ -4,19 +4,18 @@
 
 using System;
 using System.Collections.Generic;
-using WUX = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
     /// <summary>
-    /// XamlApplication is a custom <see cref="WUX.Application" /> that implements <see cref="WUX.Markup.IXamlMetadataProvider" />. The
+    /// XamlApplication is a custom <see cref="Windows.UI.Xaml.Application" /> that implements <see cref="Windows.UI.Xaml.Markup.IXamlMetadataProvider" />. The
     /// metadata provider implemented on the application is known as the 'root metadata provider'.  This provider
     /// has the responsibility of loading all other metadata for custom UWP XAML types.  In this implementation,
     /// reflection is used at runtime to probe for metadata providers in the working directory, allowing any
     /// type that includes metadata (compiled in to a .NET framework assembly) to be used without explicit
     /// metadata handling by the developer.
     /// </summary>
-    partial class XamlApplication : WUX.Application, WUX.Markup.IXamlMetadataProvider
+    partial class XamlApplication : Windows.UI.Xaml.Application, Windows.UI.Xaml.Markup.IXamlMetadataProvider
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="XamlApplication"/> class.
@@ -29,16 +28,16 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
             }
 
             _metadataContainer = this;
-            this.metadataProviders = new List<WUX.Markup.IXamlMetadataProvider>();
-            this.windowsXamlManager = WUX.Hosting.WindowsXamlManager.InitializeForCurrentThread();
+            this.metadataProviders = new List<Windows.UI.Xaml.Markup.IXamlMetadataProvider>();
+            this.windowsXamlManager = Windows.UI.Xaml.Hosting.WindowsXamlManager.InitializeForCurrentThread();
         }
 
         /// <summary>
-        /// Gets XAML <see cref="WUX.Markup.IXamlType"/> interface from all cached metadata providers for the <paramref name="type"/>.
+        /// Gets XAML <see cref="Windows.UI.Xaml.Markup.IXamlType"/> interface from all cached metadata providers for the <paramref name="type"/>.
         /// </summary>
         /// <param name="type">Type of requested type</param>
         /// <returns>IXamlType interface or null if type is not found</returns>
-        public WUX.Markup.IXamlType GetXamlType(Type type)
+        public Windows.UI.Xaml.Markup.IXamlType GetXamlType(Type type)
         {
             foreach (var provider in this.MetadataProviders)
             {
@@ -56,8 +55,8 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         /// Gets XAML IXamlType interface from all cached metadata providers by full type name
         /// </summary>
         /// <param name="fullName">Full name of requested type</param>
-        /// <returns><see cref="WUX.Markup.IXamlType"/> if found; otherwise, null.</returns>
-        public WUX.Markup.IXamlType GetXamlType(string fullName)
+        /// <returns><see cref="Windows.UI.Xaml.Markup.IXamlType"/> if found; otherwise, null.</returns>
+        public Windows.UI.Xaml.Markup.IXamlType GetXamlType(string fullName)
         {
             foreach (var provider in this.MetadataProviders)
             {
@@ -75,9 +74,9 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         /// Gets all XAML namespace definitions from metadata providers
         /// </summary>
         /// <returns>Array of namespace definitions</returns>
-        public WUX.Markup.XmlnsDefinition[] GetXmlnsDefinitions()
+        public Windows.UI.Xaml.Markup.XmlnsDefinition[] GetXmlnsDefinitions()
         {
-            var definitions = new List<WUX.Markup.XmlnsDefinition>();
+            var definitions = new List<Windows.UI.Xaml.Markup.XmlnsDefinition>();
             foreach (var provider in this.MetadataProviders)
             {
                 definitions.AddRange(provider.GetXmlnsDefinitions());

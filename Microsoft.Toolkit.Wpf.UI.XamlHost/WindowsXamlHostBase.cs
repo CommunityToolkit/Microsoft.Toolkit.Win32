@@ -20,14 +20,17 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// probe at runtime for custom UWP XAML type information.  This must be created before
         /// creating any DesktopWindowXamlSource instances if custom UWP XAML types are required.
         /// </summary>
-        /// <remarks>
-        /// Windows.UI.Xaml.Application object is required for loading custom control metadata.  If a custom
-        /// Application object is not provided by the application, the host control will create one (XamlApplication).
-        /// Instantiation of the application object must occur before creating the DesktopWindowXamlSource instance.
-        /// If no Application object is created before DesktopWindowXamlSource is created, DestkopWindowXamlSource
-        /// will create a generic Application object unable to load custom UWP XAML metadata.
-        /// </remarks>
-        private static readonly IXamlMetadataContainer _metadataContainer = XamlApplication.GetOrCreateXamlMetadataContainer();
+        private static readonly IXamlMetadataContainer _metadataContainer;
+
+        static WindowsXamlHostBase()
+        {
+            // Windows.UI.Xaml.Application object is required for loading custom control metadata.  If a custom
+            // Application object is not provided by the application, the host control will create one (XamlApplication).
+            // Instantiation of the application object must occur before creating the DesktopWindowXamlSource instance.
+            // If no Application object is created before DesktopWindowXamlSource is created, DestkopWindowXamlSource
+            // will create a generic Application object unable to load custom UWP XAML metadata.
+            _metadataContainer = XamlApplication.GetOrCreateXamlMetadataContainer();
+        }
 
         /// <summary>
         /// UWP XAML DesktopWindowXamlSource instance that hosts XAML content in a win32 application
@@ -95,17 +98,17 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// <param name="uwpProperty">the related DependencyProperty of the UWP control</param>
         /// <param name="converter">a converter, if one's needed</param>
         /// <param name="direction">indicates that the binding should be one or two directional.  If one way, the Uwp control is only updated from the wrapper.</param>
-        public void Bind(string propertyName, System.Windows.DependencyProperty wpfProperty, WUX.DependencyProperty uwpProperty, object converter = null, System.ComponentModel.BindingDirection direction = System.ComponentModel.BindingDirection.TwoWay)
+        public void Bind(string propertyName, System.Windows.DependencyProperty wpfProperty, Windows.UI.Xaml.DependencyProperty uwpProperty, object converter = null, System.ComponentModel.BindingDirection direction = System.ComponentModel.BindingDirection.TwoWay)
         {
             if (direction == System.ComponentModel.BindingDirection.TwoWay)
             {
-                var binder = new WUX.Data.Binding()
+                var binder = new Windows.UI.Xaml.Data.Binding()
                 {
                     Source = this,
-                    Path = new WUX.PropertyPath(propertyName),
-                    Converter = (WUX.Data.IValueConverter)converter
+                    Path = new Windows.UI.Xaml.PropertyPath(propertyName),
+                    Converter = (Windows.UI.Xaml.Data.IValueConverter)converter
                 };
-                WUX.Data.BindingOperations.SetBinding(ChildInternal, uwpProperty, binder);
+                Windows.UI.Xaml.Data.BindingOperations.SetBinding(ChildInternal, uwpProperty, binder);
             }
 
             var rebinder = new System.Windows.Data.Binding()
@@ -131,8 +134,8 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// <summary>
         /// Gets or sets the root UWP XAML element displayed in the WPF control instance.
         /// </summary>
-        /// <value>The <see cref="WUX.UIElement"/> child.</value>
-        /// <remarks>This UWP XAML element is the root element of the wrapped <see cref="WUX.Hosting.DesktopWindowXamlSource" />.</remarks>
+        /// <value>The <see cref="Windows.UI.Xaml.UIElement"/> child.</value>
+        /// <remarks>This UWP XAML element is the root element of the wrapped <see cref="Windows.UI.Xaml.Hosting.DesktopWindowXamlSource" />.</remarks>
         protected WUX.UIElement ChildInternal
         {
             get
@@ -188,8 +191,8 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         public bool IsDisposed { get; private set; }
 
         /// <summary>
-        /// Creates <see cref="WUX.Application" /> object, wrapped <see cref="WUX.Hosting.DesktopWindowXamlSource" /> instance; creates and
-        /// sets root UWP XAML element on <see cref="WUX.Hosting.DesktopWindowXamlSource" />.
+        /// Creates <see cref="Windows.UI.Xaml.Application" /> object, wrapped <see cref="Windows.UI.Xaml.Hosting.DesktopWindowXamlSource" /> instance; creates and
+        /// sets root UWP XAML element on <see cref="Windows.UI.Xaml.Hosting.DesktopWindowXamlSource" />.
         /// </summary>
         /// <param name="hwndParent">Parent window handle</param>
         /// <returns>Handle to XAML window</returns>
