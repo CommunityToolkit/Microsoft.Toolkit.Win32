@@ -9,7 +9,7 @@
     <Description>Sample Code for Windows Community Toolkit Controls</Description>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
-  
+
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

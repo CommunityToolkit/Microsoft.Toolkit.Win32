@@ -4,6 +4,7 @@
 
 using System;
 using System.Windows.Forms;
+using WUX = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
 {
@@ -17,7 +18,7 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
         {
             using (new UI.XamlHost.XamlApplication()
             {
-                RequestedTheme = Windows.UI.Xaml.ApplicationTheme.Dark,
+                RequestedTheme = WUX.ApplicationTheme.Dark,
             })
             {
                 Application.EnableVisualStyles();
