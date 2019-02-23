@@ -18,18 +18,6 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
     [System.ComponentModel.DesignerCategory("code")]
     public abstract partial class WindowsXamlHostBase : ContainerControl
     {
-#pragma warning disable SA1401 // Fields must be private
-        /// <summary>
-        /// DesktopWindowXamlSource instance
-        /// </summary>
-        protected internal readonly WUX.Hosting.DesktopWindowXamlSource _xamlSource;
-
-        /// <summary>
-        ///    A render transform to scale the UWP XAML content should be applied
-        /// </summary>
-        protected internal bool _dpiScalingRenderTransformEnabled = false;
-#pragma warning restore SA1401 // Fields must be private
-
         /// <summary>
         /// UWP XAML Application instance and root UWP XamlMetadataProvider.  Custom implementation required to
         /// probe at runtime for custom UWP XAML type information.  This must be created before
@@ -43,6 +31,16 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// will create a generic Application object unable to load custom UWP XAML metadata.
         /// </remarks>
         private static readonly IXamlMetadataContainer _metadataContainer = XamlApplication.GetOrCreateXamlMetadataContainer();
+
+        /// <summary>
+        /// DesktopWindowXamlSource instance
+        /// </summary>
+        private readonly WUX.Hosting.DesktopWindowXamlSource _xamlSource;
+
+        /// <summary>
+        ///    A render transform to scale the UWP XAML content should be applied
+        /// </summary>
+        private bool _dpiScalingRenderTransformEnabled = false;
 
         /// <summary>
         /// Gets the current instance of <seealso cref="XamlApplication"/>
