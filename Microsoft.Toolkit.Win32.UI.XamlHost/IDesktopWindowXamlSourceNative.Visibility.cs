@@ -8,10 +8,6 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
     {
     }
 
-    public partial interface IDesktopWindowXamlSourceNative2
-    {
-    }
-
     public static partial class DesktopWindowXamlSourceExtensions
     {
     }

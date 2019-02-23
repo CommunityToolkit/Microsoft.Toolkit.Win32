@@ -5,12 +5,10 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Security.Permissions;
 using System.Windows.Forms;
-using Microsoft.Toolkit.Win32.UI.Controls.Interop.Win32;
 using Microsoft.Toolkit.Win32.UI.XamlHost;
 using Windows.Foundation.Metadata;
-using Windows.UI.Xaml;
+using WUX = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Forms.UI.XamlHost
 {
@@ -24,7 +22,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// <summary>
         /// DesktopWindowXamlSource instance
         /// </summary>
-        protected internal readonly Windows.UI.Xaml.Hosting.DesktopWindowXamlSource _xamlSource;
+        protected internal readonly WUX.Hosting.DesktopWindowXamlSource _xamlSource;
 
         /// <summary>
         ///    A render transform to scale the UWP XAML content should be applied
@@ -37,17 +35,14 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// probe at runtime for custom UWP XAML type information.  This must be created before
         /// creating any DesktopWindowXamlSource instances if custom UWP XAML types are required.
         /// </summary>
-        private static readonly IXamlMetadataContainer _metadataContainer;
-
-        static WindowsXamlHostBase()
-        {
-            // Windows.UI.Xaml.Application object is required for loading custom control metadata.  If a custom
-            // Application object is not provided by the application, the host control will create one (XamlApplication).
-            // Instantiation of the application object must occur before creating the DesktopWindowXamlSource instance.
-            // If no Application object is created before DesktopWindowXamlSource is created, DestkopWindowXamlSource
-            // will create a generic Application object unable to load custom UWP XAML metadata.
-            _metadataContainer = XamlApplication.GetOrCreateXamlMetadataContainer();
-        }
+        /// <remarks>
+        /// <seealso cref="WUX.Application"/> object is required for loading custom control metadata.  If a custom
+        /// Application object is not provided by the application, the host control will create one (XamlApplication).
+        /// Instantiation of the application object must occur before creating the DesktopWindowXamlSource instance.
+        /// If no Application object is created before DesktopWindowXamlSource is created, DestkopWindowXamlSource
+        /// will create a generic Application object unable to load custom UWP XAML metadata.
+        /// </remarks>
+        private static readonly IXamlMetadataContainer _metadataContainer = XamlApplication.GetOrCreateXamlMetadataContainer();
 
         /// <summary>
         /// Gets the current instance of <seealso cref="XamlApplication"/>
@@ -63,7 +58,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// <summary>
         /// Private field that backs ChildInternal property.
         /// </summary>
-        private UIElement _childInternal;
+        private WUX.UIElement _childInternal;
 
         /// <summary>
         ///    Last preferredSize returned by UWP XAML during WinForms layout pass
@@ -119,7 +114,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             SizeChanged += OnWindowXamlHostSizeChanged;
 
             // Create DesktopWindowXamlSource, host for UWP XAML content
-            _xamlSource = new Windows.UI.Xaml.Hosting.DesktopWindowXamlSource();
+            _xamlSource = new WUX.Hosting.DesktopWindowXamlSource();
 
             // Hook up method for DesktopWindowXamlSource Focus handling
             _xamlSource.TakeFocusRequested += this.OnTakeFocusRequested;
@@ -155,7 +150,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// </summary>
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        protected Windows.UI.Xaml.UIElement ChildInternal
+        protected WUX.UIElement ChildInternal
         {
             get => _childInternal;
 
@@ -168,8 +163,8 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
                         return;
                     }
 
-                    var newFrameworkElement = value as Windows.UI.Xaml.FrameworkElement;
-                    var oldFrameworkElement = ChildInternal as Windows.UI.Xaml.FrameworkElement;
+                    var newFrameworkElement = value as WUX.FrameworkElement;
+                    var oldFrameworkElement = ChildInternal as WUX.FrameworkElement;
 
                     if (oldFrameworkElement != null)
                     {
@@ -201,7 +196,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// Sets the root UWP XAML element on DesktopWindowXamlSource
         /// </summary>
         /// <param name="newValue">A UWP XAML Framework element</param>
-        protected virtual void SetContent(Windows.UI.Xaml.UIElement newValue)
+        protected virtual void SetContent(WUX.UIElement newValue)
         {
             if (_xamlSource != null)
             {

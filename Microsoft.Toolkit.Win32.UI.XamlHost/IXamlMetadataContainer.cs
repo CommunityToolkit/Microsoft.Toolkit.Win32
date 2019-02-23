@@ -3,17 +3,18 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
+using WUX = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
     /// <summary>
-    /// Enables access to active set of <seealso cref="Windows.UI.Xaml.Markup.IXamlMetadataProvider"/>
+    /// Enables access to active set of <seealso cref="WUX.Markup.IXamlMetadataProvider"/>
     /// </summary>
     public partial interface IXamlMetadataContainer
     {
         /// <summary>
-        /// Gets the list of active <seealso cref="Windows.UI.Xaml.Markup.IXamlMetadataProvider"/>
+        /// Gets the list of active <seealso cref="WUX.Markup.IXamlMetadataProvider"/>
         /// </summary>
-        List<Windows.UI.Xaml.Markup.IXamlMetadataProvider> MetadataProviders { get; }
+        List<WUX.Markup.IXamlMetadataProvider> MetadataProviders { get; }
     }
 }

@@ -141,10 +141,10 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         private bool _onTakeFocusRequested = false;
 
         /// <summary>
-        /// Handles the <see cref="E:TakeFocusRequested" /> event.
+        /// Handles the <see cref="WUX.Hosting.DesktopWindowXamlSource.TakeFocusRequested" /> event.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Windows.UI.Xaml.Hosting.DesktopWindowXamlSourceTakeFocusRequestedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="WUX.Hosting.DesktopWindowXamlSourceTakeFocusRequestedEventArgs"/> instance containing the event data.</param>
         private void OnTakeFocusRequested(object sender, WUX.Hosting.DesktopWindowXamlSourceTakeFocusRequestedEventArgs e)
         {
             if (_lastFocusRequest == e.Request.CorrelationId)

@@ -8,6 +8,43 @@ using Windows.UI.Xaml.Markup;
 
 namespace Microsoft.Toolkit.Sample.Wpf.App
 {
+    public class MyControl : Toolkit.Wpf.UI.XamlHost.WindowsXamlHostBase
+    {
+        static MyControl()
+        {
+            if (MetadataContainer != null)
+            {
+                MetadataContainer.MetadataProviders.Add(new MyMetadataProvider());
+            }
+            //else
+            //{
+            //    throw new InvalidOperationException($"{typeof(MyControl).Name} only supported when for Windows.UI.Xaml.Application instances that implements {typeof(Win32.UI.XamlHost.IXamlMetadataContainer).FullName}");
+            //}
+        }
+
+        public MyControl()
+        {
+        }
+    }
+
+    public sealed class MyMetadataProvider : IXamlMetadataProvider
+    {
+        public IXamlType GetXamlType(Type type)
+        {
+            return null;
+        }
+
+        public IXamlType GetXamlType(string fullName)
+        {
+            return null;
+        }
+
+        public XmlnsDefinition[] GetXmlnsDefinitions()
+        {
+            return System.Linq.Enumerable.Empty<XmlnsDefinition>().ToArray();
+        }
+    }
+
     public static class Program
     {
         enum StartupKind
@@ -29,7 +66,7 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
             {
                 using (var xamlApp = new Win32.UI.XamlHost.XamlApplication()
                 {
-                    Resources = new Windows.UI.Xaml.ResourceDictionary()
+                    Resources = new global::Windows.UI.Xaml.ResourceDictionary()
                         {
                             { "MyResourceKey", "MyValue" },
                         },
@@ -58,43 +95,6 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
                 var app = new Microsoft.Toolkit.Sample.Wpf.App.App();
                 app.InitializeComponent();
                 app.Run();
-            }
-        }
-
-        public class MyControl : Toolkit.Wpf.UI.XamlHost.WindowsXamlHostBase
-        {
-            static MyControl()
-            {
-                if (MetadataContainer != null)
-                {
-                    MetadataContainer.MetadataProviders.Add(new MyMetadataProvider());
-                }
-                else
-                {
-                    throw new InvalidOperationException($"{typeof(MyControl).Name} only supported when for Windows.UI.Xaml.Application instances that implements {typeof(Win32.UI.XamlHost.IXamlMetadataContainer).FullName}");
-                }
-            }
-
-            public MyControl()
-            {
-            }
-        }
-
-        private class MyMetadataProvider : IXamlMetadataProvider
-        {
-            public IXamlType GetXamlType(Type type)
-            {
-                return null;
-            }
-
-            public IXamlType GetXamlType(string fullName)
-            {
-                return null;
-            }
-
-            public XmlnsDefinition[] GetXmlnsDefinitions()
-            {
-                return System.Linq.Enumerable.Empty<XmlnsDefinition>().ToArray();
             }
         }
     }

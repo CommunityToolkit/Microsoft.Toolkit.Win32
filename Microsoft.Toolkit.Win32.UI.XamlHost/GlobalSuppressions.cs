@@ -21,5 +21,6 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1205:Partial elements must declare access", Scope = "type", Target = "~T:Microsoft.Toolkit.Win32.UI.XamlHost.XamlApplication")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1601:Partial elements must be documented", Scope = "type", Target = "~T:Microsoft.Toolkit.Win32.UI.XamlHost.XamlApplication")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1205:Partial elements must declare access", Scope = "type", Target = "~T:Microsoft.Toolkit.Win32.UI.XamlHost.UWPTypeFactory")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1601:Partial elements must be documented", Justification = "<Pending>", Scope = "type", Target = "~T:Microsoft.Toolkit.Win32.UI.XamlHost.UWPTypeFactory")]
 
 #pragma warning restore SA1404 // Code analysis suppression must have justification

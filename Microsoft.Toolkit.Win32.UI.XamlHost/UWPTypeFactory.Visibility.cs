@@ -4,9 +4,6 @@
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
-    /// <summary>
-    /// Provides factory methods for type registered with <seealso cref="Windows.UI.Xaml.Application"/>
-    /// </summary>
     public static partial class UWPTypeFactory
     {
     }

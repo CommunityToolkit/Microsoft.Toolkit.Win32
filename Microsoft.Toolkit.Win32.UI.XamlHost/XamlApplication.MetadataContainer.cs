@@ -4,11 +4,12 @@
 
 using System;
 using System.Collections.Generic;
+using WUX = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
     /// <summary>
-    /// XamlApplication is a custom <see cref="Windows.UI.Xaml.Application" /> that implements <see cref="Windows.UI.Xaml.Markup.IXamlMetadataProvider" />. The
+    /// XamlApplication is a custom <see cref="WUX.Application" /> that implements <see cref="WUX.Markup.IXamlMetadataProvider" />. The
     /// metadata provider implemented on the application is known as the 'root metadata provider'.  This provider
     /// has the responsibility of loading all other metadata for custom UWP XAML types.  In this implementation,
     /// reflection is used at runtime to probe for metadata providers in the working directory, allowing any
@@ -20,12 +21,12 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         private static IXamlMetadataContainer _metadataContainer;
 
         // Metadata provider identified by the root metadata provider
-        private readonly List<Windows.UI.Xaml.Markup.IXamlMetadataProvider> metadataProviders;
+        private readonly List<WUX.Markup.IXamlMetadataProvider> metadataProviders;
 
         /// <summary>
-        /// Gets the registered set of <seealso cref="Windows.UI.Xaml.Markup.IXamlMetadataProvider"/>
+        /// Gets the registered set of <seealso cref="WUX.Markup.IXamlMetadataProvider"/>
         /// </summary>
-        public List<Windows.UI.Xaml.Markup.IXamlMetadataProvider> MetadataProviders
+        public List<WUX.Markup.IXamlMetadataProvider> MetadataProviders
         {
             get
             {
@@ -54,7 +55,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
                 }
                 catch
                 {
-                    _metadataContainer = Windows.UI.Xaml.Application.Current as IXamlMetadataContainer;
+                    _metadataContainer = WUX.Application.Current as IXamlMetadataContainer;
                 }
             }
 

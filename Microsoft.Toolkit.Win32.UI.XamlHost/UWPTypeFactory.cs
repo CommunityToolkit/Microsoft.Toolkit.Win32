@@ -4,11 +4,12 @@
 
 using System;
 using windows = Windows;
+using WUX = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
     /// <summary>
-    /// Provides factory methods for type registered with <seealso cref="Windows.UI.Xaml.Application"/>
+    /// Provides factory methods for type registered with <seealso cref="WUX.Application"/>
     /// </summary>
     static partial class UWPTypeFactory
     {
