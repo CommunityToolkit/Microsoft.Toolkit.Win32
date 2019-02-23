@@ -39,12 +39,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit.Wpf.UI.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit.Sample.Forms.App", "Microsoft.Toolkit.Sample.Forms.App\Microsoft.Toolkit.Sample.Forms.App.csproj", "{9C49A885-D39B-4CA0-9DEB-204A6EA7D453}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2B59D500-7A53-452F-B0AF-774E0ED98C16}"
-	ProjectSection(SolutionItems) = preProject
-		Directory.Build.props = Directory.Build.props
-		Directory.Build.targets = Directory.Build.targets
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9486F6B2-92C6-4F3D-9BE0-A2F4A56A5AF9}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
