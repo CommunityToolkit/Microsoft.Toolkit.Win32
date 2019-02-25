@@ -18,7 +18,7 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
         {
             using (new UI.XamlHost.XamlApplication()
             {
-                RequestedTheme = WUX.ApplicationTheme.Dark,
+                RequestedTheme = WUX.ApplicationTheme.Light,
             })
             {
                 Application.EnableVisualStyles();

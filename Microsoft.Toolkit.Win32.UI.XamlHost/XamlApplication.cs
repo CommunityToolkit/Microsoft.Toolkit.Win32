@@ -29,8 +29,8 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
             }
 
             _metadataContainer = this;
-            this.metadataProviders = new List<WUX.Markup.IXamlMetadataProvider>();
-            this.windowsXamlManager = WUX.Hosting.WindowsXamlManager.InitializeForCurrentThread();
+            this._metadataProviders = new List<WUX.Markup.IXamlMetadataProvider>();
+            this._windowsXamlManager = WUX.Hosting.WindowsXamlManager.InitializeForCurrentThread();
         }
 
         /// <summary>

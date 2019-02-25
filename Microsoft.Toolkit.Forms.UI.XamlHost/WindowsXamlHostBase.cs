@@ -32,8 +32,6 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// </remarks>
         private static readonly IXamlMetadataContainer _metadataContainer = XamlApplication.GetOrCreateXamlMetadataContainer();
 
-#pragma warning disable SA1401 // Fields must be private
-#pragma warning disable CA1051 // Do not declare visible instance fields
         /// <summary>
         /// DesktopWindowXamlSource instance
         /// </summary>
@@ -43,8 +41,6 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         ///    A render transform to scale the UWP XAML content should be applied
         /// </summary>
         private bool _dpiScalingRenderTransformEnabled = false;
-#pragma warning restore SA1401 // Fields must be private
-#pragma warning restore CA1051 // Do not declare visible instance fields
 
         /// <summary>
         /// Gets the current instance of <seealso cref="XamlApplication"/>

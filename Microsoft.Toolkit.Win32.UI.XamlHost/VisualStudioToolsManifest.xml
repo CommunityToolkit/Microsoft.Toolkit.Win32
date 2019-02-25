@@ -1,6 +1,0 @@
-<FileList>
-  <File Reference="Microsoft.Toolkit.UI.XamlHost.dll">
-    <ToolboxItems VSCategory="Windows Community Toolkit" BlendCategory="Windows Community Toolkit">
-    </ToolboxItems>
-  </File>
-</FileList>

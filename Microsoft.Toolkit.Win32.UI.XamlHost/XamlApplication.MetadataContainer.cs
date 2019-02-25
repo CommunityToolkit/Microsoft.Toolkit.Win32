@@ -21,7 +21,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         private static IXamlMetadataContainer _metadataContainer;
 
         // Metadata provider identified by the root metadata provider
-        private readonly List<WUX.Markup.IXamlMetadataProvider> metadataProviders;
+        private readonly List<WUX.Markup.IXamlMetadataProvider> _metadataProviders;
 
         /// <summary>
         /// Gets the registered set of <seealso cref="WUX.Markup.IXamlMetadataProvider"/>
@@ -30,7 +30,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         {
             get
             {
-                return this.metadataProviders;
+                return this._metadataProviders;
             }
         }
 

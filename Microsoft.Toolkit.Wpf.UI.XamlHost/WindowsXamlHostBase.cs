@@ -163,9 +163,8 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
                     // to determine if WindowsXamlHost needs to re-run layout.
                     frameworkElement.SizeChanged += XamlContentSizeChanged;
 
-                    // This was causing many tests to fail in catgates due to output file missmatch.
                     // WindowsXamlHost DataContext should flow through to UWP XAML content
-                    // frameworkElement.DataContext = DataContext;
+                    frameworkElement.DataContext = DataContext;
                 }
 
                 // Fire updated event

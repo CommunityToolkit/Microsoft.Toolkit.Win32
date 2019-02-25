@@ -17,7 +17,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
     /// </summary>
     partial class XamlApplication : IDisposable
     {
-        private readonly WUX.Hosting.WindowsXamlManager windowsXamlManager;
+        private readonly WUX.Hosting.WindowsXamlManager _windowsXamlManager;
 
         /// <summary>
         /// Gets a value indicating whether the instance has already been disposed
@@ -46,7 +46,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
 
             if (disposing)
             {
-                this.windowsXamlManager.Dispose();
+                this._windowsXamlManager.Dispose();
             }
 
             this.IsDisposed = true;
@@ -59,7 +59,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         {
             get
             {
-                return this.windowsXamlManager;
+                return this._windowsXamlManager;
             }
         }
     }

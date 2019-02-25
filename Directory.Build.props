@@ -19,7 +19,7 @@
     <IsFormsProject Condition="'$(IsDesignProject)' != 'true'">$(MSBuildProjectName.Contains('Forms'))</IsFormsProject>
     <IsSampleProject>$(MSBuildProjectName.Contains('Sample'))</IsSampleProject>
     <DefaultTargetPlatformVersion>18327</DefaultTargetPlatformVersion>
-    <DefaultTargetPlatformMinVersion>18306</DefaultTargetPlatformMinVersion>
+    <DefaultTargetPlatformMinVersion>18226</DefaultTargetPlatformMinVersion>
     <PackageOutputPath>$(MSBuildThisFileDirectory)bin\nupkg</PackageOutputPath>
   </PropertyGroup>
 
