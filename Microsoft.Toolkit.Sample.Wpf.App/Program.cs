@@ -16,10 +16,12 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
             {
                 MetadataContainer.MetadataProviders.Add(new MyMetadataProvider());
             }
-            //else
-            //{
-            //    throw new InvalidOperationException($"{typeof(MyControl).Name} only supported when for Windows.UI.Xaml.Application instances that implements {typeof(Win32.UI.XamlHost.IXamlMetadataContainer).FullName}");
-            //}
+            else
+            {
+#pragma warning disable CA1065 // Do not raise exceptions in unexpected locations
+                throw new InvalidOperationException($"{typeof(MyControl).Name} only supported for {typeof(Windows.UI.Xaml.Application).FullName} instances that implements {typeof(Win32.UI.XamlHost.IXamlMetadataContainer).FullName}");
+#pragma warning restore CA1065 // Do not raise exceptions in unexpected locations
+            }
         }
 
         public MyControl()
