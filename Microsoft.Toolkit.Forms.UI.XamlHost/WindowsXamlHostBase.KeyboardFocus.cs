@@ -91,6 +91,12 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             }
         }
 
+        /// <summary>
+        /// In order to handle keyboard accelerators and TAB input, we must give a chance to <seealso cref="windows.UI.Xaml.Hosting.DesktopWindowXamlSource"/>
+        /// to handle the <paramref name="msg"/> using <seealso cref="IDesktopWindowXamlSourceNative2.PreTranslateMessage(ref Message)"/>
+        /// </summary>
+        /// <param name="msg">The current incomming message in the queue</param>
+        /// <returns>True if <seealso cref="_xamlSource"/> was able to handle the <paramref name="msg"/></returns>
         public override bool PreProcessMessage(ref Message msg)
         {
             var desktopXamlSourceNative = this._xamlSource.GetInterop<IDesktopWindowXamlSourceNative2>();

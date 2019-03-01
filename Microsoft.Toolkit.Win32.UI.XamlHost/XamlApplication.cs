@@ -30,6 +30,12 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
 
             _metadataContainer = this;
             this._metadataProviders = new List<WUX.Markup.IXamlMetadataProvider>();
+
+            // Create an instance of the WindowsXamlManager. This initializes and holds a
+            // reference on the UWP XAML DXamlCore and must be explicitly created before
+            // any UWP XAML types are programmatically created.  If WindowsXamlManager has
+            // not been created before creating DesktopWindowXamlSource, DesktopWindowXaml source
+            // will create an instance of WindowsXamlManager here when creating XamlApplication.
             this._windowsXamlManager = WUX.Hosting.WindowsXamlManager.InitializeForCurrentThread();
         }
 

@@ -4,6 +4,9 @@
 
 namespace Microsoft.Toolkit.Wpf.UI.XamlHost
 {
+    /// <summary>
+    /// Defines assembly visibility for <seealso cref="WindowsXamlHostBase"/>
+    /// </summary>
     public partial class WindowsXamlHostBase
     {
     }

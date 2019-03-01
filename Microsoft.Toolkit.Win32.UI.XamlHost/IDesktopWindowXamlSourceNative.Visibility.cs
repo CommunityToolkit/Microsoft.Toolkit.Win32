@@ -4,10 +4,16 @@
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
+    /// <summary>
+    /// Defines assembly visibility for <seealso cref="IDesktopWindowXamlSourceNative"/>
+    /// </summary>
     public partial interface IDesktopWindowXamlSourceNative
     {
     }
 
+    /// <summary>
+    /// Defines assembly visibility for <seealso cref="DesktopWindowXamlSourceExtensions"/>
+    /// </summary>
     public static partial class DesktopWindowXamlSourceExtensions
     {
     }

@@ -16,16 +16,16 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
     abstract partial class WindowsXamlHostBase : HwndHost
     {
         /// <summary>
-        /// UWP XAML Application instance and root UWP XamlMetadataProvider.  Custom implementation required to
-        /// probe at runtime for custom UWP XAML type information.  This must be created before
-        /// creating any DesktopWindowXamlSource instances if custom UWP XAML types are required.
+        /// An instance of <seealso cref="IXamlMetadataContainer"/>. Required to
+        /// probe at runtime for custom UWP XAML type information.
+        /// This must be implemented by the instance of <seealso cref="WUX.Application"/>
         /// </summary>
         /// <remarks>
-        /// Windows.UI.Xaml.Application object is required for loading custom control metadata.  If a custom
-        /// Application object is not provided by the application, the host control will create one (XamlApplication).
+        /// <seealso cref="WUX.Application"/> object is required for loading custom control metadata.  If a custom
+        /// Application object is not provided by the application, the host control will create an instance of <seealso cref="XamlApplication"/>.
         /// Instantiation of the application object must occur before creating the DesktopWindowXamlSource instance.
         /// If no Application object is created before DesktopWindowXamlSource is created, DestkopWindowXamlSource
-        /// will create a generic Application object unable to load custom UWP XAML metadata.
+        /// will create an instance of <seealso cref="XamlApplication"/> that implements <seealso cref="IXamlMetadataContainer"/>.
         /// </remarks>
         private static readonly IXamlMetadataContainer _metadataContainer = XamlApplication.GetOrCreateXamlMetadataContainer();
 
