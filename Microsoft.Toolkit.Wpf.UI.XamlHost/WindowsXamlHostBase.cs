@@ -247,9 +247,14 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         {
             if (disposing && !this.IsDisposed)
             {
+                var currentRoot = (WUX.FrameworkElement)ChildInternal;
+                if (currentRoot != null)
+                {
+                    currentRoot.SizeChanged -= XamlContentSizeChanged;
+                }
+
                 // Free any other managed objects here.
                 ComponentDispatcher.ThreadFilterMessage -= this.OnThreadFilterMessage;
-
                 ChildInternal = null;
                 if (_xamlSource != null)
                 {

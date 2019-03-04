@@ -81,7 +81,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="windows.UI.Xaml.SizeChangedEventArgs"/> instance containing the event data.</param>
-        protected void XamlContentSizeChanged(object sender, windows.UI.Xaml.SizeChangedEventArgs e)
+        private void XamlContentSizeChanged(object sender, windows.UI.Xaml.SizeChangedEventArgs e)
         {
             InvalidateMeasure();
         }
