@@ -13,7 +13,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
     /// <summary>
     /// WindowsXamlHost control hosts UWP XAML content inside the Windows Presentation Foundation
     /// </summary>
-    public class WindowsXamlHost : WindowsXamlHostBase
+    partial class WindowsXamlHost : WindowsXamlHostBase
     {
         /// <summary>
         /// Gets XAML Content by type name
@@ -72,6 +72,20 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
             }
 
             return base.BuildWindowCore(hwndParent);
+        }
+
+        /// <summary>
+        /// Set data context on <seealso cref="Child"/> when it has changed.
+        /// </summary>
+        protected override void OnChildChanged()
+        {
+            base.OnChildChanged();
+            var frameworkElement = ChildInternal as WUX.FrameworkElement;
+            if (frameworkElement != null)
+            {
+                // WindowsXamlHost DataContext should flow through to UWP XAML content
+                frameworkElement.DataContext = DataContext;
+            }
         }
 
         /// <inheritdoc />

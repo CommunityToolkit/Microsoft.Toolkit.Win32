@@ -162,14 +162,20 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
                     // If XAML content has changed, check XAML size
                     // to determine if WindowsXamlHost needs to re-run layout.
                     frameworkElement.SizeChanged += XamlContentSizeChanged;
-
-                    // WindowsXamlHost DataContext should flow through to UWP XAML content
-                    frameworkElement.DataContext = DataContext;
                 }
+
+                OnChildChanged();
 
                 // Fire updated event
                 ChildChanged?.Invoke(this, new EventArgs());
             }
+        }
+
+        /// <summary>
+        /// Called when the property <seealso cref="ChildInternal"/> has changed.
+        /// </summary>
+        protected virtual void OnChildChanged()
+        {
         }
 
         /// <summary>
