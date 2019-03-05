@@ -3,10 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using WUX = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
 {
@@ -18,9 +16,15 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(true);
-            Application.Run(new Form1());
+            using (new UI.XamlHost.XamlApplication()
+            {
+                RequestedTheme = WUX.ApplicationTheme.Light,
+            })
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(true);
+                Application.Run(new Form1());
+            }
         }
     }
 }

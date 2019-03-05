@@ -26,9 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\**\*.cs" />
     <Compile Include="..\Microsoft.Toolkit.Win32.UI.Controls\Interop\Win32\ExternDll.cs" Link="Interop\Win32\ExternDll.cs" />
     <Compile Include="..\Microsoft.Toolkit.Win32.UI.Controls\Interop\Win32\WM.cs" Link="Interop\Win32\WM.cs" />
+    <Compile Include="..\Microsoft.Toolkit.Wpf.UI.XamlHost\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
@@ -61,6 +61,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\Microsoft.Toolkit.Win32.UI.XamlHost.csproj" />
   </ItemGroup>
 
 </Project>
