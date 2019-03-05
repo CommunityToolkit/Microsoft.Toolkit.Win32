@@ -6,6 +6,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Microsoft.Toolkit.Forms.UI.XamlHost.Interop.Win32;
+using Microsoft.Toolkit.Win32.UI.XamlHost;
 using windows = Windows;
 
 namespace Microsoft.Toolkit.Forms.UI.XamlHost
@@ -83,14 +84,32 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             }
             else
             {
-                // Temporary Focus handling for Redstone 5
-
                 // Call windows.UI.Xaml.Input.FocusManager.TryMoveFocus Next or Previous and return
                 windows.UI.Xaml.Input.FocusNavigationDirection navigationDirection =
                     forward ? windows.UI.Xaml.Input.FocusNavigationDirection.Next : windows.UI.Xaml.Input.FocusNavigationDirection.Previous;
-
                 return windows.UI.Xaml.Input.FocusManager.TryMoveFocus(navigationDirection);
             }
+        }
+
+        /// <summary>
+        /// In order to handle keyboard accelerators and TAB input, we must give a chance to <seealso cref="windows.UI.Xaml.Hosting.DesktopWindowXamlSource"/>
+        /// to handle the <paramref name="msg"/> using <seealso cref="IDesktopWindowXamlSourceNative2.PreTranslateMessage(ref Message)"/>
+        /// </summary>
+        /// <param name="msg">The current incomming message in the queue</param>
+        /// <returns>True if <seealso cref="_xamlSource"/> was able to handle the <paramref name="msg"/></returns>
+        public override bool PreProcessMessage(ref Message msg)
+        {
+            var desktopXamlSourceNative = this._xamlSource.GetInterop<IDesktopWindowXamlSourceNative2>();
+            if (desktopXamlSourceNative != null)
+            {
+                var result = desktopXamlSourceNative.PreTranslateMessage(ref msg);
+                if (result)
+                {
+                    return true;
+                }
+            }
+
+            return base.PreProcessMessage(ref msg);
         }
 
         /// <summary>

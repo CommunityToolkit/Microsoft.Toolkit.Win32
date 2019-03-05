@@ -4,28 +4,21 @@
     <OutputType>WinExe</OutputType>
     <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <AssemblyTitle>Windows Community Toolkit Controls (Sample Xaml Island Wrapper Controls for .NET WPF)</AssemblyTitle>
     <Description>Sample Code for Windows Community Toolkit Controls</Description>
-    <UseWPF>true</UseWPF>
+    <StartupObject>Microsoft.Toolkit.Sample.Wpf.App.Program</StartupObject>
   </PropertyGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
-    <PackageReference Include="System.Runtime.WindowsRuntime" Version="4.6.0-preview.19073.11" />
-    <PackageReference Include="System.Runtime.WindowsRuntime.UI.Xaml" Version="4.6.0-preview.19073.11" />
-    <Reference Include="Windows">
-      <HintPath>$(MSBuildProgramFiles32)\Windows Kits\10\UnionMetadata\10.0.18327.0\Windows.winmd</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-      <Private>false</Private>
-    </Reference>
-  </ItemGroup>
-
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
+  <Target Name="Pack">
+    <!-- No-op to avoid build error when packing solution from commandline -->
+  </Target>
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -39,7 +32,21 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="App.xaml" />
+    <None Remove="MainWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Toolkit.Wpf.UI.Controls.WebView\Microsoft.Toolkit.Wpf.UI.Controls.WebView.csproj" />
@@ -48,5 +55,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\storelogo-sdk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 </Project>

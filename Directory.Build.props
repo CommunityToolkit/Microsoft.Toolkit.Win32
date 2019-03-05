@@ -46,7 +46,7 @@
           ./build/Install-WindowsSDKISO.ps1 18327
         -->
         <TargetPlatformVersion>10.0.18327.0</TargetPlatformVersion>
-		<!-- XAML Islands require SDK 18226 -->
+        <!-- XAML Islands require SDK 18226 -->
         <TargetPlatformMinVersion>10.0.18226.0</TargetPlatformMinVersion>
 
         <!-- Compiler -->

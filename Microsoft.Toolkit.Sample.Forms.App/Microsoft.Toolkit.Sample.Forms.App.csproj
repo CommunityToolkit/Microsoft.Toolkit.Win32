@@ -9,7 +9,7 @@
     <Description>Sample Code for Windows Community Toolkit Controls</Description>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
-  
+
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -34,8 +34,12 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
-    <PackageReference Include="System.Runtime.WindowsRuntime" Version="4.6.0-preview.19073.11" />
-    <PackageReference Include="System.Runtime.WindowsRuntime.UI.Xaml" Version="4.6.0-preview.19073.11" />
+    <Reference Include="System.Runtime.WindowsRuntime">
+      <HintPath>$(WINDIR)\Microsoft.NET\Framework\v4.0.30319\System.Runtime.WindowsRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.WindowsRuntime.UI.Xaml">
+      <HintPath>$(WINDIR)\Microsoft.NET\Framework\v4.0.30319\System.Runtime.WindowsRuntime.UI.Xaml.dll</HintPath>
+    </Reference>
     <Reference Include="Windows">
       <HintPath>$(MSBuildProgramFiles32)\Windows Kits\10\UnionMetadata\10.0.18327.0\Windows.winmd</HintPath>
       <IsWinMDFile>true</IsWinMDFile>
@@ -59,6 +63,10 @@
     <ProjectReference Include="..\Microsoft.Toolkit.Forms.UI.XamlHost\Microsoft.Toolkit.Forms.UI.XamlHost.csproj">
       <Project>{b4911490-d52e-4cf2-bd14-ba487bdf2240}</Project>
       <Name>Microsoft.Toolkit.Forms.UI.XamlHost</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\Microsoft.Toolkit.Win32.UI.XamlHost.csproj">
+      <Project>{f87edd34-af48-45c7-9342-49023b882da1}</Project>
+      <Name>Microsoft.Toolkit.Win32.UI.XamlHost</Name>
     </ProjectReference>
   </ItemGroup>
   <Target Name="Pack">

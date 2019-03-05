@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0;net462</TargetFrameworks>
     <RootNamespace>Microsoft.Toolkit.Wpf.UI.XamlHost</RootNamespace>
     <AssemblyName>Microsoft.Toolkit.Wpf.UI.XamlHost</AssemblyName>
 
@@ -14,10 +14,6 @@
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
     <UseWPF>true</UseWPF>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\**\*.cs" />
-  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="System" />
@@ -60,6 +56,10 @@
 
   <ItemGroup>
     <None Include="VisualStudioToolsManifest.xml" Pack="true" PackagePath="tools" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\Microsoft.Toolkit.Win32.UI.XamlHost.csproj" />
   </ItemGroup>
 
 </Project>

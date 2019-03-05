@@ -5,13 +5,14 @@
 using System;
 using System.Windows;
 using windows = Windows;
+using WUX = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Wpf.UI.XamlHost
 {
     /// <summary>
     /// Integrates UWP XAML in to WPF's layout system
     /// </summary>
-    public partial class WindowsXamlHostBase
+    partial class WindowsXamlHostBase
     {
         /// <summary>
         /// Measures wrapped UWP XAML content using passed in size constraint
@@ -22,7 +23,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         {
             var desiredSize = new Size(0, 0);
 
-            if (_xamlSource.Content != null)
+            if (IsXamlContentLoaded())
             {
                 _xamlSource.Content.Measure(new windows.Foundation.Size(constraint.Width, constraint.Height));
                 desiredSize.Width = _xamlSource.Content.DesiredSize.Width;
@@ -42,7 +43,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// <returns>Size</returns>
         protected override Size ArrangeOverride(Size finalSize)
         {
-            if (_xamlSource.Content != null)
+            if (IsXamlContentLoaded())
             {
                 // Arrange is required to support HorizontalAlignment and VerticalAlignment properties
                 // set to 'Stretch'.  The UWP XAML content will be 0 in the stretch alignment direction
@@ -55,11 +56,32 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         }
 
         /// <summary>
+        /// Is the Xaml Content loaded and live?
+        /// </summary>
+        /// <returns>True if the Xaml content is properly loaded</returns>
+        private bool IsXamlContentLoaded()
+        {
+            if (_xamlSource.Content == null)
+            {
+                return false;
+            }
+
+            if (WUX.Media.VisualTreeHelper.GetParent(_xamlSource.Content) == null)
+            {
+                // If there's no parent to this content, it's not "live" or "loaded" in the tree yet.
+                // Performing a measure or arrange in this state may cause unexpected results.
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// UWP XAML content size changed
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="windows.UI.Xaml.SizeChangedEventArgs"/> instance containing the event data.</param>
-        protected void XamlContentSizeChanged(object sender, windows.UI.Xaml.SizeChangedEventArgs e)
+        private void XamlContentSizeChanged(object sender, windows.UI.Xaml.SizeChangedEventArgs e)
         {
             InvalidateMeasure();
         }
