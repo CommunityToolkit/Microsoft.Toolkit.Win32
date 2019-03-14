@@ -7,7 +7,10 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
 
     <Title>Windows Community Toolkit XAMLHost for Windows Forms</Title>
-    <Description>This library provides XAML islands interop helpers for Windows Forms. It is part of the Windows Community Toolkit.</Description>
+    <Description>
+      This library provides XAML islands interop helpers for Windows Forms. It is part of the Windows Community Toolkit.
+      By using the WindowsXamlHost control, you can add built-in or custom UWP controls to the User Interface (UI) of your Windows Forms desktop application, such as Windows Ink and controls that support the Fluent Design System.
+    </Description>
     <PackageTags>XAML Islands Win32 Forms WindowsForms WinForms XamlHost</PackageTags>
 
     <!--

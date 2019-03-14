@@ -7,7 +7,18 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
 
     <Title>Windows Community Toolkit WPF Controls</Title>
-    <Description>This library provides XAML controls for WPF. It is part of the Windows Community Toolkit.</Description>
+    <Description>
+      This library provides XAML controls for WPF. It is part of the Windows Community Toolkit.
+
+      Controls:
+
+      -InkCanvas : Defines an area that receives and displays ink strokes.
+      -InkToolbar : Wpf-enabled wrapper for InkToolbar, that Represents a Universal Windows app control containing a customizable and extensible collection of buttons that activate ink-related features in an associated InkCanvas.
+      -MapControl : A set of controls for WPF and UWP for rendering digital maps from different providers (like OpenStreetMap and Bing Maps) and various types of map overlays.
+      -MediaPlayerElement : This controls embeds a view that streams and renders media content such as video in your Windows Forms or WPF desktop application.
+      -SwapChainPanel : Provides a hosting surface, where Microsoft DirectX swap chains provide content that can be rendered into a XAML UI. A SwapChainPanel element is a key component for an app that renders Microsoft DirectX graphics and then presents those visuals within a XAML page.
+
+    </Description>
     <PackageTags>Win32 WPF UWP XAML</PackageTags>
 
     <DefineConstants>$(DefineConstants);WPF</DefineConstants>
