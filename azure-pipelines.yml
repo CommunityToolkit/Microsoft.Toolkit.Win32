@@ -28,7 +28,7 @@ steps:
 - task: DotNetCoreInstaller@0
   inputs:
     packageType: 'sdk'
-    version: '3.0.100-preview-010184'
+    version: '3.0.100-preview-010431'
   displayName: Install Dot Net Core SDK 3.0
     
 - task: DotNetCoreCLI@2  
@@ -41,7 +41,7 @@ steps:
 - script: nbgv cloud
   displayName: Set Version
 
-- powershell: .\build\Install-WindowsSdkISO.ps1 18327
+- powershell: .\build\Install-WindowsSdkISO.ps1 18351
   displayName: Insider SDK
 
 - powershell: .\build\build.ps1 -target=Package
