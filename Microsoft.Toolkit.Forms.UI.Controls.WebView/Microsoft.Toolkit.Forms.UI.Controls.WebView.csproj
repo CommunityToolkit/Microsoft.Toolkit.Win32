@@ -6,7 +6,10 @@
     <AssemblyName>Microsoft.Toolkit.Forms.UI.Controls.WebView</AssemblyName>
 
     <Title>Windows Community Toolkit WebView Windows Forms Controls</Title>
-    <Description>This library provides WebView user controls for Windows Forms. It is part of the Windows Community Toolkit.</Description>
+    <Description>
+      This library provides WebView XAML control for Windows Forms by hosting web content in your Windows Forms desktop application. It is part of the Windows Community Toolkit.
+      This control uses the Microsoft Edge rendering engine (EdgeHTML) or the the System.Windows.Controls.WebBrowser, for devices on older versions (WebViewCompatible), to embed a view that renders richly formatted HTML5 content from a remote web server, dynamically generated code, or content files.
+    </Description>
     <PackageTags>WebView Win32 WindowsForms</PackageTags>
 
     <DefineConstants>$(DefineConstants);WINFORMS</DefineConstants>

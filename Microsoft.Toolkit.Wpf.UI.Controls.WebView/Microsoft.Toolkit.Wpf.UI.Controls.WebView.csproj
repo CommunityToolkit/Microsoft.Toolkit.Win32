@@ -6,7 +6,10 @@
     <AssemblyName>Microsoft.Toolkit.Wpf.UI.Controls.WebView</AssemblyName>
 
     <Title>Windows Community Toolkit WPF WebView Control</Title>
-    <Description>This library provides XAML controls for WPF WebView. It is part of the Windows Community Toolkit.</Description>
+    <Description>
+      This library provides WebView XAML control for WPF by hosting web content in your WPF desktop application. It is part of the Windows Community Toolkit.
+      This control uses the Microsoft Edge rendering engine (EdgeHTML) or the the System.Windows.Controls.WebBrowser, for devices on older versions (WebViewCompatible), to embed a view that renders richly formatted HTML5 content from a remote web server, dynamically generated code, or content files.
+    </Description>
     <PackageTags>WebView Win32 WPF XAML</PackageTags>
 
     <DefineConstants>$(DefineConstants);WPF</DefineConstants>
