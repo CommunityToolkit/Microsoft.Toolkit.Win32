@@ -245,7 +245,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// <param name="e">Parameter args is ignored</param>
         private void OnParentClosed(object sender, EventArgs e)
         {
-            this.Dispose();
+            this.Dispose(true);
         }
 
         /// <summary>
