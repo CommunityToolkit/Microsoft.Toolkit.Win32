@@ -280,5 +280,15 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
                 UpdateDpiScalingFactor();
             }
         }
+
+        /// <summary>
+        /// Override that disposes the current instance when the parent handle has been destroyed
+        /// </summary>
+        /// <param name="e">Ignored</param>
+        protected override void OnHandleDestroyed(EventArgs e)
+        {
+            this.Dispose();
+            base.OnHandleDestroyed(e);
+        }
     }
 }
