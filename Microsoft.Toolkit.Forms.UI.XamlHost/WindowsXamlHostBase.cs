@@ -287,7 +287,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// <param name="e">Ignored</param>
         protected override void OnHandleDestroyed(EventArgs e)
         {
-            this.Dispose();
+            this.Dispose(true);
             base.OnHandleDestroyed(e);
         }
     }
