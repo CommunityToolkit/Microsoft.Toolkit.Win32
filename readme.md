@@ -1,3 +1,11 @@
+---
+topic: sample
+languages:
+- csharp
+products:
+- windows
+---
+
 # Windows Community Toolkit - WPF and Windows Forms
 This repository contains all controls for WPF and WinForms to simplify and demonstate usage of UWP controls.
 
