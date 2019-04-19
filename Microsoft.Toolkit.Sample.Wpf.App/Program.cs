@@ -62,7 +62,7 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
         [STAThread]
         public static void Main()
         {
-            var startupKind = StartupKind.Normal;
+            var startupKind = StartupKind.MultiThread;
 
             if (startupKind == StartupKind.CustomAppSettings)
             {
