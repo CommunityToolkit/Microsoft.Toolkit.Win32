@@ -5,10 +5,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AssemblyTitle>Windows Community Toolkit Controls (Sample WebView for .NET Forms)</AssemblyTitle>
     <Description>Sample Code for Windows Community Toolkit Controls and Windows Forms</Description>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
-  <Target Name="Pack">
-    <!-- No-op to avoid build error when packing solution from commandline -->
-  </Target>
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>

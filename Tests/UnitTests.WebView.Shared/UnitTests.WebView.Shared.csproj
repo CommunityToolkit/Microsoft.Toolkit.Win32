@@ -30,6 +30,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <ErrorReport>prompt</ErrorReport>
     <DebugType>full</DebugType>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <DefineConstants>TRACE;DEBUG</DefineConstants>
@@ -38,9 +39,6 @@
     <ErrorReport>prompt</ErrorReport>
     <DebugType>full</DebugType>
   </PropertyGroup>
-  <Target Name="Pack">
-    <!-- No-op to avoid build error when packing solution from commandline -->
-  </Target>
   <ItemGroup>
     <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
@@ -49,7 +47,7 @@
     <Reference Include="System.Management" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
-    <PackageReference Include="System.Management" Version="4.6.0-preview3.19128.7" />
+    <PackageReference Include="System.Management" Version="4.6.0-preview4.19212.13" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Microsoft.Toolkit.Win32.UI.Controls\Interop\Win32\ExternDll.cs" Link="ExternDll.cs" />

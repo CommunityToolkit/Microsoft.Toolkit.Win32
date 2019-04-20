@@ -24,6 +24,7 @@
     <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
@@ -48,9 +49,6 @@
     <DebugType>full</DebugType>
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
-  <Target Name="Pack">
-    <!-- No-op to avoid build error when packing solution from commandline -->
-  </Target>
   <ItemGroup>
     <ProjectReference Include="..\..\Microsoft.Toolkit.Forms.UI.Controls.WebView\Microsoft.Toolkit.Forms.UI.Controls.WebView.csproj" />
     <ProjectReference Include="..\UnitTests.WebView.Shared\UnitTests.WebView.Shared.csproj" />
