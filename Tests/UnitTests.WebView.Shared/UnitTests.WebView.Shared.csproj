@@ -30,6 +30,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <ErrorReport>prompt</ErrorReport>
     <DebugType>full</DebugType>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <DefineConstants>TRACE;DEBUG</DefineConstants>
@@ -38,9 +39,6 @@
     <ErrorReport>prompt</ErrorReport>
     <DebugType>full</DebugType>
   </PropertyGroup>
-  <Target Name="Pack">
-    <!-- No-op to avoid build error when packing solution from commandline -->
-  </Target>
   <ItemGroup>
     <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />

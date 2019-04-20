@@ -8,6 +8,7 @@
     <AssemblyTitle>Windows Community Toolkit Controls (Sample Xaml Island Wrapper Controls for .NET Windows Forms)</AssemblyTitle>
     <Description>Sample Code for Windows Community Toolkit Controls</Description>
     <UseWindowsForms>true</UseWindowsForms>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
@@ -52,7 +53,4 @@
       <Name>Microsoft.Toolkit.Win32.UI.XamlHost</Name>
     </ProjectReference>
   </ItemGroup>
-  <Target Name="Pack">
-     <!-- No-op to avoid build error when packing solution from commandline -->
-  </Target>
 </Project>
