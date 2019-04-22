@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <UsingTask TaskName="GenerateWinRTManifestFromAppx" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+        <ParameterGroup>
+            <AppxManifest ParameterType="System.String" Required="true" />
+            <DestinationFolder ParameterType="System.String" Required="true" />
+        </ParameterGroup>
+        <Task>
+            <Reference Include="System.Xml" />
+            <Reference Include="System.Xml.Linq" />
+            <Using Namespace="System.Collections.Generic" />
+            <Using Namespace="System.IO" />
+            <Using Namespace="System.Linq" />
+            <Using Namespace="System.Text" />
+            <Using Namespace="System.Xml" />
+            <Code Type="Fragment" Language="cs">
+                <![CDATA[
+            XmlDocument doc = new XmlDocument();
+            doc.Load(AppxManifest);
+            var nsmgr = new XmlNamespaceManager(doc.NameTable);
+            nsmgr.AddNamespace("m", "http://schemas.microsoft.com/appx/manifest/foundation/windows10");
+            var xQuery = "./m:Package/m:Extensions/m:Extension/m:InProcessServer";
+            foreach (XmlNode winRTFactory in doc.SelectNodes(xQuery, nsmgr))
+            {
+                var dllPathNode = winRTFactory.SelectSingleNode("./m:Path", nsmgr);
+                var dllPath = dllPathNode.InnerText;
+                var typesNames = winRTFactory.SelectNodes("./m:ActivatableClass", nsmgr).OfType<XmlNode>();
+                var sb = new StringBuilder();
+                var xmlHeader = String.Format(@"<?xml version='1.0' encoding='utf-8' standalone='yes'?>
+<assembly
+    xmlns='urn:schemas-microsoft-com:asm.v1'
+    xmlns:asmv3='urn:schemas-microsoft-com:asm.v3'
+    manifestVersion='1.0'>
+    <asmv3:file name='{0}'>", dllPath);
+                sb.Append(xmlHeader);
+                foreach (var typeNode in typesNames)
+                {
+                    var attribs = typeNode.Attributes.OfType<XmlAttribute>().ToArray();
+                    var typeName = attribs
+                        .OfType<XmlAttribute>()
+                        .SingleOrDefault(x => x.Name == "ActivatableClassId")
+                        .InnerText;
+                    var xmlEntry = String.Format(@"
+        <activatableClass
+            name='{0}'
+            threadingModel='both'
+            xmlns='urn:schemas-microsoft-com:winrt.v1'/>", typeName);
+                    sb.Append(xmlEntry);
+                }
+                var xmlFooter = @"
+    </asmv3:file>
+</assembly>";
+                sb.Append(xmlFooter);
+                var manifestContent = sb.ToString();
+                var outFileName = Path.Combine(DestinationFolder, dllPath + ".manifest");
+                File.WriteAllText(outFileName, manifestContent, Encoding.UTF8);
+            }
+]]>
+            </Code>
+        </Task>
+    </UsingTask>
+
+    <Target Name="CreateWinRTRegistration" BeforeTargets="PrepareForBuild">
+        <MakeDir Directories="$(IntDir)\Manifests\" />
+        <GenerateWinRTManifestFromAppx AppxManifest="@(AppxManifest)" DestinationFolder="$(IntDir)\Manifests\" />
+        <CreateItem Include="$(IntDir)Manifests\*.manifest">
+            <Output
+                TaskParameter="Include"
+                ItemName="Manifest"/>
+        </CreateItem>
+    </Target>
+
+</Project>

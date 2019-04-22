@@ -9,4 +9,7 @@
     <PackageId>Microsoft.Toolkit.UI.XamlHost</PackageId>
     <IsWpfProject>true</IsWpfProject>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlApplication.vcxproj" />
+  </ItemGroup>
 </Project>

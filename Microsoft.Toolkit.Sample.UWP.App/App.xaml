@@ -1,0 +1,7 @@
+﻿<MSMarkup:XamlApplication
+    x:Class="Microsoft.Toolkit.Sample.UWP.App.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:MSMarkup="using:Microsoft.Toolkit.Xaml.Markup"
+    xmlns:local="using:Microsoft.Toolkit.Sample.UWP.App">
+</MSMarkup:XamlApplication>

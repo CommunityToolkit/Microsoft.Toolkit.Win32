@@ -34,6 +34,11 @@ namespace winrt::Microsoft::Toolkit::Xaml::Markup::implementation
         m_windowsXamlManager = xaml::Hosting::WindowsXamlManager::InitializeForCurrentThread();
     }
 
+    winrt::Windows::Foundation::IClosable XamlApplication::WindowsXamlManager() const
+    {
+        return m_windowsXamlManager;
+    }
+
     void XamlApplication::Close()
     {
         if (m_bIsClosed)
@@ -105,7 +110,7 @@ namespace winrt::Microsoft::Toolkit::Xaml::Markup::implementation
         return winrt::com_array<xaml::Markup::XmlnsDefinition>(definitions.begin(), definitions.end());
     }
 
-    winrt::Windows::Foundation::Collections::IVector<xaml::Markup::IXamlMetadataProvider> XamlApplication::Providers()
+    winrt::Windows::Foundation::Collections::IVector<xaml::Markup::IXamlMetadataProvider> XamlApplication::MetadataProviders()
     {
         return m_providers;
     }

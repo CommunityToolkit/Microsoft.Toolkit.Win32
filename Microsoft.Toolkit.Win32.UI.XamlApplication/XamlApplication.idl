@@ -1,16 +1,18 @@
 
-namespace Microsoft.Toolkit.Win32.UI
+namespace Microsoft.Toolkit.Xaml.Markup
 {
-    interface IXamlMetadataProviderContainer
+    interface IXamlMetadataContainer
     {
-        Windows.Foundation.Collections.IVector<Windows.UI.Xaml.Markup.IXamlMetadataProvider> Providers { get; };
+        Windows.Foundation.Collections.IVector<Windows.UI.Xaml.Markup.IXamlMetadataProvider> MetadataProviders { get; };
     };
 
     [default_interface]
-    unsealed runtimeclass XamlApplication : Windows.UI.Xaml.Application, IXamlMetadataProviderContainer, Windows.Foundation.IClosable
+    unsealed runtimeclass XamlApplication : Windows.UI.Xaml.Application, IXamlMetadataContainer, Windows.Foundation.IClosable
     {
         XamlApplication();
         protected XamlApplication(Windows.UI.Xaml.Markup.IXamlMetadataProvider parentProvider);
         protected void Init();
+
+        Windows.Foundation.IClosable WindowsXamlManager{ get; };
     }
 }
