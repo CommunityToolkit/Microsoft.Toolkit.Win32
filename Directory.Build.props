@@ -35,18 +35,8 @@
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">16.0</VisualStudioVersion>
         <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-
-        <!-- Need 19H1 or later.
-        
-        When changing this value, ensure the SDK is installed with the build process.
-        Need to check several files:
-          - /azure-pipelines.yml
-
-        This also needs to be installed on your local machine. Can do this with PowerShell:
-          ./build/Install-WindowsSDKISO.ps1 18362
-        -->
         <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
-        <!-- XAML Islands require SDK 18226 -->
+		<!-- XAML Islands require SDK 18226 -->
         <TargetPlatformMinVersion>10.0.18226.0</TargetPlatformMinVersion>
 
         <!-- Compiler -->

@@ -21,14 +21,14 @@ steps:
   displayName: Setup Environment Variables
   
 - task: NuGetToolInstaller@0
-  displayName: Use NuGet 4.7.0
+  displayName: Use NuGet 5.0.0
   inputs:
-    versionSpec: 4.7.0
+    versionSpec: 5.0.0
 
 - task: DotNetCoreInstaller@0
   inputs:
     packageType: 'sdk'
-    version: '3.0.100-preview3-010431'
+    version: '3.0.100-preview4-011223'
   displayName: Install Dot Net Core SDK 3.0
     
 - task: DotNetCoreCLI@2  
@@ -40,9 +40,6 @@ steps:
 
 - script: nbgv cloud
   displayName: Set Version
-
-- powershell: .\build\Install-WindowsSdkISO.ps1 18351
-  displayName: Insider SDK
 
 - powershell: .\build\build.ps1 -target=Package
   displayName: Build 

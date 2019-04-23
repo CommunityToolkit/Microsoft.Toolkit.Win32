@@ -193,6 +193,8 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// </summary>
         public bool IsDisposed { get; private set; }
 
+        private System.Windows.Window _parentWindow;
+
         /// <summary>
         /// Creates <see cref="WUX.Application" /> object, wrapped <see cref="WUX.Hosting.DesktopWindowXamlSource" /> instance; creates and
         /// sets root UWP XAML element on <see cref="WUX.Hosting.DesktopWindowXamlSource" />.
@@ -201,6 +203,12 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// <returns>Handle to XAML window</returns>
         protected override HandleRef BuildWindowCore(HandleRef hwndParent)
         {
+            this._parentWindow = System.Windows.Window.GetWindow(this);
+            if (_parentWindow != null)
+            {
+                _parentWindow.Closed += this.OnParentClosed;
+            }
+
             ComponentDispatcher.ThreadFilterMessage += this.OnThreadFilterMessage;
 
             // 'EnableMouseInPointer' is called by the WindowsXamlManager during initialization. No need
@@ -232,6 +240,16 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         }
 
         /// <summary>
+        /// Disposes the current instance in response to the parent window getting destroyed.
+        /// </summary>
+        /// <param name="sender">Paramter sender is ignored</param>
+        /// <param name="e">Parameter args is ignored</param>
+        private void OnParentClosed(object sender, EventArgs e)
+        {
+            this.Dispose(true);
+        }
+
+        /// <summary>
         /// WPF framework request to destroy control window.  Cleans up the HwndIslandSite created by DesktopWindowXamlSource
         /// </summary>
         /// <param name="hwnd">Handle of window to be destroyed</param>
@@ -260,6 +278,12 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
                 if (_xamlSource != null)
                 {
                     _xamlSource.TakeFocusRequested -= OnTakeFocusRequested;
+                }
+
+                if (_parentWindow != null)
+                {
+                    _parentWindow.Closed -= this.OnParentClosed;
+                    _parentWindow = null;
                 }
             }
 
