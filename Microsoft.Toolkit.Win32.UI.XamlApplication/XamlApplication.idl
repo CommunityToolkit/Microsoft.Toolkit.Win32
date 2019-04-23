@@ -6,6 +6,12 @@ namespace Microsoft.Toolkit.Xaml.Markup
         Windows.Foundation.Collections.IVector<Windows.UI.Xaml.Markup.IXamlMetadataProvider> MetadataProviders { get; };
     };
 
+    enum ExecutionMode
+    {
+        UWP = 0,
+        Win32 = 1,
+    };
+
     [default_interface]
     unsealed runtimeclass XamlApplication : Windows.UI.Xaml.Application, IXamlMetadataContainer, Windows.Foundation.IClosable
     {
@@ -13,6 +19,7 @@ namespace Microsoft.Toolkit.Xaml.Markup
         protected XamlApplication(Windows.UI.Xaml.Markup.IXamlMetadataProvider parentProvider);
         protected void Init();
 
+        ExecutionMode ExecutionMode{ get; };
         Windows.Foundation.IClosable WindowsXamlManager{ get; };
     }
 }

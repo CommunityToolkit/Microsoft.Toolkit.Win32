@@ -20,14 +20,12 @@ namespace Microsoft.Toolkit.Sample.UWP.App
             : base(null)
         {
             this.Init();
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
-        }
 
-        public App(Windows.UI.Xaml.Markup.IXamlMetadataProvider provider)
-            : base(provider)
-        {
-            this.Init();
+            this.InitializeComponent();
+            if (ExecutionMode == Xaml.Markup.ExecutionMode.UWP)
+            {
+                this.Suspending += OnSuspending;
+            }
         }
 
         /// <summary>
@@ -37,7 +35,11 @@ namespace Microsoft.Toolkit.Sample.UWP.App
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            /*
+            if (this.ExecutionMode == Xaml.Markup.ExecutionMode.Win32)
+            {
+                return;
+            }
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -69,7 +71,7 @@ namespace Microsoft.Toolkit.Sample.UWP.App
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
-            }*/
+            }
         }
 
         /// <summary>

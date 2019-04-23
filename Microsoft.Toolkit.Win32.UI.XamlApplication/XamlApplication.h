@@ -19,6 +19,10 @@ namespace winrt::Microsoft::Toolkit::Xaml::Markup::implementation
         void Close();
 
         winrt::Windows::Foundation::IClosable WindowsXamlManager() const;
+        winrt::Microsoft::Toolkit::Xaml::Markup::ExecutionMode ExecutionMode() const
+        {
+            return m_executionMode;
+        }
 
         winrt::Windows::UI::Xaml::Markup::IXamlType GetXamlType(winrt::Windows::UI::Xaml::Interop::TypeName const& type);
         winrt::Windows::UI::Xaml::Markup::IXamlType GetXamlType(winrt::hstring const& fullName);
@@ -27,8 +31,9 @@ namespace winrt::Microsoft::Toolkit::Xaml::Markup::implementation
         winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider> MetadataProviders();
 
     private:
+        winrt::Microsoft::Toolkit::Xaml::Markup::ExecutionMode m_executionMode = ExecutionMode::Win32;
         winrt::Windows::UI::Xaml::Hosting::WindowsXamlManager m_windowsXamlManager = nullptr;
-		winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider> m_providers = winrt::single_threaded_vector<Windows::UI::Xaml::Markup::IXamlMetadataProvider>();
+        winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider> m_providers = winrt::single_threaded_vector<Windows::UI::Xaml::Markup::IXamlMetadataProvider>();
         bool m_bIsClosed = false;
     };
 }

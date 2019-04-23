@@ -39,7 +39,16 @@ namespace winrt::Microsoft::Toolkit::Xaml::Markup::implementation
             m_providers.Append(provider);
         }
 
-        m_windowsXamlManager = xaml::Hosting::WindowsXamlManager::InitializeForCurrentThread();
+        const auto coreWindow = winrt::Windows::UI::Core::CoreWindow::GetForCurrentThread();
+        if (!coreWindow)
+        {
+            m_executionMode = ExecutionMode::Win32;
+            m_windowsXamlManager = xaml::Hosting::WindowsXamlManager::InitializeForCurrentThread();
+        }
+        else
+        {
+            m_executionMode = ExecutionMode::UWP;
+        }
     }
 
     winrt::Windows::Foundation::IClosable XamlApplication::WindowsXamlManager() const
