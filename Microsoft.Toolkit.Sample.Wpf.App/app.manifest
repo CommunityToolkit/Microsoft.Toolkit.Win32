@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
+<assembly
+  manifestVersion="1.0"
+  xmlns:asmv3='urn:schemas-microsoft-com:asm.v3'
+  xmlns="urn:schemas-microsoft-com:asm.v1">
   <assemblyIdentity version="1.0.0.0" name="TestSample.exe" />
   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
     <security>
@@ -74,4 +77,12 @@
           language="*" />
     </dependentAssembly>
   </dependency>-->
+
+  <asmv3:file name='Microsoft.Toolkit.Xaml.Markup.dll'>
+    <activatableClass
+        name='Microsoft.Toolkit.Xaml.Markup.XamlApplication'
+        threadingModel='both'
+        xmlns='urn:schemas-microsoft-com:winrt.v1'/>
+  </asmv3:file>
+
 </assembly>

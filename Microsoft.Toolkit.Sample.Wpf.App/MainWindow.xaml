@@ -43,6 +43,10 @@
                 <TabItem.Header>MapControl</TabItem.Header>
                 <controls:MapControl x:Name="myMap" Loaded="myMap_Loaded"/>
             </TabItem>
+            <TabItem>
+                <TabItem.Header>CustomControl</TabItem.Header>
+                <xamlhost:WindowsXamlHost x:Name="myControl" InitialTypeName="Microsoft.Toolkit.Sample.UWP.App.MyUserControl"/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

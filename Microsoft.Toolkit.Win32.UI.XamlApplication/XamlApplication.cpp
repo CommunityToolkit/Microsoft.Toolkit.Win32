@@ -15,7 +15,10 @@ namespace winrt::Microsoft::Toolkit::Xaml::Markup::implementation
 {
     XamlApplication::XamlApplication(winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider parentProvider)
     {
-        m_providers.Append(parentProvider);
+        if (parentProvider)
+        {
+            m_providers.Append(parentProvider);
+        }
     }
 
     XamlApplication::XamlApplication()
@@ -29,6 +32,11 @@ namespace winrt::Microsoft::Toolkit::Xaml::Markup::implementation
         if (out)
         {
             out->AddRef();
+            winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider provider(nullptr);
+            winrt::check_hresult(out->QueryInterface(
+                winrt::guid_of<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider>(),
+                reinterpret_cast<void**>(winrt::put_abi(provider))));
+            m_providers.Append(provider);
         }
 
         m_windowsXamlManager = xaml::Hosting::WindowsXamlManager::InitializeForCurrentThread();

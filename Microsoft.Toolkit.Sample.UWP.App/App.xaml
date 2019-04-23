@@ -3,5 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:MSMarkup="using:Microsoft.Toolkit.Xaml.Markup"
-    xmlns:local="using:Microsoft.Toolkit.Sample.UWP.App">
+    xmlns:local="using:Microsoft.Toolkit.Sample.UWP.App"
+    RequestedTheme="Light">
+    <MSMarkup:XamlApplication.Resources>
+    </MSMarkup:XamlApplication.Resources>
 </MSMarkup:XamlApplication>

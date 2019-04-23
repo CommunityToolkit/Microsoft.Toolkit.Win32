@@ -20,8 +20,8 @@
     <PropertyGroup Condition="'$(Platform)'=='ARM'">
         <VCLibPlatform>ARM</VCLibPlatform>
     </PropertyGroup>
-    <PropertyGroup Condition="'$(InitDir)'==''">
-      <IntDir>$(IntermediateOutputPath)</IntDir>
+    <PropertyGroup Condition="'$(IntDir)'==''">
+      <IntDir>$(BaseIntermediateOutputPath)</IntDir>
     </PropertyGroup>
     <PropertyGroup>
         <WindowsKitDir>C:\Program Files (x86)\Microsoft SDKs\Windows Kits\10\</WindowsKitDir>
