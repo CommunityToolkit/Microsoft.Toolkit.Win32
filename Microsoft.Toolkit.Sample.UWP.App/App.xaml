@@ -6,5 +6,6 @@
     xmlns:local="using:Microsoft.Toolkit.Sample.UWP.App"
     RequestedTheme="Light">
     <MSMarkup:XamlApplication.Resources>
+        <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
     </MSMarkup:XamlApplication.Resources>
 </MSMarkup:XamlApplication>
