@@ -54,17 +54,20 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
   </ItemGroup>
+  <PropertyGroup>
+    <AppxOutDir>..\Microsoft.Toolkit.Sample.UWP.App\bin\x86\Debug\Appx</AppxOutDir>
+  </PropertyGroup>
   <ItemGroup>
-    <AppxManifest Include="..\Microsoft.Toolkit.Sample.UWP.App\bin\x86\Debug\AppxManifest.xml" Link="AppxManifest.xml" />
-    <Content Include="..\Microsoft.Toolkit.Sample.UWP.App\bin\x86\Debug\AppX\*.xbf">
-      <CopyToOutputDirectory>true</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Microsoft.Toolkit.Sample.UWP.App\bin\x86\Debug\AppX\resources.pri">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\Microsoft.Toolkit.Sample.UWP.App\bin\x86\Debug\AppX\*.dll">
-      <CopyToOutputDirectory>true</CopyToOutputDirectory>
-    </Content>
+    <AppxManifest Include="$(AppxOutDir)\AppxManifest.xml" Link="AppxManifest.xml" />
+    <None Include="$(AppxOutDir)\*.xbf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(AppxOutDir)\resources.pri">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="$(AppxOutDir)\*.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ApplicationManifest Include="app.manifest" />
