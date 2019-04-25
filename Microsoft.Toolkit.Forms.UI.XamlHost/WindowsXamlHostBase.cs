@@ -6,8 +6,8 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using Microsoft.Toolkit.Win32.UI.XamlHost;
 using Windows.Foundation.Metadata;
+using Microsoft.Toolkit.Win32.UI.XamlHost;
 using WUX = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Forms.UI.XamlHost
@@ -30,7 +30,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// If no Application object is created before DesktopWindowXamlSource is created, DestkopWindowXamlSource
         /// will create an instance of <seealso cref="XamlApplication"/> that implements <seealso cref="IXamlMetadataContainer"/>.
         /// </remarks>
-        private static readonly IXamlMetadataContainer _metadataContainer = XamlMetadataContainer.Get();
+        private static readonly IXamlMetadataContainer _metadataContainer = XamlApplicationExtensions.GetOrCreateXamlMetadataContainer();
 
         /// <summary>
         /// DesktopWindowXamlSource instance

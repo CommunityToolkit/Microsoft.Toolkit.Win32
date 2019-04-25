@@ -6,7 +6,6 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using Microsoft.Toolkit.Win32.UI.XamlHost;
-using Microsoft.Toolkit.Xaml.Markup;
 using WUX = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Wpf.UI.XamlHost
@@ -28,7 +27,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
         /// If no Application object is created before DesktopWindowXamlSource is created, DestkopWindowXamlSource
         /// will create an instance of <seealso cref="XamlApplication"/> that implements <seealso cref="IXamlMetadataContainer"/>.
         /// </remarks>
-        private static readonly IXamlMetadataContainer _metadataContainer = XamlMetadataContainer.Get();
+        private static readonly IXamlMetadataContainer _metadataContainer = XamlApplicationExtensions.GetOrCreateXamlMetadataContainer();
 
         /// <summary>
         /// UWP XAML DesktopWindowXamlSource instance that hosts XAML content in a win32 application
