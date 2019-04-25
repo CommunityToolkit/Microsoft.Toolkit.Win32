@@ -17,12 +17,12 @@ namespace Microsoft.Toolkit.Sample.UWP.App
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
-            : base(null)
         {
             this.Init();
 
             this.InitializeComponent();
-            if (ExecutionMode == Xaml.Markup.ExecutionMode.UWP)
+
+            if (ExecutionMode == Microsoft.Toolkit.Win32.UI.XamlHost.ExecutionMode.UWP)
             {
                 this.Suspending += OnSuspending;
             }
@@ -35,7 +35,7 @@ namespace Microsoft.Toolkit.Sample.UWP.App
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            if (this.ExecutionMode == Xaml.Markup.ExecutionMode.Win32)
+            if (this.ExecutionMode == Microsoft.Toolkit.Win32.UI.XamlHost.ExecutionMode.Win32)
             {
                 return;
             }

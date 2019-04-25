@@ -6,20 +6,20 @@
 #include <winrt/Windows.Foundation.Collections.h>
 #include <Windows.h>
 
-namespace winrt::Microsoft::Toolkit::Xaml::Markup::implementation
+namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 {
     class XamlApplication : public XamlApplicationT<XamlApplication, Windows::UI::Xaml::Markup::IXamlMetadataProvider>
     {
     public:
         XamlApplication();
-        XamlApplication(winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider parentProvider);
+        XamlApplication(winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider> providers);
         ~XamlApplication();
 
         void Init();
         void Close();
 
         winrt::Windows::Foundation::IClosable WindowsXamlManager() const;
-        winrt::Microsoft::Toolkit::Xaml::Markup::ExecutionMode ExecutionMode() const
+        winrt::Microsoft::Toolkit::Win32::UI::XamlHost::ExecutionMode ExecutionMode() const
         {
             return m_executionMode;
         }
@@ -30,15 +30,20 @@ namespace winrt::Microsoft::Toolkit::Xaml::Markup::implementation
 
         winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider> MetadataProviders();
 
+        bool IsDisposed() const
+        {
+            return m_bIsClosed;
+        }
+
     private:
-        winrt::Microsoft::Toolkit::Xaml::Markup::ExecutionMode m_executionMode = ExecutionMode::Win32;
+        winrt::Microsoft::Toolkit::Win32::UI::XamlHost::ExecutionMode m_executionMode = ExecutionMode::Win32;
         winrt::Windows::UI::Xaml::Hosting::WindowsXamlManager m_windowsXamlManager = nullptr;
         winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider> m_providers = winrt::single_threaded_vector<Windows::UI::Xaml::Markup::IXamlMetadataProvider>();
         bool m_bIsClosed = false;
     };
 }
 
-namespace winrt::Microsoft::Toolkit::Xaml::Markup::factory_implementation
+namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::factory_implementation
 {
     class XamlApplication : public XamlApplicationT<XamlApplication, implementation::XamlApplication>
     {

@@ -11,19 +11,20 @@ extern "C" {
     WINUSERAPI LRESULT WINAPI DispatchMessageW(_In_ CONST MSG* lpMsg);
 }
 
-namespace winrt::Microsoft::Toolkit::Xaml::Markup::implementation
+namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 {
-    XamlApplication::XamlApplication(winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider parentProvider)
+    XamlApplication::XamlApplication(winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider> providers)
     {
-        if (parentProvider)
+        for(auto provider : providers)
         {
-            m_providers.Append(parentProvider);
+            m_providers.Append(provider);
         }
+
+        Init();
     }
 
     XamlApplication::XamlApplication()
-	{
-        Init();
+    {
     }
 
     void XamlApplication::Init()
@@ -133,7 +134,7 @@ namespace winrt::Microsoft::Toolkit::Xaml::Markup::implementation
     }
 }
 
-namespace winrt::Microsoft::Toolkit::Xaml::Markup::factory_implementation
+namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::factory_implementation
 {
     XamlApplication::XamlApplication()
     {

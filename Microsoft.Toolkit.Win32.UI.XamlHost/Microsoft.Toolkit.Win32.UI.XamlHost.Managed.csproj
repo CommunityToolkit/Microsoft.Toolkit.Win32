@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
     <RootNamespace>Microsoft.Toolkit.UI.XamlHost</RootNamespace>
-    <AssemblyName>Microsoft.Toolkit.Win32.UI.XamlHost</AssemblyName>
+    <AssemblyName>Microsoft.Toolkit.Win32.UI.XamlHost.Managed</AssemblyName>
     <Title>Windows Community Toolkit XAMLHost</Title>
     <Description>This library provides XAML islands common helpers for WPF and WinForms. It is part of the Windows Community Toolkit.</Description>
     <PackageTags>XAML Islands XAMLHost</PackageTags>

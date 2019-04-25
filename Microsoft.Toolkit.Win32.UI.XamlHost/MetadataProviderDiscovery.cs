@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Microsoft.Toolkit.Xaml.Markup;
 using WUX = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
@@ -31,13 +30,8 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         /// Probes working directory for all available metadata providers
         /// </summary>
         /// <returns>List of UWP XAML metadata providers</returns>
-        internal static List<WUX.Markup.IXamlMetadataProvider> DiscoverMetadataProviders()
+        internal static IEnumerable<WUX.Markup.IXamlMetadataProvider> DiscoverMetadataProviders()
         {
-            var filteredTypes = FilteredTypes;
-
-            // List of discovered UWP XAML metadata providers
-            var metadataProviders = new List<WUX.Markup.IXamlMetadataProvider>();
-
             // Get all assemblies loaded in app domain and placed side-by-side from all DLL and EXE
             var loadedAssemblies = GetAssemblies();
 #if NET462
@@ -53,17 +47,17 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
             // Load all types loadable from the assembly, ignoring any types that could not be resolved due to an issue in the dependency chain
             foreach (var assembly in uniqueAssemblies)
             {
-                try
+                foreach (var provider in LoadTypesFromAssembly(assembly))
                 {
-                    LoadTypesFromAssembly(assembly, ref metadataProviders, ref filteredTypes);
-                }
-                catch (FileLoadException)
-                {
-                    // These exceptions are expected
+                    yield return provider;
+
+                    if (provider.GetType().IsAssignableFrom(typeof(WUX.Application)))
+                    {
+                        // We have just created a Xaml application
+                        yield break;
+                    }
                 }
             }
-
-            return metadataProviders;
         }
 
         private static IEnumerable<Assembly> GetAssemblies()
@@ -79,7 +73,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
             // Reflection-based runtime metadata probing
             var currentDirectory = new FileInfo(typeof(MetadataProviderDiscovery).Assembly.Location).Directory;
 
-            foreach (var file in currentDirectory.GetFiles("*.dll").Union(currentDirectory.GetFiles("*.exe")))
+            foreach (var file in currentDirectory.EnumerateFiles("*.dll").Union(currentDirectory.EnumerateFiles("*.exe")))
             {
                 Assembly a = null;
 
@@ -107,24 +101,18 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         /// Loads all types from the specified assembly and caches metadata providers
         /// </summary>
         /// <param name="assembly">Target assembly to load types from</param>
-        /// <param name="metadataProviders">List of metadata providers</param>
-        /// <param name="filteredTypes">List of types to ignore</param>
-        private static void LoadTypesFromAssembly(Assembly assembly, ref List<WUX.Markup.IXamlMetadataProvider> metadataProviders, ref List<Type> filteredTypes)
+        /// <returns>The set of <seealso cref="WUX.Markup.IXamlMetadataProvider"/> found</returns>
+        private static IEnumerable<WUX.Markup.IXamlMetadataProvider> LoadTypesFromAssembly(Assembly assembly)
         {
             // Load types inside the executing assembly
             foreach (var type in GetLoadableTypes(assembly))
             {
-                if (filteredTypes.Contains(type))
-                {
-                    continue;
-                }
-
                 // TODO: More type checking here
                 // Not interface, not abstract, not generic, etc.
                 if (typeof(WUX.Markup.IXamlMetadataProvider).IsAssignableFrom(type))
                 {
                     var provider = (WUX.Markup.IXamlMetadataProvider)Activator.CreateInstance(type);
-                    metadataProviders.Add(provider);
+                    yield return provider;
                 }
             }
         }
@@ -140,11 +128,18 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
 
             try
             {
-                return assembly.DefinedTypes.Select(t => t.AsType());
+                var asmTypes = assembly.DefinedTypes
+                    .Select(t => t.AsType());
+                var filteredTypes = asmTypes.Where(t => !FilteredTypes.Contains(t));
+                return filteredTypes;
             }
-            catch (ReflectionTypeLoadException ex)
+            catch (ReflectionTypeLoadException)
             {
-                return ex.Types.Where(t => t != null);
+                return Enumerable.Empty<Type>();
+            }
+            catch (FileLoadException)
+            {
+                return Enumerable.Empty<Type>();
             }
         }
 

@@ -1,5 +1,5 @@
 
-namespace Microsoft.Toolkit.Xaml.Markup
+namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
     interface IXamlMetadataContainer
     {
@@ -15,11 +15,12 @@ namespace Microsoft.Toolkit.Xaml.Markup
     [default_interface]
     unsealed runtimeclass XamlApplication : Windows.UI.Xaml.Application, IXamlMetadataContainer, Windows.Foundation.IClosable
     {
-        XamlApplication();
-        protected XamlApplication(Windows.UI.Xaml.Markup.IXamlMetadataProvider parentProvider);
+        XamlApplication(Windows.Foundation.Collections.IVector<Windows.UI.Xaml.Markup.IXamlMetadataProvider> providers);
+        protected XamlApplication();
         protected void Init();
 
         ExecutionMode ExecutionMode{ get; };
         Windows.Foundation.IClosable WindowsXamlManager{ get; };
+        Boolean IsDisposed { get; };
     }
 }

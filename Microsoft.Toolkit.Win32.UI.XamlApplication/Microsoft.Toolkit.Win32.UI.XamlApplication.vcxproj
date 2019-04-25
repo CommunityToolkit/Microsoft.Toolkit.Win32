@@ -6,8 +6,8 @@
     <CppWinRTEnabled>true</CppWinRTEnabled>
     <MinimalCoreWin>true</MinimalCoreWin>
     <ProjectGuid>{015a0047-772d-4f1a-88c9-45c18f0adfb6}</ProjectGuid>
-    <ProjectName>Microsoft.Toolkit.Xaml.Markup</ProjectName>
-    <RootNamespace>Microsoft.Toolkit.Xaml.Markup</RootNamespace>
+    <ProjectName>Microsoft.Toolkit.Win32.UI.XamlHost</ProjectName>
+    <RootNamespace>Microsoft.Toolkit.Win32.UI.XamlHost</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <AppContainerApplication>true</AppContainerApplication>
