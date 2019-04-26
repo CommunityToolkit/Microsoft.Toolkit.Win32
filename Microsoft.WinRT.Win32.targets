@@ -12,7 +12,7 @@
       <CreateItem Include="%(BuildOutputPaths.Identity)">
         <Output ItemName="BuildOutputs" TaskParameter="Include"/>
       </CreateItem>
-      <CreateItem Include="%(BuildOutputs.RelativeDir)*.dll;%(BuildOutputs.RelativeDir)*.xbf;%(BuildOutputs.RelativeDir)*.pri">
+      <CreateItem Include="%(BuildOutputs.RelativeDir)*.exe;%(BuildOutputs.RelativeDir)*.dll;%(BuildOutputs.RelativeDir)*.xbf;%(BuildOutputs.RelativeDir)*.pri">
         <Output ItemName="Filter" TaskParameter="Include"/>
       </CreateItem>
       <CreateItem Include="%(BuildOutputs.RelativeDir)AppxManifest*.xml">

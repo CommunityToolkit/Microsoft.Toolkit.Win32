@@ -73,7 +73,20 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
             // Reflection-based runtime metadata probing
             var currentDirectory = new FileInfo(typeof(MetadataProviderDiscovery).Assembly.Location).Directory;
 
-            foreach (var file in currentDirectory.EnumerateFiles("*.exe").Union(currentDirectory.EnumerateFiles("*.dll")))
+            foreach (var assembly in GetAssemblies(currentDirectory, "*.exe"))
+            {
+                yield return assembly;
+            }
+
+            foreach (var assembly in GetAssemblies(currentDirectory, "*.dll"))
+            {
+                yield return assembly;
+            }
+        }
+
+        private static IEnumerable<Assembly> GetAssemblies(DirectoryInfo folder, string fileFilter)
+        {
+            foreach (var file in folder.EnumerateFiles(fileFilter))
             {
                 Assembly a = null;
 
