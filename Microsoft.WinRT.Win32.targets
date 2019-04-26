@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <Target Name="CopyAllProjectReferencesOutputs">
-      <MSBuild Projects="@(ProjectReference)" Properties="Configuration=$(Configuration);Platform=$(Platform)">
+      <MSBuild Projects="@(ProjectReference)" Properties="Configuration=$(Configuration);Platform=$(Platform)" ContinueOnError="true">
         <Output TaskParameter="TargetOutputs" ItemName="BuildOutputPaths"/>
       </MSBuild>
       <CreateItem Include="%(BuildOutputPaths.Identity)">
