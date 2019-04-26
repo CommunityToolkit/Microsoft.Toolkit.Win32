@@ -20,19 +20,18 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
             m_providers.Append(provider);
         }
 
-        Init();
+        Initialize();
     }
 
     XamlApplication::XamlApplication()
     {
     }
 
-    void XamlApplication::Init()
+    void XamlApplication::Initialize()
     {
         const auto out = outer();
         if (out)
         {
-            out->AddRef();
             winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider provider(nullptr);
             winrt::check_hresult(out->QueryInterface(
                 winrt::guid_of<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider>(),
@@ -40,8 +39,8 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
             m_providers.Append(provider);
         }
 
-        const auto coreWindow = winrt::Windows::UI::Core::CoreWindow::GetForCurrentThread();
-        if (!coreWindow)
+        const auto dispatcherQueue = winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
+        if (!dispatcherQueue)
         {
             m_executionMode = ExecutionMode::Win32;
             m_windowsXamlManager = xaml::Hosting::WindowsXamlManager::InitializeForCurrentThread();

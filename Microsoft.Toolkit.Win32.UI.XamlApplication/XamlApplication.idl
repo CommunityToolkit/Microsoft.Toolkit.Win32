@@ -17,7 +17,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
     {
         XamlApplication(Windows.Foundation.Collections.IVector<Windows.UI.Xaml.Markup.IXamlMetadataProvider> providers);
         protected XamlApplication();
-        protected void Init();
+        protected void Initialize();
 
         ExecutionMode ExecutionMode{ get; };
         Windows.Foundation.IClosable WindowsXamlManager{ get; };

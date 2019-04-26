@@ -15,7 +15,7 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         XamlApplication(winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider> providers);
         ~XamlApplication();
 
-        void Init();
+        void Initialize();
         void Close();
 
         winrt::Windows::Foundation::IClosable WindowsXamlManager() const;

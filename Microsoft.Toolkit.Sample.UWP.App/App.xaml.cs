@@ -18,8 +18,7 @@ namespace Microsoft.Toolkit.Sample.UWP.App
         /// </summary>
         public App()
         {
-            this.Init();
-
+            this.Initialize();
             this.InitializeComponent();
 
             if (ExecutionMode == Microsoft.Toolkit.Win32.UI.XamlHost.ExecutionMode.UWP)
