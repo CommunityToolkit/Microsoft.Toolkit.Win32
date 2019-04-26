@@ -43,9 +43,6 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
   </ItemGroup>
-  <PropertyGroup>
-    <AppxOutDir>..\Microsoft.Toolkit.Sample.UWP.App\bin\x86\Debug\</AppxOutDir>
-  </PropertyGroup>
   <ItemGroup>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

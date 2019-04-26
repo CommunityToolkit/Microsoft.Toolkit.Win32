@@ -9,10 +9,6 @@
         <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2" PrivateAssets="all"/>
         <PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="10.0.18362.2002-preview" PrivateAssets="analyzers"/>
       </ItemGroup>
-      <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
-        <PackageReference Include="System.Runtime.WindowsRuntime" Version="4.6.0-preview4.19212.13" />
-        <PackageReference Include="System.Runtime.WindowsRuntime.UI.Xaml" Version="4.6.0-preview4.19212.13" />
-      </ItemGroup>
     </When>
   </Choose>
   <Target Name="AddCommitHashToAssemblyAttributes" BeforeTargets="GetAssemblyAttributes">
