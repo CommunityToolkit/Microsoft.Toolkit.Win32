@@ -3,9 +3,8 @@
     <ProjectGuid>{9C49A885-D39B-4CA0-9DEB-204A6EA7D453}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
-    <AssetTargetFallback>uap10.0.17763</AssetTargetFallback>
+    <AssetTargetFallback>uap10.0.18362</AssetTargetFallback>
     <Platforms>x86;x64</Platforms>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <AssemblyTitle>Windows Community Toolkit Controls (Sample Xaml Island Wrapper Controls for .NET Windows Forms)</AssemblyTitle>
     <Description>Sample Code for Windows Community Toolkit Controls</Description>
@@ -34,7 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="app.manifest" />
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
@@ -54,4 +52,6 @@
     <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlApplication.vcxproj" />
     <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\Microsoft.Toolkit.Win32.UI.XamlHost.Managed.csproj" />
   </ItemGroup>
+  <Import Project="..\Microsoft.VCLibs.Win32.targets" />
+  <Import Project="..\Microsoft.WinRT.Win32.targets" />
 </Project>

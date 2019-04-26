@@ -6,8 +6,8 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using Windows.Foundation.Metadata;
 using Microsoft.Toolkit.Win32.UI.XamlHost;
+using Windows.Foundation.Metadata;
 using WUX = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Forms.UI.XamlHost
