@@ -45,10 +45,10 @@
     </ApplicationDefinition>
   </ItemGroup>
   <PropertyGroup>
-    <AppxOutDir>..\Microsoft.Toolkit.Sample.UWP.App\bin\x86\Debug\Appx</AppxOutDir>
+    <AppxOutDir>..\Microsoft.Toolkit.Sample.UWP.App\bin\x86\Debug\</AppxOutDir>
   </PropertyGroup>
   <ItemGroup>
-    <AppxManifest Include="$(AppxOutDir)\AppxManifest.xml" Link="AppxManifest.xml" />
+    <AppxManifest Include="$(AppxOutDir)\AppxManifest.xml" />
     <None Include="$(AppxOutDir)\*.xbf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -69,7 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Toolkit.Sample.UWP.App\Microsoft.Toolkit.Sample.UWP.App.csproj" />
-    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlApplication.vcxproj" />
+    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.vcxproj" />
     <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\Microsoft.Toolkit.Win32.UI.XamlHost.Managed.csproj" />
     <ProjectReference Include="..\Microsoft.Toolkit.Wpf.UI.Controls.WebView\Microsoft.Toolkit.Wpf.UI.Controls.WebView.csproj" />
     <ProjectReference Include="..\Microsoft.Toolkit.Wpf.UI.Controls\Microsoft.Toolkit.Wpf.UI.Controls.csproj" />

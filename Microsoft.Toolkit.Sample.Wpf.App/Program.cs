@@ -95,6 +95,7 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
             }
             else
             {
+                System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(Microsoft.Toolkit.Wpf.UI.XamlHost.WindowsXamlHostBase).TypeHandle);
                 var app = new Microsoft.Toolkit.Sample.Wpf.App.App();
                 app.InitializeComponent();
                 app.Run();

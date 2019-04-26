@@ -51,9 +51,9 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
                 {
                     yield return provider;
 
-                    if (provider.GetType().IsAssignableFrom(typeof(WUX.Application)))
+                    if (typeof(WUX.Application).IsAssignableFrom(provider.GetType()))
                     {
-                        // We have just created a Xaml application
+                        System.Diagnostics.Debug.WriteLine("Xaml application has been created");
                         yield break;
                     }
                 }
@@ -73,7 +73,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
             // Reflection-based runtime metadata probing
             var currentDirectory = new FileInfo(typeof(MetadataProviderDiscovery).Assembly.Location).Directory;
 
-            foreach (var file in currentDirectory.EnumerateFiles("*.dll").Union(currentDirectory.EnumerateFiles("*.exe")))
+            foreach (var file in currentDirectory.EnumerateFiles("*.exe").Union(currentDirectory.EnumerateFiles("*.dll")))
             {
                 Assembly a = null;
 

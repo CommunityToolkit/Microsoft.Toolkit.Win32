@@ -47,8 +47,9 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
                         return _metadataContainer;
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    System.Diagnostics.Debug.WriteLine(ex.ToString());
                     _metadataContainer = WUX.Application.Current as IXamlMetadataContainer;
                 }
             }
