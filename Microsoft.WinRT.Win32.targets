@@ -5,7 +5,23 @@
         <IntDir>$(BaseIntermediateOutputPath)</IntDir>
     </PropertyGroup>
 
-    <UsingTask TaskName="GenerateWinRTManifestFromAppx" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+    <Target Name="CopyAllProjectReferencesOutputs">
+      <MSBuild Projects="@(ProjectReference)" Properties="Configuration=$(Configuration);Platform=$(Platform)">
+        <Output TaskParameter="TargetOutputs" ItemName="BuildOutputPaths"/>
+      </MSBuild>
+      <CreateItem Include="%(BuildOutputPaths.Identity)">
+        <Output ItemName="BuildOutputs" TaskParameter="Include"/>
+      </CreateItem>
+      <CreateItem Include="%(BuildOutputs.RelativeDir)*.dll;%(BuildOutputs.RelativeDir)*.xbf;%(BuildOutputs.RelativeDir)*.pri">
+        <Output ItemName="Filter" TaskParameter="Include"/>
+      </CreateItem>
+      <CreateItem Include="%(BuildOutputs.RelativeDir)AppxManifest*.xml">
+        <Output ItemName="AppxManifest" TaskParameter="Include"/>
+      </CreateItem>
+      <Copy SourceFiles="%(Filter.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)"/>
+    </Target>
+
+  <UsingTask TaskName="GenerateWinRTManifestFromAppx" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
         <ParameterGroup>
             <AppxManifest ParameterType="System.String" Required="true" />
             <DestinationFolder ParameterType="System.String" Required="true" />
@@ -65,7 +81,7 @@
         </Task>
     </UsingTask>
 
-    <Target Name="CreateWinRTRegistration" BeforeTargets="PrepareForBuild">
+    <Target Name="CreateWinRTRegistration" BeforeTargets="PrepareForBuild" DependsOnTargets="CopyAllProjectReferencesOutputs">
         <MakeDir Directories="$(IntDir)\Manifests\" />
         <GenerateWinRTManifestFromAppx AppxManifest="@(AppxManifest)" DestinationFolder="$(IntDir)\Manifests\" />
         <CreateItem Include="$(IntDir)Manifests\*.manifest">
