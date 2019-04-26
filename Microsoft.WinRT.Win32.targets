@@ -41,18 +41,38 @@
             var nsmgr = new XmlNamespaceManager(doc.NameTable);
             nsmgr.AddNamespace("m", "http://schemas.microsoft.com/appx/manifest/foundation/windows10");
             var xQuery = "./m:Package/m:Extensions/m:Extension/m:InProcessServer";
+            var headerF = @"<?xml version='1.0' encoding='utf-8' standalone='yes'?>
+<assembly
+  manifestVersion='1.0'
+  xmlns:asmv3='urn:schemas-microsoft-com:asm.v3'
+  xmlns='urn:schemas-microsoft-com:asm.v1'>
+  <trustInfo xmlns='urn:schemas-microsoft-com:asm.v2'>
+    <security>
+      <requestedPrivileges xmlns='urn:schemas-microsoft-com:asm.v3'>
+        <requestedExecutionLevel level='asInvoker' uiAccess='false' />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <compatibility xmlns='urn:schemas-microsoft-com:compatibility.v1'>
+    <application>
+      <maxversiontested Id='10.0.18362.0'/>
+      <supportedOS Id='{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}' />
+    </application>
+  </compatibility>
+  <application xmlns='urn:schemas-microsoft-com:asm.v3'>
+    <windowsSettings>
+      <dpiAware xmlns='http://schemas.microsoft.com/SMI/2005/WindowsSettings'>true/PM</dpiAware>
+      <dpiAwareness xmlns='http://schemas.microsoft.com/SMI/2016/WindowsSettings'>PerMonitorV2, PerMonitor</dpiAwareness>
+    </windowsSettings>
+  </application>";
+            var sb = new StringBuilder();
+            sb.Append(headerF);
             foreach (XmlNode winRTFactory in doc.SelectNodes(xQuery, nsmgr))
             {
                 var dllPathNode = winRTFactory.SelectSingleNode("./m:Path", nsmgr);
                 var dllPath = dllPathNode.InnerText;
                 var typesNames = winRTFactory.SelectNodes("./m:ActivatableClass", nsmgr).OfType<XmlNode>();
-                var sb = new StringBuilder();
-                var xmlHeader = String.Format(@"<?xml version='1.0' encoding='utf-8' standalone='yes'?>
-<assembly
-    xmlns='urn:schemas-microsoft-com:asm.v1'
-    xmlns:asmv3='urn:schemas-microsoft-com:asm.v3'
-    manifestVersion='1.0'>
-    <asmv3:file name='{0}'>", dllPath);
+                var xmlHeader = String.Format(@"    <asmv3:file name='{0}'>", dllPath);
                 sb.Append(xmlHeader);
                 foreach (var typeNode in typesNames)
                 {
@@ -69,13 +89,15 @@
                     sb.Append(xmlEntry);
                 }
                 var xmlFooter = @"
-    </asmv3:file>
-</assembly>";
+    </asmv3:file>";
                 sb.Append(xmlFooter);
-                var manifestContent = sb.ToString();
-                var outFileName = Path.Combine(DestinationFolder, dllPath + ".manifest");
-                File.WriteAllText(outFileName, manifestContent, Encoding.UTF8);
             }
+            var xmlFooterF = @"
+</assembly>";
+            sb.Append(xmlFooterF);
+            var manifestContent = sb.ToString();
+            var outFileName = Path.Combine(DestinationFolder, "app.manifest");
+            File.WriteAllText(outFileName, manifestContent, Encoding.UTF8);
 ]]>
             </Code>
         </Task>
@@ -89,6 +111,11 @@
                 TaskParameter="Include"
                 ItemName="Manifest"/>
         </CreateItem>
+        <CreateProperty Value="$(IntDir)Manifests\app.manifest">
+            <Output
+                TaskParameter="Value"
+                PropertyName="ApplicationManifest" />
+        </CreateProperty>
     </Target>
 
 </Project>
