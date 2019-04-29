@@ -67,6 +67,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.0-rc" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\Microsoft.Toolkit.Win32.UI.XamlHost.Managed.csproj" />
   </ItemGroup>
 

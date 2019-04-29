@@ -1,46 +1,44 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-    <PropertyGroup Condition="'$(IntDir)'==''">
-        <IntDir>$(BaseIntermediateOutputPath)</IntDir>
-    </PropertyGroup>
+  <PropertyGroup Condition="'$(IntDir)'==''">
+    <IntDir>$(BaseIntermediateOutputPath)</IntDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.0-rc" />
+  </ItemGroup>
 
-    <Target Name="CopyAllProjectReferencesOutputs">
-      <MSBuild Projects="@(ProjectReference)" Properties="Configuration=$(Configuration);Platform=$(Platform)" ContinueOnError="true">
-        <Output TaskParameter="TargetOutputs" ItemName="BuildOutputPaths"/>
-      </MSBuild>
-      <CreateItem Include="%(BuildOutputPaths.Identity)">
-        <Output ItemName="BuildOutputs" TaskParameter="Include"/>
-      </CreateItem>
-      <CreateItem Include="%(BuildOutputs.RelativeDir)*.exe;%(BuildOutputs.RelativeDir)*.dll;%(BuildOutputs.RelativeDir)*.xbf;%(BuildOutputs.RelativeDir)*.pri">
-        <Output ItemName="Filter" TaskParameter="Include"/>
-      </CreateItem>
-      <CreateItem Include="%(BuildOutputs.RelativeDir)AppxManifest*.xml">
-        <Output ItemName="AppxManifest" TaskParameter="Include"/>
-      </CreateItem>
-      <Copy SourceFiles="%(Filter.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)"/>
-    </Target>
+  <Target Name="CopyAllProjectReferencesOutputs">
+    <MSBuild Projects="@(ProjectReference)" Properties="Configuration=$(Configuration);Platform=$(Platform)" ContinueOnError="true">
+      <Output TaskParameter="TargetOutputs" ItemName="BuildOutputPaths"/>
+    </MSBuild>
+    <CreateItem Include="%(BuildOutputPaths.Identity)">
+      <Output ItemName="BuildOutputs" TaskParameter="Include"/>
+    </CreateItem>
+    <CreateItem Include="%(BuildOutputs.RelativeDir)*.exe;%(BuildOutputs.RelativeDir)*.dll;%(BuildOutputs.RelativeDir)*.xbf;%(BuildOutputs.RelativeDir)*.pri">
+      <Output ItemName="Filter" TaskParameter="Include"/>
+    </CreateItem>
+    <CreateItem Include="%(BuildOutputs.RelativeDir)AppxManifest*.xml">
+      <Output ItemName="AppxManifest" TaskParameter="Include"/>
+    </CreateItem>
+    <Copy SourceFiles="%(Filter.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)"/>
+  </Target>
 
   <UsingTask TaskName="GenerateWinRTManifestFromAppx" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
-        <ParameterGroup>
-            <AppxManifest ParameterType="System.String" Required="true" />
-            <DestinationFolder ParameterType="System.String" Required="true" />
-        </ParameterGroup>
-        <Task>
-            <Reference Include="System.Xml" />
-            <Reference Include="System.Xml.Linq" />
-            <Using Namespace="System.Collections.Generic" />
-            <Using Namespace="System.IO" />
-            <Using Namespace="System.Linq" />
-            <Using Namespace="System.Text" />
-            <Using Namespace="System.Xml" />
-            <Code Type="Fragment" Language="cs">
-                <![CDATA[
-            XmlDocument doc = new XmlDocument();
-            doc.Load(AppxManifest);
-            var nsmgr = new XmlNamespaceManager(doc.NameTable);
-            nsmgr.AddNamespace("m", "http://schemas.microsoft.com/appx/manifest/foundation/windows10");
-            var xQuery = "./m:Package/m:Extensions/m:Extension/m:InProcessServer";
+    <ParameterGroup>
+      <AppxManifest ParameterType="System.String" Required="false" />
+      <DestinationFolder ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Xml" />
+      <Reference Include="System.Xml.Linq" />
+      <Using Namespace="System.Collections.Generic" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Linq" />
+      <Using Namespace="System.Text" />
+      <Using Namespace="System.Xml" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
             var headerF = @"<?xml version='1.0' encoding='utf-8' standalone='yes'?>
 <assembly
   manifestVersion='1.0'
@@ -67,6 +65,15 @@
   </application>";
             var sb = new StringBuilder();
             sb.Append(headerF);
+
+            if (!string.IsNullOrEmpty(AppxManifest))
+            {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(AppxManifest);
+            var nsmgr = new XmlNamespaceManager(doc.NameTable);
+            nsmgr.AddNamespace("m", "http://schemas.microsoft.com/appx/manifest/foundation/windows10");
+            var xQuery = "./m:Package/m:Extensions/m:Extension/m:InProcessServer";
+
             foreach (XmlNode winRTFactory in doc.SelectNodes(xQuery, nsmgr))
             {
                 var dllPathNode = winRTFactory.SelectSingleNode("./m:Path", nsmgr);
@@ -92,6 +99,7 @@
     </asmv3:file>";
                 sb.Append(xmlFooter);
             }
+            }
             var xmlFooterF = @"
 </assembly>";
             sb.Append(xmlFooterF);
@@ -99,23 +107,23 @@
             var outFileName = Path.Combine(DestinationFolder, "app.manifest");
             File.WriteAllText(outFileName, manifestContent, Encoding.UTF8);
 ]]>
-            </Code>
-        </Task>
-    </UsingTask>
+      </Code>
+    </Task>
+  </UsingTask>
 
-    <Target Name="CreateWinRTRegistration" BeforeTargets="PrepareForBuild" DependsOnTargets="CopyAllProjectReferencesOutputs">
-        <MakeDir Directories="$(IntDir)\Manifests\" />
-        <GenerateWinRTManifestFromAppx AppxManifest="@(AppxManifest)" DestinationFolder="$(IntDir)\Manifests\" />
-        <CreateItem Include="$(IntDir)Manifests\*.manifest">
-            <Output
-                TaskParameter="Include"
-                ItemName="Manifest"/>
-        </CreateItem>
-        <CreateProperty Value="$(IntDir)Manifests\app.manifest">
-            <Output
-                TaskParameter="Value"
-                PropertyName="ApplicationManifest" />
-        </CreateProperty>
-    </Target>
+  <Target Name="CreateWinRTRegistration" BeforeTargets="PrepareForBuild" DependsOnTargets="CopyAllProjectReferencesOutputs">
+    <MakeDir Directories="$(IntDir)\Manifests\" />
+    <GenerateWinRTManifestFromAppx AppxManifest="@(AppxManifest)" DestinationFolder="$(IntDir)\Manifests\" />
+    <CreateItem Include="$(IntDir)Manifests\*.manifest">
+      <Output
+          TaskParameter="Include"
+          ItemName="Manifest"/>
+    </CreateItem>
+    <CreateProperty Value="$(IntDir)Manifests\app.manifest">
+      <Output
+          TaskParameter="Value"
+          PropertyName="ApplicationManifest" />
+    </CreateProperty>
+  </Target>
 
 </Project>
