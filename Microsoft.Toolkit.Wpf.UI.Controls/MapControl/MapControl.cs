@@ -78,8 +78,6 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
             Bind(nameof(Center), CenterProperty, windows.UI.Xaml.Controls.Maps.MapControl.CenterProperty, new WindowsXamlHostWrapperConverter());
             Bind(nameof(LoadingStatus), LoadingStatusProperty, windows.UI.Xaml.Controls.Maps.MapControl.LoadingStatusProperty, new WindowsXamlHostWrapperConverter());
             Bind(nameof(Pitch), PitchProperty, windows.UI.Xaml.Controls.Maps.MapControl.PitchProperty);
-            Bind(nameof(Routes), RoutesProperty, windows.UI.Xaml.Controls.Maps.MapControl.RoutesProperty);
-            Bind(nameof(TileSources), TileSourcesProperty, windows.UI.Xaml.Controls.Maps.MapControl.TileSourcesProperty);
             Bind(nameof(ZoomInteractionMode), ZoomInteractionModeProperty, windows.UI.Xaml.Controls.Maps.MapControl.ZoomInteractionModeProperty, new WindowsXamlHostWrapperConverter());
             Bind(nameof(TransitFeaturesVisible), TransitFeaturesVisibleProperty, windows.UI.Xaml.Controls.Maps.MapControl.TransitFeaturesVisibleProperty);
             Bind(nameof(TiltInteractionMode), TiltInteractionModeProperty, windows.UI.Xaml.Controls.Maps.MapControl.TiltInteractionModeProperty, new WindowsXamlHostWrapperConverter());
@@ -94,7 +92,6 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
             /* Bind(nameof(ViewPadding), ViewPaddingProperty, windows.UI.Xaml.Controls.Maps.MapControl.ViewPaddingProperty);
             Bind(nameof(StyleSheet), StyleSheetProperty, windows.UI.Xaml.Controls.Maps.MapControl.StyleSheetProperty, new WindowsXamlHostWrapperConverter()); */
             Bind(nameof(MapProjection), MapProjectionProperty, windows.UI.Xaml.Controls.Maps.MapControl.MapProjectionProperty, new WindowsXamlHostWrapperConverter());
-            Bind(nameof(Layers), LayersProperty, windows.UI.Xaml.Controls.Maps.MapControl.LayersProperty);
             Bind(nameof(Region), RegionProperty, windows.UI.Xaml.Controls.Maps.MapControl.RegionProperty);
 
             Children.OfType<WindowsXamlHostBase>().ToList().ForEach(RelocateChildToUwpControl);
@@ -178,19 +175,9 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         public static DependencyProperty PitchProperty { get; } = DependencyProperty.Register(nameof(Pitch), typeof(double), typeof(MapControl));
 
         /// <summary>
-        /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.RoutesProperty"/>
-        /// </summary>
-        public static DependencyProperty RoutesProperty { get; } = DependencyProperty.Register(nameof(Routes), typeof(System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapRouteView>), typeof(MapControl));
-
-        /// <summary>
         /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.StyleProperty"/>
         /// </summary>
         public static new DependencyProperty StyleProperty { get; } = DependencyProperty.Register(nameof(Style), typeof(MapStyle), typeof(MapControl));
-
-        /// <summary>
-        /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TileSourcesProperty"/>
-        /// </summary>
-        public static DependencyProperty TileSourcesProperty { get; } = DependencyProperty.Register(nameof(TileSources), typeof(System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapTileSource>), typeof(MapControl));
 
         /// <summary>
         /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.TrafficFlowVisibleProperty"/>
@@ -293,11 +280,6 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         /// </summary>
         public static DependencyProperty ViewPaddingProperty { get; } = DependencyProperty.Register(nameof(ViewPadding), typeof(windows.UI.Xaml.Thickness), typeof(MapControl));
         */
-
-        /// <summary>
-        /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.LayersProperty"/>
-        /// </summary>
-        public static DependencyProperty LayersProperty { get; } = DependencyProperty.Register(nameof(Layers), typeof(System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapLayer>), typeof(MapControl));
 
         /// <summary>
         /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.RegionProperty"/>
@@ -612,15 +594,25 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
             get => (MapLoadingStatus)GetValue(LoadingStatusProperty);
         }
 
+        private System.Collections.Generic.IList<MapElement> _mapElements;
+
         /// <summary>
         /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapElements"/>
         /// </summary>
         public System.Collections.Generic.IList<MapElement> MapElements
         {
-            get => new WindowsRuntimeCollection<MapElement, windows.UI.Xaml.Controls.Maps.MapElement>(
-                this.UwpControl.MapElements,
-                mp => MapElement.FromMapElement(mp),
-                mp => mp.UwpInstance);
+            get
+            {
+                if (_mapElements == null)
+                {
+                    _mapElements = new WindowsRuntimeCollection<MapElement, windows.UI.Xaml.Controls.Maps.MapElement>(
+                        this.UwpControl.MapElements,
+                        mp => MapElement.FromMapElement(mp),
+                        mp => mp.UwpInstance);
+                }
+
+                return _mapElements;
+            }
         }
 
         /// <summary>
@@ -652,7 +644,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         /// </summary>
         public System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapRouteView> Routes
         {
-            get => (System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapRouteView>)GetValue(RoutesProperty);
+            get => this.UwpControl.Routes;
         }
 
         /// <summary>
@@ -660,7 +652,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         /// </summary>
         public System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapTileSource> TileSources
         {
-            get => (System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapTileSource>)GetValue(TileSourcesProperty);
+            get => this.UwpControl.TileSources;
         }
 
         /// <summary>
@@ -819,8 +811,8 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         /// </summary>
         public System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapLayer> Layers
         {
-            get => (System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapLayer>)GetValue(LayersProperty);
-            set => SetValue(LayersProperty, value);
+            get => this.UwpControl.Layers;
+            set => this.UwpControl.Layers = value;
         }
 
         /// <summary>
