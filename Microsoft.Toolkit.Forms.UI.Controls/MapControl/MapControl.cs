@@ -672,11 +672,10 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         /// <summary>
         /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.Layers"/>
         /// </summary>
-        [DefaultValue(null)]
         public System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapLayer> Layers
         {
-            get => (System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapLayer>)this.GetUwpControlValue();
-            set => this.SetUwpControlValue(value);
+            get => this.UwpControl.Layers;
+            set => this.UwpControl.Layers = value;
         }
 
         /// <summary>

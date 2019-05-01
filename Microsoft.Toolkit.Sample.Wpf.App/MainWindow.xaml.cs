@@ -38,20 +38,30 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
 
         private async void myMap_Loaded(object sender, RoutedEventArgs e)
         {
-            if (myMap.MapElements.Count == 0)
+            if (myMap.Layers.Count == 0)
             {
                 // Specify a known location.
-                var cityPosition = new BasicGeoposition()
+                var cityPosition = new windows.Devices.Geolocation.BasicGeoposition()
                 {
                     Latitude = 47.604,
                     Longitude = -122.329
                 };
-                var cityCenter = new Geopoint(cityPosition);
-                var icon = new MapIcon()
+                var cityCenter = new windows.Devices.Geolocation.Geopoint(cityPosition);
+                var icon = new windows.UI.Xaml.Controls.Maps.MapIcon()
                 {
                     Location = cityCenter,
                 };
-                myMap.MapElements.Add(icon);
+
+                var elements = new System.Collections.Generic.List<windows.UI.Xaml.Controls.Maps.MapElement>()
+                {
+                    icon,
+                };
+                var layer = new windows.UI.Xaml.Controls.Maps.MapElementsLayer()
+                {
+                    ZIndex = 1,
+                    MapElements = elements,
+                };
+                myMap.Layers.Add(layer);
 
                 // Set the map location.
                 await myMap.TrySetViewAsync(cityCenter, 12).ConfigureAwait(false);

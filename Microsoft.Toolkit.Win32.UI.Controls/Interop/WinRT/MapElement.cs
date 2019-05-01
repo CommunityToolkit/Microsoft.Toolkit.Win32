@@ -103,12 +103,6 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         /// <returns><see cref="MapElement"/></returns>
         public static MapElement FromMapElement(windows.UI.Xaml.Controls.Maps.MapElement args)
         {
-            var mapIcon = args as windows.UI.Xaml.Controls.Maps.MapIcon;
-            if (mapIcon != null)
-            {
-                return new MapIcon(mapIcon);
-            }
-
             return new MapElement(args);
         }
     }
