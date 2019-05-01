@@ -431,7 +431,10 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public System.Collections.Generic.IList<MapElement> MapElements
         {
-            get => UwpControl.MapElements.Cast<MapElement>().ToList();
+            get => new WindowsRuntimeCollection<MapElement, windows.UI.Xaml.Controls.Maps.MapElement>(
+                this.UwpControl.MapElements,
+                mp => MapElement.FromMapElement(mp),
+                mp => mp.UwpInstance);
         }
 
         /// <summary>

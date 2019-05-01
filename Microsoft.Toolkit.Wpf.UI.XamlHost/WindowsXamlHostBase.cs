@@ -103,7 +103,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
                 {
                     Source = this,
                     Path = new WUX.PropertyPath(propertyName),
-                    Converter = (WUX.Data.IValueConverter)converter
+                    Converter = (WUX.Data.IValueConverter)converter,
                 };
                 WUX.Data.BindingOperations.SetBinding(ChildInternal, uwpProperty, binder);
             }

@@ -38,12 +38,24 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
 
         private async void myMap_Loaded(object sender, RoutedEventArgs e)
         {
-            // Specify a known location.
-            BasicGeoposition cityPosition = new BasicGeoposition() { Latitude = 47.604, Longitude = -122.329 };
-            var cityCenter = new Geopoint(cityPosition);
+            if (myMap.MapElements.Count == 0)
+            {
+                // Specify a known location.
+                var cityPosition = new BasicGeoposition()
+                {
+                    Latitude = 47.604,
+                    Longitude = -122.329
+                };
+                var cityCenter = new Geopoint(cityPosition);
+                var icon = new MapIcon()
+                {
+                    Location = cityCenter,
+                };
+                myMap.MapElements.Add(icon);
 
-            // Set the map location.
-            await myMap.TrySetViewAsync(cityCenter, 12).ConfigureAwait(false);
+                // Set the map location.
+                await myMap.TrySetViewAsync(cityCenter, 12).ConfigureAwait(false);
+            }
         }
 
         private void WindowsXamlHost_Loaded(object sender, RoutedEventArgs e)

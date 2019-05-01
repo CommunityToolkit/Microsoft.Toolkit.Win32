@@ -77,7 +77,6 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
             Bind(nameof(ZoomLevel), ZoomLevelProperty, windows.UI.Xaml.Controls.Maps.MapControl.ZoomLevelProperty);
             Bind(nameof(Center), CenterProperty, windows.UI.Xaml.Controls.Maps.MapControl.CenterProperty, new WindowsXamlHostWrapperConverter());
             Bind(nameof(LoadingStatus), LoadingStatusProperty, windows.UI.Xaml.Controls.Maps.MapControl.LoadingStatusProperty, new WindowsXamlHostWrapperConverter());
-            Bind(nameof(MapElements), MapElementsProperty, windows.UI.Xaml.Controls.Maps.MapControl.MapElementsProperty);
             Bind(nameof(Pitch), PitchProperty, windows.UI.Xaml.Controls.Maps.MapControl.PitchProperty);
             Bind(nameof(Routes), RoutesProperty, windows.UI.Xaml.Controls.Maps.MapControl.RoutesProperty);
             Bind(nameof(TileSources), TileSourcesProperty, windows.UI.Xaml.Controls.Maps.MapControl.TileSourcesProperty);
@@ -155,11 +154,6 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         /// </summary>
         public static DependencyProperty LocationProperty { get; } = DependencyProperty.Register(nameof(Center), typeof(Geopoint), typeof(MapControl));
         */
-
-        /// <summary>
-        /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapElementsProperty"/>
-        /// </summary>
-        public static DependencyProperty MapElementsProperty { get; } = DependencyProperty.Register(nameof(MapElements), typeof(System.Collections.Generic.IList<MapElement>), typeof(MapControl));
 
         /// <summary>
         /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapServiceTokenProperty"/>
@@ -623,7 +617,10 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         /// </summary>
         public System.Collections.Generic.IList<MapElement> MapElements
         {
-            get => (System.Collections.Generic.IList<MapElement>)GetValue(MapElementsProperty);
+            get => new WindowsRuntimeCollection<MapElement, windows.UI.Xaml.Controls.Maps.MapElement>(
+                this.UwpControl.MapElements,
+                mp => MapElement.FromMapElement(mp),
+                mp => mp.UwpInstance);
         }
 
         /// <summary>
