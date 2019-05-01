@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
-    public sealed class WindowsRuntimeCollection<T1, T2> : IList<T1>
+    internal sealed class WindowsRuntimeCollection<T1, T2> : IList<T1>
     {
         private readonly IList<T2> collection;
         private readonly Func<T2, T1> converter1;
