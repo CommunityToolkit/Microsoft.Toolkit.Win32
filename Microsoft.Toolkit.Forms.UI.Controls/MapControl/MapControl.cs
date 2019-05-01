@@ -424,6 +424,8 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
             get => (MapLoadingStatus)UwpControl.LoadingStatus;
         }
 
+        private System.Collections.Generic.IList<MapElement> _mapElements;
+
         /// <summary>
         /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapElements"/>
         /// </summary>
@@ -431,10 +433,18 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public System.Collections.Generic.IList<MapElement> MapElements
         {
-            get => new WindowsRuntimeCollection<MapElement, windows.UI.Xaml.Controls.Maps.MapElement>(
-                this.UwpControl.MapElements,
-                mp => MapElement.FromMapElement(mp),
-                mp => mp.UwpInstance);
+            get
+            {
+                if (_mapElements == null)
+                {
+                    _mapElements = new WindowsRuntimeCollection<MapElement, windows.UI.Xaml.Controls.Maps.MapElement>(
+                        this.UwpControl.MapElements,
+                        mp => MapElement.FromMapElement(mp),
+                        mp => mp.UwpInstance);
+                }
+
+                return _mapElements;
+            }
         }
 
         /// <summary>
