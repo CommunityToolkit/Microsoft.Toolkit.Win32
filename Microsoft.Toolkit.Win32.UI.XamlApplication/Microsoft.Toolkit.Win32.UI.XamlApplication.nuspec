@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Microsoft.Toolkit.UI.XamlHost.Native</id>
+    <version>6.0.0</version>
+    <title>Microsoft.Toolkit.UI.XamlHost.Native</title>
+    <authors>Microsoft.Toolkit</authors>
+    <owners>Microsoft.Toolkit</owners>
+    <licenseUrl>https://github.com/windows-toolkit/WindowsCommunityToolkit/blob/master/license.md</licenseUrl>
+    <projectUrl>https://github.com/windows-toolkit/WindowsCommunityToolkit</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/windows-toolkit/WindowsCommunityToolkit/master/build/nuget.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>
+      This library provides XAML islands interop helpers for native projects. It is part of the Windows Community Toolkit.
+    </description>
+    <releaseNotes>v3.0 release https://github.com/windows-toolkit/WindowsCommunityToolkit/releases</releaseNotes>
+    <copyright>(c) .NET Foundation and Contributors.  All rights reserved.</copyright>
+    <tags>XAML Islands Win32 Native XamlHost</tags>
+  </metadata>
+  <files>
+    <!-- WinMd and IntelliSense files -->
+    <file src="bin\Release\Win32\Microsoft.Toolkit.Win32.UI.XamlHost.winmd" target="lib\uap10.0"/>
+    <file src="bin\Release\Win32\Microsoft.Toolkit.Win32.UI.XamlHost.xml" target="lib\uap10.0"/>
+    
+    <!-- DLLs and resources -->
+    <file src="bin\Release\ARM\Microsoft.Toolkit.Win32.UI.XamlHost.dll" target="runtimes\win10-arm\native"/>
+    <file src="bin\Release\ARM\Microsoft.Toolkit.Win32.UI.XamlHost.pri" target="runtimes\win10-arm\native"/>
+
+    <file src="bin\Release\x64\Microsoft.Toolkit.Win32.UI.XamlHost.dll" target="runtimes\win10-x64\native"/>
+    <file src="bin\Release\x64\Microsoft.Toolkit.Win32.UI.XamlHost.pri" target="runtimes\win10-x64\native"/>
+
+    <file src="bin\Release\Win32\Microsoft.Toolkit.Win32.UI.XamlHost.dll" target="runtimes\win10-x86\native"/>
+    <file src="bin\Release\Win32\Microsoft.Toolkit.Win32.UI.XamlHost.pri" target="runtimes\win10-x86\native"/>
+
+    <!-- .targets -->
+    <file src="Microsoft.Toolkit.Win32.UI.XamlApplication.targets" target="build\native"/>
+    <file src="..\Microsoft.WinRT.Win32.targets" target="build"/>
+
+  </files>
+</package>
