@@ -12,4 +12,54 @@
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlApplication.vcxproj" />
   </ItemGroup>
+  
+  <PropertyGroup>
+    <XamlApp-Platform Condition="'$(Platform)' != ''">$(Platform)</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)' == 'x86'">Win32</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)' == 'AnyCPU'">Win32</XamlApp-Platform>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\bin\$(Configuration)\$(XamlApp-Platform)\Microsoft.Toolkit.Win32.UI.XamlHost.winmd">
+      <Pack>true</Pack>
+      <PackagePath>lib\uap10.0</PackagePath>
+    </Content>
+
+    <Content Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\bin\$(Configuration)\Win32\Microsoft.Toolkit.Win32.UI.XamlHost.xml">
+      <Pack>true</Pack>
+      <PackagePath>lib\uap10.0</PackagePath>
+    </Content>
+
+    <Content Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\bin\$(Configuration)\Win32\Microsoft.Toolkit.Win32.UI.XamlHost.dll">
+      <Pack>true</Pack>
+      <PackagePath>runtimes\win10-x86\native</PackagePath>
+    </Content>
+
+    <Content Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\bin\$(Configuration)\Win32\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
+      <Pack>true</Pack>
+      <PackagePath>runtimes\win10-x86\native</PackagePath>
+    </Content>
+
+    <Content Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\bin\$(Configuration)\x64\Microsoft.Toolkit.Win32.UI.XamlHost.dll">
+      <Pack>true</Pack>
+      <PackagePath>runtimes\win10-x64\native</PackagePath>
+    </Content>
+
+    <Content Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\bin\$(Configuration)\x64\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
+      <Pack>true</Pack>
+      <PackagePath>runtimes\win10-x64\native</PackagePath>
+    </Content>
+
+    <Content Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlApplication.targets">
+      <Pack>true</Pack>
+      <PackagePath>build</PackagePath>
+    </Content>
+
+    <Content Include="..\Microsoft.WinRT.Win32.targets">
+      <Pack>true</Pack>
+      <PackagePath>build</PackagePath>
+    </Content>
+
+  </ItemGroup>
+
 </Project>
