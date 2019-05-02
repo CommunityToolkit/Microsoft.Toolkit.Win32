@@ -424,6 +424,8 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
             get => (MapLoadingStatus)UwpControl.LoadingStatus;
         }
 
+        private System.Collections.Generic.IList<MapElement> _mapElements;
+
         /// <summary>
         /// Gets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.MapElements"/>
         /// </summary>
@@ -431,7 +433,18 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public System.Collections.Generic.IList<MapElement> MapElements
         {
-            get => UwpControl.MapElements.Cast<MapElement>().ToList();
+            get
+            {
+                if (_mapElements == null)
+                {
+                    _mapElements = new WindowsRuntimeCollection<MapElement, windows.UI.Xaml.Controls.Maps.MapElement>(
+                        this.UwpControl.MapElements,
+                        mp => MapElement.FromMapElement(mp),
+                        mp => mp.UwpInstance);
+                }
+
+                return _mapElements;
+            }
         }
 
         /// <summary>
@@ -659,11 +672,10 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         /// <summary>
         /// Gets or sets <see cref="windows.UI.Xaml.Controls.Maps.MapControl.Layers"/>
         /// </summary>
-        [DefaultValue(null)]
         public System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapLayer> Layers
         {
-            get => (System.Collections.Generic.IList<windows.UI.Xaml.Controls.Maps.MapLayer>)this.GetUwpControlValue();
-            set => this.SetUwpControlValue(value);
+            get => this.UwpControl.Layers;
+            set => this.UwpControl.Layers = value;
         }
 
         /// <summary>

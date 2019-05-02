@@ -11,7 +11,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
     /// </summary>
     public class MapElement
     {
-        private windows.UI.Xaml.Controls.Maps.MapElement UwpInstance { get; }
+        internal windows.UI.Xaml.Controls.Maps.MapElement UwpInstance { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MapElement"/> class, a
