@@ -17,6 +17,7 @@
     <TargetFrameworkProfile />
     <IsPackable>false</IsPackable>
     <IsTestProject>false</IsTestProject>
+    <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
