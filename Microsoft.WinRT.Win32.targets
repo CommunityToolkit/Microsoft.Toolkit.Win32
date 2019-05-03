@@ -3,7 +3,7 @@
 
   <PropertyGroup>
     <DefaultTargetPlatformVersion Condition="'$(DefaultTargetPlatformVersion)'==''">18362</DefaultTargetPlatformVersion>
-    <AssetTargetFallback>uap10.0.$(DefaultTargetPlatformVersion)</AssetTargetFallback>
+    <AssetTargetFallback Condition="'$(AssetTargetFallback)'==''">uap10.0.$(DefaultTargetPlatformVersion)</AssetTargetFallback>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(IntDir)'==''">
