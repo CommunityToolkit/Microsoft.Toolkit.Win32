@@ -68,27 +68,27 @@
 
             if (!string.IsNullOrEmpty(AppxManifest))
             {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(AppxManifest);
-            var nsmgr = new XmlNamespaceManager(doc.NameTable);
-            nsmgr.AddNamespace("m", "http://schemas.microsoft.com/appx/manifest/foundation/windows10");
-            var xQuery = "./m:Package/m:Extensions/m:Extension/m:InProcessServer";
+                XmlDocument doc = new XmlDocument();
+                doc.Load(AppxManifest);
+                var nsmgr = new XmlNamespaceManager(doc.NameTable);
+                nsmgr.AddNamespace("m", "http://schemas.microsoft.com/appx/manifest/foundation/windows10");
+                var xQuery = "./m:Package/m:Extensions/m:Extension/m:InProcessServer";
 
-            foreach (XmlNode winRTFactory in doc.SelectNodes(xQuery, nsmgr))
-            {
-                var dllPathNode = winRTFactory.SelectSingleNode("./m:Path", nsmgr);
-                var dllPath = dllPathNode.InnerText;
-                var typesNames = winRTFactory.SelectNodes("./m:ActivatableClass", nsmgr).OfType<XmlNode>();
-                var xmlHeader = String.Format(@"    <asmv3:file name='{0}'>", dllPath);
-                sb.Append(xmlHeader);
-                foreach (var typeNode in typesNames)
+                foreach (XmlNode winRTFactory in doc.SelectNodes(xQuery, nsmgr))
                 {
-                    var attribs = typeNode.Attributes.OfType<XmlAttribute>().ToArray();
-                    var typeName = attribs
-                        .OfType<XmlAttribute>()
-                        .SingleOrDefault(x => x.Name == "ActivatableClassId")
-                        .InnerText;
-                    var xmlEntry = String.Format(@"
+                    var dllPathNode = winRTFactory.SelectSingleNode("./m:Path", nsmgr);
+                    var dllPath = dllPathNode.InnerText;
+                    var typesNames = winRTFactory.SelectNodes("./m:ActivatableClass", nsmgr).OfType<XmlNode>();
+                    var xmlHeader = String.Format(@"    <asmv3:file name='{0}'>", dllPath);
+                    sb.Append(xmlHeader);
+                    foreach (var typeNode in typesNames)
+                    {
+                        var attribs = typeNode.Attributes.OfType<XmlAttribute>().ToArray();
+                        var typeName = attribs
+                            .OfType<XmlAttribute>()
+                            .SingleOrDefault(x => x.Name == "ActivatableClassId")
+                            .InnerText;
+                        var xmlEntry = String.Format(@"
         <activatableClass
             name='{0}'
             threadingModel='both'
@@ -97,8 +97,18 @@
                 }
                 var xmlFooter = @"
     </asmv3:file>";
-                sb.Append(xmlFooter);
+                    sb.Append(xmlFooter);
+                }
             }
+            else
+            {
+                sb.Append(@"
+    <asmv3:file name='Microsoft.Toolkit.Win32.UI.XamlHost.dll'>
+        <activatableClass
+            name='Microsoft.Toolkit.Win32.UI.XamlHost.XamlApplication'
+            threadingModel='both'
+            xmlns='urn:schemas-microsoft-com:winrt.v1'/>
+    </asmv3:file>");
             }
             var xmlFooterF = @"
 </assembly>";

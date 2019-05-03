@@ -20,6 +20,18 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
     {
         private static IXamlMetadataContainer _metadataContainer;
 
+        private static IXamlMetadataContainer GetCurrentProvider()
+        {
+            try
+            {
+                return WUX.Application.Current as IXamlMetadataContainer;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         /// <summary>
         /// Gets and returns the current UWP XAML Application instance in a reference parameter.
         /// If the current XAML Application instance has not been created for the process (is null),
@@ -36,11 +48,11 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
                 try
                 {
                     var providers = MetadataProviderDiscovery.DiscoverMetadataProviders().ToList();
-                    _metadataContainer = WUX.Application.Current as IXamlMetadataContainer;
+                    _metadataContainer = GetCurrentProvider();
                     if (_metadataContainer == null)
                     {
-                        var app = new XamlApplication(providers);
-                        return app;
+                        _metadataContainer = new XamlApplication(providers);
+                        return _metadataContainer;
                     }
                     else
                     {
@@ -50,7 +62,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
                 catch (Exception ex)
                 {
                     System.Diagnostics.Debug.WriteLine(ex.ToString());
-                    _metadataContainer = WUX.Application.Current as IXamlMetadataContainer;
+                    _metadataContainer = GetCurrentProvider();
                 }
             }
 

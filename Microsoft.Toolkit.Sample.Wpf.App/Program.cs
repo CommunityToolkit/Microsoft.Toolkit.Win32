@@ -83,6 +83,7 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
                     app.Run();
                 }
             }
+#if !NET462
             else if (startupKind == StartupKind.Explict)
             {
                 using (var xamlApp = new Microsoft.Toolkit.Sample.UWP.App.App())
@@ -93,6 +94,7 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
                     app.Run();
                 }
             }
+#endif
             else
             {
                 System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(Microsoft.Toolkit.Wpf.UI.XamlHost.WindowsXamlHostBase).TypeHandle);
