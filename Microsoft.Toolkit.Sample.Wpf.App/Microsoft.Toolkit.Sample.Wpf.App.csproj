@@ -51,9 +51,6 @@
     <ProjectReference Include="..\Microsoft.Toolkit.Sample.UWP.App\Microsoft.Toolkit.Sample.UWP.App.csproj" Condition="'$(TargetFramework)'=='netcoreapp3.0'">
       <Private>true</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlApplication.vcxproj">
-      <Private>true</Private>
-    </ProjectReference>
     <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\Microsoft.Toolkit.Win32.UI.XamlHost.Managed.csproj">
       <Private>true</Private>
     </ProjectReference>

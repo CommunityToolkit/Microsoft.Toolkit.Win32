@@ -24,6 +24,14 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <XamlApp-Platform Condition="'$(Platform)' != ''">$(Platform)</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)' == 'x86'">Win32</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)' == 'AnyCPU'">Win32</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)'=='x86'">Win32</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)'=='x64'">x64</XamlApp-Platform>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <DefaultTargetPlatformVersion Condition="'$(DefaultTargetPlatformVersion)'==''">18362</DefaultTargetPlatformVersion>
     <AssetTargetFallback Condition="'$(AssetTargetFallback)'==''">uap10.0.$(DefaultTargetPlatformVersion)</AssetTargetFallback>
   </PropertyGroup>

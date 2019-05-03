@@ -49,7 +49,6 @@
       <Name>Microsoft.Toolkit.Forms.UI.XamlHost</Name>
     </ProjectReference>
     <ProjectReference Include="..\Microsoft.Toolkit.Sample.UWP.App\Microsoft.Toolkit.Sample.UWP.App.csproj" />
-    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlApplication.vcxproj" />
     <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\Microsoft.Toolkit.Win32.UI.XamlHost.Managed.csproj" />
   </ItemGroup>
   <Import Project="..\Microsoft.WinRT.Win32.targets" />
