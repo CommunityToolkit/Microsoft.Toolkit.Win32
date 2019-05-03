@@ -10,17 +10,32 @@
     <IsWpfProject>true</IsWpfProject>
     <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlApplication.vcxproj" />
-  </ItemGroup>
-  
+
   <PropertyGroup>
     <XamlApp-Platform Condition="'$(Platform)' != ''">$(Platform)</XamlApp-Platform>
     <XamlApp-Platform Condition="'$(Platform)' == 'x86'">Win32</XamlApp-Platform>
     <XamlApp-Platform Condition="'$(Platform)' == 'AnyCPU'">Win32</XamlApp-Platform>
     <XamlApp-Platform Condition="'$(Platform)'=='x86'">Win32</XamlApp-Platform>
     <XamlApp-Platform Condition="'$(Platform)'=='x64'">Win32</XamlApp-Platform>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Microsoft.Toolkit.UI.XamlHost.props" />
+    <None Remove="Microsoft.Toolkit.UI.XamlHost.targets" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\bin\$(Configuration)\$(XamlApp-Platform)\Microsoft.Toolkit.Win32.UI.XamlHost.winmd" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <XamlApp-Platform Condition="'$(Platform)' != ''">$(Platform)</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)' == 'x86'">Win32</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)' == 'AnyCPU'">Win32</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)'=='x86'">Win32</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)'=='x64'">Win32</XamlApp-Platform>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\bin\$(Configuration)\$(XamlApp-Platform)\Microsoft.Toolkit.Win32.UI.XamlHost.winmd">
@@ -63,6 +78,17 @@
       <PackagePath>build</PackagePath>
     </Content>
 
+    <Content Include="Microsoft.Toolkit.UI.XamlHost.props">
+      <Pack>true</Pack>
+      <PackagePath>build</PackagePath>
+    </Content>
+
+    <Content Include="Microsoft.Toolkit.UI.XamlHost.targets">
+      <Pack>true</Pack>
+      <PackagePath>build</PackagePath>
+    </Content>
+
+    
   </ItemGroup>
 
 </Project>

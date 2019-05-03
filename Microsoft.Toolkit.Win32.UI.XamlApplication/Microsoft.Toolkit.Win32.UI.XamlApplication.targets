@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <PropertyGroup>
-        <XamlApp-Platform Condition="'$(Platform)' == 'Win32'">x86</XamlApp-Platform>
-        <XamlApp-Platform Condition="'$(Platform)' != 'Win32'">$(Platform)</XamlApp-Platform>
-    </PropertyGroup>
-    <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'">
-        <Reference Include="$(MSBuildThisFileDirectory)..\..\lib\uap10.0\Microsoft.Toolkit.Win32.UI.XamlHost.winmd">
-            <Implementation>Microsoft.Toolkit.Win32.UI.XamlHost.dll</Implementation>
-        </Reference>
-        <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(XamlApp-Platform)\native\Microsoft.Toolkit.Win32.UI.XamlHost.dll" />
-    </ItemGroup>
+  <PropertyGroup>
+    <XamlApp-Platform Condition="'$(Platform)' == 'Win32'">x86</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)' != 'Win32'">$(Platform)</XamlApp-Platform>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="$(MSBuildThisFileDirectory)..\lib\uap10.0\Microsoft.Toolkit.Win32.UI.XamlHost.winmd">
+      <Implementation>Microsoft.Toolkit.Win32.UI.XamlHost.dll</Implementation>
+    </Reference>
+    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\runtimes\win10-$(XamlApp-Platform)\native\Microsoft.Toolkit.Win32.UI.XamlHost.dll" />
+  </ItemGroup>
 </Project>

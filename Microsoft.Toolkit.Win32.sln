@@ -48,6 +48,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit.Win32.UI.XamlHost.Managed", "Microsoft.Toolkit.Win32.UI.XamlHost\Microsoft.Toolkit.Win32.UI.XamlHost.Managed.csproj", "{F87EDD34-AF48-45C7-9342-49023B882DA1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{015A0047-772D-4F1A-88C9-45C18F0ADFB6} = {015A0047-772D-4F1A-88C9-45C18F0ADFB6}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Toolkit.Sample.UWP.App", "Microsoft.Toolkit.Sample.UWP.App\Microsoft.Toolkit.Sample.UWP.App.csproj", "{0F5A016F-981F-485D-871C-F75C4FAE60C5}"
 EndProject
