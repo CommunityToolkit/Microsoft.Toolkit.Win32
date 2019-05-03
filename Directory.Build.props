@@ -24,6 +24,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <DefaultTargetPlatformVersion Condition="'$(DefaultTargetPlatformVersion)'==''">18362</DefaultTargetPlatformVersion>
+    <AssetTargetFallback Condition="'$(AssetTargetFallback)'==''">uap10.0.$(DefaultTargetPlatformVersion)</AssetTargetFallback>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <SignAssembly Condition="'$(SignAssembly)' == '' and '$(IsUwpProject)' != 'true'" >true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)toolkit.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>

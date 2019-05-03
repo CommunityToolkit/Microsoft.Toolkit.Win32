@@ -4,7 +4,7 @@
         <XamlApp-Platform Condition="'$(Platform)' == 'Win32'">x86</XamlApp-Platform>
         <XamlApp-Platform Condition="'$(Platform)' != 'Win32'">$(Platform)</XamlApp-Platform>
     </PropertyGroup>
-    <ItemGroup>
+    <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP'">
         <Reference Include="$(MSBuildThisFileDirectory)..\..\lib\uap10.0\Microsoft.Toolkit.Win32.UI.XamlHost.winmd">
             <Implementation>Microsoft.Toolkit.Win32.UI.XamlHost.dll</Implementation>
         </Reference>
