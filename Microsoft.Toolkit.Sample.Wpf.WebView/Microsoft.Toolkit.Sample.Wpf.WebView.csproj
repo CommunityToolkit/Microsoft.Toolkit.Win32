@@ -8,7 +8,7 @@
     <Description>Sample Code for Windows Community Toolkit Controls</Description>
     <UseWPF>true</UseWPF>
     <IsPackable>false</IsPackable>
-    <Platforms>AnyCPU;x64;x86</Platforms>
+    <Platforms>x64;x86</Platforms>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="System.Xaml" />

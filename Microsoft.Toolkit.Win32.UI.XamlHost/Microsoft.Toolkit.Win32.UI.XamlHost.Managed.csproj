@@ -8,15 +8,14 @@
     <PackageTags>XAML Islands XAMLHost</PackageTags>
     <PackageId>Microsoft.Toolkit.UI.XamlHost</PackageId>
     <IsWpfProject>true</IsWpfProject>
-    <Platforms>AnyCPU;x64;x86</Platforms>
+    <Platforms>x64;x86</Platforms>
   </PropertyGroup>
 
   <PropertyGroup>
     <XamlApp-Platform Condition="'$(Platform)' != ''">$(Platform)</XamlApp-Platform>
     <XamlApp-Platform Condition="'$(Platform)' == 'x86'">Win32</XamlApp-Platform>
-    <XamlApp-Platform Condition="'$(Platform)' == 'AnyCPU'">Win32</XamlApp-Platform>
     <XamlApp-Platform Condition="'$(Platform)'=='x86'">Win32</XamlApp-Platform>
-    <XamlApp-Platform Condition="'$(Platform)'=='x64'">Win32</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)'=='x64'">x64</XamlApp-Platform>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>

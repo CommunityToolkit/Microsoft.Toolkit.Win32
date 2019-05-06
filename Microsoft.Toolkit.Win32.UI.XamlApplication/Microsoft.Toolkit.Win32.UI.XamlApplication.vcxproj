@@ -185,4 +185,5 @@
     <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.190408.1\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.190408.1\build\native\Microsoft.Windows.CppWinRT.targets'))" />
   </Target>
   <Target Name="ResolveNuGetPackageAssets" />
+  <Target Name="Pack" />
 </Project>

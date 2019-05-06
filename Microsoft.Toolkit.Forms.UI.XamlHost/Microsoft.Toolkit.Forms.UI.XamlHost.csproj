@@ -11,7 +11,7 @@
       By using the WindowsXamlHost control, you can add built-in or custom UWP controls to the User Interface (UI) of your Windows Forms desktop application, such as Windows Ink and controls that support the Fluent Design System.
     </Description>
     <PackageTags>XAML Islands Win32 Forms WindowsForms WinForms XamlHost</PackageTags>
-    <Platforms>AnyCPU;x64;x86</Platforms>
+    <Platforms>x64;x86</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">

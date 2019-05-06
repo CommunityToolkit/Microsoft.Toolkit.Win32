@@ -6,7 +6,6 @@
     <AssemblyTitle>UnitTests.WebView.Shared</AssemblyTitle>
     <Description>UnitTests.WebView.Shared</Description>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B220BE88-944E-45D1-9248-6FAEF53868A3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -17,7 +16,7 @@
     <TargetFrameworkProfile />
     <IsPackable>false</IsPackable>
     <IsTestProject>false</IsTestProject>
-    <Platforms>AnyCPU;x64;x86</Platforms>
+    <Platforms>x64;x86</Platforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
@@ -25,7 +24,6 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Release\</OutputPath>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>false</Optimize>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
