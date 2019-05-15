@@ -46,7 +46,7 @@
     <Reference Include="System.Management" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
-    <PackageReference Include="System.Management" Version="4.6.0-preview4.19212.13" />
+    <PackageReference Include="System.Management" Version="4.6.0-preview5.19224.8" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Microsoft.Toolkit.Win32.UI.Controls\Interop\Win32\ExternDll.cs" Link="ExternDll.cs" />
