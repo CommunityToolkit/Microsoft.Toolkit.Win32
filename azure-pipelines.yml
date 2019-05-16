@@ -66,10 +66,10 @@ steps:
     verbosityRestore: Detailed # Options: quiet, normal, detaile
 
 - task: NuGetCommand@2
-   displayName: NuGet restore x64
-   inputs:
-     command: restore
-     platform: x64
+  displayName: NuGet restore x64
+  inputs:
+    command: restore
+    platform: x64
     configuration: Release
     restoreSolution: Microsoft.Toolkit.Win32.sln
     restoreDirectory: packages/
