@@ -47,10 +47,8 @@ steps:
 - task: NuGetCommand@2
   inputs:
     command: 'restore' # Options: restore, pack, push, custom
-    # nuGet: '**/*.sln' # Required when command == Restore
+    nuGet: 'Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config' # Required when command == Restore
     restoreDirectory: packages
-    feedsToUse: 'config' # Options: select, config
-    nugetConfigPath: Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config # Required when feedsToUse == Config
 
 - powershell: .\build\build.ps1 -target=Package
   displayName: Build 
