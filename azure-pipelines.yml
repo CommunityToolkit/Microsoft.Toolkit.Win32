@@ -81,33 +81,22 @@ steps:
     restoreDirectory: packages/
     verbosityRestore: Detailed # Options: quiet, normal, detaile
 
-- task: MSBuild@1
-  displayName: Build x64
-  inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
-    platform: x64
-    #configuration: # Optional
-    #msbuildArguments: # Optional
-    #clean: false # Optional
-    #maximumCpuCount: false # Optional
-    restoreNugetPackages: false # Optional
-    #logProjectEvents: false # Optional
-    #createLogFile: false # Optional
-    #logFileVerbosity: 'normal' # Optional. Options: quiet, minimal, normal, detailed, diagnostic
+- powershell: .\build\build.ps1 -target=Package
+  displayName: Build 
 
-- task: MSBuild@1
-  displayName: Build x86
-  inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
-    platform: x86
-    #configuration: # Optional
-    #msbuildArguments: # Optional
-    #clean: false # Optional
-    #maximumCpuCount: false # Optional
-    restoreNugetPackages: false # Optional
-    #logProjectEvents: false # Optional
-    #createLogFile: false # Optional
-    #logFileVerbosity: 'normal' # Optional. Options: quiet, minimal, normal, detailed, diagnostic
+#- task: MSBuild@1
+#  displayName: Build x64
+#  inputs:
+#    solution: Microsoft.Toolkit.Win32.sln 
+#    platform: x64
+#    restoreNugetPackages: false # Optional
+
+#- task: MSBuild@1
+#  displayName: Build x86
+#  inputs:
+#    solution: Microsoft.Toolkit.Win32.sln 
+#    platform: x86
+#    restoreNugetPackages: false # Optional
 
 - task: NuGetCommand@2
   displayName: NuGet Pack
@@ -115,9 +104,6 @@ steps:
     command: Pack
     packagesToPack: '**/*.csproj'
     verbosityRestore: Detailed # Options: quiet, normal, detaile
-
-#- powershell: .\build\build.ps1 -target=Package
-#  displayName: Build 
 
 - task: PowerShell@2
   displayName: Authenticode Sign Packages
