@@ -13,3 +13,4 @@
 #include <winrt/Windows.UI.Xaml.Hosting.h>
 #include <winrt/Windows.System.h>
 
+#include <winres.h>
