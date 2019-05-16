@@ -45,10 +45,12 @@ steps:
   displayName: Insider SDK
 
 - task: NuGetCommand@2
-  inputs:
-    command: 'restore' # Options: restore, pack, push, custom
-    nuGet: 'Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config' # Required when command == Restore
-    restoreDirectory: packages
+displayName: NuGet restore
+inputs:
+    command: restore
+    restoreSolution: Microsoft.Toolkit.Win32.sln
+    restoreDirectory: packages/
+    verbosityRestore: Detailed # Options: quiet, normal, detaile
 
 - powershell: .\build\build.ps1 -target=Package
   displayName: Build 
