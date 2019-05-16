@@ -49,7 +49,7 @@ steps:
   inputs:
     command: restore
     restoreSolution: Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config
-    restoreDirectory: packages/
+    restoreDirectory: ../packages/
     verbosityRestore: Detailed # Options: quiet, normal, detaile
 
 - powershell: .\build\build.ps1 -target=Package
