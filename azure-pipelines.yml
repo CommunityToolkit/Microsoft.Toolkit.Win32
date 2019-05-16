@@ -65,25 +65,25 @@ steps:
     restoreDirectory: ../packages/
     verbosityRestore: Detailed # Options: quiet, normal, detaile
 
-- task: NuGetCommand@2
-  displayName: NuGet restore x64
-  inputs:
-    command: restore
-    platform: x64
-    configuration: Release
-    restoreSolution: Microsoft.Toolkit.Win32.sln
-    restoreDirectory: packages/
-    verbosityRestore: Detailed # Options: quiet, normal, detaile
+#- task: NuGetCommand@2
+#   displayName: NuGet restore x64
+#   inputs:
+#     command: restore
+#     platform: x64
+#    configuration: Release
+#    restoreSolution: Microsoft.Toolkit.Win32.sln
+#    restoreDirectory: packages/
+#    verbosityRestore: Detailed # Options: quiet, normal, detaile
 
-- task: NuGetCommand@2
-  displayName: NuGet restore x86
-  inputs:
-    command: restore
-    platform: x86
-    configuration: Release
-    restoreSolution: Microsoft.Toolkit.Win32.sln
-    restoreDirectory: packages/
-    verbosityRestore: Detailed # Options: quiet, normal, detaile
+#- task: NuGetCommand@2
+#  displayName: NuGet restore x86
+#  inputs:
+#    command: restore
+#    platform: x86
+#    configuration: Release
+#    restoreSolution: Microsoft.Toolkit.Win32.sln
+#    restoreDirectory: packages/
+#    verbosityRestore: Detailed # Options: quiet, normal, detaile
 
 #- powershell: .\build\build.ps1 -target=Package
 #  displayName: Build 
@@ -94,7 +94,7 @@ steps:
     solution: Microsoft.Toolkit.Win32.sln 
     platform: x64
     configuration: Release
-    restoreNugetPackages: false # Optional
+    restoreNugetPackages: true # Optional
 
 - task: MSBuild@1
   displayName: Build x86
@@ -102,7 +102,7 @@ steps:
     solution: Microsoft.Toolkit.Win32.sln 
     platform: x86
     configuration: Release
-    restoreNugetPackages: false # Optional
+    restoreNugetPackages: true # Optional
 
 - task: NuGetCommand@2
   displayName: NuGet Pack
