@@ -44,6 +44,12 @@ steps:
 - powershell: .\build\Install-WindowsSdkISO.ps1 18362
   displayName: Insider SDK
 
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore' # Options: restore, pack, push, custom
+    restoreSolution: '**/*.sln' # Required when command == Restore
+    restoreDirectory: packages
+
 - powershell: .\build\build.ps1 -target=Package
   displayName: Build 
 
