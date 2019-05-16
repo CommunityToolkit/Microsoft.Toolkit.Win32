@@ -48,7 +48,7 @@ steps:
   displayName: NuGet restore
   inputs:
     command: restore
-    restoreSolution: Microsoft.Toolkit.Win32.sln
+    restoreSolution: Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config
     restoreDirectory: packages/
     verbosityRestore: Detailed # Options: quiet, normal, detaile
 
