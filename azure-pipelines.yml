@@ -13,12 +13,6 @@ variables:
   BuildConfiguration: Release
 
 steps:
-- task: BatchScript@1
-  inputs:
-    filename: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\Tools\\VsDevCmd.bat"
-    arguments: -no_logo
-    modifyEnvironment: true
-  displayName: Setup Environment Variables
 
 - task: NuGetToolInstaller@0
   displayName: Use NuGet 5.0.0
@@ -44,18 +38,45 @@ steps:
 - powershell: .\build\Install-WindowsSdkISO.ps1 18362
   displayName: Insider SDK
 
+- task: BatchScript@1
+  inputs:
+    filename: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\Tools\\VsDevCmd.bat"
+    arguments: -no_logo
+    modifyEnvironment: true
+  displayName: Setup Environment Variables
+
 - task: NuGetCommand@2
-  displayName: NuGet restore Native project
+  displayName: NuGet restore Native project x64
   inputs:
     command: restore
+    platform: x64
     restoreSolution: Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config
     restoreDirectory: ../packages/
     verbosityRestore: Detailed # Options: quiet, normal, detaile
 
 - task: NuGetCommand@2
-  displayName: NuGet restore
+  displayName: NuGet restore Native project x86
   inputs:
     command: restore
+    platform: x86
+    restoreSolution: Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config
+    restoreDirectory: ../packages/
+    verbosityRestore: Detailed # Options: quiet, normal, detaile
+
+- task: NuGetCommand@2
+  displayName: NuGet restore x64
+  inputs:
+    command: restore
+    platform: x64
+    restoreSolution: Microsoft.Toolkit.Win32.sln
+    restoreDirectory: packages/
+    verbosityRestore: Detailed # Options: quiet, normal, detaile
+
+- task: NuGetCommand@2
+  displayName: NuGet restore x86
+  inputs:
+    command: restore
+    platform: x86
     restoreSolution: Microsoft.Toolkit.Win32.sln
     restoreDirectory: packages/
     verbosityRestore: Detailed # Options: quiet, normal, detaile
