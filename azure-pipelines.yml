@@ -45,15 +45,58 @@ steps:
   displayName: Insider SDK
 
 - task: NuGetCommand@2
-  displayName: NuGet restore
+  displayName: NuGet restore Native project
   inputs:
     command: restore
     restoreSolution: Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config
     restoreDirectory: ../packages/
     verbosityRestore: Detailed # Options: quiet, normal, detaile
 
-- powershell: .\build\build.ps1 -target=Package
-  displayName: Build 
+- task: NuGetCommand@2
+  displayName: NuGet restore
+  inputs:
+    command: restore
+    restoreSolution: Microsoft.Toolkit.Win32.sln
+    restoreDirectory: packages/
+    verbosityRestore: Detailed # Options: quiet, normal, detaile
+
+- task: MSBuild@1
+  displayName: Build x64
+  inputs:
+    solution: Microsoft.Toolkit.Win32.sln 
+    platform: x64
+    #configuration: # Optional
+    #msbuildArguments: # Optional
+    #clean: false # Optional
+    #maximumCpuCount: false # Optional
+    restoreNugetPackages: false # Optional
+    #logProjectEvents: false # Optional
+    #createLogFile: false # Optional
+    #logFileVerbosity: 'normal' # Optional. Options: quiet, minimal, normal, detailed, diagnostic
+
+- task: MSBuild@1
+  displayName: Build x86
+  inputs:
+    solution: Microsoft.Toolkit.Win32.sln 
+    platform: x86
+    #configuration: # Optional
+    #msbuildArguments: # Optional
+    #clean: false # Optional
+    #maximumCpuCount: false # Optional
+    restoreNugetPackages: false # Optional
+    #logProjectEvents: false # Optional
+    #createLogFile: false # Optional
+    #logFileVerbosity: 'normal' # Optional. Options: quiet, minimal, normal, detailed, diagnostic
+
+- task: NuGetCommand@2
+  displayName: NuGet Pack
+  inputs:
+    command: Pack
+    packagesToPack: '**/*.csproj'
+    verbosityRestore: Detailed # Options: quiet, normal, detaile
+
+#- powershell: .\build\build.ps1 -target=Package
+#  displayName: Build 
 
 - task: PowerShell@2
   displayName: Authenticode Sign Packages
