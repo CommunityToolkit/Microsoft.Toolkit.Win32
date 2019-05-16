@@ -45,8 +45,8 @@ steps:
   displayName: Insider SDK
 
 - task: NuGetCommand@2
-displayName: NuGet restore
-inputs:
+  displayName: NuGet restore
+  inputs:
     command: restore
     restoreSolution: Microsoft.Toolkit.Win32.sln
     restoreDirectory: packages/
