@@ -50,6 +50,7 @@ steps:
   inputs:
     command: restore
     platform: x64
+    config: Release
     restoreSolution: Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config
     restoreDirectory: ../packages/
     verbosityRestore: Detailed # Options: quiet, normal, detaile
@@ -59,6 +60,7 @@ steps:
   inputs:
     command: restore
     platform: x86
+    config: Release
     restoreSolution: Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config
     restoreDirectory: ../packages/
     verbosityRestore: Detailed # Options: quiet, normal, detaile
@@ -68,6 +70,7 @@ steps:
   inputs:
     command: restore
     platform: x64
+    config: Release
     restoreSolution: Microsoft.Toolkit.Win32.sln
     restoreDirectory: packages/
     verbosityRestore: Detailed # Options: quiet, normal, detaile
@@ -77,6 +80,7 @@ steps:
   inputs:
     command: restore
     platform: x86
+    config: Release
     restoreSolution: Microsoft.Toolkit.Win32.sln
     restoreDirectory: packages/
     verbosityRestore: Detailed # Options: quiet, normal, detaile
@@ -89,6 +93,7 @@ steps:
   inputs:
     solution: Microsoft.Toolkit.Win32.sln 
     platform: x64
+    config: Release
     restoreNugetPackages: false # Optional
 
 - task: MSBuild@1
@@ -96,12 +101,14 @@ steps:
   inputs:
     solution: Microsoft.Toolkit.Win32.sln 
     platform: x86
+    config: Release
     restoreNugetPackages: false # Optional
 
 - task: NuGetCommand@2
   displayName: NuGet Pack
   inputs:
     command: Pack
+    config: Release
     packagesToPack: '**/*.csproj'
     verbosityRestore: Detailed # Options: quiet, normal, detaile
 
