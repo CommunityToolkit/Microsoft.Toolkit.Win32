@@ -41,6 +41,9 @@ steps:
 - script: nbgv cloud
   displayName: Set Version
 
+- powershell: .\build\Install-WindowsSdkISO.ps1 18362
+  displayName: Insider SDK	  displayName: Insider SDK
+
 - powershell: .\build\build.ps1 -target=Package
   displayName: Build 
 
