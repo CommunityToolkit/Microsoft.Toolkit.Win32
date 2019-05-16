@@ -15,11 +15,11 @@ variables:
 steps:
 - task: BatchScript@1
   inputs:
-    filename: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\Tools\\VsDevCmd.bat"
+    filename: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\Tools\\VsDevCmd.bat"
     arguments: -no_logo
     modifyEnvironment: true
   displayName: Setup Environment Variables
-  
+
 - task: NuGetToolInstaller@0
   displayName: Use NuGet 5.0.0
   inputs:
@@ -30,8 +30,8 @@ steps:
     packageType: 'sdk'
     version: '3.0.100-preview4-011223'
   displayName: Install Dot Net Core SDK 3.0
-    
-- task: DotNetCoreCLI@2  
+
+- task: DotNetCoreCLI@2
   inputs:
     command: custom
     custom: tool
