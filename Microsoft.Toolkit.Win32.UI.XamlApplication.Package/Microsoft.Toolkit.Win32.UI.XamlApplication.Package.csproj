@@ -25,10 +25,12 @@
       <PackagePath>lib\uap10.0</PackagePath>
     </Content>
 
+    <!--
     <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.xml">
       <Pack>true</Pack>
       <PackagePath>lib\uap10.0</PackagePath>
     </Content>
+    -->
 
     <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.dll">
       <Pack>true</Pack>
