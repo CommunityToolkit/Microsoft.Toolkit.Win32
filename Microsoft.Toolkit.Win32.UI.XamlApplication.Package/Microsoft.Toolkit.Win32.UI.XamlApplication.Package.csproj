@@ -6,7 +6,7 @@
     <Title>Windows Community Toolkit XamlApplication</Title>
     <Description>This library provides XAML islands common helpers for native applications. It is part of the Windows Community Toolkit.</Description>
     <PackageTags>XAML Islands XAMLHost</PackageTags>
-    <PackageId>Microsoft.Toolkit.UI.XamlApplication</PackageId>
+    <PackageId>Microsoft.Toolkit.Win32.UI.XamlApplication</PackageId>
     <Platforms>x64;x86</Platforms>
     <IsNativeWin32Project>true</IsNativeWin32Project>
   </PropertyGroup>
@@ -25,12 +25,10 @@
       <PackagePath>lib\uap10.0</PackagePath>
     </Content>
 
-    <!--
     <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.xml">
       <Pack>true</Pack>
       <PackagePath>lib\uap10.0</PackagePath>
     </Content>
-    -->
 
     <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.dll">
       <Pack>true</Pack>
