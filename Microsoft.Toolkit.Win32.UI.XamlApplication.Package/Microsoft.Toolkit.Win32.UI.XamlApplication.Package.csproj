@@ -8,7 +8,6 @@
     <PackageTags>XAML Islands XAMLHost</PackageTags>
     <PackageId>Microsoft.Toolkit.Win32.UI.XamlApplication</PackageId>
     <Platforms>x64;x86;AnyCPU</Platforms>
-    <IsNativeWin32Project>true</IsNativeWin32Project>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -52,7 +51,6 @@
       <Pack>true</Pack>
       <PackagePath>build</PackagePath>
     </Content>
-
   </ItemGroup>
-  <Target Name="Build" />
+
 </Project>
