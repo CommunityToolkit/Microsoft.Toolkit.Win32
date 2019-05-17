@@ -67,6 +67,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication.Package\Microsoft.Toolkit.Win32.UI.XamlApplication.Package.csproj" />
+    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\Microsoft.Toolkit.Win32.UI.XamlHost.Managed.csproj" />
     <Reference Include="..\$(XamlApp-Platform)\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.winmd" />
   </ItemGroup>
 
