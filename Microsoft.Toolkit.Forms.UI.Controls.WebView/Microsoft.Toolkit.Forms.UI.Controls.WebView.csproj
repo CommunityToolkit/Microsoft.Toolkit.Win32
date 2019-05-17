@@ -16,7 +16,7 @@
 
     <TargetPlatformMinVersion Condition="'$(TargetPlatformMinVersion)'==''">10.0.17134.0</TargetPlatformMinVersion>
 
-    <Platforms>x64;x86</Platforms>
+    <Platforms>x64;x86;AnyCPU</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
@@ -28,6 +28,10 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DefineConstants>$(DefineConstants);DEV_DEBUG;DEBUG_LAYOUT;</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>$(DefineConstants);DEV_DEBUG;DEBUG_LAYOUT;</DefineConstants>
   </PropertyGroup>
 

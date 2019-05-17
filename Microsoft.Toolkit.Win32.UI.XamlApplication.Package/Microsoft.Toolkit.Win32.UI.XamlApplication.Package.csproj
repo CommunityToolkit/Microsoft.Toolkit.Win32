@@ -7,17 +7,11 @@
     <Description>This library provides XAML islands common helpers for native applications. It is part of the Windows Community Toolkit.</Description>
     <PackageTags>XAML Islands XAMLHost</PackageTags>
     <PackageId>Microsoft.Toolkit.Win32.UI.XamlApplication</PackageId>
-    <Platforms>x64;x86</Platforms>
+    <Platforms>x64;x86;AnyCPU</Platforms>
     <IsNativeWin32Project>true</IsNativeWin32Project>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <XamlApp-Platform Condition="'$(Platform)' != ''">$(Platform)</XamlApp-Platform>
-    <XamlApp-Platform Condition="'$(Platform)' == 'x86'">Win32</XamlApp-Platform>
-    <XamlApp-Platform Condition="'$(Platform)'=='x86'">Win32</XamlApp-Platform>
-    <XamlApp-Platform Condition="'$(Platform)'=='x64'">x64</XamlApp-Platform>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
+
   <ItemGroup>
 
     <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.winmd">

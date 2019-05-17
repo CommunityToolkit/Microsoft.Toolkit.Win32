@@ -12,7 +12,7 @@
     </Description>
     <PackageTags>XAML Islands Win32 WPF XAMLHost</PackageTags>
     <PackageId>Microsoft.Toolkit.Wpf.UI.XamlHost</PackageId>
-    <Platforms>x64;x86</Platforms>
+    <Platforms>x64;x86;AnyCPU</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
