@@ -127,7 +127,7 @@ steps:
 - task: NuGetCommand@2
   displayName: NuGet Pack
   inputs:
-    command: Pack
+    command: pack
     configuration: Release
     packagesToPack: '**/*.csproj'
     verbosityRestore: Detailed # Options: quiet, normal, detaile
