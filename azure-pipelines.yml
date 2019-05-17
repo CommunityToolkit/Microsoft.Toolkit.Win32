@@ -98,6 +98,15 @@ steps:
     restoreNugetPackages: false # Optional
 
 - task: MSBuild@1
+  displayName: Build x86 Restore
+  inputs:
+    solution: Microsoft.Toolkit.Win32.sln 
+    platform: x86
+    configuration: Release
+    msbuildArguments: /target:Restore
+    restoreNugetPackages: false # Optional
+
+- task: MSBuild@1
   displayName: Build x64
   inputs:
     solution: Microsoft.Toolkit.Win32.sln 
@@ -112,6 +121,7 @@ steps:
     solution: Microsoft.Toolkit.Win32.sln 
     platform: x86
     configuration: Release
+    msbuildArguments: /target:Build
     restoreNugetPackages: false # Optional
 
 - task: NuGetCommand@2
