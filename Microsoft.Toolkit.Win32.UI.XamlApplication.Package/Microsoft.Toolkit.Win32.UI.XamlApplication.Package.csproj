@@ -20,32 +20,32 @@
   </PropertyGroup>
   <ItemGroup>
 
-    <Content Include="..\$(Configuration)\Win32\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.winmd">
+    <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.winmd">
       <Pack>true</Pack>
       <PackagePath>lib\uap10.0</PackagePath>
     </Content>
 
-    <Content Include="..\$(Configuration)\Win32\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.xml">
+    <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.xml">
       <Pack>true</Pack>
       <PackagePath>lib\uap10.0</PackagePath>
     </Content>
 
-    <Content Include="..\$(Configuration)\Win32\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.dll">
+    <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.dll">
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-x86\native</PackagePath>
     </Content>
 
-    <Content Include="..\$(Configuration)\Win32\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
+    <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-x86\native</PackagePath>
     </Content>
 
-    <Content Include="..\$(Configuration)\x64\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.dll">
+    <Content Include="..\x64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.dll">
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-x64\native</PackagePath>
     </Content>
 
-    <Content Include="..\$(Configuration)\x64\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
+    <Content Include="..\x64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-x64\native</PackagePath>
     </Content>
