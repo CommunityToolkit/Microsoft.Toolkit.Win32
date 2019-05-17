@@ -143,10 +143,10 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::factory_implementation
             L"twinapi.appcore.dll",
             L"threadpoolwinrt.dll",
         };
-        for (auto dllName : preloadDlls)
+        for (size_t i = 0; i < m_preloadInstances.size(); i++)
         {
-            const auto module = ::LoadLibraryExW(dllName, nullptr, 0);
-            m_preloadInstances.push_back(module);
+            const auto module = ::LoadLibraryExW(preloadDlls[i], nullptr, 0);
+            m_preloadInstances[i] = module;
         }
     }
 
@@ -156,6 +156,5 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::factory_implementation
         {
             ::FreeLibrary(module);
         }
-        m_preloadInstances.clear();
     }
 }

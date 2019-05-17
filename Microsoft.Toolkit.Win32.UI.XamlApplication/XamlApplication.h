@@ -51,6 +51,6 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::factory_implementation
         XamlApplication();
         ~XamlApplication();
     private:
-        std::vector<HMODULE> m_preloadInstances;
+        std::array<HMODULE, 2> m_preloadInstances;
     };
 }
