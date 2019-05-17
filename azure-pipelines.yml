@@ -124,14 +124,23 @@ steps:
     msbuildArguments: /target:Build
     restoreNugetPackages: false # Optional
 
-- task: NuGetCommand@2
-  displayName: NuGet Pack
+- task: MSBuild@1
+  displayName: Build Pack
   inputs:
-    command: pack
+    solution: Microsoft.Toolkit.Win32.sln 
     platform: x86
     configuration: Release
-    packagesToPack: '**/*.csproj'
-    verbosityRestore: Detailed # Options: quiet, normal, detaile
+    msbuildArguments: /target:Pack
+    restoreNugetPackages: false # Optional
+
+#- task: NuGetCommand@2
+#  displayName: NuGet Pack
+#  inputs:
+#    command: pack
+#    platform: x86
+#    configuration: Release
+#    packagesToPack: '**/*.csproj'
+#    verbosityRestore: Detailed # Options: quiet, normal, detaile
 
 - task: PowerShell@2
   displayName: Authenticode Sign Packages
