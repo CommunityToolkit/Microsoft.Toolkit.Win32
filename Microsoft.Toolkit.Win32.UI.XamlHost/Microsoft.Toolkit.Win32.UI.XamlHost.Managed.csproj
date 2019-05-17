@@ -16,7 +16,7 @@
     <XamlApp-Platform Condition="'$(Platform)' == 'x86'">Win32</XamlApp-Platform>
     <XamlApp-Platform Condition="'$(Platform)'=='x86'">Win32</XamlApp-Platform>
     <XamlApp-Platform Condition="'$(Platform)'=='x64'">x64</XamlApp-Platform>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\bin\$(Configuration)\$(XamlApp-Platform)\Microsoft.Toolkit.Win32.UI.XamlHost.winmd">
