@@ -32,7 +32,12 @@
     </CreateItem>
     <Copy SourceFiles="%(FilterBin.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)"/>
 
-    <GetAssemblyIdentity AssemblyFiles="@(FilterBin)">
+    <CreateItem Include="%(BuildOutputs.RelativeDir)*.pri;%(BuildOutputs.RelativeDir)*.xbf">
+      <Output ItemName="FilterPri" TaskParameter="Include"/>
+    </CreateItem>
+    <Copy SourceFiles="%(FilterPri.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)\"/>
+
+    <GetAssemblyIdentity AssemblyFiles="@(FilterBin)" ContinueOnError="true">
       <Output
         TaskParameter="Assemblies"
         ItemName="AssemblyIdentities"/>
@@ -42,16 +47,6 @@
       <Output ItemName="FilterXbf" TaskParameter="Include"/>
     </CreateItem>
     <Copy SourceFiles="%(FilterXbf.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)\%(FilterXbf.AsmName)"/>
-
-    <CreateItem Include="%(AssemblyIdentities.Dir)App*.xbf" AdditionalMetadata="AsmName=%(AssemblyIdentities.Name)">
-      <Output ItemName="FilterXbf" TaskParameter="Include"/>
-    </CreateItem>
-    <Copy SourceFiles="%(FilterXbf.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)\"/>
-
-    <CreateItem Include="%(AssemblyIdentities.RelativeDir)*.pri">
-      <Output ItemName="FilterPri" TaskParameter="Include"/>
-    </CreateItem>
-    <Copy SourceFiles="%(FilterPri.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)"/>
 
   </Target>
 
