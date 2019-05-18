@@ -8,6 +8,12 @@
 
 namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 {
+    enum ExecutionMode
+    {
+        UWP = 0,
+        Win32 = 1,
+    };
+
     class XamlApplication : public XamlApplicationT<XamlApplication, Windows::UI::Xaml::Markup::IXamlMetadataProvider>
     {
     public:
@@ -19,10 +25,6 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         void Close();
 
         winrt::Windows::Foundation::IClosable WindowsXamlManager() const;
-        winrt::Microsoft::Toolkit::Win32::UI::XamlHost::ExecutionMode ExecutionMode() const
-        {
-            return m_executionMode;
-        }
 
         winrt::Windows::UI::Xaml::Markup::IXamlType GetXamlType(winrt::Windows::UI::Xaml::Interop::TypeName const& type);
         winrt::Windows::UI::Xaml::Markup::IXamlType GetXamlType(winrt::hstring const& fullName);
@@ -36,7 +38,7 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         }
 
     private:
-        winrt::Microsoft::Toolkit::Win32::UI::XamlHost::ExecutionMode m_executionMode = ExecutionMode::Win32;
+        ExecutionMode m_executionMode = ExecutionMode::Win32;
         winrt::Windows::UI::Xaml::Hosting::WindowsXamlManager m_windowsXamlManager = nullptr;
         winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider> m_providers = winrt::single_threaded_vector<Windows::UI::Xaml::Markup::IXamlMetadataProvider>();
         bool m_bIsClosed = false;

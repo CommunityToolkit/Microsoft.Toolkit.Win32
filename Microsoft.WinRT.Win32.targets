@@ -37,6 +37,11 @@
     </CreateItem>
     <Copy SourceFiles="%(FilterPri.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)\"/>
 
+    <CreateItem Include="%(BuildOutputs.RelativeDir)AppxManifest*.xml">
+      <Output ItemName="AppxManifest" TaskParameter="Include"/>
+    </CreateItem>
+    <Copy SourceFiles="%(Filter.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)"/>
+
     <GetAssemblyIdentity AssemblyFiles="@(FilterBin)" ContinueOnError="true">
       <Output
         TaskParameter="Assemblies"

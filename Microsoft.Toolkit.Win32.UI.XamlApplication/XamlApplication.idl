@@ -6,12 +6,6 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         Windows.Foundation.Collections.IVector<Windows.UI.Xaml.Markup.IXamlMetadataProvider> MetadataProviders { get; };
     };
 
-    enum ExecutionMode
-    {
-        UWP = 0,
-        Win32 = 1,
-    };
-
     [default_interface]
     unsealed runtimeclass XamlApplication : Windows.UI.Xaml.Application, IXamlMetadataContainer, Windows.Foundation.IClosable
     {
@@ -19,7 +13,6 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         protected XamlApplication();
         protected void Initialize();
 
-        ExecutionMode ExecutionMode{ get; };
         Windows.Foundation.IClosable WindowsXamlManager{ get; };
         Boolean IsDisposed { get; };
     }
