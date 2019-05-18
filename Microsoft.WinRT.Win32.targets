@@ -172,12 +172,12 @@
     </CreateProperty>
 
     <Exec
-      Condition="'$(ApplicationManifest)'!=''"
+      Condition="Exists('$(ApplicationManifest)')"
       Command="&quot;$(ManifestTool)&quot; -nologo -manifest &quot;$(MSBuildProjectDirectory)\$(GeneratedApplicationManifest)&quot; &quot;$(MSBuildProjectDirectory)\$(ApplicationManifest)&quot; -out:&quot;$(MSBuildProjectDirectory)\$(MergedApplicationManifest)&quot;"
       WorkingDirectory="$(MSBuildProjectDirectory)" >
     </Exec>
     <CreateProperty
-      Condition="'$(ApplicationManifest)'==''"
+      Condition="!Exists('$(ApplicationManifest)')"
       Value="$(GeneratedApplicationManifest)">
       <Output
           TaskParameter="Value"
