@@ -17,16 +17,36 @@
     <MSBuild Projects="@(ProjectReference)" Properties="Configuration=$(Configuration);Platform=$(Platform)" ContinueOnError="true">
       <Output TaskParameter="TargetOutputs" ItemName="BuildOutputPaths"/>
     </MSBuild>
-    <CreateItem Include="%(BuildOutputPaths.Identity)">
+
+    <CreateItem Include="%(BuildOutputPaths.Identity)" AdditionalMetadata="_Project=%(BuildOutputPaths.MSBuildSourceProjectFile)">
       <Output ItemName="BuildOutputs" TaskParameter="Include"/>
     </CreateItem>
-    <CreateItem Include="%(BuildOutputs.RelativeDir)*.exe;%(BuildOutputs.RelativeDir)*.dll;%(BuildOutputs.RelativeDir)*.xbf;%(BuildOutputs.RelativeDir)*.pri">
-      <Output ItemName="Filter" TaskParameter="Include"/>
+    <CreateItem Include="%(BuildOutputs.RelativeDir)*.exe;%(BuildOutputs.RelativeDir)*.dll" AdditionalMetadata="_Project=%(BuildOutputs._Project);Dir=%(BuildOutputs.RelativeDir)">
+      <Output ItemName="FilterBin" TaskParameter="Include"/>
     </CreateItem>
-    <CreateItem Include="%(BuildOutputs.RelativeDir)AppxManifest*.xml">
-      <Output ItemName="AppxManifest" TaskParameter="Include"/>
+    <Copy SourceFiles="%(FilterBin.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)"/>
+
+    <GetAssemblyIdentity AssemblyFiles="@(FilterBin)">
+      <Output
+        TaskParameter="Assemblies"
+        ItemName="AssemblyIdentities"/>
+    </GetAssemblyIdentity>
+
+    <CreateItem Include="%(AssemblyIdentities.Dir)*.xbf" AdditionalMetadata="AsmName=%(AssemblyIdentities.Name)">
+      <Output ItemName="FilterXbf" TaskParameter="Include"/>
     </CreateItem>
-    <Copy SourceFiles="%(Filter.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)"/>
+    <Copy SourceFiles="%(FilterXbf.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)\%(FilterXbf.AsmName)"/>
+
+    <CreateItem Include="%(AssemblyIdentities.Dir)App*.xbf" AdditionalMetadata="AsmName=%(AssemblyIdentities.Name)">
+      <Output ItemName="FilterXbf" TaskParameter="Include"/>
+    </CreateItem>
+    <Copy SourceFiles="%(FilterXbf.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)\"/>
+
+    <CreateItem Include="%(AssemblyIdentities.RelativeDir)*.pri">
+      <Output ItemName="FilterPri" TaskParameter="Include"/>
+    </CreateItem>
+    <Copy SourceFiles="%(FilterPri.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)"/>
+
   </Target>
 
   <UsingTask TaskName="GenerateWinRTManifestFromAppx" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
