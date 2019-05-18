@@ -27,7 +27,7 @@
     <CreateItem Include="%(BuildOutputPaths.Identity)" AdditionalMetadata="_Project=%(BuildOutputPaths.MSBuildSourceProjectFile)">
       <Output ItemName="BuildOutputs" TaskParameter="Include"/>
     </CreateItem>
-    <CreateItem Include="%(BuildOutputs.RelativeDir)*.exe;%(BuildOutputs.RelativeDir)*.dll" AdditionalMetadata="_Project=%(BuildOutputs._Project);Dir=%(BuildOutputs.RelativeDir)">
+    <CreateItem Include="%(BuildOutputs.RelativeDir)*.exe;%(BuildOutputs.RelativeDir)*.dll;%(BuildOutputs.RelativeDir)*.winmd" AdditionalMetadata="_Project=%(BuildOutputs._Project);Dir=%(BuildOutputs.RelativeDir)">
       <Output ItemName="FilterBin" TaskParameter="Include"/>
     </CreateItem>
     <Copy SourceFiles="%(FilterBin.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)"/>
