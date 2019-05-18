@@ -6,6 +6,12 @@
     <AssetTargetFallback Condition="'$(AssetTargetFallback)'==''">uap10.0.$(DefaultTargetPlatformVersion)</AssetTargetFallback>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <_TargetPlatformVersion Condition="$(_TargetPlatformVersion)==''">10.0.18362.0</_TargetPlatformVersion>
+    <ManifestTool Condition="Exists('$(MSBuildThisFileDirectory)\..\tools\mt.exe')">$(MSBuildThisFileDirectory)\..\tools\mt.exe</ManifestTool>
+    <ManifestTool Condition="'$(ManifestTool)'==''">$(MSBuildProgramFiles32)\Windows Kits\10\bin\$(_TargetPlatformVersion)\x86\mt.exe</ManifestTool>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(IntDir)'==''">
     <IntDir>$(BaseIntermediateOutputPath)\$(Platform)\$(Configuration)\$(TargetFramework)\</IntDir>
   </PropertyGroup>
@@ -155,6 +161,30 @@
           ItemName="Manifest"/>
     </CreateItem>
     <CreateProperty Value="$(IntDir)Manifests\app.manifest">
+      <Output
+          TaskParameter="Value"
+          PropertyName="GeneratedApplicationManifest" />
+    </CreateProperty>
+    <CreateProperty Value="$(IntDir)Manifests\mergeapp.manifest">
+      <Output
+          TaskParameter="Value"
+          PropertyName="MergedApplicationManifest" />
+    </CreateProperty>
+
+    <Exec
+      Condition="'$(ApplicationManifest)'!=''"
+      Command="&quot;$(ManifestTool)&quot; -nologo -manifest &quot;$(MSBuildProjectDirectory)\$(GeneratedApplicationManifest)&quot; &quot;$(MSBuildProjectDirectory)\$(ApplicationManifest)&quot; -out:&quot;$(MSBuildProjectDirectory)\$(MergedApplicationManifest)&quot;"
+      WorkingDirectory="$(MSBuildProjectDirectory)" >
+    </Exec>
+    <CreateProperty
+      Condition="'$(ApplicationManifest)'==''"
+      Value="$(GeneratedApplicationManifest)">
+      <Output
+          TaskParameter="Value"
+          PropertyName="MergedApplicationManifest" />
+    </CreateProperty>
+
+    <CreateProperty Value="$(MergedApplicationManifest)">
       <Output
           TaskParameter="Value"
           PropertyName="ApplicationManifest" />

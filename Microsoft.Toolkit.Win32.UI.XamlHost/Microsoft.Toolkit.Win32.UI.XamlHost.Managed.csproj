@@ -27,6 +27,19 @@
       <PackagePath>build</PackagePath>
     </Content>
 
+    <Content Include="$(MSBuildProgramFiles32)\Windows Kits\10\bin\10.0.$(DefaultTargetPlatformVersion).0\x86\mt.exe">
+      <Pack>true</Pack>
+      <PackagePath>tools</PackagePath>
+    </Content>
+    <Content Include="$(MSBuildProgramFiles32)\Windows Kits\10\bin\10.0.$(DefaultTargetPlatformVersion).0\x86\mt.exe.config">
+      <Pack>true</Pack>
+      <PackagePath>tools</PackagePath>
+    </Content>
+    <Content Include="$(MSBuildProgramFiles32)\Windows Kits\10\bin\10.0.$(DefaultTargetPlatformVersion).0\x86\midlrtmd.dll">
+      <Pack>true</Pack>
+      <PackagePath>tools</PackagePath>
+    </Content>
+
   </ItemGroup>
 
   <PropertyGroup>
