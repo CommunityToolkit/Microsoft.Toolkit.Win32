@@ -149,6 +149,15 @@ Task("Build")
     EnsureDirectoryExists(nupkgDir);
 
     {
+        var solution = new FilePath(@"..\Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config");
+        var nugetRestoreSettings = new NuGetRestoreSettings {
+            PackagesDirectory = new DirectoryPath(@"..\packages"),
+        };
+        Information("\nRestore Native Step");
+        NuGetRestore(solution, nugetRestoreSettings);
+    }
+
+    {
         var buildSettings = new MSBuildSettings
         {
             PlatformTarget = PlatformTarget.x64,
