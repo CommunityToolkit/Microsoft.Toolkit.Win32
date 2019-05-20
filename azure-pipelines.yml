@@ -65,6 +65,9 @@ steps:
     restoreDirectory: ../packages/
     verbosityRestore: Detailed # Options: quiet, normal, detaile
 
+- powershell: .\build\build.ps1 -target=Package
+  displayName: Build 
+
 - task: NuGetCommand@2
   displayName: NuGet restore x64
   inputs:
@@ -84,9 +87,6 @@ steps:
     restoreSolution: Microsoft.Toolkit.Win32.sln
     restoreDirectory: packages/
     verbosityRestore: Detailed # Options: quiet, normal, detaile
-
-#- powershell: .\build\build.ps1 -target=Package
-#  displayName: Build 
 
 - task: MSBuild@1
   displayName: Build x64 Restore
@@ -132,15 +132,6 @@ steps:
     configuration: Release
     msbuildArguments: /target:Pack
     restoreNugetPackages: false # Optional
-
-#- task: NuGetCommand@2
-#  displayName: NuGet Pack
-#  inputs:
-#    command: pack
-#    platform: x86
-#    configuration: Release
-#    packagesToPack: '**/*.csproj'
-#    verbosityRestore: Detailed # Options: quiet, normal, detaile
 
 - task: PowerShell@2
   displayName: Authenticode Sign Packages

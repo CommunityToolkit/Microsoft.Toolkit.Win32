@@ -146,56 +146,66 @@ Task("Build")
     .Does(() =>
 {
     Information("\nBuilding Solution");
-
-    var buildSettings = new MSBuildSettings
-    {
-        PlatformTarget = PlatformTarget.x86,
-        MaxCpuCount = 0,
-    }
-    .SetConfiguration("Release")
-    //.WithProperty("GenerateLibraryLayout", "true")
-    .UseToolVersion(MSBuildToolVersion.VS2019)
-    .WithTarget("Restore");
-
-    buildSettings = new MSBuildSettings
-    {
-        PlatformTarget = PlatformTarget.x64,
-        MaxCpuCount = 0,
-    }
-    .SetConfiguration("Release")
-    //.WithProperty("GenerateLibraryLayout", "true")
-    .UseToolVersion(MSBuildToolVersion.VS2019)
-    .WithTarget("Restore");
-
-    Information("\nRestore Step");
-    MSBuild(win32Solution, buildSettings);
-
     EnsureDirectoryExists(nupkgDir);
 
-    // Build once with normal dependency ordering
-    buildSettings = new MSBuildSettings
     {
-        PlatformTarget = PlatformTarget.x86,
-        MaxCpuCount = 0,
-    }
-    .SetConfiguration("Release")
-    //.WithProperty("GenerateLibraryLayout", "true")
-    .UseToolVersion(MSBuildToolVersion.VS2019)
-    .WithTarget("Build");
+        var buildSettings = new MSBuildSettings
+        {
+            PlatformTarget = PlatformTarget.x64,
+            MaxCpuCount = 1,
+        }
+        .SetConfiguration("Release")
+        .UseToolVersion(MSBuildToolVersion.VS2019)
+        .WithTarget("Restore");
 
-    // Build once with normal dependency ordering
-    buildSettings = new MSBuildSettings
+        Information("\nRestore x64 Step");
+        MSBuild(win32Solution, buildSettings);
+    }
+
     {
-        PlatformTarget = PlatformTarget.x64,
-        MaxCpuCount = 0,
-    }
-    .SetConfiguration("Release")
-    //.WithProperty("GenerateLibraryLayout", "true")
-    .UseToolVersion(MSBuildToolVersion.VS2019)
-    .WithTarget("Build");
+        // Build once with normal dependency ordering
+        var buildSettings = new MSBuildSettings
+        {
+            PlatformTarget = PlatformTarget.x64,
+            MaxCpuCount = 1,
+        }
+        .SetConfiguration("Release")
+        .UseToolVersion(MSBuildToolVersion.VS2019)
+        .WithTarget("Build");
 
-    Information("\nBuild Step");
-    MSBuild(win32Solution, buildSettings);
+        Information("\nBuild x64 Step");
+        MSBuild(win32Solution, buildSettings);
+    }
+
+    {
+        var buildSettings = new MSBuildSettings
+        {
+            PlatformTarget = PlatformTarget.x86,
+            MaxCpuCount = 1,
+        }
+        .SetConfiguration("Release")
+        .UseToolVersion(MSBuildToolVersion.VS2019)
+        .WithTarget("Restore");
+
+        Information("\nRestore x86 Step");
+        MSBuild(win32Solution, buildSettings);
+    }
+
+    {
+        // Build once with normal dependency ordering
+        var buildSettings = new MSBuildSettings
+        {
+            PlatformTarget = PlatformTarget.x86,
+            MaxCpuCount = 1,
+        }
+        .SetConfiguration("Release")
+        .UseToolVersion(MSBuildToolVersion.VS2019)
+        .WithTarget("Build");
+
+        Information("\nBuild x86 Step");
+        MSBuild(win32Solution, buildSettings);
+    }
+
 });
 
 Task("InheritDoc")
