@@ -65,8 +65,8 @@ steps:
     restoreDirectory: ../packages/
     verbosityRestore: Detailed # Options: quiet, normal, detaile
 
-- powershell: .\build\build.ps1 -target=Package
-  displayName: Build 
+#- powershell: .\build\build.ps1 -target=Package
+#  displayName: Build 
 
 - task: NuGetCommand@2
   displayName: NuGet restore x64
