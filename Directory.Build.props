@@ -24,8 +24,9 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <XamlApp-Platform Condition="'$(Platform)' == ''">x64</XamlApp-Platform>
     <XamlApp-Platform Condition="'$(Platform)' == 'x86'">Win32</XamlApp-Platform>
-    <XamlApp-Platform Condition="'$(Platform)' == 'AnyCPU'">Win32</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)' == 'AnyCPU'">x64</XamlApp-Platform>
     <XamlApp-Platform Condition="'$(Platform)' == 'x64'">x64</XamlApp-Platform>
   </PropertyGroup>
 
