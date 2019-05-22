@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
     <RootNamespace>Microsoft.Toolkit.UI.XamlHost</RootNamespace>
@@ -12,6 +12,10 @@
     <IsNativeProject>true</IsNativeProject>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFrameworks Condition="$(_IsPacking)=='true'">net462</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>

@@ -99,7 +99,7 @@ steps:
     solution: Microsoft.Toolkit.Win32.sln 
     platform: x86
     configuration: Release
-    msbuildArguments: /target:Pack
+    msbuildArguments: /target:Pack /p:_IsPacking=true
     restoreNugetPackages: false # Optional
 
 - task: PowerShell@2
