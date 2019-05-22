@@ -15,5 +15,7 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1205:Partial elements must declare access", Scope = "type", Target = "~T:Microsoft.Toolkit.Wpf.UI.XamlHost.WindowsXamlHostBase")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1601:Partial elements must be documented", Scope = "type", Target = "~T:Microsoft.Toolkit.Wpf.UI.XamlHost.WindowsXamlHostBase")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.OrderingRules", "SA1205:Partial elements must declare access", Scope = "type", Target = "~T:Microsoft.Toolkit.Wpf.UI.XamlHost.WindowsXamlHost")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1810:Initialize reference type static fields inline", Scope = "member", Target = "~M:Microsoft.Toolkit.Wpf.UI.XamlHost.WindowsXamlHostBase.#cctor")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1810:Initialize reference type static fields inline", Scope = "member", Target = "~M:Microsoft.Toolkit.Forms.UI.XamlHost.WindowsXamlHostBase.#cctor")]
 
 #pragma warning restore SA1404 // Code analysis suppression must have justification

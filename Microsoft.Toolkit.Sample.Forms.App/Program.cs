@@ -16,7 +16,6 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
         [STAThread]
         static void Main()
         {
-            System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(Microsoft.Toolkit.Forms.UI.XamlHost.WindowsXamlHostBase).TypeHandle);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(true);
             Application.Run(new Form1());
