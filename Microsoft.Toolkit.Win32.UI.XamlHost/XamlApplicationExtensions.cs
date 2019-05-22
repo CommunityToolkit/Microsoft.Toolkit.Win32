@@ -19,6 +19,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
     public static partial class XamlApplicationExtensions
     {
         private static IXamlMetadataContainer _metadataContainer;
+        private static bool _initialized = false;
 
         private static IXamlMetadataContainer GetCurrentProvider()
         {
@@ -42,17 +43,23 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         {
             // Instantiation of the application object must occur before creating the DesktopWindowXamlSource instance.
             // DesktopWindowXamlSource will create a generic Application object unable to load custom UWP XAML metadata.
-            if (_metadataContainer == null)
+            if (_metadataContainer == null && !_initialized)
             {
+                _initialized = true;
+
                 // Create a custom UWP XAML Application object that implements reflection-based XAML metadata probing.
                 try
                 {
-                    var providers = MetadataProviderDiscovery.DiscoverMetadataProviders().ToList();
                     _metadataContainer = GetCurrentProvider();
                     if (_metadataContainer == null)
                     {
-                        _metadataContainer = new XamlApplication(providers);
-                        return _metadataContainer;
+                        var providers = MetadataProviderDiscovery.DiscoverMetadataProviders().ToList();
+                        _metadataContainer = GetCurrentProvider();
+                        if (_metadataContainer == null)
+                        {
+                            _metadataContainer = new XamlApplication(providers);
+                            return _metadataContainer;
+                        }
                     }
                     else
                     {
