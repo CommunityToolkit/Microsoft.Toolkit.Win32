@@ -12,10 +12,7 @@
     <IsNativeProject>true</IsNativeProject>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <TargetFrameworks Condition="$(_IsPacking)=='true'">net462</TargetFrameworks>
+    <IsTool>true</IsTool>
   </PropertyGroup>
 
   <ItemGroup>
