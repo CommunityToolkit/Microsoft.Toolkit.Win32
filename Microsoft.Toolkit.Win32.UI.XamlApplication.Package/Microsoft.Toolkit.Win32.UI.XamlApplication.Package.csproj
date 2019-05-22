@@ -9,6 +9,7 @@
     <PackageId>Microsoft.Toolkit.Win32.UI.XamlApplication</PackageId>
     <Platforms>x64;x86;AnyCPU</Platforms>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IsNativeProject>true</IsNativeProject>
   </PropertyGroup>
 
   <ItemGroup>
