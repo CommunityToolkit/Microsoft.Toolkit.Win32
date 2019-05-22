@@ -10,6 +10,8 @@
     <Platforms>x64;x86;AnyCPU</Platforms>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IsNativeProject>true</IsNativeProject>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
 
   <ItemGroup>
