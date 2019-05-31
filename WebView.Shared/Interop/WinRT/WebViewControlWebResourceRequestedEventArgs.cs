@@ -10,7 +10,7 @@ using windows = Windows;
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 {
     /// <summary>
-    /// CProvides data for the <see cref="IWebView.WebResourceRequested" /> event. This class cannot be inherited.
+    /// Provides data for the <see cref="IWebView.WebResourceRequested" /> event. This class cannot be inherited.
     /// </summary>
     /// <remarks>Copy from <see cref="windows.Web.UI.WebViewControlWebResourceRequestedEventArgs"/> to avoid requirement to link Windows.winmd</remarks>
     /// <seealso cref="System.EventArgs" />
