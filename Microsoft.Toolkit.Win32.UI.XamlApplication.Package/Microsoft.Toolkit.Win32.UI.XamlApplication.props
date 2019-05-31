@@ -4,4 +4,8 @@
     <!-- Native projects does not support Reflection metadata provider -->
     <EnableTypeInfoReflection>false</EnableTypeInfoReflection>
   </PropertyGroup>
+  <PropertyGroup>
+    <XamlApp-Platform Condition="'$(Platform)' == 'Win32'">x86</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)' != 'Win32'">$(Platform)</XamlApp-Platform>
+  </PropertyGroup>
 </Project>

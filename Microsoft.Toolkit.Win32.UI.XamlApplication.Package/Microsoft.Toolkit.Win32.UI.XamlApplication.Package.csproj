@@ -61,11 +61,15 @@
       <PackagePath>runtimes\win10-x64\native</PackagePath>
     </Content>
 
-    <Content Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlApplication.props">
+    <Content Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication.props">
       <Pack>true</Pack>
       <PackagePath>build</PackagePath>
     </Content>
-    <Content Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlApplication.targets">
+    <Content Include="..\managed\Microsoft.Toolkit.Win32.UI.XamlApplication.targets">
+      <Pack>true</Pack>
+      <PackagePath>build</PackagePath>
+    </Content>
+    <Content Include="..\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets">
       <Pack>true</Pack>
       <PackagePath>build\native</PackagePath>
     </Content>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Reference Include="$(MSBuildThisFileDirectory)..\lib\uap10.0\Microsoft.Toolkit.Win32.UI.XamlHost.winmd">
+      <Implementation>Microsoft.Toolkit.Win32.UI.XamlHost.dll</Implementation>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+</Project>
