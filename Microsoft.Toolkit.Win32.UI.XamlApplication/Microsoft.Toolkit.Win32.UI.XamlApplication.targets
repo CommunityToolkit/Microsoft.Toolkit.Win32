@@ -4,15 +4,12 @@
     <XamlApp-Platform Condition="'$(Platform)' == 'Win32'">x86</XamlApp-Platform>
     <XamlApp-Platform Condition="'$(Platform)' != 'Win32'">$(Platform)</XamlApp-Platform>
   </PropertyGroup>
-  <PropertyGroup>
-    <EnableTypeInfoReflection>false</EnableTypeInfoReflection>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="$(MSBuildThisFileDirectory)..\lib\uap10.0\Microsoft.Toolkit.Win32.UI.XamlHost.winmd">
+    <Reference Include="$(MSBuildThisFileDirectory)..\..\lib\uap10.0\Microsoft.Toolkit.Win32.UI.XamlHost.winmd">
       <Implementation>Microsoft.Toolkit.Win32.UI.XamlHost.dll</Implementation>
       <Private>false</Private>
     </Reference>
-    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\lib\uap10.0\Microsoft.Toolkit.Win32.UI.XamlHost.*" />
-    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\runtimes\win10-$(XamlApp-Platform)\native\Microsoft.Toolkit.Win32.UI.XamlHost.*" />
+    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\lib\uap10.0\Microsoft.Toolkit.Win32.UI.XamlHost.*" />
+    <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(XamlApp-Platform)\native\Microsoft.Toolkit.Win32.UI.XamlHost.*" />
   </ItemGroup>
 </Project>
