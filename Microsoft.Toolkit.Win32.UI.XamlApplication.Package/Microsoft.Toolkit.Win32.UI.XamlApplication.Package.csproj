@@ -67,7 +67,7 @@
     </Content>
     <Content Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlApplication.targets">
       <Pack>true</Pack>
-      <PackagePath>build</PackagePath>
+      <PackagePath>build\native</PackagePath>
     </Content>
   </ItemGroup>
 
