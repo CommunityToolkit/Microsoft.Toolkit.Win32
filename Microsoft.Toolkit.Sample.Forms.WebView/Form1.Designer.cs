@@ -97,6 +97,7 @@ namespace Microsoft.Toolkit.Sample.Forms.WebView
             this.webView1.NavigationStarting += new System.EventHandler<Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlNavigationStartingEventArgs>(this.webView1_NavigationStarting);
             this.webView1.PermissionRequested += new System.EventHandler<Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlPermissionRequestedEventArgs>(this.webView1_PermissionRequested);
             this.webView1.ScriptNotify += new System.EventHandler<Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlScriptNotifyEventArgs>(this.webView1_ScriptNotify);
+            this.webView1.WebResourceRequested += new System.EventHandler<Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlWebResourceRequestedEventArgs>(this.webView1_WebResourceRequested);
             // 
             // button2
             // 
@@ -150,7 +151,6 @@ namespace Microsoft.Toolkit.Sample.Forms.WebView
             this.ResumeLayout(false);
 
         }
-
 
         #endregion
 

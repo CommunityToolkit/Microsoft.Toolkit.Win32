@@ -147,5 +147,10 @@ namespace Microsoft.Toolkit.Sample.Forms.WebView
         {
             MessageBox.Show(e.Value, e.Uri?.ToString() ?? string.Empty);
         }
+
+        private void webView1_WebResourceRequested(object sender, Win32.UI.Controls.Interop.WinRT.WebViewControlWebResourceRequestedEventArgs e)
+        {
+            
+        }
     }
 }

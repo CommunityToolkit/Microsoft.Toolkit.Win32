@@ -118,6 +118,8 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Unviewable", Justification ="This is the name from WinRT")]
         internal event EventHandler<WebViewControlUnviewableContentIdentifiedEventArgs> UnviewableContentIdentified = (sender, args) => { };
 
+        internal event EventHandler<WebViewControlWebResourceRequestedEventArgs> WebResourceRequested = (sender, args) => { };
+
         internal static bool IsSupported => OSVersionHelper.IsWindows10April2018OrGreater
                                             && OSVersionHelper.IsWorkstation
                                             && OSVersionHelper.EdgeExists;
@@ -1050,6 +1052,13 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 
         private void OnUnviewableContentIdentified(IWebViewControl sender, windows.Web.UI.WebViewControlUnviewableContentIdentifiedEventArgs args) => OnUnviewableContentIdentified(args);
 
+        private void OnWebResourceRequested(WebViewControlWebResourceRequestedEventArgs args)
+        {
+            WebResourceRequested?.Invoke(this, args);
+        }
+
+        private void OnWebResourceRequested(IWebViewControl sender, windows.Web.UI.WebViewControlWebResourceRequestedEventArgs args) => OnWebResourceRequested(args);
+
         [SecurityCritical]
         private void SubscribeEvents()
         {
@@ -1076,6 +1085,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
             _webViewControl.UnsafeContentWarningDisplaying += OnUnsafeContentWarningDisplaying;
             _webViewControl.UnsupportedUriSchemeIdentified += OnUnsupportedUriSchemeIdentified;
             _webViewControl.UnviewableContentIdentified += OnUnviewableContentIdentified;
+            _webViewControl.WebResourceRequested += OnWebResourceRequested;
 
             ApiInformationExtensions.ExecuteIfEventPresent(
                 WinRtType,
@@ -1124,6 +1134,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
             _webViewControl.UnsafeContentWarningDisplaying -= OnUnsafeContentWarningDisplaying;
             _webViewControl.UnsupportedUriSchemeIdentified -= OnUnsupportedUriSchemeIdentified;
             _webViewControl.UnviewableContentIdentified -= OnUnviewableContentIdentified;
+            _webViewControl.WebResourceRequested -= OnWebResourceRequested;
 
             ApiInformationExtensions.ExecuteIfEventPresent(
                 WinRtType,

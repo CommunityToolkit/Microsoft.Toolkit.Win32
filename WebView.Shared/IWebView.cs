@@ -136,6 +136,11 @@ namespace Microsoft.Toolkit.Win32.UI.Controls
         event EventHandler<WebViewControlUnviewableContentIdentifiedEventArgs> UnviewableContentIdentified;
 
         /// <summary>
+        /// Allows the interception of an HTTP request. This event is triggered every time an HTTP request is made.
+        /// </summary>
+        event EventHandler<WebViewControlWebResourceRequestedEventArgs> WebResourceRequested;
+
+        /// <summary>
         /// Gets a value indicating whether there is at least one page in the backward navigation history.
         /// </summary>
         /// <value><c>true</c> if the <see cref="IWebView" /> can navigate backward; otherwise, <c>false</c>.</value>

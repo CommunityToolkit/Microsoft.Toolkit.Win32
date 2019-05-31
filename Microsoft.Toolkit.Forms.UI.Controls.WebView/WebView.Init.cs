@@ -188,6 +188,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
             _webViewControl.UnsafeContentWarningDisplaying += OnUnsafeContentWarningDisplaying;
             _webViewControl.UnsupportedUriSchemeIdentified += OnUnsupportedUriSchemeIdentified;
             _webViewControl.UnviewableContentIdentified += OnUnviewableContentIdentified;
+            _webViewControl.WebResourceRequested += OnWebResourceRequested;
         }
 
         private void UnsubscribeEvents()
@@ -217,6 +218,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
             _webViewControl.UnsafeContentWarningDisplaying -= OnUnsafeContentWarningDisplaying;
             _webViewControl.UnsupportedUriSchemeIdentified -= OnUnsupportedUriSchemeIdentified;
             _webViewControl.UnviewableContentIdentified -= OnUnviewableContentIdentified;
+            _webViewControl.WebResourceRequested -= OnWebResourceRequested;
         }
     }
 }

@@ -16,6 +16,7 @@ using WebViewControlPermissionRequestedEventArgs = Microsoft.Toolkit.Win32.UI.Co
 using WebViewControlScriptNotifyEventArgs = Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlScriptNotifyEventArgs;
 using WebViewControlUnsupportedUriSchemeIdentifiedEventArgs = Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlUnsupportedUriSchemeIdentifiedEventArgs;
 using WebViewControlUnviewableContentIdentifiedEventArgs = Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlUnviewableContentIdentifiedEventArgs;
+using WebViewControlWebResourceRequestedEventArgs = Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlWebResourceRequestedEventArgs;
 
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
@@ -167,6 +168,13 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         [StringResourceCategory(Constants.CategoryAction)]
         [StringResourceDescription(Constants.DescriptionWebViewUnviewableContentIdentified)]
         public event EventHandler<WebViewControlUnviewableContentIdentifiedEventArgs> UnviewableContentIdentified = (sender, args) => { };
+
+        /// <summary>
+        /// Occurs when <see cref="WebView"/> requests a web resource.
+        /// </summary>
+        [StringResourceCategory(Constants.CategoryAction)]
+        [StringResourceDescription(Constants.DescriptionWebViewWebResourceRequested)]
+        public event EventHandler<WebViewControlWebResourceRequestedEventArgs> WebResourceRequested = (sender, args) => { };
 
         private void OnAcceleratorKeyPressed(object sender, WebViewControlAcceleratorKeyPressedEventArgs args)
         {
@@ -344,6 +352,11 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
             {
                 handler(this, args);
             }
+        }
+
+        private void OnWebResourceRequested(object sender, WebViewControlWebResourceRequestedEventArgs args)
+        {
+            WebResourceRequested?.Invoke(this, args);
         }
     }
 }
