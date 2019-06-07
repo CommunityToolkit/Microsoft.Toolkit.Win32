@@ -36,6 +36,24 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
             set => SetValue(InitialTypeNameProperty, value);
         }
 
+        private WUX.UIElement CreateXamlContent()
+        {
+            WUX.UIElement content = null;
+            try
+            {
+                content = UWPTypeFactory.CreateXamlContentByType(InitialTypeName);
+            }
+            catch
+            {
+                content = new WUX.Controls.TextBlock()
+                {
+                    Text = $"Cannot create control of type {InitialTypeName}",
+                };
+            }
+
+            return content;
+        }
+
         /// <summary>
         /// Creates <see cref="WUX.Application" /> object, wrapped <see cref="WUX.Hosting.DesktopWindowXamlSource" /> instance; creates and
         /// sets root UWP XAML element on DesktopWindowXamlSource.
@@ -47,8 +65,7 @@ namespace Microsoft.Toolkit.Wpf.UI.XamlHost
             // Create and set initial root UWP XAML content
             if (!string.IsNullOrEmpty(InitialTypeName) && Child == null)
             {
-                Child = UWPTypeFactory.CreateXamlContentByType(InitialTypeName);
-
+                Child = CreateXamlContent();
                 var frameworkElement = Child as WUX.FrameworkElement;
 
                 // Default to stretch : UWP XAML content will conform to the size of WindowsXamlHost

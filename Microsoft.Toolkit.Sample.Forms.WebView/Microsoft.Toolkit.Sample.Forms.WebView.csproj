@@ -6,6 +6,7 @@
     <AssemblyTitle>Windows Community Toolkit Controls (Sample WebView for .NET Forms)</AssemblyTitle>
     <Description>Sample Code for Windows Community Toolkit Controls and Windows Forms</Description>
     <IsPackable>false</IsPackable>
+    <Platforms>x64;x86</Platforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
     <UseWindowsForms>true</UseWindowsForms>

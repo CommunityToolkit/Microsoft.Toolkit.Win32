@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml.Markup;
 
@@ -51,7 +52,7 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
     {
         enum StartupKind
         {
-            MultiThread,
+            Explict,
             CustomAppSettings,
             Normal,
         };
@@ -62,19 +63,19 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
         [STAThread]
         public static void Main()
         {
-            var startupKind = StartupKind.MultiThread;
+            var startupKind = StartupKind.Normal;
 
             if (startupKind == StartupKind.CustomAppSettings)
             {
-                using (var xamlApp = new Win32.UI.XamlHost.XamlApplication()
+                using (var xamlApp = new Win32.UI.XamlHost.XamlApplication(new List<IXamlMetadataProvider>()
+                {
+                    new MyMetadataProvider(),
+                })
                 {
                     Resources = new global::Windows.UI.Xaml.ResourceDictionary()
                         {
                             { "MyResourceKey", "MyValue" },
                         },
-                    MetadataProviders = {
-                        new MyMetadataProvider(),
-                    },
                 })
                 {
                     var app = new Microsoft.Toolkit.Sample.Wpf.App.App();
@@ -82,9 +83,10 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
                     app.Run();
                 }
             }
-            else if (startupKind == StartupKind.MultiThread)
+#if !NET462
+            else if (startupKind == StartupKind.Explict)
             {
-                using (var xamlApp = new Win32.UI.XamlHost.XamlApplication())
+                using (var xamlApp = new Microsoft.Toolkit.Sample.UWP.App.App())
                 {
                     var appOwnedWindowsXamlManager = xamlApp.WindowsXamlManager;
                     var app = new Microsoft.Toolkit.Sample.Wpf.App.App();
@@ -92,6 +94,7 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
                     app.Run();
                 }
             }
+#endif
             else
             {
                 var app = new Microsoft.Toolkit.Sample.Wpf.App.App();

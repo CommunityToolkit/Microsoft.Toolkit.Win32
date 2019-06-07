@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using WUX = Windows.UI.Xaml;
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
@@ -16,21 +16,20 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
     /// type that includes metadata (compiled in to a .NET framework assembly) to be used without explicit
     /// metadata handling by the developer.
     /// </summary>
-    partial class XamlApplication : IXamlMetadataContainer
+    public static partial class XamlApplicationExtensions
     {
         private static IXamlMetadataContainer _metadataContainer;
+        private static bool _initialized = false;
 
-        // Metadata provider identified by the root metadata provider
-        private readonly List<WUX.Markup.IXamlMetadataProvider> _metadataProviders;
-
-        /// <summary>
-        /// Gets the registered set of <seealso cref="WUX.Markup.IXamlMetadataProvider"/>
-        /// </summary>
-        public List<WUX.Markup.IXamlMetadataProvider> MetadataProviders
+        private static IXamlMetadataContainer GetCurrentProvider()
         {
-            get
+            try
             {
-                return this._metadataProviders;
+                return WUX.Application.Current as IXamlMetadataContainer;
+            }
+            catch
+            {
+                return null;
             }
         }
 
@@ -44,18 +43,33 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         {
             // Instantiation of the application object must occur before creating the DesktopWindowXamlSource instance.
             // DesktopWindowXamlSource will create a generic Application object unable to load custom UWP XAML metadata.
-            if (_metadataContainer == null)
+            if (_metadataContainer == null && !_initialized)
             {
+                _initialized = true;
+
                 // Create a custom UWP XAML Application object that implements reflection-based XAML metadata probing.
                 try
                 {
-                    var app = new XamlApplication();
-                    app.MetadataProviders.AddRange(MetadataProviderDiscovery.DiscoverMetadataProviders());
-                    return app;
+                    _metadataContainer = GetCurrentProvider();
+                    if (_metadataContainer == null)
+                    {
+                        var providers = MetadataProviderDiscovery.DiscoverMetadataProviders().ToList();
+                        _metadataContainer = GetCurrentProvider();
+                        if (_metadataContainer == null)
+                        {
+                            _metadataContainer = new XamlApplication(providers);
+                            return _metadataContainer;
+                        }
+                    }
+                    else
+                    {
+                        return _metadataContainer;
+                    }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    _metadataContainer = WUX.Application.Current as IXamlMetadataContainer;
+                    System.Diagnostics.Debug.WriteLine(ex.ToString());
+                    _metadataContainer = GetCurrentProvider();
                 }
             }
 

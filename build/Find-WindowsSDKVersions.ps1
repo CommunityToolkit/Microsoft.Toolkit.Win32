@@ -151,6 +151,7 @@ foreach($version in $versions) {
         $installRequired = Test-InstallWindowsSDK $version
         Write-Host "Windows SDK '$version' install required: $installRequired"
         if ($installRequired) {           
+            # Automatically invoke Install-WindowsSDKIso.ps1 ?
             $anyInstallRequired = $true
         }
     }

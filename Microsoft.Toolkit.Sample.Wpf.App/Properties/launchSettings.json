@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "Microsoft.Toolkit.Sample.Wpf.App": {
+      "commandName": "Project"
+    }
+  }
+}

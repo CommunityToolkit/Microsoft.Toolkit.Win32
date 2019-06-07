@@ -7,19 +7,13 @@ pr:
 - rel/*
 
 pool:
-  vmImage: vs2017-win2016
+  vmImage: 'windows-2019'
 
 variables: 
   BuildConfiguration: Release
 
 steps:
-- task: BatchScript@1
-  inputs:
-    filename: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\Common7\\Tools\\VsDevCmd.bat"
-    arguments: -no_logo
-    modifyEnvironment: true
-  displayName: Setup Environment Variables
-  
+
 - task: NuGetToolInstaller@0
   displayName: Use NuGet 5.0.0
   inputs:
@@ -30,8 +24,8 @@ steps:
     packageType: 'sdk'
     version: '3.0.100-preview5-011568'
   displayName: Install Dot Net Core SDK 3.0
-    
-- task: DotNetCoreCLI@2  
+
+- task: DotNetCoreCLI@2
   inputs:
     command: custom
     custom: tool
@@ -41,8 +35,72 @@ steps:
 - script: nbgv cloud
   displayName: Set Version
 
-- powershell: .\build\build.ps1 -target=Package
-  displayName: Build 
+- powershell: .\build\Install-WindowsSdkISO.ps1 18362
+  displayName: Insider SDK
+
+- task: BatchScript@1
+  inputs:
+    filename: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\Tools\\VsDevCmd.bat"
+    arguments: -no_logo
+    modifyEnvironment: true
+  displayName: Setup Environment Variables
+
+#- powershell: .\build\build.ps1 -target=Package
+#  displayName: Build 
+
+- task: NuGetCommand@2
+  displayName: NuGet restore Native projects
+  inputs:
+    command: restore
+    configuration: Release
+    restoreSolution: Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config
+    restoreDirectory: ../packages/
+    verbosityRestore: Detailed # Options: quiet, normal, detaile
+
+- task: MSBuild@1
+  displayName: Build x64 Restore
+  inputs:
+    solution: Microsoft.Toolkit.Win32.sln 
+    platform: x64
+    configuration: Release
+    msbuildArguments: /target:Restore
+    restoreNugetPackages: false # Optional
+
+- task: MSBuild@1
+  displayName: Build x64
+  inputs:
+    solution: Microsoft.Toolkit.Win32.sln 
+    platform: x64
+    configuration: Release
+    msbuildArguments: /target:Build
+    restoreNugetPackages: false # Optional
+
+- task: MSBuild@1
+  displayName: Build x86 Restore
+  inputs:
+    solution: Microsoft.Toolkit.Win32.sln 
+    platform: x86
+    configuration: Release
+    msbuildArguments: /target:Restore
+    restoreNugetPackages: false # Optional
+
+- task: MSBuild@1
+  displayName: Build x86
+  inputs:
+    solution: Microsoft.Toolkit.Win32.sln 
+    platform: x86
+    configuration: Release
+    msbuildArguments: /target:Build
+    restoreNugetPackages: false # Optional
+
+- task: MSBuild@1
+  displayName: Build Pack
+  inputs:
+    solution: Microsoft.Toolkit.Win32.sln 
+    platform: x86
+    configuration: Release
+    msbuildArguments: /target:Pack
+    restoreNugetPackages: false # Optional
 
 - task: PowerShell@2
   displayName: Authenticode Sign Packages

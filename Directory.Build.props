@@ -24,6 +24,18 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <XamlApp-Platform Condition="'$(Platform)' == ''">x64</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)' == 'x86'">Win32</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)' == 'AnyCPU'">x64</XamlApp-Platform>
+    <XamlApp-Platform Condition="'$(Platform)' == 'x64'">x64</XamlApp-Platform>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DefaultTargetPlatformVersion Condition="'$(DefaultTargetPlatformVersion)'==''">18362</DefaultTargetPlatformVersion>
+    <AssetTargetFallback Condition="'$(AssetTargetFallback)'==''">uap10.0.$(DefaultTargetPlatformVersion)</AssetTargetFallback>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <SignAssembly Condition="'$(SignAssembly)' == '' and '$(IsUwpProject)' != 'true'" >true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)toolkit.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>

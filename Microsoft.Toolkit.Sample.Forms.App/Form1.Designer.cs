@@ -43,12 +43,15 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
             this.mediaPlayerElement1 = new Microsoft.Toolkit.Forms.UI.Controls.MediaPlayerElement();
             this.sampleTab = new System.Windows.Forms.TabPage();
             this.windowsXamlHost = new Microsoft.Toolkit.Forms.UI.XamlHost.WindowsXamlHost();
+            this.customWindowsXamlHostTab = new System.Windows.Forms.TabPage();
+            this.customWindowsXamlHost = new Microsoft.Toolkit.Forms.UI.XamlHost.WindowsXamlHost();
             this.tabControl1.SuspendLayout();
             this.inkingTab.SuspendLayout();
             this.inkToolbar1.SuspendLayout();
             this.webTab.SuspendLayout();
             this.mediaTab.SuspendLayout();
             this.sampleTab.SuspendLayout();
+            this.customWindowsXamlHostTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -57,6 +60,7 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
             this.tabControl1.Controls.Add(this.webTab);
             this.tabControl1.Controls.Add(this.mediaTab);
             this.tabControl1.Controls.Add(this.sampleTab);
+            this.tabControl1.Controls.Add(this.customWindowsXamlHostTab);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
@@ -186,6 +190,26 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
             this.windowsXamlHost.TabIndex = 0;
             this.windowsXamlHost.Text = "windowsXamlHost1";
             // 
+            // customWindowsXamlHostTab
+            // 
+            this.customWindowsXamlHostTab.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
+            this.customWindowsXamlHostTab.Controls.Add(customWindowsXamlHost);
+            this.customWindowsXamlHostTab.Location = new System.Drawing.Point(0, 0);
+            this.customWindowsXamlHostTab.Name = "customWindowsXamlHost";
+            this.customWindowsXamlHostTab.Size = new System.Drawing.Size(1051, 685);
+            this.customWindowsXamlHostTab.TabIndex = 0;
+            this.customWindowsXamlHostTab.Text = "Custom Control";
+            // 
+            // customWindowsXamlHost
+            // 
+            this.customWindowsXamlHost.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
+            this.customWindowsXamlHost.InitialTypeName = "Microsoft.Toolkit.Sample.UWP.App.MyUserControl";
+            this.customWindowsXamlHost.Location = new System.Drawing.Point(0, 0);
+            this.customWindowsXamlHost.Name = "customWindowsXamlHost";
+            this.customWindowsXamlHost.Size = new System.Drawing.Size(1051, 685);
+            this.customWindowsXamlHost.TabIndex = 0;
+            this.customWindowsXamlHost.Text = "Custom Control";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -200,6 +224,7 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
             this.inkingTab.ResumeLayout(false);
             this.inkingTab.PerformLayout();
             this.inkToolbar1.ResumeLayout(false);
+            this.customWindowsXamlHostTab.ResumeLayout(false);
             this.webTab.ResumeLayout(false);
             this.mediaTab.ResumeLayout(false);
             this.sampleTab.ResumeLayout(false);
@@ -220,6 +245,8 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
         private Forms.UI.Controls.InkToolbar inkToolbar1;
         private Forms.UI.Controls.InkToolbarCustomToolButton inkToolbarCustomToolButton1;
         private Forms.UI.XamlHost.WindowsXamlHost windowsXamlHost;
+        private Forms.UI.XamlHost.WindowsXamlHost customWindowsXamlHost;
+        private System.Windows.Forms.TabPage customWindowsXamlHostTab;
     }
 }
 
