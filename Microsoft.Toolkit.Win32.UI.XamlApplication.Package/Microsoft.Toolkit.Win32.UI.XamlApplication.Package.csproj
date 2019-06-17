@@ -73,6 +73,10 @@
       <Pack>true</Pack>
       <PackagePath>build\native</PackagePath>
     </Content>
+    <Content Include="Microsoft.Toolkit.Win32.UI.XamlApplication.props">
+      <Pack>true</Pack>
+      <PackagePath>build\native</PackagePath>
+    </Content>
   </ItemGroup>
 
 </Project>
