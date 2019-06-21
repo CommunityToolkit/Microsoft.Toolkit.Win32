@@ -107,6 +107,8 @@
       <ModuleDefinitionFile>Microsoft.UI.Xaml.Markup.def</ModuleDefinitionFile>
       <OutputFile>$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
       <AdditionalDependencies>WindowsApp.lib;Kernel32.lib;User32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <!-- AppContainer must be false, otherwise we will fail WACK certification for using user32 APIs when submitted to the store -->
+      <AppContainer>false</AppContainer>
     </Link>
     <Midl>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
