@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
+    <RootNamespace>Microsoft.Toolkit.Win32.Tools</RootNamespace>
+    <AssemblyName>Microsoft.Toolkit.Win32.Tools.Package</AssemblyName>
+    <Title>Windows Community Toolkit Tools for XAML Islands</Title>
+    <Description>This library provides XAML islands common helpers applications. It is part of the Windows Community Toolkit.</Description>
+    <PackageTags>XAML Islands Tools</PackageTags>
+    <PackageId>Microsoft.Toolkit.Win32.UI.Tools</PackageId>
+    <Platforms>x64;x86;AnyCPU</Platforms>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IsNativeProject>true</IsNativeProject>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IsTool>true</IsTool>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="..\Microsoft.WinRT.Win32.targets">
+      <Pack>true</Pack>
+      <PackagePath>build</PackagePath>
+    </Content>
+
+    <Content Include="Microsoft.Toolkit.Win32.UI.Tools.props">
+      <Pack>true</Pack>
+      <PackagePath>build</PackagePath>
+    </Content>
+
+    <Content Include="Microsoft.Toolkit.Win32.UI.Tools.targets">
+      <Pack>true</Pack>
+      <PackagePath>build</PackagePath>
+    </Content>
+
+    <Content Include="$(MSBuildProgramFiles32)\Windows Kits\10\bin\10.0.$(DefaultTargetPlatformVersion).0\x86\mt.exe">
+      <Pack>true</Pack>
+      <PackagePath>tools</PackagePath>
+    </Content>
+    <Content Include="$(MSBuildProgramFiles32)\Windows Kits\10\bin\10.0.$(DefaultTargetPlatformVersion).0\x86\mt.exe.config">
+      <Pack>true</Pack>
+      <PackagePath>tools</PackagePath>
+    </Content>
+    <Content Include="$(MSBuildProgramFiles32)\Windows Kits\10\bin\10.0.$(DefaultTargetPlatformVersion).0\x86\midlrtmd.dll">
+      <Pack>true</Pack>
+      <PackagePath>tools</PackagePath>
+    </Content>
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication.Package\Microsoft.Toolkit.Win32.UI.XamlApplication.Package.csproj">
+      <!-- <PrivateAssets>analyzers</PrivateAssets>-->
+    </ProjectReference>
+  </ItemGroup>
+
+</Project>
