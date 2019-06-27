@@ -97,6 +97,7 @@
             var sb = new StringBuilder();
             sb.Append(headerF);
 
+            bool foundXamlHost = false;
             if (!string.IsNullOrEmpty(AppxManifest))
             {
                 XmlDocument doc = new XmlDocument();
@@ -109,6 +110,10 @@
                 {
                     var dllPathNode = winRTFactory.SelectSingleNode("./m:Path", nsmgr);
                     var dllPath = dllPathNode.InnerText;
+                    if (!foundXamlHost)
+                    {
+                      foundXamlHost = String.Compare(dllPath, "Microsoft.Toolkit.Win32.UI.XamlHost.dll", true) == 0;
+                    }
                     var typesNames = winRTFactory.SelectNodes("./m:ActivatableClass", nsmgr).OfType<XmlNode>();
                     var xmlHeader = String.Format(@"    <asmv3:file name='{0}'>", dllPath);
                     sb.Append(xmlHeader);
@@ -127,11 +132,12 @@
                     sb.Append(xmlEntry);
                 }
                 var xmlFooter = @"
-    </asmv3:file>";
+    </asmv3:file>
+";
                     sb.Append(xmlFooter);
                 }
             }
-            else
+            if (!foundXamlHost)
             {
                 sb.Append(@"
     <asmv3:file name='Microsoft.Toolkit.Win32.UI.XamlHost.dll'>
