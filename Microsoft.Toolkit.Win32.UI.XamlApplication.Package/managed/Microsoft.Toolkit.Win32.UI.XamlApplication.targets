@@ -3,7 +3,7 @@
   <ItemGroup>
     <Reference Include="$(MSBuildThisFileDirectory)..\lib\uap10.0\Microsoft.Toolkit.Win32.UI.XamlHost.winmd">
       <Implementation>Microsoft.Toolkit.Win32.UI.XamlHost.dll</Implementation>
-      <Private Condition="'$(TargetPlatformIdentifier)' != 'UAP'">false</Private>
+      <Private>true</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != 'UAP'">
