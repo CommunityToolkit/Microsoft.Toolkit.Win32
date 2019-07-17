@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <Platforms>AnyCPU;x86;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="10.0.18362.2002-preview" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication.Package\Microsoft.Toolkit.Win32.UI.XamlApplication.Package.csproj" />
+    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlApplication.vcxproj" />
+  </ItemGroup>
+
+  <Import Project="..\Microsoft.WinRT.Win32.targets" />
+
+</Project>

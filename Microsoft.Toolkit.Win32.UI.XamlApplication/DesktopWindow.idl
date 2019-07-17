@@ -9,6 +9,8 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
 
         String Title{ get; set; };
 
+        void Show();
+
         void Close();
     }
 }

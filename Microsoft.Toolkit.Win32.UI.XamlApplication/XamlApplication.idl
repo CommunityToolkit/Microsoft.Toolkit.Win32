@@ -1,3 +1,4 @@
+import "DesktopWindow.idl";
 
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
@@ -15,5 +16,7 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
 
         Windows.Foundation.IClosable WindowsXamlManager{ get; };
         Boolean IsDisposed { get; };
+
+        void Run(DesktopWindow window);
     }
 }

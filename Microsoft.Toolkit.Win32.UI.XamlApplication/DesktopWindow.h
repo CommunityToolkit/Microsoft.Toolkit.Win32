@@ -23,6 +23,8 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         winrt::hstring Title();
         void Title(winrt::hstring title);
 
+        void Show();
+
         void Close();
 
         bool IsDisposed() const

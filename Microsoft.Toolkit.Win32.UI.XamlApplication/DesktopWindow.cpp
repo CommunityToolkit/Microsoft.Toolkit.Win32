@@ -13,6 +13,22 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         Create();
     }
 
+    void DesktopWindow::Show()
+    {
+        ::ShowWindow(_window.get(), 0);
+        ::UpdateWindow(_window.get());
+        ::SetFocus(_window.get());
+
+        MSG msg = {};
+        while (GetMessage(&msg, nullptr, 0, 0))
+        {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
+
+        return; //(int)msg.wParam;
+    }
+
     void DesktopWindow::Close()
     {
         if (m_bIsClosed)
@@ -32,32 +48,40 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 
     void DesktopWindow::Create()
     {
-        WNDCLASS wc{};
-        wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
-        wc.hInstance = ::GetModuleHandle(nullptr);
-        wc.lpszClassName = XAML_HOSTING_WINDOW_CLASS_NAME;
-        wc.style = CS_HREDRAW | CS_VREDRAW;
-        wc.lpfnWndProc = DesktopWindow::WndProc;
-        wc.hIcon = NULL; // LoadIconW(wc.hInstance, MAKEINTRESOURCEW(IDI_APPICON));
-        RegisterClass(&wc);
-        WINRT_ASSERT(!_window);
+        if (!_window)
+        {
+            WNDCLASS wc{};
+            wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
+            wc.hInstance = ::GetModuleHandle(nullptr);
+            wc.lpszClassName = XAML_HOSTING_WINDOW_CLASS_NAME;
+            wc.style = CS_HREDRAW | CS_VREDRAW;
+            wc.lpfnWndProc = DesktopWindow::WndProc;
+            wc.hIcon = NULL; // LoadIconW(wc.hInstance, MAKEINTRESOURCEW(IDI_APPICON));
+            RegisterClass(&wc);
+            WINRT_ASSERT(!_window);
 
-        // Create the window with the default size here - During the creation of the
-        // window, the system will give us a chance to set its size in WM_CREATE.
-        // WM_CREATE will be handled synchronously, before CreateWindow returns.
-        WINRT_VERIFY(CreateWindow(wc.lpszClassName,
-            Title().c_str(),
-            WS_OVERLAPPEDWINDOW,
-            CW_USEDEFAULT,
-            CW_USEDEFAULT,
-            CW_USEDEFAULT,
-            CW_USEDEFAULT,
-            nullptr,
-            nullptr,
-            wc.hInstance,
-            this));
+            // Create the window with the default size here - During the creation of the
+            // window, the system will give us a chance to set its size in WM_CREATE.
+            // WM_CREATE will be handled synchronously, before CreateWindow returns.
+            WINRT_VERIFY(CreateWindow(wc.lpszClassName,
+                Title().c_str(),
+                WS_OVERLAPPEDWINDOW,
+                CW_USEDEFAULT,
+                CW_USEDEFAULT,
+                CW_USEDEFAULT,
+                CW_USEDEFAULT,
+                nullptr,
+                nullptr,
+                wc.hInstance,
+                this));
 
-        WINRT_ASSERT(_window);
+            WINRT_ASSERT(_window);
+
+            auto interop = _source.as<IDesktopWindowXamlSourceNative>();
+            // Parent the DesktopWindowXamlSource object to current window
+            winrt::check_hresult(interop->AttachToWindow(_window.get()));
+            winrt::check_hresult(interop->get_WindowHandle(&_interopWindowHandle));
+        }
     }
 
     winrt::hstring DesktopWindow::Title()

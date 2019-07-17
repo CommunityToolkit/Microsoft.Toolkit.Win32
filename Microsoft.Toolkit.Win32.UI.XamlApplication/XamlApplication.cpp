@@ -51,6 +51,11 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         }
     }
 
+    void XamlApplication::Run(winrt::Microsoft::Toolkit::Win32::UI::XamlHost::DesktopWindow window)
+    {
+        window.Show();
+    }
+
     winrt::Windows::Foundation::IClosable XamlApplication::WindowsXamlManager() const
     {
         return m_windowsXamlManager;

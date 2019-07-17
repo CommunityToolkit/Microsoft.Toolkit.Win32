@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Microsoft.Toolkit.Sample.DesktopWindow": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

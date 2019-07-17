@@ -5,6 +5,7 @@
 #include <winrt/Windows.UI.ViewManagement.h>
 #include <winrt/Windows.Foundation.Collections.h>
 #include <Windows.h>
+#include <DesktopWindow.h>
 
 namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 {
@@ -22,7 +23,10 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         ~XamlApplication();
 
         void Initialize();
+
         void Close();
+
+        void Run(winrt::Microsoft::Toolkit::Win32::UI::XamlHost::DesktopWindow window);
 
         winrt::Windows::Foundation::IClosable WindowsXamlManager() const;
 
