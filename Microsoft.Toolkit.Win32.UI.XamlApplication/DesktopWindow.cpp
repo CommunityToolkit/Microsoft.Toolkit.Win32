@@ -134,6 +134,113 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
     {
         // TODO MSFT#21315817 Stop rendering island content when the app is minimized.
     }
+
+    [[nodiscard]] LRESULT __stdcall DesktopWindow::WndProc(HWND const window, UINT const message, WPARAM const wparam, LPARAM const lparam) noexcept
+    {
+        WINRT_ASSERT(window);
+
+        if (WM_NCCREATE == message)
+        {
+            auto cs = reinterpret_cast<CREATESTRUCT*>(lparam);
+            const auto that = static_cast<DesktopWindow*>(cs->lpCreateParams);
+            WINRT_ASSERT(that);
+            WINRT_ASSERT(!that->_window);
+            that->_window = wil::unique_hwnd(window);
+            SetWindowLongPtr(window, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(that));
+
+            EnableNonClientDpiScaling(window);
+            that->_currentDpi = GetDpiForWindow(window);
+
+            auto interop = that->_source.as<IDesktopWindowXamlSourceNative>();
+            winrt::check_hresult(interop->AttachToWindow(window));
+            winrt::check_hresult(interop->get_WindowHandle(&that->_interopWindowHandle));
+        }
+        else if (DesktopWindow * that = GetThisFromHandle(window))
+        {
+            return that->MessageHandler(message, wparam, lparam);
+        }
+
+        return DefWindowProc(window, message, wparam, lparam);
+    }
+
+    [[nodiscard]] LRESULT DesktopWindow::MessageHandler(UINT const message, WPARAM const wparam, LPARAM const lparam) noexcept
+    {
+        switch (message)
+        {
+        case WM_DPICHANGED:
+        {
+            return HandleDpiChange(_window.get(), wparam, lparam);
+        }
+
+        case WM_DESTROY:
+        {
+            PostQuitMessage(0);
+            return 0;
+        }
+
+        case WM_SIZE:
+        {
+            UINT width = LOWORD(lparam);
+            UINT height = HIWORD(lparam);
+
+            switch (wparam)
+            {
+            case SIZE_MAXIMIZED:
+                [[fallthrough]] ;
+            case SIZE_RESTORED:
+                if (_minimized)
+                {
+                    _minimized = false;
+                    OnRestore();
+                }
+
+                // We always need to fire the resize event, even when we're transitioning from minimized.
+                // We might be transitioning directly from minimized to maximized, and we'll need
+                // to trigger any size-related content changes.
+                OnResize(width, height);
+                break;
+            case SIZE_MINIMIZED:
+                if (!_minimized)
+                {
+                    _minimized = true;
+                    OnMinimize();
+                }
+                break;
+            default:
+                // do nothing.
+                break;
+            }
+            break;
+        }
+        case CM_UPDATE_TITLE:
+        {
+            SetWindowTextW(_window.get(), _title.c_str());
+            break;
+        }
+        }
+
+        return DefWindowProc(_window.get(), message, wparam, lparam);
+    }
+
+    // DPI Change handler. on WM_DPICHANGE resize the window
+    [[nodiscard]] LRESULT DesktopWindow::HandleDpiChange(const HWND hWnd, const WPARAM wParam, const LPARAM lParam)
+    {
+        _inDpiChange = true;
+        const HWND hWndStatic = ::GetWindow(hWnd, GW_CHILD);
+        if (hWndStatic != nullptr)
+        {
+            const UINT uDpi = HIWORD(wParam);
+
+            // Resize the window
+            auto lprcNewScale = reinterpret_cast<RECT*>(lParam);
+
+            ::SetWindowPos(hWnd, nullptr, lprcNewScale->left, lprcNewScale->top, lprcNewScale->right - lprcNewScale->left, lprcNewScale->bottom - lprcNewScale->top, SWP_NOZORDER | SWP_NOACTIVATE);
+
+            _currentDpi = uDpi;
+        }
+        _inDpiChange = false;
+        return 0;
+    }
 }
 
 namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::factory_implementation
