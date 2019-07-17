@@ -57,6 +57,10 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 
                 EnableNonClientDpiScaling(window);
                 that->_currentDpi = GetDpiForWindow(window);
+
+                auto interop = that->_source.as<IDesktopWindowXamlSourceNative>();
+                winrt::check_hresult(interop->AttachToWindow(window));
+                winrt::check_hresult(interop->get_WindowHandle(&that->_interopWindowHandle));
             }
             else if (DesktopWindow* that = GetThisFromHandle(window))
             {

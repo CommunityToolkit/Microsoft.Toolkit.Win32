@@ -15,7 +15,7 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 
     void DesktopWindow::Show()
     {
-        ::ShowWindow(_window.get(), 0);
+        ::ShowWindow(_window.get(), SW_SHOW);
         ::UpdateWindow(_window.get());
         ::SetFocus(_window.get());
 
@@ -76,11 +76,6 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
                 this));
 
             WINRT_ASSERT(_window);
-
-            auto interop = _source.as<IDesktopWindowXamlSourceNative>();
-            // Parent the DesktopWindowXamlSource object to current window
-            winrt::check_hresult(interop->AttachToWindow(_window.get()));
-            winrt::check_hresult(interop->get_WindowHandle(&_interopWindowHandle));
         }
     }
 
