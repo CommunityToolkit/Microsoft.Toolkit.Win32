@@ -1,12 +1,45 @@
 ﻿#pragma once
 
-#include <SDKDDKVer.h>
-//#define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
+// Ignore checked iterators warning from VC compiler.
+#define _SCL_SECURE_NO_WARNINGS
+
+// Block minwindef.h min/max macros to prevent <algorithm> conflict
+#define NOMINMAX
+
+#define WIN32_LEAN_AND_MEAN
+
+#ifdef WINAPI_FAMILY
+#undef WINAPI_FAMILY
+#define WINAPI_FAMILY WINAPI_FAMILY_DESKTOP_APP
+#endif
+
+#include <unknwn.h>
+
+#define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
+
 #include <windows.h>
-#include <WinUser.h>
+#include <stdlib.h>
+#include <string.h>
+#include <shellscalingapi.h>
 
-#include <unknwn.h> // To enable support for non-WinRT interfaces, unknwn.h must be included before any C++/WinRT headers.
-
-#include <winrt/Windows.Foundation.h>
+// This is inexplicable, but for whatever reason, cppwinrt conflicts with the
+//      SDK definition of this function, so the only fix is to undef it.
+// from WinBase.h
+// Windows::UI::Xaml::Media::Animation::IStoryboard::GetCurrentTime
+#ifdef GetCurrentTime
+#undef GetCurrentTime
+#endif
+// Needed just for XamlIslands to work at all:
+#include <winrt/Windows.system.h>
+#include <winrt/Windows.Foundation.Collections.h>
 #include <winrt/Windows.UI.Xaml.Hosting.h>
-#include <winrt/Windows.System.h>
+#include <windows.ui.xaml.hosting.desktopwindowxamlsource.h>
+
+// Additional headers for various xaml features. We need:
+//  * Controls for grid
+//  * Media for ScaleTransform
+#include <winrt/Windows.UI.Xaml.Controls.h>
+#include <winrt/Windows.ui.xaml.media.h>
+
+#include <wil/resource.h>
+#include <wil/win32_helpers.h>
