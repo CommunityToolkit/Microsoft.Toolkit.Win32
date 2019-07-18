@@ -8,7 +8,7 @@ namespace Microsoft.Toolkit.Sample.DesktopWindow
     {
         public MainWindow()
         {
-            Content = new Windows.UI.Xaml.Controls.Button()
+            Content = new global::Windows.UI.Xaml.Controls.Button()
             {
                 Content = "Hello from Xaml",
             };
