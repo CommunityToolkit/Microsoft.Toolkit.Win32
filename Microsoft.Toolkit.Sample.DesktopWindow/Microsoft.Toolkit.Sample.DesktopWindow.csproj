@@ -6,6 +6,7 @@
     <Platforms>x86;x64</Platforms>
     <!-- Workaround: https://github.com/microsoft/microsoft-ui-xaml/issues/798 -->
     <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +19,24 @@
     <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlApplication.vcxproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <DesktopApp Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesktopApp>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <DesktopWindow Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesktopWindow>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+  </ItemGroup>
+  
   <Import Project="..\Microsoft.WinRT.Win32.targets" />
-
+    
 </Project>

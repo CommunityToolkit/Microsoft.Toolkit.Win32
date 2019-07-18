@@ -1,0 +1,14 @@
+﻿<xamlhost:DesktopWindow
+    x:Class="Microsoft.Toolkit.Sample.DesktopWindow.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:xamlhost="using:Microsoft.Toolkit.Win32.UI.XamlHost"
+    xmlns:local="using:Microsoft.Toolkit.Sample.DesktopWindow"
+    xmlns:controls="clr-namespace:Windows.UI.Xaml.Controls;assembly=Windows.Foundation.UniversalApiContract"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <controls:Grid>
+    </controls:Grid>
+</xamlhost:DesktopWindow>
