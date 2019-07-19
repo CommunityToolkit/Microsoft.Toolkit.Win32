@@ -1,11 +1,12 @@
 namespace Microsoft.Toolkit.Win32.UI.XamlHost
 {
     [default_interface]
+	[contentproperty("Content")]
     unsealed runtimeclass DesktopWindow : Windows.UI.Xaml.DependencyObject, Windows.Foundation.IClosable
     {
         DesktopWindow();
 
-        Windows.UI.Xaml.UIElement Content{ get; set; };
+		Windows.UI.Xaml.UIElement Content{ get; set; };
 
         String Title{ get; set; };
 
