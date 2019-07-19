@@ -11,15 +11,13 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 -->
 
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
-  <Import Project="ImportBefore\*"/>
   
   <!-- Need the path to vcmeta.dll -->
   <PropertyGroup>
     <XamlProjectName Condition=" '$(XamlProjectName)' == '' ">$(MSBuildProjectName)</XamlProjectName>
-    <WindowsSdkPath Condition="'$(WindowsSdkPath)'==''">$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\$(SDKIdentifier)\v$(SDKVersion)', 'InstallationFolder', null, RegistryView.Registry32, RegistryView.Default))</WindowsSdkPath>
-
-    <XAMLFingerprint Condition="'$(XAMLFingerprint)' == ''">true</XAMLFingerprint>
+    <WindowsSdkPath Condition="'$(WindowsSdkPath)'==''">$(MSBuildProgramFiles32)\Windows Kits\10\</WindowsSdkPath>
+    
+    <XAMLFingerprint Condition="'$(XAMLFingerprint)' == ''">false</XAMLFingerprint>
     <DisableXbfGeneration Condition="'$(DisableXbfGeneration)' == '' AND '$(TargetPlatformVersion)' == '8.0'">true</DisableXbfGeneration>
     <DisableXbfGeneration Condition="'$(DisableXbfGeneration)' == ''">false</DisableXbfGeneration>
 
@@ -40,6 +38,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     <FacadeWinmdPath Condition="'$(FacadeWinmdPath)' == ''">$(WindowsSdkPath)UnionMetadata\facade\Windows.winmd</FacadeWinmdPath>
 
     <XamlLanguage Condition="'$(XamlLanguage)' == ''">$(Language)</XamlLanguage>
+    <XamlLanguage Condition="'$(XamlLanguage)' == ''">C#</XamlLanguage>
 
     <!-- If building a C++\WinRT project, we need the cppwinrt.exe compiler to generate an IDL for our metadata provider -->
     <CppWinRTAddXamlMetaDataProviderIdl Condition="$(CppWinRTAddXamlMetaDataProviderIdl) != 'false'">true</CppWinRTAddXamlMetaDataProviderIdl>
@@ -65,6 +64,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     
     <!-- If EnableDefaultValidationContextGeneration is set, respect that value. Otherwise, we always generate it-->
     <EnableDefaultValidationContextGeneration Condition="'$(EnableDefaultValidationContextGeneration)' == ''">true</EnableDefaultValidationContextGeneration>
+
   </PropertyGroup>
 
   <!-- When using reflection for our metadata provider, we need to include the reflection helper DLL which is in the same folder as this targets file -->
@@ -131,17 +131,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       WinUIMarkupCompilePass2;
       $(PrepareResourcesDependsOn)
     </PrepareResourcesDependsOn>
-
-    <PrepareResourceNamesDependsOn>
-      $(PrepareResourceNamesDependsOn)
-      WinUIMarkupCompilePass1;
-    </PrepareResourceNamesDependsOn>
     
-    <MarkupCompilePass1DependsOn>
-      $(MarkupCompilePass1DependsOn)
-      WinUIMarkupCompilePass1;
-    </MarkupCompilePass1DependsOn>
-
     <Prefer32Bit Condition="'$(Prefer32Bit)' == '' and ('$(OutputType)' == 'exe' or '$(OutputType)' == 'winexe' or '$(OutputType)' == 'appcontainerexe')">true</Prefer32Bit>
     <HighEntropyVA Condition="'$(HighEntropyVA)' == ''">true</HighEntropyVA>
     <SubsystemVersion Condition="'$(SubsystemVersion)' == '' and ('$(PlatformTarget)' == 'ARM' or '$(OutputType)' == 'appcontainerexe' or '$(OutputType)' == 'winmdobj')">6.02</SubsystemVersion>
@@ -153,8 +143,17 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     <XamlGeneratedOutputPath Condition="'$(XamlGeneratedOutputPath)' == ''">$(IntermediateOutputPath)</XamlGeneratedOutputPath>
   </PropertyGroup>
 
+  <Target Name="KKCompile" AfterTargets="ResolveKeySource" BeforeTargets="XamlPreCompile" DependsOnTargets="WinUIMarkupCompilePass1">
+    <Warning Text="WinUIMarkupCompilePass1" />
+  </Target>
+
+  <Target Name="KKCompile2" AfterTargets="XamlPreCompile" BeforeTargets="PrepareResources" DependsOnTargets="WinUIMarkupCompilePass2">
+    <Error Text="WinUIMarkupCompilePass2" />
+  </Target>
+  
   <PropertyGroup Condition="$(XamlCompilerTaskPath) == ''">
-    <XamlCompilerTaskPath>$(MSBuildThisFileDirectory)Microsoft.Windows.UI.Xaml.Build.Tasks.dll</XamlCompilerTaskPath>
+    <XamlCompilerTaskPath>$(WindowsSdkPath)\bin\$(_TargetPlatformVersion)\XamlCompiler\Microsoft.Windows.UI.Xaml.Build.Tasks.dll</XamlCompilerTaskPath>
+    <XamlCompilerTaskPath Condition="Exists('$(MSBuildThisFileDirectory)Microsoft.Windows.UI.Xaml.Build.Tasks.dll')" >$(MSBuildThisFileDirectory)Microsoft.Windows.UI.Xaml.Build.Tasks.dll</XamlCompilerTaskPath>
   </PropertyGroup>
 
   <UsingTask TaskName="Microsoft.Windows.UI.Xaml.Build.Tasks.CompileXaml"                  AssemblyFile="$(XamlCompilerTaskPath)" />
@@ -319,6 +318,9 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     <ItemGroup>
       <ReferencePath Condition="'$(IsNativeLanguage)'=='true' and Exists($(FacadeWinmdPath))" Include="$(FacadeWinmdPath)" />
     </ItemGroup>
+    <PropertyGroup>
+      <XamlGeneratedOutputPath Condition="'$(XamlGeneratedOutputPath)' == ''">$(IntermediateOutputPath)</XamlGeneratedOutputPath>
+    </PropertyGroup>
     <CompileXaml
             LanguageSourceExtension="$(DefaultLanguageSourceExtension)"
             Language="$(XamlLanguage)"
@@ -363,7 +365,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       <Output ItemName="_GeneratedXamlFiles" TaskParameter="GeneratedXamlFiles" />
       <Output ItemName="_GeneratedXbfFiles" TaskParameter="GeneratedXbfFiles" />
     </CompileXaml>
-
+   
     <ItemGroup>
       <FileWrites Include="$(XamlSavedStateFilePath)" />
     </ItemGroup>
@@ -417,12 +419,22 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       <XamlReferencesToCompile Condition="'$(IsNativeLanguage)'!='true'" Include="@(ReferencePath)" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ApplicationDefinition Include="@(DesktopApp)" />
+      <Page Include="@(DesktopWindow)" />
+    </ItemGroup>
+    
+    <PropertyGroup>
+      <!-- Use Intermediate dir if XamlGeneratedOutputPath is not defined -->
+      <XamlGeneratedOutputPath Condition="'$(XamlGeneratedOutputPath)' == ''">$(IntermediateOutputPath)</XamlGeneratedOutputPath>
+    </PropertyGroup>
+    
     <CompileXaml
             LanguageSourceExtension="$(DefaultLanguageSourceExtension)"
             Language="$(XamlLanguage)"
             RootNamespace="$(RootNamespace)"
-            XamlPages="@(DesktopWindow)"
-            XamlApplications="@(DesktopApp)"
+            XamlPages="@(Page)"
+            XamlApplications="@(ApplicationDefinition)"
             SdkXamlPages="@(SdkXamlItems)"
             PriIndexName="$(PriIndexName)"
             ProjectName="$(XamlProjectName)"
