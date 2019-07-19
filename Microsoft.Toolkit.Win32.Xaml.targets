@@ -13,12 +13,6 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <Import Project="ImportBefore\*"/>
-
-  <ItemGroup>
-    <Reference Include="Microsoft.UI.Xaml.Markup2">
-      <HintPath>C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd</HintPath>
-    </Reference>
-  </ItemGroup>
   
   <!-- Need the path to vcmeta.dll -->
   <PropertyGroup>
@@ -74,6 +68,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
   </PropertyGroup>
 
   <!-- When using reflection for our metadata provider, we need to include the reflection helper DLL which is in the same folder as this targets file -->
+  <!-- Microsoft.UI.Xaml.Markup.winmd is not compatible with Unpackaged apps
   <Choose>
     <When Condition="'$(EnableTypeInfoReflection)' == 'true'">
       <ItemGroup>
@@ -83,7 +78,8 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       </ItemGroup>
     </When>
   </Choose>
-
+  -->
+  
   <ItemGroup Condition="'$(BuildingInsideVisualStudio)'=='true'">
     <AvailableItemName Include="PRIResource" />
     <AvailableItemName Include="AppxManifest" />
@@ -130,11 +126,21 @@ Copyright (C) Microsoft Corporation. All rights reserved.
             See Microsoft.Windows.UI.Xaml.Cpp.Targets for Native build rules -->
     <PrepareResourcesDependsOn>
       ResolveKeySource;
-      MarkupCompilePass1;
+      WinUIMarkupCompilePass1;
       XamlPreCompile;
-      MarkupCompilePass2;
+      WinUIMarkupCompilePass2;
       $(PrepareResourcesDependsOn)
     </PrepareResourcesDependsOn>
+
+    <PrepareResourceNamesDependsOn>
+      $(PrepareResourceNamesDependsOn)
+      WinUIMarkupCompilePass1;
+    </PrepareResourceNamesDependsOn>
+    
+    <MarkupCompilePass1DependsOn>
+      $(MarkupCompilePass1DependsOn)
+      WinUIMarkupCompilePass1;
+    </MarkupCompilePass1DependsOn>
 
     <Prefer32Bit Condition="'$(Prefer32Bit)' == '' and ('$(OutputType)' == 'exe' or '$(OutputType)' == 'winexe' or '$(OutputType)' == 'appcontainerexe')">true</Prefer32Bit>
     <HighEntropyVA Condition="'$(HighEntropyVA)' == ''">true</HighEntropyVA>
@@ -191,15 +197,15 @@ Copyright (C) Microsoft Corporation. All rights reserved.
   </ItemGroup>
 
   <PropertyGroup>
-    <MarkupCompilePass1DependsOn>
+    <WinUIMarkupCompilePass1DependsOn>
       GetXamlCppIncludeDirectories;
       $(GetXamlCppIncludeDirectories)
-    </MarkupCompilePass1DependsOn>
+    </WinUIMarkupCompilePass1DependsOn>
 
-    <MarkupCompilePass2DependsOn>
+    <WinUIMarkupCompilePass2DependsOn>
       GetXamlCppIncludeDirectories;
       $(GetXamlCppIncludeDirectories)
-    </MarkupCompilePass2DependsOn>
+    </WinUIMarkupCompilePass2DependsOn>
 
     <Prep_ComputeProcessXamlFilesDependsOn>
       GetXamlCppIncludeDirectories;
@@ -238,7 +244,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
   <!-- A copy of the first pass, without the WarningLevel manipulation -->
   <Target Name="DesignTimeMarkupCompilationCT"
-        DependsOnTargets="$(MarkupCompilePass1DependsOn)"
+        DependsOnTargets="$(WinUIMarkupCompilePass1DependsOn)"
         Condition="'@(DesktopWindow)' != '' Or '@(DesktopApp)' != '' " >
 
     <MakeDir Condition="'$(ManagedAssembly)'!='false'" Directories="$(XamlGeneratedOutputPath)intermediatexaml\" />
@@ -301,12 +307,12 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
   <!--   
     ================================================================
-                         MarkupCompilePass1
+                         WinUIMarkupCompilePass1
     ================================================================
     -->
 
-  <Target Name="MarkupCompilePass1"
-        DependsOnTargets="$(MarkupCompilePass1DependsOn)"
+  <Target Name="WinUIMarkupCompilePass1"
+        DependsOnTargets="$(WinUIMarkupCompilePass1DependsOn)"
         Condition="'@(DesktopWindow)' != '' Or '@(DesktopApp)' != '' " >
 
     <MakeDir Condition="'$(ManagedAssembly)'!='false'" Directories="$(XamlGeneratedOutputPath)intermediatexaml\" />
@@ -376,12 +382,12 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
   <!--   
     ================================================================
-                         MarkupCompilePass2
+                         WinUIMarkupCompilePass2
     ================================================================
     -->
 
-  <Target Name="MarkupCompilePass2"
-          DependsOnTargets="$(MarkupCompilePass2DependsOn)"
+  <Target Name="WinUIMarkupCompilePass2"
+          DependsOnTargets="$(WinUIMarkupCompilePass2DependsOn)"
           Condition="'@(DesktopWindow)' != '' Or '@(DesktopApp)' != '' " >
 
     <PropertyGroup>

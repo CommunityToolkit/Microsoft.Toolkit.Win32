@@ -4,6 +4,7 @@
   <PropertyGroup>
     <DefaultTargetPlatformVersion Condition="'$(DefaultTargetPlatformVersion)'==''">18362</DefaultTargetPlatformVersion>
     <AssetTargetFallback Condition="'$(AssetTargetFallback)'==''">uap10.0.$(DefaultTargetPlatformVersion)</AssetTargetFallback>
+    <IsWinUIDesktopApp>true</IsWinUIDesktopApp>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -202,4 +203,7 @@
     </CreateProperty>
   </Target>
 
+  <!--
+  <Import Project="$(MSBuildThisFileDirectory)\Microsoft.Toolkit.Win32.Xaml.targets" />
+  -->
 </Project>

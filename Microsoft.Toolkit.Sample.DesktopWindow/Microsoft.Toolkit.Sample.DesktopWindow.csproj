@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -9,6 +8,7 @@
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <EnableTypeInfoReflection>false</EnableTypeInfoReflection>
     <IsPackable>false</IsPackable>
+    <PrepareResourcesDependsOn></PrepareResourcesDependsOn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -42,13 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Microsoft.UI.Xaml.Markup">
-      <HintPath>C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="App.xaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -58,7 +51,4 @@
   </ItemGroup>
 
   <Import Project="..\Microsoft.WinRT.Win32.targets" />
-  <!--
-  <Import Project="..\Microsoft.Toolkit.Win32.UI.Tools\Microsoft.Toolkit.Win32.Xaml.targets" />
-  -->
 </Project>

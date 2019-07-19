@@ -21,6 +21,11 @@
       <PackagePath>build</PackagePath>
     </Content>
 
+    <Content Include="..\Microsoft.Toolkit.Win32.Xaml.targets">
+      <Pack>true</Pack>
+      <PackagePath>build</PackagePath>
+    </Content>
+
     <Content Include="Microsoft.Toolkit.Win32.UI.Tools.props">
       <Pack>true</Pack>
       <PackagePath>build</PackagePath>
