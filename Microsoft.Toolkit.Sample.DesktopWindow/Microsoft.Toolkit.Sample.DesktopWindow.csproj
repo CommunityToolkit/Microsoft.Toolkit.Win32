@@ -8,6 +8,7 @@
     <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <EnableTypeInfoReflection>false</EnableTypeInfoReflection>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
