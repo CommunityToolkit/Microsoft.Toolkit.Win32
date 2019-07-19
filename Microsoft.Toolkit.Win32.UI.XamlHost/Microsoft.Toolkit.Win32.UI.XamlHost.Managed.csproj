@@ -26,12 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.Tools\Microsoft.Toolkit.Win32.UI.Tools.csproj">
-      <PrivateAssets>analyzers</PrivateAssets>
-    </ProjectReference>
-    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication.Package\Microsoft.Toolkit.Win32.UI.XamlApplication.Package.csproj">
-      <PrivateAssets>analyzers</PrivateAssets>
-    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlApplication.vcxproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="..\$(XamlApp-Platform)\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.winmd" />
   </ItemGroup>
 

@@ -224,3 +224,4 @@ msbuild.binlog
 *.project.lock.json
 /build/tools
 /build/dotnet-install.ps1
+/Microsoft.Toolkit.Sample.DesktopWindow/intermediatexaml/Microsoft.Toolkit.Sample.DesktopWindow.dll
