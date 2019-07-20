@@ -122,16 +122,6 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
   <PropertyGroup>
     <AvailablePlatforms>$(AvailablePlatforms),ARM</AvailablePlatforms>
-
-    <!-- this Property is used only for the Managed build.
-            See Microsoft.Windows.UI.Xaml.Cpp.Targets for Native build rules -->
-    <PrepareResourcesDependsOn>
-      ResolveKeySource;
-      WinUIMarkupCompilePass1;
-      XamlPreCompile;
-      WinUIMarkupCompilePass2;
-      $(PrepareResourcesDependsOn)
-    </PrepareResourcesDependsOn>
     
     <Prefer32Bit Condition="'$(Prefer32Bit)' == '' and ('$(OutputType)' == 'exe' or '$(OutputType)' == 'winexe' or '$(OutputType)' == 'appcontainerexe')">true</Prefer32Bit>
     <HighEntropyVA Condition="'$(HighEntropyVA)' == ''">true</HighEntropyVA>
@@ -145,21 +135,10 @@ Copyright (C) Microsoft Corporation. All rights reserved.
   </PropertyGroup>
 
   <!--
-  <ItemGroup>
-    <ApplicationDefinition Include="@(DesktopApp)" />
-    <Page Include="@(DesktopWindow)" />
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Remove="@(ApplicationDefinition)" />
-    <Page Remove="@(Page)" />
-  </ItemGroup>
-  -->
-
-  <!--
-      The XamlPreCompile target must remain identical to
+      The WinUIXamlPreCompile target must remain identical to
       the CoreCompile target in Microsoft.CSharp.Core.targets.
       Any updates to one must be made to the other.
--->
+  -->
   <Target
      Name="WinUIXamlPreCompile"
      Inputs="$(MSBuildAllProjects);
@@ -231,6 +210,12 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       <UseSharedCompilation>true</UseSharedCompilation>
     </PropertyGroup>
 
+    <PropertyGroup>
+      <XamlGeneratedOutputPath Condition="'$(XamlGeneratedOutputPath)' == ''">$(IntermediateOutputPath)</XamlGeneratedOutputPath>
+      <XamlIntermediateAssembly Condition="'$(ManagedAssembly)'!='false'">$(XamlGeneratedOutputPath)intermediatexaml\$(TargetName)$(TargetExt)</XamlIntermediateAssembly>
+      <XamlIntermediateAssembly Condition="'$(ManagedAssembly)'=='false'">$(OutputPath)\$(TargetName).winmd</XamlIntermediateAssembly>
+    </PropertyGroup>
+    
     <!-- Condition is to filter out the _CoreCompileResourceInputs so that it doesn't pass in culture resources to the compiler -->
     <Csc  Condition=" '%(_CoreCompileResourceInputs.WithCulture)' != 'true' "
           AdditionalLibPaths="$(AdditionalLibPaths)"
@@ -266,7 +251,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
           NoStandardLib="$(NoCompilerStandardLib)"
           NoWin32Manifest="$(NoWin32Manifest)"
           Optimize="$(Optimize)"
-          OutputAssembly="@(XamlIntermediateAssembly)"
+          OutputAssembly="$(XamlIntermediateAssembly)"
           PdbFile="$(PdbFile)"
           Platform="$(PlatformTarget)"
           Prefer32Bit="$(Prefer32Bit)"
@@ -299,7 +284,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
               </ItemGroup>
 
               <CallTarget Targets="$(TargetsTriggeredByCompilation)" Condition="'$(TargetsTriggeredByCompilation)' != ''"/>
--->
+    -->
     <OnError Condition="'$(OnXamlPreCompileErrorTarget)' != ''" ExecuteTargets="$(OnXamlPreCompileErrorTarget)" />
   </Target>
 
@@ -474,13 +459,13 @@ Copyright (C) Microsoft Corporation. All rights reserved.
         DependsOnTargets="$(WinUIMarkupCompilePass1DependsOn)"
         Condition="'@(DesktopWindow)' != '' Or '@(DesktopApp)' != '' " >
 
+    <PropertyGroup>
+      <XamlGeneratedOutputPath Condition="'$(XamlGeneratedOutputPath)' == ''">$(IntermediateOutputPath)</XamlGeneratedOutputPath>
+    </PropertyGroup>
     <MakeDir Condition="'$(ManagedAssembly)'!='false'" Directories="$(XamlGeneratedOutputPath)intermediatexaml\" />
     <ItemGroup>
       <ReferencePath Condition="'$(IsNativeLanguage)'=='true' and Exists($(FacadeWinmdPath))" Include="$(FacadeWinmdPath)" />
     </ItemGroup>
-    <PropertyGroup>
-      <XamlGeneratedOutputPath Condition="'$(XamlGeneratedOutputPath)' == ''">$(IntermediateOutputPath)</XamlGeneratedOutputPath>
-    </PropertyGroup>
     <CompileXaml
             LanguageSourceExtension="$(DefaultLanguageSourceExtension)"
             Language="$(XamlLanguage)"
@@ -563,6 +548,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
         @(XamlIntermediateAssembly->'%(Identity)')
       </LocalAssembly>
       <XamlLocalAssembly Condition="'$(XamlLocalAssembly)' == ''">$(LocalAssembly)</XamlLocalAssembly>
+      <XamlLocalAssembly>$(XamlIntermediateAssembly)</XamlLocalAssembly>
     </PropertyGroup>
 
     <CallTarget Targets="SDKRedistOutputGroup" Condition="'$(IncludeSDKRedistOutputGroup)' == 'true'">
