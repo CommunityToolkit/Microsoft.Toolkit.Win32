@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Text;
 using Windows.UI.Xaml;
 using Microsoft.Toolkit.Win32.UI.XamlHost;
+using System.Threading.Tasks;
 
 namespace Microsoft.Toolkit.Sample.DesktopWindow
 {
@@ -17,6 +18,7 @@ namespace Microsoft.Toolkit.Sample.DesktopWindow
         private void OnButtonClick(object sender, RoutedEventArgs e)
         {
             Debug.WriteLine("Hello from Xaml!");
+            this.text.Text = "Button Click worked";
         }
     }
 }
