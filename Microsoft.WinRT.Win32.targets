@@ -204,5 +204,7 @@
   </Target>
 
   <Import Project="$(MSBuildThisFileDirectory)\Microsoft.Toolkit.Win32.Xaml.targets" />
+
+  <Import Project="$(MSBuildThisFileDirectory)\Microsoft.Toolkit.Win32.Xaml.Resources.targets" />
   
 </Project>

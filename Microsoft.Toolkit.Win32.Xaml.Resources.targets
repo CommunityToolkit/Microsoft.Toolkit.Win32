@@ -1,0 +1,69 @@
+<!--
+***********************************************************************************************
+Microsoft.Windows.UI.Xaml.Common.targets
+
+WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
+          created a backup copy.  Incorrect changes to this file will make it
+          impossible to load or build your projects from the command-line or the IDE.
+
+Copyright (C) Microsoft Corporation. All rights reserved.
+***********************************************************************************************
+-->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Target Name="GeneratePRIFileForUnpackagedApps" AfterTargets="AfterBuild">
+
+    <PropertyGroup>
+      <PRILanguages>x-generate</PRILanguages>
+      <MakePRIPath>&quot;$(MSBuildProgramFiles32)\Windows Kits&quot;\10\bin\10.0.18362.0\x86\</MakePRIPath>
+      <ConfigPRIFile>&quot;$(SolutionDir)config.xml&quot;</ConfigPRIFile>
+      <OutputPRIFolder>&quot;$(TargetDir)resources.pri&quot;</OutputPRIFolder>
+      <ProjectRootPRI>&quot;$(TargetDir).&quot;</ProjectRootPRI>
+    </PropertyGroup>
+        
+    <!-- Create the config PRI File -->
+    <Exec Command="$(MakePRIPath)makepri createconfig /cf $(ConfigPRIFile) /dq $(PRILanguages) /o" />
+
+    <!-- Remove the packaging section from the PRI Confif file so there is just PRI for everything -->
+    <PreparePRIConfigFile ConfigPRIFileName="$(SolutionDir)config.xml" />
+
+    <!-- Create the resources.PRI file -->
+    <Exec Command="$(MakePRIPath)makepri new /o /pr $(ProjectRootPRI) /cf $(ConfigPRIFile) /of $(OutputPRIFolder) " />
+  </Target>
+
+  <UsingTask TaskName="PreparePRIConfigFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <ConfigPRIFileName ParameterType="System.String" Required="false" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Xml" />
+      <Reference Include="System.Xml.Linq" />
+      <Using Namespace="System.Collections.Generic" />
+      <Using Namespace="System.IO" />
+      <Using Namespace="System.Linq" />
+      <Using Namespace="System.Text" />
+      <Using Namespace="System.Xml" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+            string xpath = "resources/packaging";
+
+            if (ConfigPRIFileName != null)
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(ConfigPRIFileName);
+                XmlNodeList nodes = doc.SelectNodes(xpath);
+                if (nodes.Count > 0)
+                {
+                    for (int i = nodes.Count - 1; i >= 0; i--)
+                    {
+                        nodes[i].ParentNode.RemoveChild(nodes[i]);
+                    }
+                    doc.Save(ConfigPRIFileName);
+                }
+            }]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+</Project>
