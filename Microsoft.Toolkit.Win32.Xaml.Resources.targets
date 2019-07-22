@@ -43,7 +43,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     <MsAppxPackageTargets Condition="'$(MsAppxPackageTargets)'==''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\AppxPackage\Microsoft.AppXPackage.Targets</MsAppxPackageTargets>
   </PropertyGroup>
   <Import Project="$(MsAppxPackageTargets)" Condition="Exists('$(MsAppxPackageTargets)')" />
-  
+
   <PropertyGroup>
     <AppxPackage>true</AppxPackage>
     <WindowsSdkPath Condition="'$(WindowsSdkPath)'==''">$(MSBuildProgramFiles32)\Windows Kits\10\</WindowsSdkPath>
@@ -61,7 +61,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
   </PropertyGroup>
   
   <!-- Compute final list of input PRI files. -->
-  <Target Name="_WinUIComputeInputPriFiles" >
+  <Target Name="_WinUIComputeInputPriFiles" Condition="'@(DesktopWindow)'!=''">
     <ItemGroup>
       <_PriFile Include="$(TargetDir)\*.pri" />
       <_PriFile Include="@(_PortableLibraryCreatedPriFiles)" />
@@ -69,7 +69,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
   </Target>
   
   <!-- Get list of PRI files from the payload. -->
-  <Target Name="_WinUIGetPriFilesFromPayload" >
+  <Target Name="_WinUIGetPriFilesFromPayload" Condition="'@(DesktopWindow)'!=''" >
     <ItemGroup>
       <_PriFilesFromPayloadRaw Include="@(PackagingOutputs)"
                                Condition="'%(Extension)' == '.pri'
@@ -90,6 +90,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
   <!-- Generates configuration files for makepri.exe. -->
   <Target Name="_WinUIGenerateProjectPriConfigurationFiles"
+          Condition="'@(DesktopWindow)'!=''"
           DependsOnTargets="_GetPackageFileExtensions"
           Inputs="$(MSBuildAllProjects);@(_PriFile);$(AppxPriConfigXmlDefaultSnippetPath);@(PackagingOutputs)"
           Outputs="$(_PriConfigXmlPath);$(_UnfilteredLayoutResfilesPath);$(_FilteredLayoutResfilesPath);$(_ExcludedLayoutResfilesPath);$(_ResourcesResfilesPath);$(_PriResfilesPath)"
@@ -177,7 +178,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
   </Target>
 
-  <Target Name="_UpdateTargetOsVersion" BeforeTargets="_GenerateProjectPriFileCore">
+  <Target Name="_UpdateTargetOsVersion" BeforeTargets="_GenerateProjectPriFileCore" Condition="'@(DesktopWindow)'!=''">
     <PropertyGroup>
       <_PriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_PriConfigXmlPath>
     </PropertyGroup>
@@ -189,8 +190,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
         />
   </Target>
 
-  <Target Name="GeneratePRIFileForUnpackagedApps" AfterTargets="AfterBuild" Condition="@(AppxManifest)==''">
- 
+  <Target Name="GeneratePRIFileForUnpackagedApps" AfterTargets="AfterBuild" Condition="@(AppxManifest)=='' AND '@(DesktopWindow)'!=''">
     <PropertyGroup>
       <GeneratePRIFileForUnpackagedAppsDependOn>
         BeforeGenerateProjectPriFile;
@@ -212,5 +212,5 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     </PropertyGroup>
     <CallTarget Targets="$(GeneratePRIFileForUnpackagedAppsDependOn)" />
   </Target>
-  
+
 </Project>
