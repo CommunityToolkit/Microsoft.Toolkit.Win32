@@ -9,8 +9,10 @@
 
   <PropertyGroup>
     <_TargetPlatformVersion Condition="$(_TargetPlatformVersion)==''">10.0.18362.0</_TargetPlatformVersion>
+    <WindowsSdkPath Condition="'$(WindowsSdkPath)'==''">$(MSBuildProgramFiles32)\Windows Kits\10\</WindowsSdkPath>
+    <_WindowsSdkPathTools Condition="'$(_WindowsSdkPathTools)'==''">$(WindowsSdkPath)bin\$(_TargetPlatformVersion)\x86\</_WindowsSdkPathTools>
     <ManifestTool Condition="Exists('$(MSBuildThisFileDirectory)\..\tools\mt.exe')">$(MSBuildThisFileDirectory)\..\tools\mt.exe</ManifestTool>
-    <ManifestTool Condition="'$(ManifestTool)'==''">$(MSBuildProgramFiles32)\Windows Kits\10\bin\$(_TargetPlatformVersion)\x86\mt.exe</ManifestTool>
+    <ManifestTool Condition="'$(ManifestTool)'==''">$(_WindowsSdkPathTools)\mt.exe</ManifestTool>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(IntDir)'==''">

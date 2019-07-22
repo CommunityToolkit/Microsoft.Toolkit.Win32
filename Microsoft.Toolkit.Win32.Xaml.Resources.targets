@@ -12,26 +12,6 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <Target Name="GeneratePRIFileForUnpackagedApps" AfterTargets="AfterBuild">
-
-    <PropertyGroup>
-      <PRILanguages>x-generate</PRILanguages>
-      <MakePRIPath>&quot;$(MSBuildProgramFiles32)\Windows Kits&quot;\10\bin\10.0.18362.0\x86\</MakePRIPath>
-      <ConfigPRIFile>&quot;$(SolutionDir)config.xml&quot;</ConfigPRIFile>
-      <OutputPRIFolder>&quot;$(TargetDir)resources.pri&quot;</OutputPRIFolder>
-      <ProjectRootPRI>&quot;$(TargetDir).&quot;</ProjectRootPRI>
-    </PropertyGroup>
-        
-    <!-- Create the config PRI File -->
-    <Exec Command="$(MakePRIPath)makepri createconfig /cf $(ConfigPRIFile) /dq $(PRILanguages) /o" />
-
-    <!-- Remove the packaging section from the PRI Confif file so there is just PRI for everything -->
-    <PreparePRIConfigFile ConfigPRIFileName="$(SolutionDir)config.xml" />
-
-    <!-- Create the resources.PRI file -->
-    <Exec Command="$(MakePRIPath)makepri new /o /pr $(ProjectRootPRI) /cf $(ConfigPRIFile) /of $(OutputPRIFolder) " />
-  </Target>
-
   <UsingTask TaskName="PreparePRIConfigFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
     <ParameterGroup>
       <ConfigPRIFileName ParameterType="System.String" Required="false" />
@@ -65,5 +45,30 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       </Code>
     </Task>
   </UsingTask>
+
+  <Target Name="GeneratePRIFileForUnpackagedApps" AfterTargets="AfterBuild" Condition="@(AppxManifest)==''">
+    <PropertyGroup>
+      <PRILanguages>x-generate</PRILanguages>
+      <WindowsSdkPath Condition="'$(WindowsSdkPath)'==''">$(MSBuildProgramFiles32)\Windows Kits\10\</WindowsSdkPath>
+      <_WindowsSdkPathTools Condition="'$(_WindowsSdkPathTools)'==''">$(WindowsSdkPath)bin\$(_TargetPlatformVersion)\x86\</_WindowsSdkPathTools>
+      <MakePRIPath>$(_WindowsSdkPathTools)MakePri.exe</MakePRIPath>
+      <ConfigPRIFile>.\$(IntermediateOutputPath)config.xml</ConfigPRIFile>
+      <OutputPRIFolder>$(TargetDir)resources.pri</OutputPRIFolder>
+      <ProjectRootPRI>$(TargetDir).</ProjectRootPRI>
+    </PropertyGroup>
+
+    <!-- Create the config PRI File -->
+    <Exec
+      Command="&quot;$(MakePRIPath)&quot; createconfig /cf &quot;$(ConfigPRIFile)&quot; /dq $(PRILanguages) /pv 10.0.0 /o"
+      WorkingDirectory="$(MSBuildProjectDirectory)" />
+
+    <!-- Remove the packaging section from the PRI Confif file so there is just PRI for everything -->
+    <PreparePRIConfigFile ConfigPRIFileName="$(ConfigPRIFile)" />
+
+    <!-- Create the resources.PRI file -->
+    <Exec
+      Command="&quot;$(MakePRIPath)&quot; new /o /pr &quot;$(ProjectRootPRI)&quot; /cf &quot;$(ConfigPRIFile)&quot; /of &quot;$(OutputPRIFolder)&quot; "
+      WorkingDirectory="$(MSBuildProjectDirectory)"/>
+  </Target>
 
 </Project>
