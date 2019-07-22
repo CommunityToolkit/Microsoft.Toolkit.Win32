@@ -26,7 +26,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       <Using Namespace="System.Xml" />
       <Code Type="Fragment" Language="cs">
         <![CDATA[
-            if (ConfigPRIFileName != null)
+            if (ConfigPRIFileName != null && File.Exists(ConfigPRIFileName))
             {
                 XmlDocument doc = new XmlDocument();
                 doc.Load(ConfigPRIFileName);
@@ -183,7 +183,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     </PropertyGroup>
     <!-- Update targetOsVersion -->
     <PreparePRIConfigFile ConfigPRIFileName="$(_PriConfigXmlPath)" />
-    <Copy
+    <Copy Condition="Exists('$(_PriConfigXmlPath).updated')"
         SourceFiles="$(_PriConfigXmlPath).updated"
         DestinationFiles="$(_PriConfigXmlPath)"
         />
