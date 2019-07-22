@@ -9,6 +9,8 @@
     <EnableTypeInfoReflection>false</EnableTypeInfoReflection>
     <IsPackable>false</IsPackable>
     <PrepareResourcesDependsOn></PrepareResourcesDependsOn>
+    <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,6 +39,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+    <Reference Include="Microsoft.UI.Xaml">
+      <HintPath>C:\Users\$(UserName)\.nuget\packages\microsoft.ui.xaml\2.1.190319001-prerelease\lib\uap10.0\Microsoft.UI.Xaml.winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+    </Reference>
+    -->
   </ItemGroup>
 
   <Import Project="..\Microsoft.WinRT.Win32.targets" />
