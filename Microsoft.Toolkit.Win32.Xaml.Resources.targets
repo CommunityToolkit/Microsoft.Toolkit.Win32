@@ -26,49 +26,191 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       <Using Namespace="System.Xml" />
       <Code Type="Fragment" Language="cs">
         <![CDATA[
-            string xpath = "resources/packaging";
-
             if (ConfigPRIFileName != null)
             {
                 XmlDocument doc = new XmlDocument();
                 doc.Load(ConfigPRIFileName);
-                XmlNodeList nodes = doc.SelectNodes(xpath);
-                if (nodes.Count > 0)
-                {
-                    for (int i = nodes.Count - 1; i >= 0; i--)
-                    {
-                        nodes[i].ParentNode.RemoveChild(nodes[i]);
-                    }
-                    doc.Save(ConfigPRIFileName);
-                }
+                var nodes = doc.SelectNodes("resources");
+                var versionNode = nodes[0] as System.Xml.XmlElement;
+                versionNode.SetAttribute("targetOsVersion", "10.0.0");
+                doc.Save(ConfigPRIFileName+".updated");
             }]]>
       </Code>
     </Task>
   </UsingTask>
 
-  <Target Name="GeneratePRIFileForUnpackagedApps" AfterTargets="AfterBuild" Condition="@(AppxManifest)==''">
-    <PropertyGroup>
-      <PRILanguages>x-generate</PRILanguages>
-      <WindowsSdkPath Condition="'$(WindowsSdkPath)'==''">$(MSBuildProgramFiles32)\Windows Kits\10\</WindowsSdkPath>
-      <_WindowsSdkPathTools Condition="'$(_WindowsSdkPathTools)'==''">$(WindowsSdkPath)bin\$(_TargetPlatformVersion)\x86\</_WindowsSdkPathTools>
-      <MakePRIPath>$(_WindowsSdkPathTools)MakePri.exe</MakePRIPath>
-      <ConfigPRIFile>.\$(IntermediateOutputPath)config.xml</ConfigPRIFile>
-      <OutputPRIFolder>$(TargetDir)resources.pri</OutputPRIFolder>
-      <ProjectRootPRI>$(TargetDir).</ProjectRootPRI>
-    </PropertyGroup>
+  <PropertyGroup>
+    <MsAppxPackageTargets Condition="'$(MsAppxPackageTargets)'==''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\AppxPackage\Microsoft.AppXPackage.Targets</MsAppxPackageTargets>
+  </PropertyGroup>
+  <Import Project="$(MsAppxPackageTargets)" Condition="Exists('$(MsAppxPackageTargets)')" />
+  
+  <PropertyGroup>
+    <AppxPackage>true</AppxPackage>
+    <WindowsSdkPath Condition="'$(WindowsSdkPath)'==''">$(MSBuildProgramFiles32)\Windows Kits\10\</WindowsSdkPath>
+    <_WindowsSdkPathTools Condition="'$(_WindowsSdkPathTools)'==''">$(WindowsSdkPath)bin\$(_TargetPlatformVersion)\x64\</_WindowsSdkPathTools>
+    <MakePriExeFullPath>$(_WindowsSdkPathTools)MakePri.exe</MakePriExeFullPath>
+    <IntermediateExtension>.intermediate</IntermediateExtension>
+    <AppxIntermediateExtension>$(IntermediateExtension)</AppxIntermediateExtension>
+  </PropertyGroup>
 
-    <!-- Create the config PRI File -->
-    <Exec
-      Command="&quot;$(MakePRIPath)&quot; createconfig /cf &quot;$(ConfigPRIFile)&quot; /dq $(PRILanguages) /pv 10.0.0 /o"
-      WorkingDirectory="$(MSBuildProjectDirectory)" />
-
-    <!-- Remove the packaging section from the PRI Confif file so there is just PRI for everything -->
-    <PreparePRIConfigFile ConfigPRIFileName="$(ConfigPRIFile)" />
-
-    <!-- Create the resources.PRI file -->
-    <Exec
-      Command="&quot;$(MakePRIPath)&quot; new /o /pr &quot;$(ProjectRootPRI)&quot; /cf &quot;$(ConfigPRIFile)&quot; /of &quot;$(OutputPRIFolder)&quot; "
-      WorkingDirectory="$(MSBuildProjectDirectory)"/>
+  <PropertyGroup>
+    <PRILanguages>x-generate</PRILanguages>
+    <ConfigPRIFile>.\$(IntermediateOutputPath)config.xml</ConfigPRIFile>
+    <OutputPRIFolder>$(TargetDir)resources.pri</OutputPRIFolder>
+    <ProjectRootPRI>$(TargetDir).</ProjectRootPRI>
+  </PropertyGroup>
+  
+  <!-- Compute final list of input PRI files. -->
+  <Target Name="_WinUIComputeInputPriFiles" >
+    <ItemGroup>
+      <_PriFile Include="$(TargetDir)\*.pri" />
+      <_PriFile Include="@(_PortableLibraryCreatedPriFiles)" />
+    </ItemGroup>
+  </Target>
+  
+  <!-- Get list of PRI files from the payload. -->
+  <Target Name="_WinUIGetPriFilesFromPayload" >
+    <ItemGroup>
+      <_PriFilesFromPayloadRaw Include="@(PackagingOutputs)"
+                               Condition="'%(Extension)' == '.pri'
+                                            and '%(ProjectName)' != '$(ProjectName)'"
+                                     />
+      <_PriFilesFromPayloadRaw Include="@(PackagingOutputs)"
+                               Condition="'%(Extension)' == '.pri'
+                                            and '%(ProjectName)' == '$(ProjectName)'
+                                            and '%(OutputGroup)' != 'ProjectPriFile'"
+                                     />
+    </ItemGroup>
+    <RemoveDuplicatePriFiles Inputs="@(_PriFilesFromPayloadRaw)"
+                             Platform="$(Platform)"
+                             VsTelemetrySession="$(VsTelemetrySession)">
+      <Output TaskParameter="Filtered" ItemName="_PriFilesFromPayload" />
+    </RemoveDuplicatePriFiles>
   </Target>
 
+  <!-- Generates configuration files for makepri.exe. -->
+  <Target Name="_WinUIGenerateProjectPriConfigurationFiles"
+          DependsOnTargets="_GetPackageFileExtensions"
+          Inputs="$(MSBuildAllProjects);@(_PriFile);$(AppxPriConfigXmlDefaultSnippetPath);@(PackagingOutputs)"
+          Outputs="$(_PriConfigXmlPath);$(_UnfilteredLayoutResfilesPath);$(_FilteredLayoutResfilesPath);$(_ExcludedLayoutResfilesPath);$(_ResourcesResfilesPath);$(_PriResfilesPath)"
+            >
+    <PropertyGroup>
+      <_SupportEmbedFileResources Condition="'$(_SupportEmbedFileResources)' ==''">true</_SupportEmbedFileResources>
+      <_PriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_PriConfigXmlPath>
+      <_UnfilteredLayoutResfilesPath>$(IntermediateOutputPath)unfiltered.layout.resfiles</_UnfilteredLayoutResfilesPath>
+      <_FilteredLayoutResfilesPath>$(IntermediateOutputPath)filtered.layout.resfiles</_FilteredLayoutResfilesPath>
+      <_ExcludedLayoutResfilesPath>$(IntermediateOutputPath)excluded.layout.resfiles</_ExcludedLayoutResfilesPath>
+      <_ResourcesResfilesPath>$(IntermediateOutputPath)resources.resfiles</_ResourcesResfilesPath>
+      <_PriResfilesPath>$(IntermediateOutputPath)pri.resfiles</_PriResfilesPath>
+      <_EmbedFileResfilePath Condition="'$(_SupportEmbedFileResources)' == 'true'">$(IntermediateOutputPath)$(AppxSubfolderWithFilesToBeEmbedded)\embed.resfiles</_EmbedFileResfilePath>
+      <_QualifiersPath>$(IntermediateOutputPath)qualifiers.txt</_QualifiersPath>
+      <_MultipleQualifiersPerDimensionFoundPath>$(IntermediateOutputPath)MultipleQualifiersPerDimensionFound.txt</_MultipleQualifiersPerDimensionFoundPath>
+      <ProjectPriIndexName>8e062615-901b-4165-bff1-9cbf262cc734</ProjectPriIndexName>
+      <ProjectPriFullPath>$(TargetDir)resources.pri</ProjectPriFullPath>
+      <TargetPlatformVersion>$(_TargetPlatformVersion)</TargetPlatformVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <!--
+        First, build out the complete list of files we want to consider for the layout.
+        Then exclude anything that matches any pattern or filename listed in _AppxLayoutAssetPackageFiles.
+        We could do this as a 'Remove' operation, but by building an oracle we don't modify, we simplify future manipulations of this data set.
+      -->
+      <_LayoutFileSource Include="@(PackagingOutputs)" Condition="'%(OutputGroup)' == 'ContentFilesProjectOutputGroup' and '%(ProjectName)' == '$(ProjectName)'" />
+      <_LayoutFileSource Include="@(PackagingOutputs)" Condition="'%(OutputGroup)' == 'CustomOutputGroupForPackaging' and '%(ProjectName)' == '$(ProjectName)'" />
+      <_LayoutFile Include="@(_LayoutFileSource)" Exclude="@(_AppxLayoutAssetPackageFiles)" />
+      <_EmbedFile Include="@(PackagingOutputs)" Condition="'%(OutputGroup)' == 'EmbedOutputGroupForPackaging' and '%(ProjectName)' == '$(ProjectName)'"/>
+      <_EmbedFileCopy Include="@(_EmbedFile->'$(IntermediateOutputPath)$(AppxSubfolderWithFilesToBeEmbedded)\%(TargetPath)')" />
+    </ItemGroup>
+
+    <GeneratePriConfigurationFiles
+          UnfilteredLayoutResfilesPath="$(_UnfilteredLayoutResfilesPath)"
+          FilteredLayoutResfilesPath="$(_FilteredLayoutResfilesPath)"
+          ExcludedLayoutResfilesPath="$(_ExcludedLayoutResfilesPath)"
+          ResourcesResfilesPath="$(_ResourcesResfilesPath)"
+          PriResfilesPath="$(_PriResfilesPath)"
+          EmbedFileResfilePath="$(_EmbedFileResfilePath)"
+          LayoutFiles="@(_LayoutFile)"
+          PRIResourceFiles="@(PRIResource)"
+          PriFiles="@(_PriFile)"
+          EmbedFiles="@(_EmbedFile)"
+          IntermediateExtension="$(AppxIntermediateExtension)"
+          UnprocessedResourceFiles_OtherLanguages="@(_UnprocessedReswFiles_OtherLanguages)"
+          VsTelemetrySession="$(VsTelemetrySession)">
+      <Output TaskParameter="AdditionalResourceResFiles" ItemName="_AdditionalResourceResFiles" />
+    </GeneratePriConfigurationFiles>
+
+    <CreatePriConfigXmlForFullIndex
+        PriConfigXmlPath="$(_PriConfigXmlPath).updated"
+        LayoutResfilesPath="$(_FilteredLayoutResfilesPath)"
+        ResourcesResfilesPath="$(_ResourcesResfilesPath)"
+        PriResfilesPath="$(_PriResfilesPath)"
+        EmbedFileResfilePath="$(_EmbedFileResfilePath)"
+        PriInitialPath="$(AppxPriInitialPath)"
+        DefaultResourceLanguage="$(DefaultResourceLanguage)"
+        DefaultResourceQualifiers="$(AppxDefaultResourceQualifiers)"
+        IntermediateExtension="$(AppxIntermediateExtension)"
+        PriConfigXmlDefaultSnippetPath="$(AppxPriConfigXmlDefaultSnippetPath)"
+        TargetPlatformIdentifier="$(TargetPlatformIdentifier)"
+        TargetPlatformVersion="$(TargetPlatformResourceVersion)"
+        AdditionalResourceResFiles="@(_AdditionalResourceResFiles)"
+        VsTelemetrySession="$(VsTelemetrySession)"
+            />
+
+    <!-- Copy Embed files to location expected by embed indexer-->
+    <MakeDir Directories="$(IntermediateOutputPath)$(AppxSubfolderWithFilesToBeEmbedded)" />
+
+    <Copy
+        SourceFiles="@(_EmbedFile)"
+        DestinationFiles="@(_EmbedFileCopy)"
+        SkipUnchangedFiles='true'
+        />
+
+    <Message Text="$(MSBuildProjectName) -> $(_PriConfigXmlPath)" />
+    <Message Text="$(MSBuildProjectName) -> $(_UnfilteredLayoutResfilesPath)" />
+    <Message Text="$(MSBuildProjectName) -> $(_FilteredLayoutResfilesPath)" />
+    <Message Text="$(MSBuildProjectName) -> $(_ExcludedLayoutResfilesPath)" />
+    <Message Text="$(MSBuildProjectName) -> $(_ResourcesResfilesPath)" />
+    <Message Text="$(MSBuildProjectName) -> $(_PriResfilesPath)" />
+    <Message Text="$(MSBuildProjectName) -> $(_AdditionalResourceResFiles)" />
+    <Message Condition="'$(_SupportEmbedFileResources)' == 'true'" Text="$(MSBuildProjectName) -> $(_EmbedFileResfilePath)" />
+
+  </Target>
+
+  <Target Name="_UpdateTargetOsVersion" BeforeTargets="_GenerateProjectPriFileCore">
+    <PropertyGroup>
+      <_PriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_PriConfigXmlPath>
+    </PropertyGroup>
+    <!-- Update targetOsVersion -->
+    <PreparePRIConfigFile ConfigPRIFileName="$(_PriConfigXmlPath)" />
+    <Copy
+        SourceFiles="$(_PriConfigXmlPath).updated"
+        DestinationFiles="$(_PriConfigXmlPath)"
+        />
+  </Target>
+
+  <Target Name="GeneratePRIFileForUnpackagedApps" AfterTargets="AfterBuild" Condition="@(AppxManifest)==''">
+ 
+    <PropertyGroup>
+      <GeneratePRIFileForUnpackagedAppsDependOn>
+        BeforeGenerateProjectPriFile;
+        _GetDefaultResourceLanguage;
+        _GeneratePrisForPortableLibraries;
+        _WinUIGetPriFilesFromPayload;
+        _WinUIComputeInputPriFiles;
+        _UpdateTargetOsVersion;
+        _WinUIGenerateProjectPriConfigurationFiles;
+        _CalculateInputsForGenerateProjectPriFileCore;
+        _GenerateProjectPriFileCore;
+        _AddFileReadsAndFileWritesForProjectPri;
+        _CreateProjectPriFileItem;
+        _ExpandProjectPriFile;
+        _ExpandPriFiles;
+        _ExpandPriUploadFiles;
+        AfterGenerateProjectPriFile          
+      </GeneratePRIFileForUnpackagedAppsDependOn>
+    </PropertyGroup>
+    <CallTarget Targets="$(GeneratePRIFileForUnpackagedAppsDependOn)" />
+  </Target>
+  
 </Project>
