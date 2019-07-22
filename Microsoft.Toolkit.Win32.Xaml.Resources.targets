@@ -51,6 +51,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     <MakePriExeFullPath>$(_WindowsSdkPathTools)MakePri.exe</MakePriExeFullPath>
     <IntermediateExtension>.intermediate</IntermediateExtension>
     <AppxIntermediateExtension>$(IntermediateExtension)</AppxIntermediateExtension>
+    <_PriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_PriConfigXmlPath>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -93,8 +94,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
           Condition="'@(DesktopWindow)'!=''"
           DependsOnTargets="_GetPackageFileExtensions"
           Inputs="$(MSBuildAllProjects);@(_PriFile);$(AppxPriConfigXmlDefaultSnippetPath);@(PackagingOutputs)"
-          Outputs="$(_PriConfigXmlPath);$(_UnfilteredLayoutResfilesPath);$(_FilteredLayoutResfilesPath);$(_ExcludedLayoutResfilesPath);$(_ResourcesResfilesPath);$(_PriResfilesPath)"
-            >
+          Outputs="$(_PriConfigXmlPath);$(_UnfilteredLayoutResfilesPath);$(_FilteredLayoutResfilesPath);$(_ExcludedLayoutResfilesPath);$(_ResourcesResfilesPath);$(_PriResfilesPath)" >
     <PropertyGroup>
       <_SupportEmbedFileResources Condition="'$(_SupportEmbedFileResources)' ==''">true</_SupportEmbedFileResources>
       <_PriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_PriConfigXmlPath>
@@ -178,7 +178,37 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
   </Target>
 
-  <Target Name="_UpdateTargetOsVersion" BeforeTargets="_GenerateProjectPriFileCore" Condition="'@(DesktopWindow)'!=''">
+  <!-- Generates intermediate PRI file for the current project. -->
+  <Target Name="_WinUIGenerateProjectPriFileCore"
+          Inputs="$(MSBuildAllProjects);@(_GenerateProjectPriFileCoreInput)"
+          Outputs="$(ProjectPriFullPath)"
+            >
+
+    <MakeDir Condition="'$(InsertReverseMap)' == 'true'"
+             Directories="$(_ReverseMapProjectPriDirectory)"
+                 />
+
+    <GenerateProjectPriFile MakePriExeFullPath="$(MakePriExeFullPath)"
+                            MakePriExtensionPath="$(OutOfProcessMakePriExtensionPath)"
+                            PriConfigXmlPath="$(_PriConfigXmlPath)"
+                            IndexFilesForQualifiersCollection="$(_FilteredLayoutResfilesPath);$(_ResourcesResfilesPath)"
+                            ProjectPriIndexName="$(ProjectPriIndexName)"
+                            InsertReverseMap="$(InsertReverseMap)"
+                            ProjectDirectory="$(ProjectDir)"
+                            OutputFileName="$(ProjectPriFullPath)"
+                            QualifiersPath="$(_QualifiersPath)"
+                            IntermediateExtension="$(AppxIntermediateExtension)"
+                            AppxBundleAutoResourcePackageQualifiers="$(AppxBundleAutoResourcePackageQualifiers)"
+                            MultipleQualifiersPerDimensionFoundPath="$(_MultipleQualifiersPerDimensionFoundPath)"
+                            AdditionalMakepriExeParameters="$(AppxGenerateProjectPriFileAdditionalMakepriExeParameters)"
+                            VsTelemetrySession="$(VsTelemetrySession)"
+                            />
+
+    <Message Text="$(MSBuildProjectName) -> $(ProjectPriFileName)" />
+
+  </Target>
+
+  <Target Name="_UpdateTargetOsVersion" BeforeTargets="_WinUIGenerateProjectPriFileCore" Condition="'@(DesktopWindow)'!=''">
     <PropertyGroup>
       <_PriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_PriConfigXmlPath>
     </PropertyGroup>
@@ -201,7 +231,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
         _UpdateTargetOsVersion;
         _WinUIGenerateProjectPriConfigurationFiles;
         _CalculateInputsForGenerateProjectPriFileCore;
-        _GenerateProjectPriFileCore;
+        _WinUIGenerateProjectPriFileCore;
         _AddFileReadsAndFileWritesForProjectPri;
         _CreateProjectPriFileItem;
         _ExpandProjectPriFile;
