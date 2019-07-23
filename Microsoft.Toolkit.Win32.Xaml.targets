@@ -1,18 +1,4 @@
-<!--
-***********************************************************************************************
-Microsoft.Windows.UI.Xaml.Common.targets
-
-WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and have
-          created a backup copy.  Incorrect changes to this file will make it
-          impossible to load or build your projects from the command-line or the IDE.
-
-Copyright (C) Microsoft Corporation. All rights reserved.
-***********************************************************************************************
--->
-
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  
-  <!-- Need the path to vcmeta.dll -->
   <PropertyGroup>
     <XamlProjectName Condition=" '$(XamlProjectName)' == '' ">$(MSBuildProjectName)</XamlProjectName>
     <WindowsSdkPath Condition="'$(WindowsSdkPath)'==''">$(MSBuildProgramFiles32)\Windows Kits\10\</WindowsSdkPath>
@@ -22,7 +8,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     <DisableXbfGeneration Condition="'$(DisableXbfGeneration)' == ''">false</DisableXbfGeneration>
 
     <XamlSavedStateFileName Condition="'$(XamlSavedStateFileName)' == ''">XamlSaveStateFile.xml</XamlSavedStateFileName>
-    <XamlSavedStateFilePath>$(IntermediateOutputPath)\$(XamlSavedStateFileName)</XamlSavedStateFilePath>
+    <WinUIXamlSavedStateFilePath>$(IntermediateOutputPath)\$(XamlSavedStateFileName)</WinUIXamlSavedStateFilePath>
 
     <XAMLFingerprintIgnorePaths Condition="'$(XAMLFingerprintIgnorePaths)'==''">
       @(ReferenceAssemblyPaths);
@@ -69,7 +55,8 @@ Copyright (C) Microsoft Corporation. All rights reserved.
   </PropertyGroup>
 
   <!-- When using reflection for our metadata provider, we need to include the reflection helper DLL which is in the same folder as this targets file -->
-  <!-- Microsoft.UI.Xaml.Markup.winmd is not compatible with Unpackaged apps
+  <!-- Microsoft.UI.Xaml.Markup.winmd is not compatible with Unpackaged apps -->
+  <!-- Bug 23007116: Reflection metadata provider should support unpackaged Win32 applications 
   <Choose>
     <When Condition="'$(EnableTypeInfoReflection)' == 'true'">
       <ItemGroup>
@@ -417,7 +404,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
             XAMLFingerprint="$(XAMLFingerprint)"
             FingerprintIgnorePaths="$(XAMLFingerprintIgnorePaths)"
             VCInstallDir="$(VCInstallDir)"
-            SavedStateFile="$(XamlSavedStateFilePath)"
+            SavedStateFile="$(WinUIXamlSavedStateFilePath)"
             SuppressWarnings="$(SuppressXamlWarnings)"
             TargetPlatformMinVersion="$(TargetPlatformMinVersion)"
             WindowsSdkPath="$(WindowsSdkPath)"
@@ -440,7 +427,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     </CompileXaml>
 
     <ItemGroup>
-      <FileWrites Include="$(XamlSavedStateFilePath)" />
+      <FileWrites Include="$(WinUIXamlSavedStateFilePath)" />
     </ItemGroup>
 
     <Message Text="(Out) ISenseCodeFiles: '@(_GeneratedCodeFiles)'" />
@@ -461,6 +448,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
     <PropertyGroup>
       <XamlGeneratedOutputPath Condition="'$(XamlGeneratedOutputPath)' == ''">$(IntermediateOutputPath)</XamlGeneratedOutputPath>
+      <WinUIXamlSavedStateFilePath>$(IntermediateOutputPath)\$(XamlSavedStateFileName)</WinUIXamlSavedStateFilePath>
     </PropertyGroup>
     <MakeDir Condition="'$(ManagedAssembly)'!='false'" Directories="$(XamlGeneratedOutputPath)intermediatexaml\" />
     <ItemGroup>
@@ -487,7 +475,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
             XAMLFingerprint="$(XAMLFingerprint)"
             FingerprintIgnorePaths="$(XAMLFingerprintIgnorePaths)"
             VCInstallDir="$(VCInstallDir)"
-            SavedStateFile="$(XamlSavedStateFilePath)"
+            SavedStateFile="$(WinUIXamlSavedStateFilePath)"
             SuppressWarnings="$(SuppressXamlWarnings)"
             TargetPlatformMinVersion="$(TargetPlatformMinVersion)"
             WindowsSdkPath="$(WindowsSdkPath)"
@@ -512,7 +500,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     </CompileXaml>
    
     <ItemGroup>
-      <FileWrites Include="$(XamlSavedStateFilePath)" />
+      <FileWrites Include="$(WinUIXamlSavedStateFilePath)" />
     </ItemGroup>
 
     <Message Text="(Out) GeneratedCodeFiles: '@(_GeneratedCodeFiles)'" />
@@ -597,7 +585,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
             FingerprintIgnorePaths="$(XAMLFingerprintIgnorePaths)"
             VCInstallDir="$(VCInstallDir)"
             WindowsSdkPath="$(WindowsSdkPath)"
-            SavedStateFile="$(XamlSavedStateFilePath)"
+            SavedStateFile="$(WinUIXamlSavedStateFilePath)"
             RootsLog="$(XamlRootsLog)"
             SuppressWarnings="$(SuppressXamlWarnings)"
             TargetPlatformMinVersion="$(TargetPlatformMinVersion)"
@@ -625,7 +613,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     </CompileXaml>
 
     <ItemGroup>
-      <FileWrites Include="$(XamlSavedStateFilePath)" />
+      <FileWrites Include="$(WinUIXamlSavedStateFilePath)" />
       <FileWrites Condition="'$(XamlRootsLog)' != ''" Include="$(XamlRootsLog)" />
     </ItemGroup>
 
@@ -657,7 +645,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
             XamlApplications="@(DesktopApp)"
             ForceSharedStateShutdown="True"
             CompileMode="OnErrorShutdown"
-            SavedStateFile="$(XamlSavedStateFilePath)"
+            SavedStateFile="$(WinUIXamlSavedStateFilePath)"
             TargetPlatformMinVersion="$(TargetPlatformMinVersion)"
             XamlResourceMapName="$(XamlResourceMapName)"
             XamlComponentResourceLocation="$(XamlComponentResourceLocation)"
