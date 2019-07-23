@@ -51,7 +51,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     <MakePriExeFullPath>$(_WindowsSdkPathTools)MakePri.exe</MakePriExeFullPath>
     <IntermediateExtension>.intermediate</IntermediateExtension>
     <AppxIntermediateExtension>$(IntermediateExtension)</AppxIntermediateExtension>
-    <_PriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_PriConfigXmlPath>
+    <_WinUIPriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_WinUIPriConfigXmlPath>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -94,7 +94,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
           Condition="'@(DesktopWindow)'!=''"
           DependsOnTargets="_GetPackageFileExtensions"
           Inputs="$(MSBuildAllProjects);@(_PriFile);$(AppxPriConfigXmlDefaultSnippetPath);@(PackagingOutputs)"
-          Outputs="$(_PriConfigXmlPath);$(_UnfilteredLayoutResfilesPath);$(_FilteredLayoutResfilesPath);$(_ExcludedLayoutResfilesPath);$(_ResourcesResfilesPath);$(_PriResfilesPath)" >
+          Outputs="$(_WinUIPriConfigXmlPath);$(_UnfilteredLayoutResfilesPath);$(_FilteredLayoutResfilesPath);$(_ExcludedLayoutResfilesPath);$(_ResourcesResfilesPath);$(_PriResfilesPath)" >
     <PropertyGroup>
       <_SupportEmbedFileResources Condition="'$(_SupportEmbedFileResources)' ==''">true</_SupportEmbedFileResources>
       <_UnfilteredLayoutResfilesPath>$(IntermediateOutputPath)unfiltered.layout.resfiles</_UnfilteredLayoutResfilesPath>
@@ -111,7 +111,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     </PropertyGroup>
 
     <PropertyGroup>
-      <_PriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_PriConfigXmlPath>
+      <_WinUIPriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_WinUIPriConfigXmlPath>
     </PropertyGroup>
 
     <ItemGroup>
@@ -145,7 +145,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
     </GeneratePriConfigurationFiles>
 
     <CreatePriConfigXmlForFullIndex
-        PriConfigXmlPath="$(_PriConfigXmlPath).updated"
+        PriConfigXmlPath="$(_WinUIPriConfigXmlPath).updated"
         LayoutResfilesPath="$(_FilteredLayoutResfilesPath)"
         ResourcesResfilesPath="$(_ResourcesResfilesPath)"
         PriResfilesPath="$(_PriResfilesPath)"
@@ -170,7 +170,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
         SkipUnchangedFiles='true'
         />
 
-    <Message Text="$(MSBuildProjectName) -> $(_PriConfigXmlPath)" />
+    <Message Text="$(MSBuildProjectName) -> $(_WinUIPriConfigXmlPath)" />
     <Message Text="$(MSBuildProjectName) -> $(_UnfilteredLayoutResfilesPath)" />
     <Message Text="$(MSBuildProjectName) -> $(_FilteredLayoutResfilesPath)" />
     <Message Text="$(MSBuildProjectName) -> $(_ExcludedLayoutResfilesPath)" />
@@ -188,7 +188,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
             >
 
     <PropertyGroup>
-      <_PriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_PriConfigXmlPath>
+      <_WinUIPriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_WinUIPriConfigXmlPath>
     </PropertyGroup>
 
     <MakeDir Condition="'$(InsertReverseMap)' == 'true'"
@@ -197,7 +197,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
     <GenerateProjectPriFile MakePriExeFullPath="$(MakePriExeFullPath)"
                             MakePriExtensionPath="$(OutOfProcessMakePriExtensionPath)"
-                            PriConfigXmlPath="$(_PriConfigXmlPath)"
+                            PriConfigXmlPath="$(_WinUIPriConfigXmlPath)"
                             IndexFilesForQualifiersCollection="$(_FilteredLayoutResfilesPath);$(_ResourcesResfilesPath)"
                             ProjectPriIndexName="$(ProjectPriIndexName)"
                             InsertReverseMap="$(InsertReverseMap)"
@@ -217,19 +217,19 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
   <Target Name="_UpdateTargetOsVersion" Condition="'@(DesktopWindow)'!=''">
     <PropertyGroup>
-      <_PriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_PriConfigXmlPath>
+      <_WinUIPriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_WinUIPriConfigXmlPath>
     </PropertyGroup>
     <!-- Update targetOsVersion -->
-    <PreparePRIConfigFile ConfigPRIFileName="$(_PriConfigXmlPath)" />
-    <Copy Condition="Exists('$(_PriConfigXmlPath).updated')"
-        SourceFiles="$(_PriConfigXmlPath).updated"
-        DestinationFiles="$(_PriConfigXmlPath)"
+    <PreparePRIConfigFile ConfigPRIFileName="$(_WinUIPriConfigXmlPath)" />
+    <Copy Condition="Exists('$(_WinUIPriConfigXmlPath).updated')"
+        SourceFiles="$(_WinUIPriConfigXmlPath).updated"
+        DestinationFiles="$(_WinUIPriConfigXmlPath)"
         />
   </Target>
 
   <Target Name="GeneratePRIFileForUnpackagedApps" AfterTargets="AfterBuild" Condition="@(AppxManifest)=='' AND '@(DesktopWindow)'!=''">
     <PropertyGroup>
-      <_PriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_PriConfigXmlPath>
+      <_WinUIPriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_WinUIPriConfigXmlPath>
     </PropertyGroup>
     <PropertyGroup>
       <GeneratePRIFileForUnpackagedAppsDependOn>
