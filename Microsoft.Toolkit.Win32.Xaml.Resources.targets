@@ -183,6 +183,10 @@ Copyright (C) Microsoft Corporation. All rights reserved.
           Outputs="$(ProjectPriFullPath)"
             >
 
+    <PropertyGroup>
+      <_PriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_PriConfigXmlPath>
+    </PropertyGroup>
+
     <MakeDir Condition="'$(InsertReverseMap)' == 'true'"
              Directories="$(_ReverseMapProjectPriDirectory)"
                  />
