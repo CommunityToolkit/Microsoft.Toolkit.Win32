@@ -73,14 +73,8 @@
       <Using Namespace="System.Linq" />
       <Using Namespace="System.Text" />
       <Using Namespace="System.Xml" />
-      <!-- 
-      <Code Type="Class" Language="cs" >
-<![CDATA[
-internal static class WinMDEnumerator
-{
-}
-]]>
-      </Code>-->
+      <Using Namespace="System.Reflection" />
+      <Using Namespace="System.Runtime.InteropServices.WindowsRuntime" />
       <Code Type="Fragment" Language="cs">
         <![CDATA[
             var headerF = @"<?xml version='1.0' encoding='utf-8' standalone='yes'?>
@@ -111,6 +105,17 @@ internal static class WinMDEnumerator
             sb.Append(headerF);
 
             bool foundXamlHost = false;
+
+            const string fileStart = @"    <asmv3:file name='{0}'>";
+            const string fileEntry = @"
+        <activatableClass
+            name='{0}'
+            threadingModel='both'
+            xmlns='urn:schemas-microsoft-com:winrt.v1'/>";
+            const string fileEnd = @"
+    </asmv3:file>
+";
+
             if (!string.IsNullOrEmpty(AppxManifest))
             {
                 XmlDocument doc = new XmlDocument();
@@ -128,7 +133,7 @@ internal static class WinMDEnumerator
                       foundXamlHost = String.Compare(dllPath, "Microsoft.Toolkit.Win32.UI.XamlHost.dll", true) == 0;
                     }
                     var typesNames = winRTFactory.SelectNodes("./m:ActivatableClass", nsmgr).OfType<XmlNode>();
-                    var xmlHeader = String.Format(@"    <asmv3:file name='{0}'>", dllPath);
+                    var xmlHeader = String.Format(fileStart, dllPath);
                     sb.Append(xmlHeader);
                     foreach (var typeNode in typesNames)
                     {
@@ -137,17 +142,70 @@ internal static class WinMDEnumerator
                             .OfType<XmlAttribute>()
                             .SingleOrDefault(x => x.Name == "ActivatableClassId")
                             .InnerText;
-                        var xmlEntry = String.Format(@"
-        <activatableClass
-            name='{0}'
-            threadingModel='both'
-            xmlns='urn:schemas-microsoft-com:winrt.v1'/>", typeName);
-                    sb.Append(xmlEntry);
+                        var xmlEntry = String.Format(fileEntry, typeName);
+                        sb.Append(xmlEntry);
+                    }
+                    sb.Append(fileEnd);
                 }
-                var xmlFooter = @"
-    </asmv3:file>
-";
-                    sb.Append(xmlFooter);
+            }
+            else if (!string.IsNullOrEmpty(WinMDReferences))
+            {
+                var references = WinMDReferences.Replace("\\\\", "\\").Split(';');
+
+                AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += (sender, eventArgs) => Assembly.ReflectionOnlyLoad(eventArgs.Name);
+                WindowsRuntimeMetadata.ReflectionOnlyNamespaceResolve += (sender, eventArgs) =>
+                {
+                    string path =
+                        WindowsRuntimeMetadata.ResolveNamespace(eventArgs.NamespaceName, references)
+                            .FirstOrDefault();
+                    if (path == null) return;
+                    eventArgs.ResolvedAssemblies.Add(Assembly.ReflectionOnlyLoadFrom(path));
+                };
+
+                var referencesInfo = references.Select(f => new FileInfo(f));
+                var winMDreferences = referencesInfo
+                    .Where(f => String.Equals(f.Extension, ".winmd", StringComparison.OrdinalIgnoreCase))
+                    .Where(f => !f.Name.StartsWith("Windows", StringComparison.OrdinalIgnoreCase));
+                foreach (var winMDFile in winMDreferences)
+                {
+                   string fullAssemblyPath = winMDFile.FullName;
+                   var loadedAssembly = Assembly.ReflectionOnlyLoadFrom(fullAssemblyPath);
+                   {
+                        var exportedTypes = loadedAssembly.GetTypes();
+
+                        var appendEnd = false;
+                        foreach (var type in exportedTypes)
+                        {
+                            bool isVisible = false;
+                            var attributes = CustomAttributeData.GetCustomAttributes(type);
+                            foreach(var attrib in attributes)
+                            {
+                                var attributeString = attrib.ToString();
+                                if (attributeString.Contains("Windows.Foundation.Metadata.ComposableAttribute") ||
+                                    attributeString.Contains("Windows.Foundation.Metadata.ActivatableAttribute") ||
+                                    attributeString.Contains("Windows.Foundation.Metadata.StaticAttribute"))
+                                {
+                                    isVisible = true;
+                                }
+                            }
+
+                            if (isVisible)
+                            {
+                                if (!appendEnd)
+                                {
+                                    appendEnd = true;
+                                    var xmlHeader = String.Format(fileStart, winMDFile.Name.Replace(".winmd", ".dll"));
+                                    sb.Append(xmlHeader);
+                                }
+                                var xmlEntry = String.Format(fileEntry, type.FullName);
+                                sb.Append(xmlEntry);
+                            }
+                        }
+                        if (appendEnd)
+                        {
+                            sb.Append(fileEnd);
+                        }
+                    }
                 }
             }
             if (!foundXamlHost)
