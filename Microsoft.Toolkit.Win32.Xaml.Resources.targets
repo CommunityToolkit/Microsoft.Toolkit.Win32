@@ -201,7 +201,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
                             IndexFilesForQualifiersCollection="$(_FilteredLayoutResfilesPath);$(_ResourcesResfilesPath)"
                             ProjectPriIndexName="$(ProjectPriIndexName)"
                             InsertReverseMap="$(InsertReverseMap)"
-                            ProjectDirectory="$(ProjectDir)"
+                            ProjectDirectory="$(MSBuildProjectDirectory)"
                             OutputFileName="$(ProjectPriFullPath)"
                             QualifiersPath="$(_QualifiersPath)"
                             IntermediateExtension="$(AppxIntermediateExtension)"
