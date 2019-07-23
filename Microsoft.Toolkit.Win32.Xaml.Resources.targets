@@ -110,6 +110,10 @@ Copyright (C) Microsoft Corporation. All rights reserved.
       <TargetPlatformVersion>$(_TargetPlatformVersion)</TargetPlatformVersion>
     </PropertyGroup>
 
+    <PropertyGroup>
+      <_PriConfigXmlPath>$(IntermediateOutputPath)priconfig.xml</_PriConfigXmlPath>
+    </PropertyGroup>
+
     <ItemGroup>
       <!--
         First, build out the complete list of files we want to consider for the layout.
