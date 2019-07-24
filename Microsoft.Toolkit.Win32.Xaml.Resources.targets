@@ -41,10 +41,10 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 
   <PropertyGroup>
     <MsAppxPackageTargets Condition="'$(MsAppxPackageTargets)'==''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\AppxPackage\Microsoft.AppXPackage.Targets</MsAppxPackageTargets>
+    <AppxPackage>true</AppxPackage>
   </PropertyGroup>
   <Import Project="$(MsAppxPackageTargets)" Condition="Exists('$(MsAppxPackageTargets)')" />
 
-  <!-- Disable noisy appx tasks: Start -->
   <Target Name="_GetSdkToolPaths"/>
   <Target Name="_ValidatePresenceOfAppxManifestItems" />
   <Target Name="_GenerateProjectPriFile"  />
@@ -52,12 +52,11 @@ Copyright (C) Microsoft Corporation. All rights reserved.
   <Target Name="_GenerateAppxPackageRecipeFile" />
   <PropertyGroup>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
-    <AppxPackage>false</AppxPackage>
+    <AppxPackage>true</AppxPackage>
   </PropertyGroup>
   <ItemGroup>
     <AppxManifestSchema Include="AppxInvalidManifestSchema" />
   </ItemGroup>
-  <!-- Disable noisy appx tasks: End -->
 
   <PropertyGroup>
     <WindowsSdkPath Condition="'$(WindowsSdkPath)'==''">$(MSBuildProgramFiles32)\Windows Kits\10\</WindowsSdkPath>
