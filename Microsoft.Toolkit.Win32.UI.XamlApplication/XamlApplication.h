@@ -28,6 +28,8 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 
         void Run(winrt::Microsoft::Toolkit::Win32::UI::XamlHost::DesktopWindow window);
 
+        void Run();
+
         winrt::Windows::Foundation::IClosable WindowsXamlManager() const;
 
         winrt::Windows::UI::Xaml::Markup::IXamlType GetXamlType(winrt::Windows::UI::Xaml::Interop::TypeName const& type);

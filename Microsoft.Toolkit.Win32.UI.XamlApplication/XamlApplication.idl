@@ -18,5 +18,6 @@ namespace Microsoft.Toolkit.Win32.UI.XamlHost
         Boolean IsDisposed { get; };
 
         void Run(DesktopWindow window);
+        void Run();
     }
 }

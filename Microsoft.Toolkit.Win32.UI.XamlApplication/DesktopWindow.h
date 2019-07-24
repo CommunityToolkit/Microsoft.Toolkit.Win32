@@ -49,6 +49,7 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         // DPI Change handler. on WM_DPICHANGE resize the window
         [[nodiscard]] LRESULT HandleDpiChange(const HWND hWnd, const WPARAM wParam, const LPARAM lParam);
 
+        void OnCreate();
         void OnResize(const UINT width, const UINT height);
         void OnMinimize();
         void OnRestore();
@@ -124,7 +125,7 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         winrt::hstring _title = L"";
         bool _minimized = false;
         HWND _interopWindowHandle;
-        winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource _source;
+        winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource _source{ nullptr };
     };
 }
 

@@ -18,15 +18,6 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         ::ShowWindow(_window.get(), SW_SHOW);
         ::UpdateWindow(_window.get());
         ::SetFocus(_window.get());
-
-        MSG msg = {};
-        while (GetMessage(&msg, nullptr, 0, 0))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
-
-        return; //(int)msg.wParam;
     }
 
     void DesktopWindow::Close()
@@ -107,6 +98,19 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
     // - height: the new height of the window _in pixels_
     void DesktopWindow::OnResize(const UINT width, const UINT height)
     {
+        // Workaround start
+        // Bug 22970981: Launching Xaml island app causes temporary black screen
+        // https://microsoft.visualstudio.com/OS/_workitems/edit/22970981
+        // We need to delay the call to AttachToWindow until the first WM_SIZE
+        // Otherwise, the D3D device will reset
+        if (!_interopWindowHandle)
+        {
+            auto interop = _source.as<IDesktopWindowXamlSourceNative>();
+            winrt::check_hresult(interop->AttachToWindow(_window.get()));
+            winrt::check_hresult(interop->get_WindowHandle(&_interopWindowHandle));
+        }
+        // Workaround end
+
         if (_interopWindowHandle)
         {
             // update the interop window size
@@ -147,13 +151,7 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
             WINRT_ASSERT(!that->_window);
             that->_window = wil::unique_hwnd(window);
             SetWindowLongPtr(window, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(that));
-
-            EnableNonClientDpiScaling(window);
-            that->_currentDpi = GetDpiForWindow(window);
-
-            auto interop = that->_source.as<IDesktopWindowXamlSourceNative>();
-            winrt::check_hresult(interop->AttachToWindow(window));
-            winrt::check_hresult(interop->get_WindowHandle(&that->_interopWindowHandle));
+            that->OnCreate();
         }
         else if (DesktopWindow * that = GetThisFromHandle(window))
         {
@@ -161,6 +159,25 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         }
 
         return DefWindowProc(window, message, wparam, lparam);
+    }
+
+    void DesktopWindow::OnCreate()
+    {
+        EnableNonClientDpiScaling(_window.get());
+        _currentDpi = GetDpiForWindow(_window.get());
+
+        _source = winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource();
+
+        // Workaround start
+        // Bug 22970981: Launching Xaml island app causes temporary black screen
+        // https://microsoft.visualstudio.com/OS/_workitems/edit/22970981
+        // We need to delay the call to AttachToWindow until the first WM_SIZE
+        // Otherwise, the D3D device will reset
+
+        //auto interop = _source.as<IDesktopWindowXamlSourceNative>();
+        //winrt::check_hresult(interop->AttachToWindow(_window.get()));
+        //winrt::check_hresult(interop->get_WindowHandle(&_interopWindowHandle));
+        // Workaround end
     }
 
     [[nodiscard]] LRESULT DesktopWindow::MessageHandler(UINT const message, WPARAM const wparam, LPARAM const lparam) noexcept

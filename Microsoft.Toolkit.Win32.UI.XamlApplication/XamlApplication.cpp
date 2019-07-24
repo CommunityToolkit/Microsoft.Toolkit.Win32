@@ -1,15 +1,10 @@
 ﻿#include "pch.h"
 
 #include "XamlApplication.h"
+#include <winrt/Windows.UI.Core.h>
+#include <CoreWindow.h>
 
 namespace xaml = ::winrt::Windows::UI::Xaml;
-
-extern "C" {
-    WINBASEAPI HMODULE WINAPI LoadLibraryExW(_In_ LPCWSTR lpLibFileName, _Reserved_ HANDLE hFile, _In_ DWORD dwFlags);
-    WINBASEAPI HMODULE WINAPI GetModuleHandleW(_In_opt_ LPCWSTR lpModuleName);
-    WINUSERAPI BOOL WINAPI PeekMessageW(_Out_ LPMSG lpMsg, _In_opt_ HWND hWnd, _In_ UINT wMsgFilterMin, _In_ UINT wMsgFilterMax, _In_ UINT wRemoveMsg);
-    WINUSERAPI LRESULT WINAPI DispatchMessageW(_In_ CONST MSG* lpMsg);
-}
 
 namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 {
@@ -44,6 +39,14 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         {
             m_executionMode = ExecutionMode::Win32;
             m_windowsXamlManager = xaml::Hosting::WindowsXamlManager::InitializeForCurrentThread();
+
+            if (auto coreWindow = winrt::Windows::UI::Core::CoreWindow::GetForCurrentThread())
+            {
+                auto coreWindowInterop = coreWindow.as<ICoreWindowInterop>();
+                HWND coreWindowHwnd = nullptr;
+                coreWindowInterop->get_WindowHandle(&coreWindowHwnd);
+                LOG_LAST_ERROR_IF(!::ShowWindow(coreWindowHwnd, SW_HIDE));
+            }
         }
         else
         {
@@ -54,6 +57,19 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
     void XamlApplication::Run(winrt::Microsoft::Toolkit::Win32::UI::XamlHost::DesktopWindow window)
     {
         window.Show();
+        Run();
+    }
+
+    void XamlApplication::Run()
+    {
+        MSG msg = {};
+        while (GetMessage(&msg, nullptr, 0, 0))
+        {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
+
+        return; //(int)msg.wParam;
     }
 
     winrt::Windows::Foundation::IClosable XamlApplication::WindowsXamlManager() const
