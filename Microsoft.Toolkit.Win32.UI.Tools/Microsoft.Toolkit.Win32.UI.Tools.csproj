@@ -1,18 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>net462</TargetFrameworks>
     <RootNamespace>Microsoft.Toolkit.Win32.Tools</RootNamespace>
     <AssemblyName>Microsoft.Toolkit.Win32.Tools.Package</AssemblyName>
     <Title>Windows Community Toolkit Tools for XAML Islands</Title>
     <Description>This library provides XAML islands common helpers applications. It is part of the Windows Community Toolkit.</Description>
     <PackageTags>XAML Islands Tools</PackageTags>
     <PackageId>Microsoft.Toolkit.Win32.UI.Tools</PackageId>
-    <Platforms>x64;x86;AnyCPU</Platforms>
+    <Platforms>x86;x64;AnyCPU</Platforms>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IsNativeProject>true</IsNativeProject>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
     <IsTool>true</IsTool>
+    <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
   </PropertyGroup>
 
   <ItemGroup>
@@ -63,6 +63,13 @@
     <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication.Package\Microsoft.Toolkit.Win32.UI.XamlApplication.Package.csproj">
       <PrivateAssets>analyzers</PrivateAssets>
     </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Build" />
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Build.Tasks.v4.0" />
+    <Reference Include="Microsoft.Build.Utilities.v4.0" />
   </ItemGroup>
 
 </Project>

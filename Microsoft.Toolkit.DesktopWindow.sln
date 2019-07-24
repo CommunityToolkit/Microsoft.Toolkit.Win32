@@ -35,6 +35,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit.Win32.UI.Tools", "Microsoft.Toolkit.Win32.UI.Tools\Microsoft.Toolkit.Win32.UI.Tools.csproj", "{955EF618-DB95-4AF7-83C3-7CAC44543D90}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit.Sample.DesktopWindow", "Microsoft.Toolkit.Sample.DesktopWindow\Microsoft.Toolkit.Sample.DesktopWindow.csproj", "{78A4EEFF-12D6-4772-A248-487EB13F2FB3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{955EF618-DB95-4AF7-83C3-7CAC44543D90} = {955EF618-DB95-4AF7-83C3-7CAC44543D90}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Toolkit.Win32.Sample.UWPLib", "Microsoft.Toolkit.Win32.Sample.UWP.UserControl\Microsoft.Toolkit.Win32.Sample.UWPLib.csproj", "{148CF727-355D-4603-9D05-11C104381A81}"
 EndProject
@@ -122,10 +125,10 @@ Global
 		{955EF618-DB95-4AF7-83C3-7CAC44543D90}.Release|ARM.Build.0 = Release|Any CPU
 		{955EF618-DB95-4AF7-83C3-7CAC44543D90}.Release|ARM64.ActiveCfg = Release|Any CPU
 		{955EF618-DB95-4AF7-83C3-7CAC44543D90}.Release|ARM64.Build.0 = Release|Any CPU
-		{955EF618-DB95-4AF7-83C3-7CAC44543D90}.Release|x64.ActiveCfg = Release|x64
-		{955EF618-DB95-4AF7-83C3-7CAC44543D90}.Release|x64.Build.0 = Release|x64
-		{955EF618-DB95-4AF7-83C3-7CAC44543D90}.Release|x86.ActiveCfg = Release|x86
-		{955EF618-DB95-4AF7-83C3-7CAC44543D90}.Release|x86.Build.0 = Release|x86
+		{955EF618-DB95-4AF7-83C3-7CAC44543D90}.Release|x64.ActiveCfg = Release|Any CPU
+		{955EF618-DB95-4AF7-83C3-7CAC44543D90}.Release|x64.Build.0 = Release|Any CPU
+		{955EF618-DB95-4AF7-83C3-7CAC44543D90}.Release|x86.ActiveCfg = Release|Any CPU
+		{955EF618-DB95-4AF7-83C3-7CAC44543D90}.Release|x86.Build.0 = Release|Any CPU
 		{78A4EEFF-12D6-4772-A248-487EB13F2FB3}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{78A4EEFF-12D6-4772-A248-487EB13F2FB3}.Debug|ARM.ActiveCfg = Debug|x86
 		{78A4EEFF-12D6-4772-A248-487EB13F2FB3}.Debug|ARM64.ActiveCfg = Debug|x86
