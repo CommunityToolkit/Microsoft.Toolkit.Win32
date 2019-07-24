@@ -7,7 +7,7 @@
     <Description>This library provides XAML islands common helpers applications. It is part of the Windows Community Toolkit.</Description>
     <PackageTags>XAML Islands Tools</PackageTags>
     <PackageId>Microsoft.Toolkit.Win32.UI.Tools</PackageId>
-    <Platforms>x86;x64;AnyCPU</Platforms>
+    <Platforms>AnyCPU</Platforms>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IsNativeProject>true</IsNativeProject>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
