@@ -58,6 +58,24 @@ steps:
     verbosityRestore: Detailed # Options: quiet, normal, detaile
 
 - task: MSBuild@1
+  displayName: Build AnyCPU Restore
+  inputs:
+    solution: Microsoft.Toolkit.Win32.sln 
+    platform: AnyCPU
+    configuration: Release
+    msbuildArguments: /target:Restore
+    restoreNugetPackages: false # Optional
+
+- task: MSBuild@1
+  displayName: Build AnyCPU
+  inputs:
+    solution: Microsoft.Toolkit.Win32.sln 
+    platform: AnyCPU
+    configuration: Release
+    msbuildArguments: /target:Build
+    restoreNugetPackages: false # Optional
+
+- task: MSBuild@1
   displayName: Build x64 Restore
   inputs:
     solution: Microsoft.Toolkit.Win32.sln 
