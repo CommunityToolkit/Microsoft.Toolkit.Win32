@@ -62,7 +62,7 @@
     <_WinRTWin32TaskAssemblyPath Condition="Exists('$(MSBuildThisFileDirectory)Microsoft.Toolkit.Win32.UI.Tools\bin\AnyCPU\$(Configuration)\net462\Microsoft.Toolkit.Win32.Tools.Package.dll')">$(MSBuildThisFileDirectory)Microsoft.Toolkit.Win32.UI.Tools\bin\AnyCPU\$(Configuration)\net462\Microsoft.Toolkit.Win32.Tools.Package.dll</_WinRTWin32TaskAssemblyPath>
     <_WinRTWin32TaskAssemblyPath Condition="Exists('$(MSBuildThisFileDirectory)..\tasks\Microsoft.Toolkit.Win32.Tools.Package.dll')">$(MSBuildThisFileDirectory)..\tasks\Microsoft.Toolkit.Win32.Tools.Package.dll</_WinRTWin32TaskAssemblyPath>
   </PropertyGroup>
-  <UsingTask TaskName="GenerateWinRTManifest" AssemblyFile="$(_WinRTWin32TaskAssemblyPath)" />
+  <UsingTask TaskName="GenerateWinRTManifest" AssemblyFile="$(_WinRTWin32TaskAssemblyPath)" Condition="'$(_WinRTWin32TaskAssemblyPath)'!=''" />
 
   <Target Name="CreateWinRTRegistration" AfterTargets="ResolveKeySource" DependsOnTargets="CopyAllProjectReferencesOutputs">
     <MakeDir Directories="$(IntDir)\Manifests\" />
