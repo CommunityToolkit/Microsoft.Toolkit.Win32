@@ -22,7 +22,7 @@
     <PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="10.0.18362.2002-preview" />
   </ItemGroup>
 
-  <Target Name="CopyAllProjectReferencesOutputs">
+  <Target Name="CopyAllProjectReferencesOutputs" Condition="'@(DesktopWindow)'==''">
     <MSBuild Projects="@(ProjectReference)" Properties="Configuration=$(Configuration);Platform=$(Platform)" ContinueOnError="true">
       <Output TaskParameter="TargetOutputs" ItemName="BuildOutputPaths"/>
     </MSBuild>
@@ -168,43 +168,49 @@
                     .Where(f => !f.Name.StartsWith("Windows", StringComparison.OrdinalIgnoreCase));
                 foreach (var winMDFile in winMDreferences)
                 {
-                   string fullAssemblyPath = winMDFile.FullName;
-                   var loadedAssembly = Assembly.ReflectionOnlyLoadFrom(fullAssemblyPath);
-                   {
-                        var exportedTypes = loadedAssembly.GetTypes();
+                    string fullAssemblyPath = winMDFile.FullName;
+                    var exportedTypes = Enumerable.Empty<Type>();
+                    try
+                    {
+                        var loadedAssembly = Assembly.ReflectionOnlyLoadFrom(fullAssemblyPath);
+                        exportedTypes = loadedAssembly.GetTypes();
+                    }
+                    catch(Exception e)
+                    {
+                        //throw new TypeLoadException("Cannot load types from "+winMDFile.FullName, e);
+                    }
 
-                        var appendEnd = false;
-                        foreach (var type in exportedTypes)
+                    var appendEnd = false;
+                    foreach (var type in exportedTypes)
+                    {
+                        bool isVisible = false;
+                        var attributes = CustomAttributeData.GetCustomAttributes(type);
+                        foreach(var attrib in attributes)
                         {
-                            bool isVisible = false;
-                            var attributes = CustomAttributeData.GetCustomAttributes(type);
-                            foreach(var attrib in attributes)
+                            var attributeString = attrib.ToString();
+                            if (attributeString.Contains("Windows.Foundation.Metadata.ComposableAttribute") ||
+                                attributeString.Contains("Windows.Foundation.Metadata.ActivatableAttribute") ||
+                                attributeString.Contains("Windows.Foundation.Metadata.StaticAttribute"))
                             {
-                                var attributeString = attrib.ToString();
-                                if (attributeString.Contains("Windows.Foundation.Metadata.ComposableAttribute") ||
-                                    attributeString.Contains("Windows.Foundation.Metadata.ActivatableAttribute") ||
-                                    attributeString.Contains("Windows.Foundation.Metadata.StaticAttribute"))
-                                {
-                                    isVisible = true;
-                                }
-                            }
-
-                            if (isVisible)
-                            {
-                                if (!appendEnd)
-                                {
-                                    appendEnd = true;
-                                    var xmlHeader = String.Format(fileStart, winMDFile.Name.Replace(".winmd", ".dll"));
-                                    sb.Append(xmlHeader);
-                                }
-                                var xmlEntry = String.Format(fileEntry, type.FullName);
-                                sb.Append(xmlEntry);
+                                isVisible = true;
                             }
                         }
-                        if (appendEnd)
+
+                        if (isVisible)
                         {
-                            sb.Append(fileEnd);
+                            if (!appendEnd)
+                            {
+                                appendEnd = true;
+                                var xmlHeader = String.Format(fileStart, winMDFile.Name.Replace(".winmd", ".dll"));
+                                sb.Append(xmlHeader);
+                            }
+                            var xmlEntry = String.Format(fileEntry, type.FullName);
+                            sb.Append(xmlEntry);
                         }
+                    }
+                    if (appendEnd)
+                    {
+                        sb.Append(fileEnd);
                     }
                 }
             }
@@ -280,8 +286,7 @@
     </CreateProperty>
   </Target>
 
+  <Import Project="$(MSBuildThisFileDirectory)\Microsoft.Toolkit.Win32.Xaml.Resources.targets" />
   <Import Project="$(MSBuildThisFileDirectory)\Microsoft.Toolkit.Win32.Xaml.targets" />
 
-  <Import Project="$(MSBuildThisFileDirectory)\Microsoft.Toolkit.Win32.Xaml.Resources.targets" />
-  
 </Project>

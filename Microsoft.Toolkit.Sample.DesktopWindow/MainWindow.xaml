@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:xamlhost="using:Microsoft.Toolkit.Win32.UI.XamlHost"
     xmlns:local="using:Microsoft.Toolkit.Sample.DesktopWindow"
+    xmlns:uwplib="using:Microsoft.Toolkit.Win32.Sample.UWPLib"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -12,5 +13,7 @@
         <Button Click="OnButtonClick">Hello from Xaml</Button>
         <TextBlock x:Name="text" />
         <muxc:ColorPicker />
+        <!-- TODO: MakePri reports duplicated entry for the user control xbf
+        <uwplib:MyUserControl /> -->
     </StackPanel>
 </xamlhost:DesktopWindow>

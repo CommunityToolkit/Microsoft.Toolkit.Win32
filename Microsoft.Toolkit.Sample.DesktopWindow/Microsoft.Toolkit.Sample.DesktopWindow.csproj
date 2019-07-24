@@ -17,6 +17,11 @@
     <PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="10.0.18362.2002-preview" />
   </ItemGroup>
 
+  <!-- TODO: MakePri reports duplicated entry for the user control xbf
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Toolkit.Win32.Sample.UWP.UserControl\Microsoft.Toolkit.Win32.Sample.UWPLib.csproj" />
+  </ItemGroup> -->
+
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlApplication.vcxproj" />
     <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlHost\Microsoft.Toolkit.Win32.UI.XamlHost.Managed.csproj" />
