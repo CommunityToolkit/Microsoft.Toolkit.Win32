@@ -199,6 +199,11 @@ namespace Microsoft.Toolkit.Win32.UI.Tools
                     {
                     }
 
+                    if (winMDFile.Name.StartsWith("Microsoft.Toolkit.Win32.UI.XamlHost", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        foundXamlHost = true;
+                    }
+
                     var appendEnd = false;
                     foreach (var type in exportedTypes)
                     {
@@ -220,7 +225,9 @@ namespace Microsoft.Toolkit.Win32.UI.Tools
                             if (!appendEnd)
                             {
                                 appendEnd = true;
-                                var xmlHeader = string.Format(fileStart, winMDFile.Name.Replace(".winmd", ".dll"));
+
+                                var implementationDll = winMDFile.Name.Replace(".winmd", ".dll");
+                                var xmlHeader = string.Format(fileStart, implementationDll);
                                 sb.Append(xmlHeader);
                             }
 
