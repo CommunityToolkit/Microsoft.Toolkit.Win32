@@ -243,7 +243,7 @@ Task("Build")
         Information("\nBuild ARM Step");
         MSBuild(win32Solution, buildSettings);
     }
-	
+
     {
         var buildSettings = new MSBuildSettings
         {
