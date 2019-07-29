@@ -32,12 +32,10 @@
       <PackagePath>runtimes\win10-x86\native</PackagePath>
     </Content>
 
-    <!--
     <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pdb">
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-x86\native</PackagePath>
     </Content>
-    -->
 
     <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
       <Pack>true</Pack>
@@ -49,13 +47,11 @@
       <PackagePath>runtimes\win10-x64\native</PackagePath>
     </Content>
 
-    <!--
     <Content Include="..\x64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pdb">
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-x64\native</PackagePath>
     </Content>
-    -->
-   
+
     <Content Include="..\x64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-x64\native</PackagePath>
@@ -66,12 +62,10 @@
       <PackagePath>runtimes\win10-arm\native</PackagePath>
     </Content>
 
-    <!--
     <Content Include="..\arm\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pdb">
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-arm\native</PackagePath>
     </Content>
-    -->
 
     <Content Include="..\arm\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
       <Pack>true</Pack>
@@ -83,12 +77,10 @@
       <PackagePath>runtimes\win10-arm64\native</PackagePath>
     </Content>
 
-    <!--
     <Content Include="..\arm64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pdb">
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-arm64\native</PackagePath>
     </Content>
-    -->
 
     <Content Include="..\arm64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
       <Pack>true</Pack>
