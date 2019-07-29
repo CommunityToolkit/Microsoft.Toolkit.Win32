@@ -4,13 +4,19 @@
 
 using System;
 using System.Windows;
+#if WPF
 using System.Windows.Data;
+#endif
 using System.Windows.Forms;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 
 namespace Microsoft.Toolkit.Forms.UI.Controls
 {
-    internal abstract class WebBaseCompatibilityAdapter : DependencyObject, IWebViewCompatibleAdapter
+    internal abstract class WebBaseCompatibilityAdapter :
+#if WPF
+        DependencyObject, 
+#endif
+        IWebViewCompatibleAdapter
     {
         protected WebBaseCompatibilityAdapter()
         {
@@ -19,7 +25,9 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
 #pragma warning restore CA2214 // Do not call overridable methods in constructors
         }
 
+#if WPF
         public static DependencyProperty SourceProperty { get; } = DependencyProperty.Register(nameof(Source), typeof(Uri), typeof(WebBaseCompatibilityAdapter));
+#endif
 
         public abstract Control View { get; }
 
