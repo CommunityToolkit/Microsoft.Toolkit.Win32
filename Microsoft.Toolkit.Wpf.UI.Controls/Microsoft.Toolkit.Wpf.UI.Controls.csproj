@@ -19,7 +19,7 @@
 
     </Description>
     <PackageTags>Win32 WPF UWP XAML</PackageTags>
-
+    <PackageId>Windows.Toolkit.Wpf.UI.Controls</PackageId>
     <DefineConstants>$(DefineConstants);WPF</DefineConstants>
 
     <Platforms>x64;x86;AnyCPU</Platforms>

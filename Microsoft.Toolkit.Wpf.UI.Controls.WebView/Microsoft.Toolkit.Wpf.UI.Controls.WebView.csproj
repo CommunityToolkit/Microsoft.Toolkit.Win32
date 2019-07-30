@@ -11,7 +11,7 @@
       This control uses the Microsoft Edge rendering engine (EdgeHTML) or the the System.Windows.Controls.WebBrowser, for devices on older versions (WebViewCompatible), to embed a view that renders richly formatted HTML5 content from a remote web server, dynamically generated code, or content files.
     </Description>
     <PackageTags>WebView Win32 WPF XAML</PackageTags>
-
+    <PackageId>Windows.Toolkit.Wpf.UI.Controls.WebView</PackageId>
     <DefineConstants>$(DefineConstants);WPF</DefineConstants>
 
     <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>

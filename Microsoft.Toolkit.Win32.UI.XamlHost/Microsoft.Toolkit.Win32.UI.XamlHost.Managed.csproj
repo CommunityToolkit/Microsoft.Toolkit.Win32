@@ -6,7 +6,7 @@
     <Title>Windows Community Toolkit XAMLHost</Title>
     <Description>This library provides XAML islands common helpers for WPF and WinForms. It is part of the Windows Community Toolkit.</Description>
     <PackageTags>XAML Islands XAMLHost</PackageTags>
-    <PackageId>Microsoft.Toolkit.UI.XamlHost</PackageId>
+    <PackageId>Windows.Toolkit.UI.XamlHost</PackageId>
     <IsWpfProject>true</IsWpfProject>
     <Platforms>x64;x86;AnyCPU</Platforms>
   </PropertyGroup>
@@ -17,12 +17,12 @@
       <PackagePath>build</PackagePath>
     </Content>
 
-    <Content Include="Microsoft.Toolkit.UI.XamlHost.props">
+    <Content Include="Windows.Toolkit.UI.XamlHost.props">
       <Pack>true</Pack>
       <PackagePath>build</PackagePath>
     </Content>
 
-    <Content Include="Microsoft.Toolkit.UI.XamlHost.targets">
+    <Content Include="Windows.Toolkit.UI.XamlHost.targets">
       <Pack>true</Pack>
       <PackagePath>build</PackagePath>
     </Content>

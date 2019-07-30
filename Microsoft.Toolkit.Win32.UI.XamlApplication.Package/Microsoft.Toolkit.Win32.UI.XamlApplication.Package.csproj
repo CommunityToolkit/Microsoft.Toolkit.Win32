@@ -6,7 +6,7 @@
     <Title>Windows Community Toolkit XamlApplication</Title>
     <Description>This library provides XAML islands common helpers for native applications. It is part of the Windows Community Toolkit.</Description>
     <PackageTags>XAML Islands XAMLHost</PackageTags>
-    <PackageId>Microsoft.Toolkit.Win32.UI.XamlApplication</PackageId>
+    <PackageId>Windows.Toolkit.Win32.UI.XamlApplication</PackageId>
     <Platforms>x64;x86;ARM;ARM64;AnyCPU</Platforms>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IsNativeProject>true</IsNativeProject>
@@ -95,19 +95,19 @@
       <PackagePath>runtimes\win10-arm64\native</PackagePath>
     </Content>
 
-    <Content Include="Microsoft.Toolkit.Win32.UI.XamlApplication.props">
+    <Content Include="Windows.Toolkit.Win32.UI.XamlApplication.props">
       <Pack>true</Pack>
       <PackagePath>build</PackagePath>
     </Content>
-    <Content Include="managed\Microsoft.Toolkit.Win32.UI.XamlApplication.targets">
+    <Content Include="managed\Windows.Toolkit.Win32.UI.XamlApplication.targets">
       <Pack>true</Pack>
       <PackagePath>build</PackagePath>
     </Content>
-    <Content Include="native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets">
+    <Content Include="native\Windows.Toolkit.Win32.UI.XamlApplication.targets">
       <Pack>true</Pack>
       <PackagePath>build\native</PackagePath>
     </Content>
-    <Content Include="Microsoft.Toolkit.Win32.UI.XamlApplication.props">
+    <Content Include="Windows.Toolkit.Win32.UI.XamlApplication.props">
       <Pack>true</Pack>
       <PackagePath>build\native</PackagePath>
     </Content>

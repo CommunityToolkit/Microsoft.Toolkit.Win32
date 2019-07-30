@@ -19,6 +19,7 @@
       
     </Description>
     <PackageTags>Win32 WindowsForms UWP XAML</PackageTags>
+    <PackageId>Windows.Toolkit.Forms.UI.Controls</PackageId>
     <Platforms>x64;x86;AnyCPU</Platforms>
   </PropertyGroup>
 
