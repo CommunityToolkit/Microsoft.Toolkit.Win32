@@ -4,7 +4,9 @@
 
 using System;
 using System.Security;
+#if WINFORMS
 using System.Windows.Forms;
+#endif
 using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
