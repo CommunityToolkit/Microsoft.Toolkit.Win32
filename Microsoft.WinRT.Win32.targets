@@ -35,24 +35,10 @@
       <Output ItemName="_AppxBuildOutputs" TaskParameter="Include"/>
     </CreateItem>
 
-    <CreateItem Include="@(_AppxBuildOutputs)" Condition="'%(_AppxBuildOutputs.Extension)'=='.xbf'" >
-      <Output ItemName="FilterXbf" TaskParameter="Include"/>
+    <CreateItem Include="@(_AppxBuildOutputs)" >
+      <Output ItemName="_AppxAllItems" TaskParameter="Include"/>
     </CreateItem>
-    <CreateItem Include="@(FilterXbf)" AdditionalMetadata="CopyToOutputDirectory=PreserveNewest">
-      <Output ItemName="Content" TaskParameter="Include"/>
-    </CreateItem>
-
-    <CreateItem Include="@(_AppxBuildOutputs)" Condition="'%(_AppxBuildOutputs.Extension)'=='.pri'" >
-      <Output ItemName="FilterPri" TaskParameter="Include"/>
-    </CreateItem>
-    <CreateItem Include="@(FilterPri)" AdditionalMetadata="CopyToOutputDirectory=PreserveNewest">
-      <Output ItemName="Content" TaskParameter="Include"/>
-    </CreateItem>
-
-    <CreateItem Include="@(_AppxBuildOutputs)" Condition="'%(_AppxBuildOutputs.Extension)'=='.winmd'" >
-      <Output ItemName="FilterWinMD" TaskParameter="Include"/>
-    </CreateItem>
-    <CreateItem Include="@(FilterWinMD)" AdditionalMetadata="CopyToOutputDirectory=PreserveNewest">
+    <CreateItem Include="@(_AppxAllItems)" AdditionalMetadata="CopyToOutputDirectory=PreserveNewest">
       <Output ItemName="Content" TaskParameter="Include"/>
     </CreateItem>
 
