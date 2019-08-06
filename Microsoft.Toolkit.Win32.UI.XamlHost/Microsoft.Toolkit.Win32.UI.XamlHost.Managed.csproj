@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.Tools\Microsoft.Toolkit.Win32.UI.Tools.csproj">
+    <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.Tools\Microsoft.Toolkit.Win32.UI.SDK.csproj" >
       <PrivateAssets>analyzers</PrivateAssets>
     </ProjectReference>
     <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication.Package\Microsoft.Toolkit.Win32.UI.XamlApplication.Package.csproj">

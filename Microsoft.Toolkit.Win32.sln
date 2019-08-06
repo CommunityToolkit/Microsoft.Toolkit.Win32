@@ -64,7 +64,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit.Win32.UI.
 		{015A0047-772D-4F1A-88C9-45C18F0ADFB6} = {015A0047-772D-4F1A-88C9-45C18F0ADFB6}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit.Win32.UI.Tools", "Microsoft.Toolkit.Win32.UI.Tools\Microsoft.Toolkit.Win32.UI.Tools.csproj", "{955EF618-DB95-4AF7-83C3-7CAC44543D90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit.Win32.UI.SDK", "Microsoft.Toolkit.Win32.UI.Tools\Microsoft.Toolkit.Win32.UI.SDK.csproj", "{955EF618-DB95-4AF7-83C3-7CAC44543D90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
