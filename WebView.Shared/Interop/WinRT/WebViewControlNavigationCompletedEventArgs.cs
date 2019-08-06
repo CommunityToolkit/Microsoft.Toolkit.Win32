@@ -4,7 +4,9 @@
 
 using System;
 using System.Security;
+#if WINFORMS
 using System.Windows.Forms;
+#endif
 using windows = Windows;
 
 namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
@@ -36,13 +38,13 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
             IsSuccess = true; // no ability to detect otherwise
             Uri = e.Uri;
         }
-#endif
-
+#elif WINFORMS
         internal WebViewControlNavigationCompletedEventArgs(WebBrowserNavigatedEventArgs e)
         {
             IsSuccess = true; // no ability to detect otherwise
             Uri = e.Url;
         }
+#endif
 
         /// <summary>
         /// Gets a value indicating whether the navigation completed successfully.
@@ -94,8 +96,7 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         public static WebViewControlNavigationCompletedEventArgs ToWebViewControlNavigationCompletedEventArgs(
             System.Windows.Navigation.NavigationEventArgs args) =>
             new WebViewControlNavigationCompletedEventArgs(args);
-#endif
-
+#elif WINFORMS
         /// <summary>
         /// Performs an implicit conversion from <see cref="WebBrowserNavigatedEventArgs"/> to <see cref="WebViewControlNavigationCompletedEventArgs"/>.
         /// </summary>
@@ -111,5 +112,6 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
         public static WebViewControlNavigationCompletedEventArgs ToWebViewControlNavigationCompletedEventArgs(
             WebBrowserNavigatedEventArgs args) =>
             new WebViewControlNavigationCompletedEventArgs(args);
+#endif
     }
 }

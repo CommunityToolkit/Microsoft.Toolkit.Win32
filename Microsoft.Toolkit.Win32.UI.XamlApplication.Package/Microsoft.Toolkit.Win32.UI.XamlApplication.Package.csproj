@@ -7,7 +7,7 @@
     <Description>This library provides XAML islands common helpers for native applications. It is part of the Windows Community Toolkit.</Description>
     <PackageTags>XAML Islands XAMLHost</PackageTags>
     <PackageId>Microsoft.Toolkit.Win32.UI.XamlApplication</PackageId>
-    <Platforms>x64;x86;AnyCPU</Platforms>
+    <Platforms>x64;x86;ARM;ARM64;AnyCPU</Platforms>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IsNativeProject>true</IsNativeProject>
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
@@ -32,12 +32,10 @@
       <PackagePath>runtimes\win10-x86\native</PackagePath>
     </Content>
 
-    <!--
     <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pdb">
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-x86\native</PackagePath>
     </Content>
-    -->
 
     <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
       <Pack>true</Pack>
@@ -49,16 +47,29 @@
       <PackagePath>runtimes\win10-x64\native</PackagePath>
     </Content>
 
-    <!--
     <Content Include="..\x64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pdb">
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-x64\native</PackagePath>
     </Content>
-    -->
-   
+
     <Content Include="..\x64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-x64\native</PackagePath>
+    </Content>
+
+    <Content Include="..\arm\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.dll">
+      <Pack>true</Pack>
+      <PackagePath>runtimes\win10-arm\native</PackagePath>
+    </Content>
+
+    <Content Include="..\arm\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pdb">
+      <Pack>true</Pack>
+      <PackagePath>runtimes\win10-arm\native</PackagePath>
+    </Content>
+
+    <Content Include="..\arm\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
+      <Pack>true</Pack>
+      <PackagePath>runtimes\win10-arm\native</PackagePath>
     </Content>
 
     <Content Include="..\arm64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.dll">
@@ -66,12 +77,10 @@
       <PackagePath>runtimes\win10-arm64\native</PackagePath>
     </Content>
 
-    <!--
     <Content Include="..\arm64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pdb">
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-arm64\native</PackagePath>
     </Content>
-    -->
 
     <Content Include="..\arm64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
       <Pack>true</Pack>
