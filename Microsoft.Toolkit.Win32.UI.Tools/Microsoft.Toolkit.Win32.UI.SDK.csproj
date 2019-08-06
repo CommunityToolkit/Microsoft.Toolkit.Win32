@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
-    <RootNamespace>Microsoft.Toolkit.Win32.SDK</RootNamespace>
+    <RootNamespace>Microsoft.Toolkit.Win32.SDK.Tasks</RootNamespace>
     <AssemblyName>Microsoft.Toolkit.Win32.Tasks</AssemblyName>
     <Title>Windows Community Toolkit Tools for XAML Islands</Title>
     <Description>This library provides XAML islands common helpers applications. It is part of the Windows Community Toolkit.</Description>
@@ -21,12 +21,12 @@
       <PackagePath>build</PackagePath>
     </Content>
 
-    <Content Include="Microsoft.Toolkit.Win32.UI.Tools.props">
+    <Content Include="Microsoft.Toolkit.Win32.UI.SDK.props">
       <Pack>true</Pack>
       <PackagePath>build</PackagePath>
     </Content>
 
-    <Content Include="Microsoft.Toolkit.Win32.UI.Tools.targets">
+    <Content Include="Microsoft.Toolkit.Win32.UI.SDK.targets">
       <Pack>true</Pack>
       <PackagePath>build</PackagePath>
     </Content>
