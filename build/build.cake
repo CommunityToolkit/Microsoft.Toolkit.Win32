@@ -215,6 +215,64 @@ Task("Build")
         MSBuild(win32Solution, buildSettings);
     }
 
+    {
+        var buildSettings = new MSBuildSettings
+        {
+            PlatformTarget = PlatformTarget.ARM,
+            MaxCpuCount = 1,
+        }
+        .SetConfiguration("Release")
+        .UseToolVersion(MSBuildToolVersion.VS2019)
+        .WithTarget("Restore");
+
+        Information("\nRestore ARM Step");
+        MSBuild(win32Solution, buildSettings);
+    }
+
+    {
+        // Build once with normal dependency ordering
+        var buildSettings = new MSBuildSettings
+        {
+            PlatformTarget = PlatformTarget.ARM,
+            MaxCpuCount = 1,
+        }
+        .SetConfiguration("Release")
+        .UseToolVersion(MSBuildToolVersion.VS2019)
+        .WithTarget("Build");
+
+        Information("\nBuild ARM Step");
+        MSBuild(win32Solution, buildSettings);
+    }
+
+    {
+        var buildSettings = new MSBuildSettings
+        {
+            PlatformTarget = PlatformTarget.ARM64,
+            MaxCpuCount = 1,
+        }
+        .SetConfiguration("Release")
+        .UseToolVersion(MSBuildToolVersion.VS2019)
+        .WithTarget("Restore");
+
+        Information("\nRestore ARM64 Step");
+        MSBuild(win32Solution, buildSettings);
+    }
+
+    {
+        // Build once with normal dependency ordering
+        var buildSettings = new MSBuildSettings
+        {
+            PlatformTarget = PlatformTarget.ARM64,
+            MaxCpuCount = 1,
+        }
+        .SetConfiguration("Release")
+        .UseToolVersion(MSBuildToolVersion.VS2019)
+        .WithTarget("Build");
+
+        Information("\nBuild ARM64 Step");
+        MSBuild(win32Solution, buildSettings);
+    }
+
 });
 
 Task("InheritDoc")

@@ -22,7 +22,7 @@ steps:
 - task: DotNetCoreInstaller@0
   inputs:
     packageType: 'sdk'
-    version: '3.0.100-preview6-012264'
+    version: '3.0.100-preview7-012821'
   displayName: Install Dot Net Core SDK 3.0
 
 - task: DotNetCoreCLI@2
@@ -89,6 +89,24 @@ steps:
   inputs:
     solution: Microsoft.Toolkit.Win32.sln 
     platform: x86
+    configuration: Release
+    msbuildArguments: /target:Build
+    restoreNugetPackages: false # Optional
+
+- task: MSBuild@1
+  displayName: Build ARM Restore
+  inputs:
+    solution: Microsoft.Toolkit.Win32.sln 
+    platform: ARM
+    configuration: Release
+    msbuildArguments: /target:Restore
+    restoreNugetPackages: false # Optional
+
+- task: MSBuild@1
+  displayName: Build ARM
+  inputs:
+    solution: Microsoft.Toolkit.Win32.sln 
+    platform: ARM
     configuration: Release
     msbuildArguments: /target:Build
     restoreNugetPackages: false # Optional

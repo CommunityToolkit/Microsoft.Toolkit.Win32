@@ -23,44 +23,37 @@
   </ItemGroup>
 
   <Target Name="CopyAllProjectReferencesOutputs" Condition="'@(DesktopWindow)'==''">
-    <MSBuild Projects="@(ProjectReference)" Properties="Configuration=$(Configuration);Platform=$(Platform)" ContinueOnError="true">
-      <Output TaskParameter="TargetOutputs" ItemName="BuildOutputPaths"/>
+
+    <CreateItem Include="@(ProjectReference)" Condition="Exists('%(RelativeDir)\Package.appxmanifest')">
+      <Output ItemName="_AppxProject" TaskParameter="Include"/>
+    </CreateItem>
+
+    <MSBuild Projects="@(_AppxProject)"
+      Properties="Configuration=$(Configuration);Platform=$(Platform)"
+      Targets="Build;GetPackagingOutputs">
+      <Output TaskParameter="TargetOutputs" ItemName="_AppxBuildOutputPaths" />
     </MSBuild>
 
-    <CreateItem Include="%(BuildOutputPaths.Identity)" AdditionalMetadata="_Project=%(BuildOutputPaths.MSBuildSourceProjectFile)">
-      <Output ItemName="BuildOutputs" TaskParameter="Include"/>
+    <CreateItem Include="%(_AppxBuildOutputPaths.Identity)" Condition="'%(_AppxBuildOutputPaths.TargetPath)'!=''" AdditionalMetadata="Link=%(_AppxBuildOutputPaths.TargetPath)">
+      <Output ItemName="_AppxBuildOutputs" TaskParameter="Include"/>
     </CreateItem>
-    <CreateItem Include="%(BuildOutputs.RelativeDir)*.exe;%(BuildOutputs.RelativeDir)*.dll;%(BuildOutputs.RelativeDir)*.winmd" AdditionalMetadata="_Project=%(BuildOutputs._Project);Dir=%(BuildOutputs.RelativeDir)">
-      <Output ItemName="FilterBin" TaskParameter="Include"/>
-    </CreateItem>
-    <Copy SourceFiles="%(FilterBin.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)"/>
 
-    <CreateItem Include="%(BuildOutputs.RelativeDir)*.pri;%(BuildOutputs.RelativeDir)*.xbf">
-      <Output ItemName="FilterPri" TaskParameter="Include"/>
+    <CreateItem Include="@(_AppxBuildOutputs)" >
+      <Output ItemName="_AppxAllItems" TaskParameter="Include"/>
     </CreateItem>
-    <Copy SourceFiles="%(FilterPri.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)\"/>
+    <CreateItem Include="@(_AppxAllItems)" AdditionalMetadata="CopyToOutputDirectory=PreserveNewest">
+      <Output ItemName="Content" TaskParameter="Include"/>
+    </CreateItem>
 
-    <CreateItem Include="%(BuildOutputs.RelativeDir)AppxManifest*.xml">
+    <CreateItem Include="%(_AppxBuildOutputPaths.RelativeDir)AppxManifest.xml" Condition="Exists('%(_AppxBuildOutputPaths.RelativeDir)AppxManifest.xml')">
       <Output ItemName="AppxManifest" TaskParameter="Include"/>
     </CreateItem>
-    <Copy SourceFiles="%(Filter.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)"/>
-
-    <GetAssemblyIdentity AssemblyFiles="@(FilterBin)" ContinueOnError="true">
-      <Output
-        TaskParameter="Assemblies"
-        ItemName="AssemblyIdentities"/>
-    </GetAssemblyIdentity>
-
-    <CreateItem Include="%(AssemblyIdentities.Dir)*.xbf" AdditionalMetadata="AsmName=%(AssemblyIdentities.Name)">
-      <Output ItemName="FilterXbf" TaskParameter="Include"/>
-    </CreateItem>
-    <Copy SourceFiles="%(FilterXbf.Identity)" ContinueOnError="true" DestinationFolder="$(OutDir)\%(FilterXbf.AsmName)"/>
 
   </Target>
 
   <PropertyGroup>
-    <_WinRTWin32TaskAssemblyPath Condition="Exists('$(MSBuildThisFileDirectory)Microsoft.Toolkit.Win32.UI.Tools\bin\AnyCPU\$(Configuration)\net462\Microsoft.Toolkit.Win32.Tools.Package.dll')">$(MSBuildThisFileDirectory)Microsoft.Toolkit.Win32.UI.Tools\bin\AnyCPU\$(Configuration)\net462\Microsoft.Toolkit.Win32.Tools.Package.dll</_WinRTWin32TaskAssemblyPath>
-    <_WinRTWin32TaskAssemblyPath Condition="Exists('$(MSBuildThisFileDirectory)..\tasks\Microsoft.Toolkit.Win32.Tools.Package.dll')">$(MSBuildThisFileDirectory)..\tasks\Microsoft.Toolkit.Win32.Tools.Package.dll</_WinRTWin32TaskAssemblyPath>
+    <_WinRTWin32TaskAssemblyPath Condition="Exists('$(MSBuildThisFileDirectory)Microsoft.Toolkit.Win32.UI.Tools\bin\AnyCPU\$(Configuration)\net462\Microsoft.Toolkit.Win32.SDK.Tasks.dll')">$(MSBuildThisFileDirectory)Microsoft.Toolkit.Win32.UI.Tools\bin\AnyCPU\$(Configuration)\net462\Microsoft.Toolkit.Win32.SDK.Tasks.dll</_WinRTWin32TaskAssemblyPath>
+    <_WinRTWin32TaskAssemblyPath Condition="Exists('$(MSBuildThisFileDirectory)..\tasks\Microsoft.Toolkit.Win32.SDK.Tasks.dll')">$(MSBuildThisFileDirectory)..\tasks\Microsoft.Toolkit.Win32.SDK.Tasks.dll</_WinRTWin32TaskAssemblyPath>
   </PropertyGroup>
   <UsingTask TaskName="GenerateWinRTManifest" AssemblyFile="$(_WinRTWin32TaskAssemblyPath)" Condition="'$(_WinRTWin32TaskAssemblyPath)'!=''" />
 
