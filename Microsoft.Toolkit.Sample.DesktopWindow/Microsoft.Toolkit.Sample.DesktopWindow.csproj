@@ -11,6 +11,7 @@
     <PrepareResourcesDependsOn></PrepareResourcesDependsOn>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <StartupObject>Microsoft.Toolkit.Sample.DesktopWindow.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -46,7 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.UI.Xaml" Version="2.2.190702001-prerelease" />
+    <PackageReference Include="Microsoft.UI.Xaml" Version="2.2.190731001-prerelease" />
   </ItemGroup>
 
   <!-- Workaround issue: https://github.com/microsoft/microsoft-ui-xaml/issues/1089

@@ -57,7 +57,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.0-rc">
+    <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.1-rc">
       <PrivateAssets>analyzers</PrivateAssets>
     </PackageReference>
     <ProjectReference Include="..\Microsoft.Toolkit.Win32.UI.XamlApplication.Package\Microsoft.Toolkit.Win32.UI.XamlApplication.Package.csproj">

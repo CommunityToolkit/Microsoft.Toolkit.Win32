@@ -31,7 +31,16 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
             winrt::check_hresult(out->QueryInterface(
                 winrt::guid_of<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider>(),
                 reinterpret_cast<void**>(winrt::put_abi(provider))));
-            m_providers.Append(provider);
+
+            winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider selfProvider(nullptr);
+            winrt::check_hresult(this->NonDelegatingQueryInterface(
+                winrt::guid_of<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider>(),
+                reinterpret_cast<void**>(winrt::put_abi(selfProvider))));
+
+            if (get_abi(selfProvider) != get_abi(provider))
+            {
+                m_providers.Append(provider);
+            }
         }
 
         const auto dispatcherQueue = winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
