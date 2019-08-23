@@ -88,7 +88,6 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Test.WinForms.WebView.FunctionalTe
     }
 
     [TestClass]
-    [DeploymentItem("FunctionalTests/PreLoad/preload.js")]
     public class RelativePreLoadScript : HostFormWebViewContextSpecification
     {
         private bool _scriptNotifyCalled;

@@ -89,7 +89,7 @@
     <Content Include="async.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="FunctionalTests\PreLoad\preload.js">
+    <Content Include="preload.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
