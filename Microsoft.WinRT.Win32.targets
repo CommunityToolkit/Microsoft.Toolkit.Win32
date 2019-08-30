@@ -19,7 +19,10 @@
     <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.0-rc" />
   </ItemGroup>
 
-  <Target Name="CopyAllProjectReferencesOutputs">
+  <Target Name="CopyAllProjectReferencesOutputs"
+      BeforeTargets="PrepareForBuild"
+      Inputs="@(ProjectReference)"
+      Outputs="$(IntDir)\AppUWP.payload')">
 
     <CreateItem Include="@(ProjectReference)" Condition="Exists('%(RelativeDir)\Package.appxmanifest')">
       <Output ItemName="_AppxProject" TaskParameter="Include"/>
@@ -46,6 +49,11 @@
       <Output ItemName="AppxManifest" TaskParameter="Include"/>
     </CreateItem>
 
+    <WriteLinesToFile
+                File="$(IntDir)\AppUWP.payload"
+                Lines="@(_AppxBuildOutputPaths)"
+                Overwrite="true"
+                Encoding="Unicode"/>
   </Target>
 
   <UsingTask TaskName="GenerateWinRTManifestFromAppx" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
