@@ -4,6 +4,11 @@
   <PropertyGroup>
     <DefaultTargetPlatformVersion Condition="'$(DefaultTargetPlatformVersion)'==''">18362</DefaultTargetPlatformVersion>
     <AssetTargetFallback Condition="'$(AssetTargetFallback)'==''">uap10.0.$(DefaultTargetPlatformVersion)</AssetTargetFallback>
+
+    <!-- Up-to-date check fails for Xaml Islands projects: -->
+    <!--    https://github.com/dotnet/project-system/issues/5543 -->
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+
   </PropertyGroup>
 
   <PropertyGroup>
