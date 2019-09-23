@@ -10,6 +10,7 @@ pool:
   vmImage: 'windows-2019'
 
 variables: 
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   BuildConfiguration: Release
 
 steps:
@@ -22,7 +23,7 @@ steps:
 - task: DotNetCoreInstaller@0
   inputs:
     packageType: 'sdk'
-    version: '3.0.100-preview8-013656'
+    version: '3.0.100'
   displayName: Install Dot Net Core SDK 3.0
 
 - task: DotNetCoreCLI@2
