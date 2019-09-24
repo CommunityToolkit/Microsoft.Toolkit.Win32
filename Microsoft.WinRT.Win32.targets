@@ -4,6 +4,11 @@
   <PropertyGroup>
     <DefaultTargetPlatformVersion Condition="'$(DefaultTargetPlatformVersion)'==''">18362</DefaultTargetPlatformVersion>
     <AssetTargetFallback Condition="'$(AssetTargetFallback)'==''">uap10.0.$(DefaultTargetPlatformVersion)</AssetTargetFallback>
+
+    <!-- Up-to-date check fails for Xaml Islands projects: -->
+    <!--    https://github.com/dotnet/project-system/issues/5543 -->
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+
   </PropertyGroup>
 
   <PropertyGroup>
@@ -19,17 +24,32 @@
     <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.0-rc" />
   </ItemGroup>
 
-  <Target Name="CopyAllProjectReferencesOutputs">
-
+  <Target Name="_GetUWPAppPayload">
     <CreateItem Include="@(ProjectReference)" Condition="Exists('%(RelativeDir)\Package.appxmanifest')">
       <Output ItemName="_AppxProject" TaskParameter="Include"/>
     </CreateItem>
-
     <MSBuild Projects="@(_AppxProject)"
       Properties="Configuration=$(Configuration);Platform=$(Platform)"
       Targets="Build;GetPackagingOutputs">
       <Output TaskParameter="TargetOutputs" ItemName="_AppxBuildOutputPaths" />
     </MSBuild>
+
+    <CreateItem Include="%(_AppxBuildOutputPaths.Identity)"
+        Condition="'%(_AppxBuildOutputPaths.TargetPath)'!=''"
+        AdditionalMetadata="FinalTargetPath=$(OutDir)%(_AppxBuildOutputPaths.TargetPath);TargetPath=%(_AppxBuildOutputPaths.TargetPath)">
+      <Output ItemName="_AppxInputs" TaskParameter="Include"/>
+    </CreateItem>
+
+    <CreateItem Include="%(_AppxBuildOutputPaths.RelativeDir)AppxManifest.xml" Condition="Exists('%(_AppxBuildOutputPaths.RelativeDir)AppxManifest.xml')">
+      <Output ItemName="AppxManifest" TaskParameter="Include"/>
+    </CreateItem>
+
+  </Target>
+
+  <Target Name="CopyAllProjectReferencesOutputs"
+      DependsOnTargets="_GetUWPAppPayload;ResolveReferences"
+      Inputs="@(_AppxInputs)"
+      Outputs="@(_AppxInputs->'%(FinalTargetPath)')">
 
     <CreateItem Include="%(_AppxBuildOutputPaths.Identity)" Condition="'%(_AppxBuildOutputPaths.TargetPath)'!=''" AdditionalMetadata="Link=%(_AppxBuildOutputPaths.TargetPath)">
       <Output ItemName="_AppxBuildOutputs" TaskParameter="Include"/>
@@ -42,10 +62,11 @@
       <Output ItemName="Content" TaskParameter="Include"/>
     </CreateItem>
 
-    <CreateItem Include="%(_AppxBuildOutputPaths.RelativeDir)AppxManifest.xml" Condition="Exists('%(_AppxBuildOutputPaths.RelativeDir)AppxManifest.xml')">
-      <Output ItemName="AppxManifest" TaskParameter="Include"/>
-    </CreateItem>
-
+    <WriteLinesToFile
+                File="$(IntDir)\AppUWP.payload"
+                Lines="@(_AppxBuildOutputPaths)"
+                Overwrite="true"
+                Encoding="Unicode"/>
   </Target>
 
   <UsingTask TaskName="GenerateWinRTManifestFromAppx" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
@@ -152,7 +173,11 @@
     </Task>
   </UsingTask>
 
-  <Target Name="CreateWinRTRegistration" BeforeTargets="PrepareForBuild" DependsOnTargets="CopyAllProjectReferencesOutputs">
+  <Target Name="CreateWinRTRegistration"
+      AfterTargets="ResolveReferences"
+      DependsOnTargets="CopyAllProjectReferencesOutputs"
+      Inputs="@(AppxManifest)"
+      Outputs="$(IntDir)Manifests\app.manifest">
     <MakeDir Directories="$(IntDir)\Manifests\" />
     <GenerateWinRTManifestFromAppx AppxManifest="@(AppxManifest)" DestinationFolder="$(IntDir)\Manifests\" />
     <CreateItem Include="$(IntDir)Manifests\*.manifest">
