@@ -44,6 +44,17 @@
       <Output ItemName="AppxManifest" TaskParameter="Include"/>
     </CreateItem>
 
+    <CreateProperty Value="$(IntDir)Manifests\app.manifest">
+      <Output
+          TaskParameter="Value"
+          PropertyName="GeneratedApplicationManifest" />
+    </CreateProperty>
+    <CreateProperty Value="$(IntDir)Manifests\mergeapp.manifest">
+      <Output
+          TaskParameter="Value"
+          PropertyName="MergedApplicationManifest" />
+    </CreateProperty>
+
   </Target>
 
   <Target Name="CopyAllProjectReferencesOutputs"
@@ -176,8 +187,8 @@
   <Target Name="CreateWinRTRegistration"
       AfterTargets="ResolveReferences"
       DependsOnTargets="CopyAllProjectReferencesOutputs"
-      Inputs="@(AppxManifest)"
-      Outputs="$(IntDir)Manifests\app.manifest">
+      Inputs="@(AppxManifest);$(ApplicationManifest)"
+      Outputs="$(MergedApplicationManifest)">
     <MakeDir Directories="$(IntDir)\Manifests\" />
     <GenerateWinRTManifestFromAppx AppxManifest="@(AppxManifest)" DestinationFolder="$(IntDir)\Manifests\" />
     <CreateItem Include="$(IntDir)Manifests\*.manifest">
@@ -185,17 +196,6 @@
           TaskParameter="Include"
           ItemName="Manifest"/>
     </CreateItem>
-    <CreateProperty Value="$(IntDir)Manifests\app.manifest">
-      <Output
-          TaskParameter="Value"
-          PropertyName="GeneratedApplicationManifest" />
-    </CreateProperty>
-    <CreateProperty Value="$(IntDir)Manifests\mergeapp.manifest">
-      <Output
-          TaskParameter="Value"
-          PropertyName="MergedApplicationManifest" />
-    </CreateProperty>
-
     <Exec
       Condition="Exists('$(ApplicationManifest)')"
       Command="&quot;$(ManifestTool)&quot; -nologo -manifest &quot;$(MSBuildProjectDirectory)\$(GeneratedApplicationManifest)&quot; &quot;$(MSBuildProjectDirectory)\$(ApplicationManifest)&quot; -out:&quot;$(MSBuildProjectDirectory)\$(MergedApplicationManifest)&quot;"
