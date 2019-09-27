@@ -23,7 +23,7 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '3.0.100-rc1-014190'
+    version: '3.0.100'
   displayName: Use .NET Core sdk
 
 - task: DotNetCoreCLI@2
