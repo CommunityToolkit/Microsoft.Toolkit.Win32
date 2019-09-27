@@ -185,7 +185,6 @@
   </UsingTask>
 
   <Target Name="CreateWinRTRegistration"
-      AfterTargets="ResolveReferences"
       DependsOnTargets="CopyAllProjectReferencesOutputs"
       Inputs="@(AppxManifest);$(ApplicationManifest)"
       Outputs="$(MergedApplicationManifest)">
