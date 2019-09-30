@@ -8,7 +8,10 @@
     <!-- Up-to-date check fails for Xaml Islands projects: -->
     <!--    https://github.com/dotnet/project-system/issues/5543 -->
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
 
+  <PropertyGroup Condition="'$(DesignTimeBuild)' == 'true'">
+    <_DisableAppxCopy>true</_DisableAppxCopy>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -21,7 +24,7 @@
     <IntDir>$(BaseIntermediateOutputPath)\$(Platform)\$(Configuration)\$(TargetFramework)\</IntDir>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.0-rc" />
+    <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.2-rc" />
   </ItemGroup>
 
   <Target Name="_GetUWPAppPayload">
@@ -60,7 +63,8 @@
   <Target Name="CopyAllProjectReferencesOutputs"
       DependsOnTargets="_GetUWPAppPayload;ResolveReferences"
       Inputs="@(_AppxInputs)"
-      Outputs="@(_AppxInputs->'%(FinalTargetPath)')">
+      Outputs="@(_AppxInputs->'%(FinalTargetPath)')"
+      Condition="'$(_DisableAppxCopy)'==''">
 
     <CreateItem Include="%(_AppxBuildOutputPaths.Identity)" Condition="'%(_AppxBuildOutputPaths.TargetPath)'!=''" AdditionalMetadata="Link=%(_AppxBuildOutputPaths.TargetPath)">
       <Output ItemName="_AppxBuildOutputs" TaskParameter="Include"/>
@@ -185,9 +189,11 @@
   </UsingTask>
 
   <Target Name="CreateWinRTRegistration"
+      AfterTargets="ResolveReferences"
       DependsOnTargets="CopyAllProjectReferencesOutputs"
       Inputs="@(AppxManifest);$(ApplicationManifest)"
-      Outputs="$(MergedApplicationManifest)">
+      Outputs="$(MergedApplicationManifest)"
+      Condition="'$(_DisableAppxCopy)'==''">
     <MakeDir Directories="$(IntDir)\Manifests\" />
     <GenerateWinRTManifestFromAppx AppxManifest="@(AppxManifest)" DestinationFolder="$(IntDir)\Manifests\" />
     <CreateItem Include="$(IntDir)Manifests\*.manifest">
