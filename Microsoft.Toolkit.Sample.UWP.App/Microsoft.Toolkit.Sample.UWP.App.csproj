@@ -160,13 +160,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.8</Version>
+      <Version>6.2.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.2.190416008-prerelease</Version>
+      <Version>2.2.190917002</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.SDK.Contracts">
-      <Version>10.0.18362.2002-preview</Version>
+      <Version>10.0.18362.2005</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -179,5 +179,5 @@
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
-  <Target Name="Pack"/>
+  <Target Name="Pack" />
 </Project>

@@ -68,7 +68,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.0-rc" />
+    <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.2-rc" />
   </ItemGroup>
 
   <ItemGroup>
