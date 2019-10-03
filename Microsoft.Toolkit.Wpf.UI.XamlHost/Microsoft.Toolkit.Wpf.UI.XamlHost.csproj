@@ -13,9 +13,6 @@
     <PackageTags>XAML Islands Win32 WPF XAMLHost</PackageTags>
     <PackageId>Microsoft.Toolkit.Wpf.UI.XamlHost</PackageId>
     <Platforms>x64;x86;AnyCPU</Platforms>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
@@ -54,10 +51,6 @@
 
   <ItemGroup>
     <None Include="VisualStudioToolsManifest.xml" Pack="true" PackagePath="tools" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.2-rc" />
   </ItemGroup>
 
   <ItemGroup>

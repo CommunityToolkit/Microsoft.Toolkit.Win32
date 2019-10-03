@@ -20,9 +20,6 @@
     </Description>
     <PackageTags>Win32 WindowsForms UWP XAML</PackageTags>
     <Platforms>x64;x86;AnyCPU</Platforms>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 

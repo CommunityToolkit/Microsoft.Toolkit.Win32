@@ -61,8 +61,9 @@
         <NoWarn>1591</NoWarn>
         <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
         <OutputPath>bin\$(Platform)\$(Configuration)</OutputPath>
+      </PropertyGroup>
+      <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-
       </PropertyGroup>
       <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
         <DebugSymbols>true</DebugSymbols>

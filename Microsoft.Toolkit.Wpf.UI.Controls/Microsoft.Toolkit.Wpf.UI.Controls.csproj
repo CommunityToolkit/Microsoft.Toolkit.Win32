@@ -23,9 +23,6 @@
     <DefineConstants>$(DefineConstants);WPF</DefineConstants>
 
     <Platforms>x64;x86;AnyCPU</Platforms>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 

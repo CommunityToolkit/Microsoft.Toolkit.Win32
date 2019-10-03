@@ -9,6 +9,7 @@
     <PackageId>Microsoft.Toolkit.UI.XamlHost</PackageId>
     <IsWpfProject>true</IsWpfProject>
     <Platforms>x64;x86;AnyCPU</Platforms>
+    <MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);NETSDK1106</MSBuildWarningsAsMessages>
   </PropertyGroup>
 
   <ItemGroup>
