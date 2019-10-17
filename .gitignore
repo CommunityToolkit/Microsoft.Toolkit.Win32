@@ -222,5 +222,6 @@ AppPackages
 project.lock.json
 msbuild.binlog
 *.project.lock.json
-/build/tools
+/build/tools/**
+!/build/tools/packages.config
 /build/dotnet-install.ps1
