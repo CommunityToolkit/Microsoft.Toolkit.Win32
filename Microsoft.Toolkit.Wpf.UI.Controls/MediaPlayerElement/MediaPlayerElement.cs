@@ -179,7 +179,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         /// </summary>
         public MediaPlayer MediaPlayer
         {
-            get => (MediaPlayer)GetValue(MediaPlayerProperty);
+            get => UwpControl?.MediaPlayer;
         }
     }
 }
