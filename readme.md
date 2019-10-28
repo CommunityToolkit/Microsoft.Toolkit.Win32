@@ -36,6 +36,10 @@ Want to see the toolkit in action before jumping into the code? Download and pla
 | [MediaPlayerElement](https://docs.microsoft.com/windows/communitytoolkit/controls/wpf-winforms/mediaplayerelement) | Windows 10, version 1809 | Embeds a view that streams and renders media content such as video in your Windows Forms or WPF desktop application. |
 | [MapControls](https://docs.microsoft.com/windows/communitytoolkit/controls/wpf-winforms/mapcontrol) | Windows 10, version 1809 | Enables a symbolic or photorealistic map in your Windows Forms or WPF desktop application. |
 
+## WebView Notice
+WebView2 will replace the WebView control in the toolkit, as laid out in the introduction to [WebView2 here](https://docs.microsoft.com/en-us/microsoft-edge/hosting/webview2). This means that we've deprecated the WebView control within the Toolkit and are working with the Edge team to convey all the requirements from the open issues here.
+
+Over the next few months, they'll be processing the open requests to ensure the scenarios folks are using WebView for will be supported with its replacement in the future. You can provide feedback directly to the Edge team [here](https://github.com/MicrosoftEdge/WebViewFeedback). Thank you for using WebView!
 
 ## Feedback and Requests
 Please use [GitHub Issues](https://github.com/windows-toolkit/WindowsCommunityToolkit/issues) for bug reports and feature requests.
