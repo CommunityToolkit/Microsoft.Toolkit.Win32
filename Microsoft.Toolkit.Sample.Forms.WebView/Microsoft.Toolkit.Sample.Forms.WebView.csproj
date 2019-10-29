@@ -7,6 +7,7 @@
     <Description>Sample Code for Windows Community Toolkit Controls and Windows Forms</Description>
     <IsPackable>false</IsPackable>
     <Platforms>x64;x86</Platforms>
+    <NoWarn>CS0618;</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
     <UseWindowsForms>true</UseWindowsForms>

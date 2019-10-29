@@ -9,6 +9,7 @@
     <UseWPF>true</UseWPF>
     <IsPackable>false</IsPackable>
     <Platforms>x64;x86</Platforms>
+    <NoWarn>CS0618;</NoWarn>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="System.Xaml" />
