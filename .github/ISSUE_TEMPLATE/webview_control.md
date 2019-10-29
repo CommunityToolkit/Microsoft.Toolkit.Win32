@@ -2,7 +2,7 @@
 name: WebView Control
 about: I have an issue with the WPF or WinForms WebView control
 title: "[WebView]"
-labels: WebView
+labels: "WebView :desktop_computer:"
 assignees: ''
 
 ---
