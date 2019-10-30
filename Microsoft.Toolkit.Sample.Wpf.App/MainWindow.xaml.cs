@@ -153,5 +153,10 @@ namespace Microsoft.Toolkit.Sample.Wpf.App
         {
             await _contentDialog.ShowAsync(windows.UI.Xaml.Controls.ContentDialogPlacement.Popup);
         }
+
+        private void mediaPlayerElement_Loaded(object sender, RoutedEventArgs e)
+        {
+            mediaPlayerElement.MediaPlayer.IsLoopingEnabled = true;
+        }
     }
 }

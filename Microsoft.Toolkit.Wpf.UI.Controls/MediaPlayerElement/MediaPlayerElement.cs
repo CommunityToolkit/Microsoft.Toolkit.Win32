@@ -63,7 +63,6 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
             Bind(nameof(IsFullWindow), IsFullWindowProperty, windows.UI.Xaml.Controls.MediaPlayerElement.IsFullWindowProperty);
             Bind(nameof(AutoPlay), AutoPlayProperty, windows.UI.Xaml.Controls.MediaPlayerElement.AutoPlayProperty);
             Bind(nameof(AreTransportControlsEnabled), AreTransportControlsEnabledProperty, windows.UI.Xaml.Controls.MediaPlayerElement.AreTransportControlsEnabledProperty);
-            Bind(nameof(MediaPlayer), MediaPlayerProperty, windows.UI.Xaml.Controls.MediaPlayerElement.MediaPlayerProperty, null, System.ComponentModel.BindingDirection.OneWay);
 
             // Full-screen not supported yet.
             UwpControl.TransportControls.IsFullWindowButtonVisible = false;
@@ -85,11 +84,6 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
         /// Gets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.IsFullWindowProperty"/>
         /// </summary>
         public static DependencyProperty IsFullWindowProperty { get; } = DependencyProperty.Register(nameof(IsFullWindow), typeof(bool), typeof(MediaPlayerElement));
-
-        /// <summary>
-        /// Gets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.MediaPlayerProperty"/>
-        /// </summary>
-        public static DependencyProperty MediaPlayerProperty { get; } = DependencyProperty.Register(nameof(MediaPlayer), typeof(MediaPlayer), typeof(MediaPlayerElement));
 
         /// <summary>
         /// Gets <see cref="windows.UI.Xaml.Controls.MediaPlayerElement.PosterSourceProperty"/>
