@@ -34,6 +34,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
     [Description("Embeds a view into your application that renders web content using the Microsoft Edge rendering engine")]
     [SecurityCritical]
     [PermissionSet(SecurityAction.InheritanceDemand, Name = Constants.SecurityPermissionSetName)]
+    [Obsolete("The WebView control will be replaced by WebView2 in the future. Read more here to provide early feedback: https://docs.microsoft.com/en-us/microsoft-edge/hosting/webview2")]
     public sealed partial class WebView : Control, IWebView, ISupportInitialize
     {
         private string _delayedEnterpriseId = WebViewDefaults.EnterpriseId;

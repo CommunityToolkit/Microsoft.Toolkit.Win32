@@ -15,7 +15,7 @@
     <DefineConstants>$(DefineConstants);WPF</DefineConstants>
 
     <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
-
+    <NoWarn>CS0618;CS1591;</NoWarn>
     <Platforms>x64;x86;AnyCPU</Platforms>
     <UseWPF>true</UseWPF>
   </PropertyGroup>

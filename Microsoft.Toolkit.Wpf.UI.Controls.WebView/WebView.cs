@@ -49,6 +49,7 @@ namespace Microsoft.Toolkit.Wpf.UI.Controls
     /// <seealso cref="IWebView" />
     [ToolboxItem(true)]
     [DesignTimeVisible(true)]
+    [Obsolete("The WebView control will be replaced by WebView2 in the future. Read more here to provide early feedback: https://docs.microsoft.com/en-us/microsoft-edge/hosting/webview2")]
     public sealed partial class WebView : WebViewHost, IWebView, IWebViewCompatible
     {
         private static readonly DependencyProperty EnterpriseIdProperty = DependencyProperty.Register(
