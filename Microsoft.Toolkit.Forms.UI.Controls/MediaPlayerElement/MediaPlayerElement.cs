@@ -153,7 +153,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MediaPlayer MediaPlayer
         {
-            get => UwpControl.MediaPlayer;
+            get => UwpControl?.MediaPlayer;
         }
     }
 }
