@@ -60,7 +60,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             var preferredSize = Size.Empty;
             if (ChildInternal != null)
             {
-                preferredSize = new Size((int)_xamlSource.Content.DesiredSize.Width, (int)_xamlSource.Content.DesiredSize.Height);
+                preferredSize = new Size((int)(_xamlSource.Content.DesiredSize.Width * _lastDpi / 96.0f), (int)(_xamlSource.Content.DesiredSize.Height * _lastDpi / 96.0f));
             }
 
             return preferredSize;
