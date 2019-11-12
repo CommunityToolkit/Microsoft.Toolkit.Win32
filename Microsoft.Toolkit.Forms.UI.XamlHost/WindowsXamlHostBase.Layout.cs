@@ -40,7 +40,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
                 {
                     proposedHeight = double.PositiveInfinity;
                 }
-                else if (_xamlIslandHandlesDpiScaling)
+                else
                 {
                     proposedHeight /= _lastDpi / 96.0f;
                 }
@@ -49,7 +49,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
                 {
                     proposedWidth = double.PositiveInfinity;
                 }
-                else if (_xamlIslandHandlesDpiScaling)
+                else
                 {
                     proposedWidth /= _lastDpi / 96.0f;
                 }
@@ -60,15 +60,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             var preferredSize = Size.Empty;
             if (ChildInternal != null)
             {
-                // Convert effective pixels to pixels if necessary
-                if (_xamlIslandHandlesDpiScaling)
-                {
-                    preferredSize = new Size((int)(_xamlSource.Content.DesiredSize.Width * _lastDpi / 96.0f), (int)(_xamlSource.Content.DesiredSize.Height * _lastDpi / 96.0f));
-                }
-                else
-                {
-                    preferredSize = new Size((int)_xamlSource.Content.DesiredSize.Width, (int)_xamlSource.Content.DesiredSize.Height);
-                }
+                preferredSize = new Size((int)_xamlSource.Content.DesiredSize.Width, (int)_xamlSource.Content.DesiredSize.Height);
             }
 
             return preferredSize;
@@ -79,7 +71,6 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         /// </summary>
         protected void UpdateDpiScalingFactor()
         {
-            DpiScalingPanel panel = _xamlSource.Content as DpiScalingPanel;
             double dpi = 96.0f;
             if (_xamlIslandWindowHandle != IntPtr.Zero)
             {
@@ -91,10 +82,6 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             }
 
             _lastDpi = dpi;
-
-            double newScalingFactor = (_dpiScalingRenderTransformEnabled == true && _xamlIslandHandlesDpiScaling == false) ? (dpi / 96.0f) : 1.0f;
-
-            panel.SetScalingFactor(newScalingFactor);
         }
 
         /// <summary>
@@ -169,11 +156,6 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
                     // The XAML Arrange pass will expand XAML content with 'HorizontalStretch' and
                     // 'VerticalStretch' properties to the bounds of the XamlContentHost Control.
                     var rect = new windows.Foundation.Rect(0, 0, Width, Height);
-                    if (_xamlIslandHandlesDpiScaling)
-                    {
-                        rect.Width /= _lastDpi / 96.0f;
-                        rect.Height /= _lastDpi / 96.0f;
-                    }
 
                     _xamlSource.Content.Measure(new windows.Foundation.Size(rect.Width, rect.Height));
                     _xamlSource.Content.Arrange(rect);

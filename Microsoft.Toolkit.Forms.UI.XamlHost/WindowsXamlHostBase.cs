@@ -43,11 +43,6 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         private readonly WUX.Hosting.DesktopWindowXamlSource _xamlSource;
 
         /// <summary>
-        ///    A render transform to scale the UWP XAML content should be applied
-        /// </summary>
-        private bool _dpiScalingRenderTransformEnabled = false;
-
-        /// <summary>
         /// Gets the current instance of <seealso cref="XamlApplication"/>
         /// </summary>
         protected static IXamlMetadataContainer MetadataContainer
@@ -72,11 +67,6 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         ///    UWP XAML island window handle associated with this Control instance
         /// </summary>
         private IntPtr _xamlIslandWindowHandle = IntPtr.Zero;
-
-        /// <summary>
-        ///    Set if the UWP XAML island handles scaling of the content
-        /// </summary>
-        private bool _xamlIslandHandlesDpiScaling = false;
 
         /// <summary>
         ///    The last dpi value retrieved from the system
@@ -121,12 +111,6 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
 
             // Hook up method for DesktopWindowXamlSource Focus handling
             _xamlSource.TakeFocusRequested += this.OnTakeFocusRequested;
-
-            // Check if the XAML island scales the content according to the current dpi value
-            _xamlIslandHandlesDpiScaling = ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 8);
-
-            // Add scaling panel as the root XAML element
-            _xamlSource.Content = new DpiScalingPanel();
         }
 
         protected WindowsXamlHostBase(string typeName)
@@ -203,33 +187,7 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         {
             if (_xamlSource != null)
             {
-                (_xamlSource.Content as DpiScalingPanel).Child = newValue;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether a render transform is added to the UWP control corresponding to the current dpi scaling factor
-        /// if scaling is not supported natively by the XAML island
-        /// </summary>
-        /// <value>The dpi scaling mode.</value>
-        /// <remarks>A custom render transform added to the root UWP control will be overwritten.</remarks>
-        [ReadOnly(false)]
-        [Browsable(true)]
-        [DefaultValue(false)]
-        [Category("Layout")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public bool DpiScalingRenderTransform
-        {
-            get => _dpiScalingRenderTransformEnabled;
-
-            set
-            {
-                _dpiScalingRenderTransformEnabled = value;
-                if (!DesignMode)
-                {
-                    UpdateDpiScalingFactor();
-                    PerformLayout();
-                }
+                _xamlSource.Content = newValue;
             }
         }
 
@@ -242,7 +200,16 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
             if (disposing)
             {
                 SizeChanged -= OnWindowXamlHostSizeChanged;
+
+                var oldFrameworkElement = ChildInternal as WUX.FrameworkElement;
+                if (oldFrameworkElement != null)
+                {
+                    oldFrameworkElement.SizeChanged -= OnChildSizeChanged;
+                }
+
                 ChildInternal?.ClearWrapper();
+
+                this._childInternal = null;
 
                 // Required by CA2213: _xamlSource?.Dispose() is insufficient.
                 if (_xamlSource != null)
