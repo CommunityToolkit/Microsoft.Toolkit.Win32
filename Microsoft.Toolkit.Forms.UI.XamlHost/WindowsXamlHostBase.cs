@@ -192,6 +192,26 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
         }
 
         /// <summary>
+        /// Gets or sets a value indicating whether a render transform is added to the UWP control corresponding to the current dpi scaling factor
+        /// if scaling is not supported natively by the XAML island
+        /// </summary>
+        /// <value>The dpi scaling mode.</value>
+        /// <remarks>A custom render transform added to the root UWP control will be overwritten.</remarks>
+        [ReadOnly(false)]
+        [Browsable(true)]
+        [DefaultValue(false)]
+        [Category("Layout")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Deprecated("Custom scaling transform no longer required to handle Dpi", DeprecationType.Deprecate, 0)]
+        public bool DpiScalingRenderTransform
+        {
+            get => false;
+            set
+            {
+            }
+        }
+
+        /// <summary>
         /// Clean up hosted UWP XAML content
         /// </summary>
         /// <param name="disposing">IsDisposing?</param>
