@@ -156,6 +156,8 @@ namespace Microsoft.Toolkit.Forms.UI.XamlHost
                     // The XAML Arrange pass will expand XAML content with 'HorizontalStretch' and
                     // 'VerticalStretch' properties to the bounds of the XamlContentHost Control.
                     var rect = new windows.Foundation.Rect(0, 0, Width, Height);
+                    rect.Width /= _lastDpi / 96.0f;
+                    rect.Height /= _lastDpi / 96.0f;
 
                     _xamlSource.Content.Measure(new windows.Foundation.Size(rect.Width, rect.Height));
                     _xamlSource.Content.Arrange(rect);
