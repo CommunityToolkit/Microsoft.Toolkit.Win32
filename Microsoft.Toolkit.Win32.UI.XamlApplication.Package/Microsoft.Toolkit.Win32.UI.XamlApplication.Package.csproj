@@ -44,6 +44,16 @@
       <PackagePath>runtimes\win10-x86\native</PackagePath>
     </Content>
 
+    <Content Include="..\x64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.winmd">
+      <Pack>true</Pack>
+      <PackagePath>lib\uap10.0</PackagePath>
+    </Content>
+
+    <Content Include="..\x64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.xml">
+      <Pack>true</Pack>
+      <PackagePath>lib\uap10.0</PackagePath>
+    </Content>
+
     <Content Include="..\x64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.dll">
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-x64\native</PackagePath>
