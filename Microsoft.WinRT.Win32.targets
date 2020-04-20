@@ -24,7 +24,7 @@
     <IntDir>$(BaseIntermediateOutputPath)\$(Platform)\$(Configuration)\$(TargetFramework)\</IntDir>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.3" />
+    <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.6" />
   </ItemGroup>
 
   <Target Name="_GetUWPAppPayload">
