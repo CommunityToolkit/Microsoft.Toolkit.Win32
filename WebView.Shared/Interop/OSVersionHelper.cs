@@ -5,6 +5,7 @@
 using System;
 using System.IO;
 using System.Security;
+using System.Security.Principal;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.Win32;
 using Windows.Foundation.Metadata;
 using Windows.Security.EnterpriseData;
@@ -57,6 +58,8 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop
         internal static bool EdgeExists { get; } = File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), ExternDll.EdgeHtml));
 
         internal static bool IsWindows10 { get; } = IsWindowsNt && IsSince(WindowsVersions.Win10);
+
+        internal static bool IsRunningAsAdministrator { get; } = new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
 
         /// <summary>
         /// Gets a value indicating whether the current OS is Windows 10 April 2018 Update (Redstone 4) or greater
