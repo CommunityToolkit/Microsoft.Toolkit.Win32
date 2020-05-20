@@ -120,7 +120,8 @@ namespace Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT
 
         internal static bool IsSupported => OSVersionHelper.IsWindows10April2018OrGreater
                                             && OSVersionHelper.IsWorkstation
-                                            && OSVersionHelper.EdgeExists;
+                                            && OSVersionHelper.EdgeExists
+                                            && !OSVersionHelper.IsRunningAsAdministrator;
 
         internal bool CanGoBack
         {
