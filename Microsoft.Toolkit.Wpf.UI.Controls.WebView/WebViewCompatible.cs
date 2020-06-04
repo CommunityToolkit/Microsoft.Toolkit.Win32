@@ -11,6 +11,7 @@ using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 
 namespace Microsoft.Toolkit.Wpf.UI.Controls
 {
+    [Obsolete("The WebViewCompatible control will be replaced by WebView2 in the future. Read more at https://aka.ms/webview2")]
     public class WebViewCompatible : UserControl, IWebViewCompatible, IDisposable
     {
         public static DependencyProperty SourceProperty { get; } = DependencyProperty.Register(nameof(Source), typeof(Uri), typeof(WebViewCompatible));

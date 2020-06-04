@@ -39,7 +39,7 @@ Want to see the toolkit in action before jumping into the code? Download and pla
 ## WebView Notice
 **New:** _Try out the pre-release preview of WebView2 for .NET [here](https://docs.microsoft.com/en-us/microsoft-edge/webview2/releasenotes#09515-prerelease)._ 🎉🎉🎉
 
-WebView2 will replace the WebView control in the toolkit, as laid out in the introduction to [WebView2 here](https://docs.microsoft.com/en-us/microsoft-edge/hosting/webview2). This means that we've deprecated the WebView control within the Toolkit and are working with the Edge team to convey all the requirements from the open issues here.
+WebView2 will replace the WebView control in the toolkit, as laid out in the introduction to [WebView2 here](https://aka.ms/WebView2). This means that we've deprecated the WebView control within the Toolkit and are working with the Edge team to convey all the requirements from the open issues here.
 
 Over the next few months, they'll be processing the open requests to ensure the scenarios folks are using WebView for will be supported with its replacement in the future. You can provide feedback directly to the Edge team [here](https://github.com/MicrosoftEdge/WebViewFeedback). Thank you for using WebView!
 
