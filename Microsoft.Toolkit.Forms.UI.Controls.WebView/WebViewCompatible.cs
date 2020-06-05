@@ -15,6 +15,7 @@ namespace Microsoft.Toolkit.Forms.UI.Controls
     [DefaultEvent(Constants.ComponentDefaultEvent)]
     [Docking(DockingBehavior.AutoDock)]
     [Description("Embeds a view into your application that renders web content using the a rendering engine")]
+    [Obsolete("The WebViewCompatible control will be replaced by WebView2 in the future. Read more at https://aka.ms/webview2")]
     public class WebViewCompatible : Control, IWebViewCompatible
     {
         private readonly IWebViewCompatibleAdapter _implementation;

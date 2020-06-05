@@ -38,7 +38,9 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
             this.inkToolbarCustomToolButton1 = new Microsoft.Toolkit.Forms.UI.Controls.InkToolbarCustomToolButton();
             this.inkCanvas1 = new Microsoft.Toolkit.Forms.UI.Controls.InkCanvas();
             this.webTab = new System.Windows.Forms.TabPage();
+            #pragma warning disable CS0618 // Type or member is obsolete
             this.webViewCompatible1 = new Microsoft.Toolkit.Forms.UI.Controls.WebViewCompatible();
+            #pragma warning restore CS0618 // Type or member is obsolete
             this.mediaTab = new System.Windows.Forms.TabPage();
             this.mediaPlayerElement1 = new Microsoft.Toolkit.Forms.UI.Controls.MediaPlayerElement();
             this.sampleTab = new System.Windows.Forms.TabPage();
@@ -237,7 +239,9 @@ namespace Microsoft.Toolkit.Win32.Samples.WinForms.App
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage webTab;
         private System.Windows.Forms.TabPage inkingTab;
+        #pragma warning disable CS0618 // Type or member is obsolete
         private Forms.UI.Controls.WebViewCompatible webViewCompatible1;
+        #pragma warning restore CS0618 // Type or member is obsolete
         private Forms.UI.Controls.InkCanvas inkCanvas1;
         private System.Windows.Forms.TabPage mediaTab;
         private Forms.UI.Controls.MediaPlayerElement mediaPlayerElement1;
