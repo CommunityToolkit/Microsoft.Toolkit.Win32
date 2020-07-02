@@ -8,6 +8,10 @@
     <!-- Up-to-date check fails for Xaml Islands projects: -->
     <!--    https://github.com/dotnet/project-system/issues/5543 -->
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+
+    <_PlatformShortName_>$(Platform)</_PlatformShortName_>
+    <_PlatformShortName_ Condition="'$(_PlatformShortName_)'=='Win32'">x86</_PlatformShortName_>
+    <_NetCoreUWP_NuGetPackageId>runtime.win10-$(_PlatformShortName_)-aot.Microsoft.NETCore.UniversalWindowsPlatform</_NetCoreUWP_NuGetPackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(DesignTimeBuild)' == 'true'">
@@ -66,7 +70,9 @@
       Outputs="@(_AppxInputs->'%(FinalTargetPath)')"
       Condition="'$(_DisableAppxCopy)'==''">
 
-    <CreateItem Include="%(_AppxBuildOutputPaths.Identity)" Condition="'%(_AppxBuildOutputPaths.TargetPath)'!=''" AdditionalMetadata="Link=%(_AppxBuildOutputPaths.TargetPath)">
+    <CreateItem Include="@(_AppxBuildOutputPaths)"
+      Condition="'%(_AppxBuildOutputPaths.TargetPath)'!='' and '%(_AppxBuildOutputPaths.NuGetPackageId)'!='$(_NetCoreUWP_NuGetPackageId)'"
+      AdditionalMetadata="Link=%(_AppxBuildOutputPaths.TargetPath)">
       <Output ItemName="_AppxBuildOutputs" TaskParameter="Include"/>
     </CreateItem>
 
