@@ -11,7 +11,8 @@
 
     <_PlatformShortName_>$(Platform)</_PlatformShortName_>
     <_PlatformShortName_ Condition="'$(_PlatformShortName_)'=='Win32'">x86</_PlatformShortName_>
-    <_NetCoreUWP_NuGetPackageId>runtime.win10-$(_PlatformShortName_)-aot.Microsoft.NETCore.UniversalWindowsPlatform</_NetCoreUWP_NuGetPackageId>
+    <_NetCoreUWP_NuGetPackageId>runtime.win10-$(_PlatformShortName_).Microsoft.NETCore.UniversalWindowsPlatform</_NetCoreUWP_NuGetPackageId>
+    <_NetCoreUWP_AOT_NuGetPackageId>runtime.win10-$(_PlatformShortName_)-aot.Microsoft.NETCore.UniversalWindowsPlatform</_NetCoreUWP_AOT_NuGetPackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(DesignTimeBuild)' == 'true'">
@@ -71,7 +72,9 @@
       Condition="'$(_DisableAppxCopy)'==''">
 
     <CreateItem Include="@(_AppxBuildOutputPaths)"
-      Condition="'%(_AppxBuildOutputPaths.TargetPath)'!='' and '%(_AppxBuildOutputPaths.NuGetPackageId)'!='$(_NetCoreUWP_NuGetPackageId)'"
+      Condition="'%(_AppxBuildOutputPaths.TargetPath)'!='' and
+        '%(_AppxBuildOutputPaths.NuGetPackageId)'!='$(_NetCoreUWP_AOT_NuGetPackageId)' and
+        '%(_AppxBuildOutputPaths.NuGetPackageId)'!='$(_NetCoreUWP_NuGetPackageId)' "
       AdditionalMetadata="Link=%(_AppxBuildOutputPaths.TargetPath)">
       <Output ItemName="_AppxBuildOutputs" TaskParameter="Include"/>
     </CreateItem>
