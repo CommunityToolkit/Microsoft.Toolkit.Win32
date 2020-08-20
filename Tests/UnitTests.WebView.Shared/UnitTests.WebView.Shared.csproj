@@ -5,7 +5,6 @@
     <AssemblyName>Microsoft.Toolkit.Win32.UI.Controls.Test.WebView.Shared</AssemblyName>
     <AssemblyTitle>UnitTests.WebView.Shared</AssemblyTitle>
     <Description>UnitTests.WebView.Shared</Description>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <ProjectGuid>{B220BE88-944E-45D1-9248-6FAEF53868A3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -17,9 +16,6 @@
     <IsPackable>false</IsPackable>
     <IsTestProject>false</IsTestProject>
     <Platforms>x64;x86;AnyCPU</Platforms>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <DebugSymbols>true</DebugSymbols>
