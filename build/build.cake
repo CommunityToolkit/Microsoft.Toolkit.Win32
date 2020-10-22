@@ -41,6 +41,8 @@ string Version = null;
 var inheritDoc = toolsDir + "/InheritDoc/tools/InheritDoc.exe";
 var inheritDocExclude = "Foo.*";
 
+var pdbcopyPath = Context.Environment.GetSpecialPath(SpecialPath.ProgramFilesX86).Combine(@"Windows Kits\10\Debuggers\x64").CombineWithFilePath("pdbcopy.exe");
+
 //////////////////////////////////////////////////////////////////////
 // METHODS
 //////////////////////////////////////////////////////////////////////
@@ -88,6 +90,59 @@ void VerifyHeaders(bool Replace)
     if(!Replace && hasMissing)
     {
         throw new Exception("Please run UpdateHeaders.bat or '.\\build.ps1 -target=UpdateHeaders' and commit the changes.");
+    }
+}
+
+void Build(PlatformTarget platformTarget)
+{
+    var buildSettings = new MSBuildSettings
+    {
+        PlatformTarget = platformTarget,
+        MaxCpuCount = 1,
+    }
+    .SetConfiguration("Release")
+    .UseToolVersion(MSBuildToolVersion.VS2019)
+    .WithTarget("Restore");
+
+    Information($"\nRestore {platformTarget} Step");
+    MSBuild(win32Solution, buildSettings);
+
+    // Build once with normal dependency ordering
+    buildSettings = new MSBuildSettings
+    {
+        PlatformTarget = platformTarget,
+        MaxCpuCount = 1,
+    }
+    .SetConfiguration("Release")
+    .UseToolVersion(MSBuildToolVersion.VS2019)
+    .WithTarget("Build");
+
+    Information($"\nBuild {platformTarget} Step");
+    MSBuild(win32Solution, buildSettings);
+
+    Information($"\nStripping {platformTarget} PDB");
+
+    string arch;
+    switch(platformTarget)
+    {
+        case PlatformTarget.x86:
+            arch = "Win32";
+            break;
+        default:
+            arch = platformTarget.ToString();
+            break;
+    }
+
+    var args = new ProcessArgumentBuilder()
+                .AppendQuoted(baseDir + $"/{arch}/Release/Microsoft.Toolkit.Win32.UI.XamlApplication/Microsoft.Toolkit.Win32.UI.XamlHost.pdb")
+                .AppendQuoted(baseDir + $"/{arch}/Release/Microsoft.Toolkit.Win32.UI.XamlApplication/Microsoft.Toolkit.Win32.UI.XamlHost_stripped.pdb")
+                .AppendSwitch("-p", "");
+
+    var result = StartProcess(pdbcopyPath, new ProcessSettings { Arguments = args });
+
+    if (result != 0)
+    {
+        throw new InvalidOperationException($"PDBCopy stripping for '{arch}' failed!");
     }
 }
 
@@ -157,121 +212,10 @@ Task("Build")
         NuGetRestore(solution, nugetRestoreSettings);
     }
 
-    {
-        var buildSettings = new MSBuildSettings
-        {
-            PlatformTarget = PlatformTarget.x64,
-            MaxCpuCount = 1,
-        }
-        .SetConfiguration("Release")
-        .UseToolVersion(MSBuildToolVersion.VS2019)
-        .WithTarget("Restore");
-
-        Information("\nRestore x64 Step");
-        MSBuild(win32Solution, buildSettings);
-    }
-
-    {
-        // Build once with normal dependency ordering
-        var buildSettings = new MSBuildSettings
-        {
-            PlatformTarget = PlatformTarget.x64,
-            MaxCpuCount = 1,
-        }
-        .SetConfiguration("Release")
-        .UseToolVersion(MSBuildToolVersion.VS2019)
-        .WithTarget("Build");
-
-        Information("\nBuild x64 Step");
-        MSBuild(win32Solution, buildSettings);
-    }
-
-    {
-        var buildSettings = new MSBuildSettings
-        {
-            PlatformTarget = PlatformTarget.x86,
-            MaxCpuCount = 1,
-        }
-        .SetConfiguration("Release")
-        .UseToolVersion(MSBuildToolVersion.VS2019)
-        .WithTarget("Restore");
-
-        Information("\nRestore x86 Step");
-        MSBuild(win32Solution, buildSettings);
-    }
-
-    {
-        // Build once with normal dependency ordering
-        var buildSettings = new MSBuildSettings
-        {
-            PlatformTarget = PlatformTarget.x86,
-            MaxCpuCount = 1,
-        }
-        .SetConfiguration("Release")
-        .UseToolVersion(MSBuildToolVersion.VS2019)
-        .WithTarget("Build");
-
-        Information("\nBuild x86 Step");
-        MSBuild(win32Solution, buildSettings);
-    }
-
-    {
-        var buildSettings = new MSBuildSettings
-        {
-            PlatformTarget = PlatformTarget.ARM,
-            MaxCpuCount = 1,
-        }
-        .SetConfiguration("Release")
-        .UseToolVersion(MSBuildToolVersion.VS2019)
-        .WithTarget("Restore");
-
-        Information("\nRestore ARM Step");
-        MSBuild(win32Solution, buildSettings);
-    }
-
-    {
-        // Build once with normal dependency ordering
-        var buildSettings = new MSBuildSettings
-        {
-            PlatformTarget = PlatformTarget.ARM,
-            MaxCpuCount = 1,
-        }
-        .SetConfiguration("Release")
-        .UseToolVersion(MSBuildToolVersion.VS2019)
-        .WithTarget("Build");
-
-        Information("\nBuild ARM Step");
-        MSBuild(win32Solution, buildSettings);
-    }
-
-    {
-        var buildSettings = new MSBuildSettings
-        {
-            PlatformTarget = PlatformTarget.ARM64,
-            MaxCpuCount = 1,
-        }
-        .SetConfiguration("Release")
-        .UseToolVersion(MSBuildToolVersion.VS2019)
-        .WithTarget("Restore");
-
-        Information("\nRestore ARM64 Step");
-        MSBuild(win32Solution, buildSettings);
-    }
-
-    {
-        // Build once with normal dependency ordering
-        var buildSettings = new MSBuildSettings
-        {
-            PlatformTarget = PlatformTarget.ARM64,
-            MaxCpuCount = 1,
-        }
-        .SetConfiguration("Release")
-        .UseToolVersion(MSBuildToolVersion.VS2019)
-        .WithTarget("Build");
-
-        Information("\nBuild ARM64 Step");
-        MSBuild(win32Solution, buildSettings);
-    }
+    Build(PlatformTarget.x64);
+    Build(PlatformTarget.x86);
+    Build(PlatformTarget.ARM);
+    Build(PlatformTarget.ARM64);
 
 });
 
