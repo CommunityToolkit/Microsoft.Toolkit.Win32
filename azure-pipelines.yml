@@ -162,3 +162,18 @@ steps:
     pathToPublish: .\bin\nupkg
     artifactType: container
     artifactName: Packages
+
+# Publish stripped pdbs to artifacts
+- task: CopyFiles@2
+  inputs:
+    Contents: |
+      x64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost_stripped.pdb
+      Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost_stripped.pdb
+      arm\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost_stripped.pdb
+      arm64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost_stripped.pdb
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\symbols\'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)\symbols' 
+    artifactName: 'symbols' 
