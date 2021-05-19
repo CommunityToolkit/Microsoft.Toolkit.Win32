@@ -5,7 +5,6 @@
     <AssemblyName>Microsoft.Toolkit.Win32.UI.Controls.Test.WPF.WebView</AssemblyName>
     <AssemblyTitle>UnitTests.WebView.WPF</AssemblyTitle>
     <Description>UnitTests.WebView.WPF</Description>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <ProjectGuid>{2E49400E-B114-4FAE-B743-6CB57B500E31}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -25,13 +24,8 @@
     <IsTestProject>true</IsTestProject>
     <IsPackable>false</IsPackable>
     <Platforms>x64;x86;AnyCPU</Platforms>
-    <NoWarn>CS0618;</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
     <UseWPF>true</UseWPF>
+    <NoWarn>CS0618;</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <DebugSymbols>true</DebugSymbols>
@@ -64,13 +58,6 @@
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
     <PackageReference Include="InputSimulatorCore" Version="1.0.0" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="FunctionalTests\" />

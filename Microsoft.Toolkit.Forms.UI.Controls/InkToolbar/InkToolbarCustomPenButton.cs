@@ -8,7 +8,6 @@ using System.ComponentModel;
 using System.Linq;
 using Microsoft.Toolkit.Forms.UI.XamlHost;
 using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
-using Microsoft.Toolkit.Win32.UI.Interop;
 using Windows.UI.Xaml;
 using windows = Windows;
 

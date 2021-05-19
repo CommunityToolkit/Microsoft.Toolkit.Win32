@@ -44,12 +44,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Design" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
     <Reference Include="System.Net.Http">
       <HintPath>$(WINDIR)\Microsoft.NET\Framework\v4.0.30319\System.Net.Http.dll</HintPath>

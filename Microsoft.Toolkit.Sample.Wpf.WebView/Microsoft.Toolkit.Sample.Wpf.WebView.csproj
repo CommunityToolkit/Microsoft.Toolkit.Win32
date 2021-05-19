@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <AssemblyTitle>Windows Community Toolkit Controls (Sample WebView for .NET WPF)</AssemblyTitle>
     <Description>Sample Code for Windows Community Toolkit Controls</Description>
     <UseWPF>true</UseWPF>
@@ -11,17 +11,13 @@
     <Platforms>x64;x86</Platforms>
     <NoWarn>CS0618;</NoWarn>
   </PropertyGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-    <Reference Include="System.Xaml" />
-    <Reference Include="UIAutomationProvider" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-  </ItemGroup>
+
   <ItemGroup>
     <None Include="app.manifest" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Toolkit.Wpf.UI.Controls.WebView\Microsoft.Toolkit.Wpf.UI.Controls.WebView.csproj" />
   </ItemGroup>
+
 </Project>

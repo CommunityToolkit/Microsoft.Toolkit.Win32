@@ -1,24 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AssemblyTitle>Windows Community Toolkit Controls (Sample WebView for .NET Forms)</AssemblyTitle>
     <Description>Sample Code for Windows Community Toolkit Controls and Windows Forms</Description>
+    <UseWindowsForms>true</UseWindowsForms>
     <IsPackable>false</IsPackable>
     <Platforms>x64;x86</Platforms>
     <NoWarn>CS0618;</NoWarn>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
-    <UseWindowsForms>true</UseWindowsForms>
-  </PropertyGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
-    <Reference Include="System.Windows.Forms" />
-  </ItemGroup>
+
   <ItemGroup>
     <None Include="app.manifest" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Toolkit.Forms.UI.Controls.WebView\Microsoft.Toolkit.Forms.UI.Controls.WebView.csproj" />
   </ItemGroup>
+
 </Project>
