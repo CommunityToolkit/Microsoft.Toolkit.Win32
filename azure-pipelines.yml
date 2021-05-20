@@ -12,6 +12,7 @@ pool:
 variables: 
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   BuildConfiguration: Release
+  RepositoryLocalPath : $(Build.Repository.LocalPath)
 
 steps:
 
@@ -36,18 +37,12 @@ steps:
 - script: nbgv cloud
   displayName: Set Version
 
-- powershell: .\build\Install-WindowsSdkISO.ps1 18362
-  displayName: Insider SDK
-
 - task: BatchScript@1
   inputs:
     filename: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\Tools\\VsDevCmd.bat"
     arguments: -no_logo
     modifyEnvironment: true
   displayName: Setup Environment Variables
-
-#- powershell: .\build\build.ps1 -target=Package
-#  displayName: Build 
 
 - task: NuGetCommand@2
   displayName: NuGet restore Native projects
@@ -76,6 +71,9 @@ steps:
     msbuildArguments: /target:Build
     restoreNugetPackages: false # Optional
 
+- powershell: "& 'C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\pdbcopy.exe' $env:RepositoryLocalPath\\x64\\Release\\Microsoft.Toolkit.Win32.UI.XamlApplication\\Microsoft.Toolkit.Win32.UI.XamlHost.pdb $env:RepositoryLocalPath\\x64\\Release\\Microsoft.Toolkit.Win32.UI.XamlApplication\\Microsoft.Toolkit.Win32.UI.XamlHost_stripped.pdb -p"
+  displayName: Strip x64
+
 - task: MSBuild@1
   displayName: Build x86 Restore
   inputs:
@@ -93,6 +91,9 @@ steps:
     configuration: Release
     msbuildArguments: /target:Build
     restoreNugetPackages: false # Optional
+
+- powershell: "& 'C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\pdbcopy.exe' $env:RepositoryLocalPath\\Win32\\Release\\Microsoft.Toolkit.Win32.UI.XamlApplication\\Microsoft.Toolkit.Win32.UI.XamlHost.pdb $env:RepositoryLocalPath\\Win32\\Release\\Microsoft.Toolkit.Win32.UI.XamlApplication\\Microsoft.Toolkit.Win32.UI.XamlHost_stripped.pdb -p"
+  displayName: Strip x86
 
 - task: MSBuild@1
   displayName: Build ARM Restore
@@ -112,6 +113,9 @@ steps:
     msbuildArguments: /target:Build
     restoreNugetPackages: false # Optional
 
+- powershell: "& 'C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\pdbcopy.exe' $env:RepositoryLocalPath\\ARM\\Release\\Microsoft.Toolkit.Win32.UI.XamlApplication\\Microsoft.Toolkit.Win32.UI.XamlHost.pdb $env:RepositoryLocalPath\\ARM\\Release\\Microsoft.Toolkit.Win32.UI.XamlApplication\\Microsoft.Toolkit.Win32.UI.XamlHost_stripped.pdb -p"
+  displayName: Strip ARM
+
 - task: MSBuild@1
   displayName: Build ARM64 Restore
   inputs:
@@ -129,6 +133,9 @@ steps:
     configuration: Release
     msbuildArguments: /target:Build
     restoreNugetPackages: false # Optional
+
+- powershell: "& 'C:\\Program Files (x86)\\Windows Kits\\10\\Debuggers\\x64\\pdbcopy.exe' $env:RepositoryLocalPath\\ARM64\\Release\\Microsoft.Toolkit.Win32.UI.XamlApplication\\Microsoft.Toolkit.Win32.UI.XamlHost.pdb $env:RepositoryLocalPath\\ARM64\\Release\\Microsoft.Toolkit.Win32.UI.XamlApplication\\Microsoft.Toolkit.Win32.UI.XamlHost_stripped.pdb -p"
+  displayName: Strip ARM64
 
 - task: MSBuild@1
   displayName: Build Pack
@@ -155,3 +162,18 @@ steps:
     pathToPublish: .\bin\nupkg
     artifactType: container
     artifactName: Packages
+
+# Publish stripped pdbs to artifacts
+- task: CopyFiles@2
+  inputs:
+    Contents: |
+      x64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost_stripped.pdb
+      Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost_stripped.pdb
+      arm\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost_stripped.pdb
+      arm64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost_stripped.pdb
+    TargetFolder: '$(Build.ArtifactStagingDirectory)\symbols\'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)\symbols' 
+    artifactName: 'symbols' 
