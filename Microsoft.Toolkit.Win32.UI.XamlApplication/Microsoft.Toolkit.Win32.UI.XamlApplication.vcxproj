@@ -17,9 +17,6 @@
     <IsNativeWin32Project>true</IsNativeWin32Project>
     <TargetFrameworks>UAP,Version=v10.0</TargetFrameworks>
     <ResolveNuGetPackages>false</ResolveNuGetPackages>
-    <TargetFramework>net3.0-windows10.0.18362.0</TargetFramework>
-    <Platforms>x86;x64;arm64</Platforms>
-    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <ItemGroup Label="ProjectConfigurations">
@@ -156,7 +153,6 @@
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.190506.1\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.190506.1\build\native\Microsoft.Windows.CppWinRT.targets')" />
   </ImportGroup>
-  <Target Name="Restore" />
   <Target Name="Pack" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
