@@ -15,16 +15,12 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 {
     XamlApplication::XamlApplication(winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider> providers)
     {
-        for(auto provider : providers)
+        for (auto&& provider : providers)
         {
             m_providers.Append(provider);
         }
 
         Initialize();
-    }
-
-    XamlApplication::XamlApplication()
-    {
     }
 
     void XamlApplication::Initialize()

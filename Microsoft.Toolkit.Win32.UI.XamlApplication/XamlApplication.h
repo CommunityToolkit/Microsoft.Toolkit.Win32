@@ -17,7 +17,7 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
     class XamlApplication : public XamlApplicationT<XamlApplication, Windows::UI::Xaml::Markup::IXamlMetadataProvider>
     {
     public:
-        XamlApplication();
+        XamlApplication() = default;
         XamlApplication(winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider> providers);
         ~XamlApplication();
 
