@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
-    <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <RootNamespace>Microsoft.Toolkit.Win32.SDK.Tasks</RootNamespace>
     <AssemblyName>Microsoft.Toolkit.Win32.Tasks</AssemblyName>
     <Title>Windows Community Toolkit Tools for XAML Islands</Title>
