@@ -46,9 +46,6 @@ steps:
     modifyEnvironment: true
   displayName: Setup Environment Variables
 
-#- powershell: .\build\build.ps1 -target=Package
-#  displayName: Build 
-
 - task: NuGetCommand@2
   displayName: NuGet restore Native projects
   inputs:
@@ -58,73 +55,46 @@ steps:
     restoreDirectory: ../packages/
     verbosityRestore: Detailed # Options: quiet, normal, detaile
 
-- task: MSBuild@1
-  displayName: Build x64 Restore
+- task: NuGetCommand@2
+  displayName: NuGet restore Managed projects
   inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
-    platform: x64
+    command: restore
     configuration: Release
-    msbuildArguments: /target:Restore
-    restoreNugetPackages: false # Optional
+    restoreSolution:
+      - '**/*.csproj'
+      - !'Microsoft.Toolkit.Sample.UWP.App/*.csproj'
 
 - task: MSBuild@1
   displayName: Build x64
   inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
+    solution: Microsoft.Toolkit.Win32.sln
     platform: x64
     configuration: Release
     msbuildArguments: /target:Build
-    restoreNugetPackages: false # Optional
-
-- task: MSBuild@1
-  displayName: Build x86 Restore
-  inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
-    platform: x86
-    configuration: Release
-    msbuildArguments: /target:Restore
     restoreNugetPackages: false # Optional
 
 - task: MSBuild@1
   displayName: Build x86
   inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
+    solution: Microsoft.Toolkit.Win32.sln
     platform: x86
     configuration: Release
     msbuildArguments: /target:Build
     restoreNugetPackages: false # Optional
 
 - task: MSBuild@1
-  displayName: Build ARM Restore
-  inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
-    platform: ARM
-    configuration: Release
-    msbuildArguments: /target:Restore
-    restoreNugetPackages: false # Optional
-
-- task: MSBuild@1
   displayName: Build ARM
   inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
+    solution: Microsoft.Toolkit.Win32.sln
     platform: ARM
     configuration: Release
     msbuildArguments: /target:Build
     restoreNugetPackages: false # Optional
 
 - task: MSBuild@1
-  displayName: Build ARM64 Restore
-  inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
-    platform: ARM64
-    configuration: Release
-    msbuildArguments: /target:Restore
-    restoreNugetPackages: false # Optional
-
-- task: MSBuild@1
   displayName: Build ARM64
   inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
+    solution: Microsoft.Toolkit.Win32.sln
     platform: ARM64
     configuration: Release
     msbuildArguments: /target:Build
@@ -133,7 +103,7 @@ steps:
 - task: MSBuild@1
   displayName: Build Pack
   inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
+    solution: Microsoft.Toolkit.Win32.sln
     platform: x86
     configuration: Release
     msbuildArguments: /target:Pack
