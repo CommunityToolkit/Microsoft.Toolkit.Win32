@@ -16,6 +16,7 @@
     <WindowsTargetPlatformMinVersion>10.0.18362.0</WindowsTargetPlatformMinVersion>
     <IsNativeWin32Project>true</IsNativeWin32Project>
     <TargetFrameworks>UAP,Version=v10.0</TargetFrameworks>
+    <RuntimeIdentifiers>win-x64;win-x86;win-arm64;win10-x64;win10-x86;win10-arm64;win10-x64-aot;win10-x86-aot;win10-arm64-aot</RuntimeIdentifiers>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <ItemGroup Label="ProjectConfigurations">
