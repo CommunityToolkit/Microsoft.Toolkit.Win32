@@ -23,7 +23,7 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '3.0.103'
+    useGlobalJson: true
   displayName: Use .NET Core sdk
 
 - task: DotNetCoreCLI@2
@@ -36,8 +36,8 @@ steps:
 - script: nbgv cloud
   displayName: Set Version
 
-- powershell: .\build\Install-WindowsSdkISO.ps1 18362
-  displayName: Insider SDK
+#- powershell: .\build\Install-WindowsSdkISO.ps1 18362
+#  displayName: Insider SDK
 
 - task: BatchScript@1
   inputs:
@@ -60,7 +60,7 @@ steps:
   inputs:
     command: restore
     configuration: Release
-    restoreSolution: '**/*.csproj;!Microsoft.Toolkit.Sample.UWP.App/*.csproj'
+    restoreSolution: '**/*.sln'
 
 - task: MSBuild@1
   displayName: Build x64
