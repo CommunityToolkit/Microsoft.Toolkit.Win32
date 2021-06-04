@@ -43,14 +43,21 @@ steps:
     modifyEnvironment: true
   displayName: Setup Environment Variables
 
-- task: MSBuild@1
-  displayName: Restore NuGet packages
+- task: NuGetCommand@2
+  displayName: NuGet restore Native projects
   inputs:
-    solution: Microsoft.Toolkit.Win32.sln
-    platform: x64
+    command: restore
     configuration: Release
-    msbuildArguments: /target:Restore /p:RestorePackagesConfig=true
-    restoreNugetPackages: false # Optional
+    restoreSolution: Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config
+    restoreDirectory: ../packages/
+    verbosityRestore: Detailed # Options: quiet, normal, detaile
+
+- task: NuGetCommand@2
+  displayName: NuGet restore Managed projects
+  inputs:
+    command: restore
+    configuration: Release
+    restoreSolution: '**/*.csproj'
 
 - task: MSBuild@1
   displayName: Build x64
