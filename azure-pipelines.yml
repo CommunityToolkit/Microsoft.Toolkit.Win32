@@ -36,9 +36,6 @@ steps:
 - script: nbgv cloud
   displayName: Set Version
 
-#- powershell: .\build\Install-WindowsSdkISO.ps1 18362
-#  displayName: Insider SDK
-
 - task: BatchScript@1
   inputs:
     filename: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\Tools\\VsDevCmd.bat"
@@ -46,21 +43,14 @@ steps:
     modifyEnvironment: true
   displayName: Setup Environment Variables
 
-- task: NuGetCommand@2
-  displayName: NuGet restore Native projects
+- task: MSBuild@1
+  displayName: Restore NuGet packages
   inputs:
-    command: restore
+    solution: Microsoft.Toolkit.Win32.sln
+    platform: AnyCPU
     configuration: Release
-    restoreSolution: Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config
-    restoreDirectory: ../packages/
-    verbosityRestore: Detailed # Options: quiet, normal, detaile
-
-- task: NuGetCommand@2
-  displayName: NuGet restore Managed projects
-  inputs:
-    command: restore
-    configuration: Release
-    restoreSolution: '**/*.sln'
+    msbuildArguments: /target:Restore /p:RestorePackagesConfig=true
+    restoreNugetPackages: false # Optional
 
 - task: MSBuild@1
   displayName: Build x64
