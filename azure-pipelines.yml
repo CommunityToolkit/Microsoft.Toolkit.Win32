@@ -60,9 +60,7 @@ steps:
   inputs:
     command: restore
     configuration: Release
-    restoreSolution:
-      - '**/*.csproj'
-      - !'Microsoft.Toolkit.Sample.UWP.App/*.csproj'
+    restoreSolution: '**/*.csproj;!Microsoft.Toolkit.Sample.UWP.App/*.csproj'
 
 - task: MSBuild@1
   displayName: Build x64
