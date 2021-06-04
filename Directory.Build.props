@@ -149,9 +149,8 @@
     <DefaultRuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</DefaultRuntimeIdentifiers>
     <DefaultPlatforms>x86;x64;arm64</DefaultPlatforms>
     <PlatformTarget>$(Platform)</PlatformTarget>
-    <RuntimeIdentifiers/>
     <AssetTargetFallback>$(AssetTargetFallback);native0.0</AssetTargetFallback>
-    <!--RuntimeIdentifiers>win-x64;win-x86;win-arm64;win10-x64;win10-x86;win10-arm64;win10-x64-aot;win10-x86-aot;win10-arm64-aot</RuntimeIdentifiers-->
+    <RuntimeIdentifiers>win-x64;win-x86;win-arm64;win10-x64;win10-x86;win10-arm64;win10-x64-aot;win10-x86-aot;win10-arm64-aot</RuntimeIdentifiers>
   </PropertyGroup>
 
 </Project>
