@@ -65,7 +65,7 @@ steps:
     solution: Microsoft.Toolkit.Win32.sln
     platform: x64
     configuration: Release
-    msbuildArguments: /target:Build /bl:msbuild.release.x64.binlog
+    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\msbuild.release.x64.binlog
     restoreNugetPackages: false # Optional
 
 - task: MSBuild@1
@@ -74,7 +74,7 @@ steps:
     solution: Microsoft.Toolkit.Win32.sln
     platform: x86
     configuration: Release
-    msbuildArguments: /target:Build /bl:msbuild.release.x86.binlog
+    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\msbuild.release.x86.binlog
     restoreNugetPackages: false # Optional
 
 - task: MSBuild@1
@@ -83,7 +83,7 @@ steps:
     solution: Microsoft.Toolkit.Win32.sln
     platform: ARM
     configuration: Release
-    msbuildArguments: /target:Build /bl:msbuild.release.arm.binlog
+    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\msbuild.release.arm.binlog
     restoreNugetPackages: false # Optional
 
 - task: MSBuild@1
@@ -92,14 +92,14 @@ steps:
     solution: Microsoft.Toolkit.Win32.sln
     platform: ARM64
     configuration: Release
-    msbuildArguments: /target:Build /bl:msbuild.release.arm64.binlog
+    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\msbuild.release.arm64.binlog
     restoreNugetPackages: false # Optional
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish MsBuild binlog'
   condition: Always()
   inputs:
-    PathtoPublish: '*.binlog'
+    PathtoPublish: '$(Agent.TempDirectory)\*.binlog'
     artifactName: 'binlogs'
 
 - task: MSBuild@1
