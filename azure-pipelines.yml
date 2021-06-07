@@ -96,11 +96,11 @@ steps:
     restoreNugetPackages: false # Optional
 
 - task: PublishPipelineArtifact@1
-  displayName: 'Publish MsBuild binlog'
+  displayName: 'Publish MsBuild binlog x86'
   condition: Always()
   inputs:
-    targetPath: '$(Agent.TempDirectory)\*.binlog'
-    artifactName: 'binlogs'
+    targetPath: $(Agent.TempDirectory)\msbuild.release.x86.binlog
+    artifactName: 'binlogs x86'
 
 - task: MSBuild@1
   displayName: Build Pack
