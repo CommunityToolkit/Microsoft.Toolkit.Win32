@@ -99,7 +99,7 @@ steps:
   displayName: 'Publish MsBuild binlog'
   condition: Always()
   inputs:
-    PathtoPublish: '**/*.binlog'
+    PathtoPublish: '*.binlog'
     artifactName: 'binlogs'
 
 - task: MSBuild@1
