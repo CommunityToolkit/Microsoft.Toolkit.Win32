@@ -10,6 +10,7 @@
     <Description>Sample Code for Windows Community Toolkit Controls</Description>
     <StartupObject>Microsoft.Toolkit.Sample.Wpf.App.Program</StartupObject>
     <IsPackable>false</IsPackable>
+    <UseWpf>true</UseWpf>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
