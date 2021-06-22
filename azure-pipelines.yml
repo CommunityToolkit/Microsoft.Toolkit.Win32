@@ -59,6 +59,15 @@ steps:
     configuration: Release
     restoreSolution: '**/*.csproj'
 
+- task: NuGetCommand@2
+  displayName: NuGet restore Managed projects (x86)
+  inputs:
+    command: restore
+    configuration: Release
+    restoreSolution: '**/*.csproj'
+  env:
+    plaform: x86
+
 - task: MSBuild@1
   displayName: Build x64
   inputs:
