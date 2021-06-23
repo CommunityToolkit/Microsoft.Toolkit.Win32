@@ -50,7 +50,7 @@ steps:
     configuration: Release
     restoreSolution: Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config
     restoreDirectory: ../packages/
-    verbosityRestore: Detailed # Options: quiet, normal, detaile
+    verbosityRestore: Detailed
 
 - task: NuGetCommand@2
   displayName: NuGet restore Managed projects
@@ -74,8 +74,8 @@ steps:
     solution: Microsoft.Toolkit.Win32.sln
     platform: x64
     configuration: Release
-    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\msbuild.release.x64.binlog
-    restoreNugetPackages: false # Optional
+    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\binlogs\msbuild.release.x64.binlog
+    restoreNugetPackages: false
 
 - task: MSBuild@1
   displayName: Build x86
@@ -83,8 +83,8 @@ steps:
     solution: Microsoft.Toolkit.Win32.sln
     platform: x86
     configuration: Release
-    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\msbuild.release.x86.binlog
-    restoreNugetPackages: false # Optional
+    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\binlogs\msbuild.release.x86.binlog
+    restoreNugetPackages: false
 
 - task: MSBuild@1
   displayName: Build ARM
@@ -92,8 +92,8 @@ steps:
     solution: Microsoft.Toolkit.Win32.sln
     platform: ARM
     configuration: Release
-    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\msbuild.release.arm.binlog
-    restoreNugetPackages: false # Optional
+    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\binlogs\msbuild.release.arm.binlog
+    restoreNugetPackages: false
 
 - task: MSBuild@1
   displayName: Build ARM64
@@ -101,15 +101,15 @@ steps:
     solution: Microsoft.Toolkit.Win32.sln
     platform: ARM64
     configuration: Release
-    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\msbuild.release.arm64.binlog
-    restoreNugetPackages: false # Optional
+    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\binlogs\msbuild.release.arm64.binlog
+    restoreNugetPackages: false
 
 - task: PublishPipelineArtifact@1
-  displayName: 'Publish MsBuild binlog x86'
+  displayName: 'Publish binlogs'
   condition: Always()
   inputs:
-    targetPath: $(Agent.TempDirectory)\msbuild.release.x86.binlog
-    artifactName: 'binlogs x86'
+    targetPath: $(Agent.TempDirectory)\binlogs
+    artifactName: 'binlogs'
 
 - task: MSBuild@1
   displayName: Build Pack
@@ -118,7 +118,7 @@ steps:
     platform: x86
     configuration: Release
     msbuildArguments: /target:Pack
-    restoreNugetPackages: false # Optional
+    restoreNugetPackages: false
 
 - task: PowerShell@2
   displayName: Authenticode Sign Packages
