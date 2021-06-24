@@ -179,5 +179,4 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <Target Name="Pack" />
-  <Target Name="Restore" />
 </Project>
