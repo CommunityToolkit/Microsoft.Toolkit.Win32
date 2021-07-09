@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <RootNamespace>Microsoft.Toolkit.Win32.UI.Controls.Test.WebView.Shared</RootNamespace>
     <AssemblyName>Microsoft.Toolkit.Win32.UI.Controls.Test.WebView.Shared</AssemblyName>
     <AssemblyTitle>UnitTests.WebView.Shared</AssemblyTitle>

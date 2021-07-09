@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ProjectGuid>{45524ED2-8B5A-42E8-97A2-DCA44ECC83AA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <Platforms>x86;x64</Platforms>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -10,6 +10,7 @@
     <Description>Sample Code for Windows Community Toolkit Controls</Description>
     <StartupObject>Microsoft.Toolkit.Sample.Wpf.App.Program</StartupObject>
     <IsPackable>false</IsPackable>
+    <UseWpf>true</UseWpf>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -26,20 +27,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="App.xaml" />
-    <None Remove="MainWindow.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </ApplicationDefinition>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Toolkit.Sample.UWP.App\Microsoft.Toolkit.Sample.UWP.App.csproj" Condition="'$(TargetFramework)'=='netcoreapp3.0'">
