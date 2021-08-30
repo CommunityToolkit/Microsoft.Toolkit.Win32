@@ -23,7 +23,7 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '3.0.100'
+    useGlobalJson: true
   displayName: Use .NET Core sdk
 
 - task: DotNetCoreCLI@2
@@ -36,18 +36,12 @@ steps:
 - script: nbgv cloud
   displayName: Set Version
 
-- powershell: .\build\Install-WindowsSdkISO.ps1 18362
-  displayName: Insider SDK
-
 - task: BatchScript@1
   inputs:
     filename: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\Tools\\VsDevCmd.bat"
     arguments: -no_logo
     modifyEnvironment: true
   displayName: Setup Environment Variables
-
-#- powershell: .\build\build.ps1 -target=Package
-#  displayName: Build 
 
 - task: NuGetCommand@2
   displayName: NuGet restore Native projects
@@ -56,88 +50,75 @@ steps:
     configuration: Release
     restoreSolution: Microsoft.Toolkit.Win32.UI.XamlApplication\packages.config
     restoreDirectory: ../packages/
-    verbosityRestore: Detailed # Options: quiet, normal, detaile
+    verbosityRestore: Detailed
 
-- task: MSBuild@1
-  displayName: Build x64 Restore
+- task: NuGetCommand@2
+  displayName: NuGet restore Managed projects
   inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
-    platform: x64
+    command: restore
     configuration: Release
-    msbuildArguments: /target:Restore
-    restoreNugetPackages: false # Optional
+    restoreSolution: '**/*.csproj'
+
+- task: NuGetCommand@2
+  displayName: NuGet restore Managed projects (x86)
+  inputs:
+    command: restore
+    configuration: Release
+    restoreSolution: '**/*.csproj'
+  env:
+    NUGET_RESTORE_MSBUILD_ARGS: /p:Platform=x86
 
 - task: MSBuild@1
   displayName: Build x64
   inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
+    solution: Microsoft.Toolkit.Win32.sln
     platform: x64
     configuration: Release
-    msbuildArguments: /target:Build
-    restoreNugetPackages: false # Optional
-
-- task: MSBuild@1
-  displayName: Build x86 Restore
-  inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
-    platform: x86
-    configuration: Release
-    msbuildArguments: /target:Restore
-    restoreNugetPackages: false # Optional
+    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\binlogs\msbuild.release.x64.binlog
+    restoreNugetPackages: false
 
 - task: MSBuild@1
   displayName: Build x86
   inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
+    solution: Microsoft.Toolkit.Win32.sln
     platform: x86
     configuration: Release
-    msbuildArguments: /target:Build
-    restoreNugetPackages: false # Optional
-
-- task: MSBuild@1
-  displayName: Build ARM Restore
-  inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
-    platform: ARM
-    configuration: Release
-    msbuildArguments: /target:Restore
-    restoreNugetPackages: false # Optional
+    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\binlogs\msbuild.release.x86.binlog
+    restoreNugetPackages: false
 
 - task: MSBuild@1
   displayName: Build ARM
   inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
+    solution: Microsoft.Toolkit.Win32.sln
     platform: ARM
     configuration: Release
-    msbuildArguments: /target:Build
-    restoreNugetPackages: false # Optional
-
-- task: MSBuild@1
-  displayName: Build ARM64 Restore
-  inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
-    platform: ARM64
-    configuration: Release
-    msbuildArguments: /target:Restore
-    restoreNugetPackages: false # Optional
+    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\binlogs\msbuild.release.arm.binlog
+    restoreNugetPackages: false
 
 - task: MSBuild@1
   displayName: Build ARM64
   inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
+    solution: Microsoft.Toolkit.Win32.sln
     platform: ARM64
     configuration: Release
-    msbuildArguments: /target:Build
-    restoreNugetPackages: false # Optional
+    msbuildArguments: /target:Build /bl:$(Agent.TempDirectory)\binlogs\msbuild.release.arm64.binlog
+    restoreNugetPackages: false
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish binlogs'
+  condition: Always()
+  inputs:
+    targetPath: $(Agent.TempDirectory)\binlogs
+    artifactName: 'binlogs'
 
 - task: MSBuild@1
   displayName: Build Pack
   inputs:
-    solution: Microsoft.Toolkit.Win32.sln 
+    solution: Microsoft.Toolkit.Win32.sln
     platform: x86
     configuration: Release
     msbuildArguments: /target:Pack
-    restoreNugetPackages: false # Optional
+    restoreNugetPackages: false
 
 - task: PowerShell@2
   displayName: Authenticode Sign Packages

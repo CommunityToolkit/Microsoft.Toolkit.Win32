@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net462;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <RootNamespace>Microsoft.Toolkit.UI.XamlHost</RootNamespace>
     <AssemblyName>Microsoft.Toolkit.UI.XamlApplication.Package</AssemblyName>
     <Title>Windows Community Toolkit XamlApplication</Title>
@@ -14,7 +14,6 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <IsTool>true</IsTool>
   </PropertyGroup>
-
   <ItemGroup>
 
     <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.winmd">
@@ -31,13 +30,11 @@
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-x86\native</PackagePath>
     </Content>
-
-    <!--
+    
     <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pdb">
       <Pack>true</Pack>
-      <PackagePath>runtimes\win10-x86\native</PackagePath>
+      <PackagePath>tools\symbols\x86</PackagePath>
     </Content>
-    -->
 
     <Content Include="..\Win32\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
       <Pack>true</Pack>
@@ -49,12 +46,10 @@
       <PackagePath>runtimes\win10-x64\native</PackagePath>
     </Content>
 
-    <!--
     <Content Include="..\x64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pdb">
       <Pack>true</Pack>
-      <PackagePath>runtimes\win10-x64\native</PackagePath>
+      <PackagePath>tools\symbols\x64</PackagePath>
     </Content>
-    -->
    
     <Content Include="..\x64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
       <Pack>true</Pack>
@@ -65,13 +60,11 @@
       <Pack>true</Pack>
       <PackagePath>runtimes\win10-arm\native</PackagePath>
     </Content>
-
-    <!--
+    
     <Content Include="..\arm\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pdb">
       <Pack>true</Pack>
-      <PackagePath>runtimes\win10-arm\native</PackagePath>
+      <PackagePath>tools\symbols\arm</PackagePath>
     </Content>
-    -->
 
     <Content Include="..\arm\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
       <Pack>true</Pack>
@@ -83,12 +76,10 @@
       <PackagePath>runtimes\win10-arm64\native</PackagePath>
     </Content>
 
-    <!--
     <Content Include="..\arm64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pdb">
       <Pack>true</Pack>
-      <PackagePath>runtimes\win10-arm64\native</PackagePath>
-    </Content>
-    -->
+      <PackagePath>tools\symbols\arm64</PackagePath>
+    </Content>   
 
     <Content Include="..\arm64\$(Configuration)\Microsoft.Toolkit.Win32.UI.XamlApplication\Microsoft.Toolkit.Win32.UI.XamlHost.pri">
       <Pack>true</Pack>
