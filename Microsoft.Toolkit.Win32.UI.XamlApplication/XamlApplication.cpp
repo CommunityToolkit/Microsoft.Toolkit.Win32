@@ -13,7 +13,7 @@ extern "C" {
 
 namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 {
-    XamlApplication::XamlApplication(winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider> providers)
+    XamlApplication::XamlApplication(const winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider>& providers)
     {
         for (auto&& provider : providers)
         {
@@ -25,13 +25,12 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 
     void XamlApplication::Initialize()
     {
-        const auto out = outer();
-        if (out)
+        if (const auto out = outer())
         {
             winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider provider(nullptr);
             winrt::check_hresult(out->QueryInterface(
                 winrt::guid_of<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider>(),
-                reinterpret_cast<void**>(winrt::put_abi(provider))));
+                winrt::put_abi(provider)));
             m_providers.Append(provider);
         }
 
