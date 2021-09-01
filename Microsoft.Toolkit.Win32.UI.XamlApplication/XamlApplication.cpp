@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 
 #include "XamlApplication.h"
 
@@ -13,9 +13,9 @@ extern "C" {
 
 namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 {
-    XamlApplication::XamlApplication(winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider> providers)
+    XamlApplication::XamlApplication(const winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider>& providers)
     {
-        for(auto provider : providers)
+        for (auto&& provider : providers)
         {
             m_providers.Append(provider);
         }
@@ -23,21 +23,11 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         Initialize();
     }
 
-    XamlApplication::XamlApplication()
-    {
-    }
-
     void XamlApplication::Initialize()
     {
-        const auto out = outer();
-        if (out)
-        {
-            winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider provider(nullptr);
-            winrt::check_hresult(out->QueryInterface(
-                winrt::guid_of<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider>(),
-                reinterpret_cast<void**>(winrt::put_abi(provider))));
-            m_providers.Append(provider);
-        }
+        const auto& outerWinRt = *reinterpret_cast<winrt::Windows::Foundation::IInspectable*>(outer());
+        auto provider = outerWinRt.as<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider>();
+        m_providers.Append(provider);
 
         const auto dispatcherQueue = winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
         if (!dispatcherQueue)
