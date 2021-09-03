@@ -2,13 +2,10 @@
 
 #include "XamlApplication.h"
 
-namespace xaml = ::winrt::Windows::UI::Xaml;
-
-extern "C" {
-    WINBASEAPI HMODULE WINAPI LoadLibraryExW(_In_ LPCWSTR lpLibFileName, _Reserved_ HANDLE hFile, _In_ DWORD dwFlags);
-    WINBASEAPI HMODULE WINAPI GetModuleHandleW(_In_opt_ LPCWSTR lpModuleName);
-    WINUSERAPI BOOL WINAPI PeekMessageW(_Out_ LPMSG lpMsg, _In_opt_ HWND hWnd, _In_ UINT wMsgFilterMin, _In_ UINT wMsgFilterMax, _In_ UINT wRemoveMsg);
-    WINUSERAPI LRESULT WINAPI DispatchMessageW(_In_ CONST MSG* lpMsg);
+namespace winrt
+{
+    using namespace winrt::Windows::UI::Xaml;
+    using namespace winrt::Windows::UI::Xaml::Hosting;
 }
 
 namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
@@ -25,19 +22,15 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 
     void XamlApplication::Initialize()
     {
-        const auto& outerWinRt = *reinterpret_cast<winrt::Windows::Foundation::IInspectable*>(outer());
-        auto provider = outerWinRt.as<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider>();
-        m_providers.Append(provider);
+        auto outerWithRef = outer();
+        outerWithRef->AddRef();
+        winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider metdataProvider{ outerWithRef, winrt::take_ownership_from_abi };
+        m_providers.Append(metdataProvider);
 
         const auto dispatcherQueue = winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
         if (!dispatcherQueue)
         {
-            m_executionMode = ExecutionMode::Win32;
-            m_windowsXamlManager = xaml::Hosting::WindowsXamlManager::InitializeForCurrentThread();
-        }
-        else
-        {
-            m_executionMode = ExecutionMode::UWP;
+            m_windowsXamlManager = winrt::Hosting::WindowsXamlManager::InitializeForCurrentThread();
         }
     }
 
@@ -74,7 +67,7 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         Close();
     }
 
-    xaml::Markup::IXamlType XamlApplication::GetXamlType(xaml::Interop::TypeName const& type)
+    winrt::Markup::IXamlType XamlApplication::GetXamlType(winrt::Interop::TypeName const& type)
     {
         for (const auto& provider : m_providers)
         {
@@ -88,7 +81,7 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         return nullptr;
     }
 
-    xaml::Markup::IXamlType XamlApplication::GetXamlType(winrt::hstring const& fullName)
+    winrt::Markup::IXamlType XamlApplication::GetXamlType(winrt::hstring const& fullName)
     {
         for (const auto& provider : m_providers)
         {
@@ -102,9 +95,9 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         return nullptr;
     }
 
-    winrt::com_array<xaml::Markup::XmlnsDefinition> XamlApplication::GetXmlnsDefinitions()
+    winrt::com_array<winrt::Markup::XmlnsDefinition> XamlApplication::GetXmlnsDefinitions()
     {
-        std::list<xaml::Markup::XmlnsDefinition> definitions;
+        std::list<winrt::Markup::XmlnsDefinition> definitions;
         for (const auto& provider : m_providers)
         {
             auto defs = provider.GetXmlnsDefinitions();
@@ -114,10 +107,10 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
             }
         }
 
-        return winrt::com_array<xaml::Markup::XmlnsDefinition>(definitions.begin(), definitions.end());
+        return winrt::com_array<winrt::Markup::XmlnsDefinition>(definitions.begin(), definitions.end());
     }
 
-    winrt::Windows::Foundation::Collections::IVector<xaml::Markup::IXamlMetadataProvider> XamlApplication::MetadataProviders()
+    winrt::Windows::Foundation::Collections::IVector<winrt::Markup::IXamlMetadataProvider> XamlApplication::MetadataProviders()
     {
         return m_providers;
     }
