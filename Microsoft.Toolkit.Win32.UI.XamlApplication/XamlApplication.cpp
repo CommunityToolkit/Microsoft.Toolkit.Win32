@@ -22,10 +22,9 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 
     void XamlApplication::Initialize()
     {
-        auto outerWithRef = outer();
-        outerWithRef->AddRef();
-        winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider metdataProvider{ outerWithRef, winrt::take_ownership_from_abi };
-        m_providers.Append(metdataProvider);
+        winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider provider{ nullptr };
+        winrt::check_hresult(outer()->QueryInterface(winrt::guid_of<decltype(provider)>(), winrt::put_abi(provider)));
+        m_providers.Append(provider);
 
         const auto dispatcherQueue = winrt::Windows::System::DispatcherQueue::GetForCurrentThread();
         if (!dispatcherQueue)
