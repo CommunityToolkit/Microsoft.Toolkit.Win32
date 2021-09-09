@@ -3,7 +3,6 @@
   <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.210825.3\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210825.3\build\native\Microsoft.Windows.CppWinRT.props')" />
   <PropertyGroup Label="Globals">
     <CppWinRTEnabled>true</CppWinRTEnabled>
-    <CppWinRTImplicitlyExpandTargetPlatform>true</CppWinRTImplicitlyExpandTargetPlatform>
     <MinimalCoreWin>true</MinimalCoreWin>
     <ProjectGuid>{015a0047-772d-4f1a-88c9-45c18f0adfb6}</ProjectGuid>
     <ProjectName>Microsoft.Toolkit.Win32.UI.XamlHost</ProjectName>
@@ -151,6 +150,11 @@
     <None Include="Microsoft.UI.Xaml.Markup.def" />
     <None Include="packages.config" />
     <None Include="ReadMe.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsDesktop, Version=10.0.18362.0">
+      <Name>Windows Desktop Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
