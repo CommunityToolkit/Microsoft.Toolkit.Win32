@@ -11,6 +11,12 @@ This repository contains all controls for WPF and WinForms to simplify and demon
 
 For everything else in the Windows Community Toolkit (UWP controls, .NET Standard web services, helpers and more), [start here](https://github.com/windows-toolkit/WindowsCommunityToolkit)
 
+## 🚨 Archival Notice - 8/30/2023
+
+With the release of [Xaml Islands for Windows App SDK 1.4](https://learn.microsoft.com/windows/apps/windows-app-sdk/stable-channel#xaml-islands-no-longer-experimental) this repo is being archived.
+
+All feature/issue/discussion inquires related to XAML Islands should be directed to the [WindowsAppSDK repository here](https://github.com/microsoft/WindowsAppSDK).
+
 ## XAML Islands Notice
 The set of WPF and WinForms controls found here are _only designed to work with .NET Core 3.1_, **not** .NET 5 and above. These controls are using the XAML Islands Windows 10 APIs included within the Windows 10 OS which won't be improved anymore. 
 
