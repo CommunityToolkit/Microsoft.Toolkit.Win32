@@ -1,10 +1,7 @@
-﻿#pragma once
+#pragma once
 
+#include "pch.h"
 #include "XamlApplication.g.h"
-#include <winrt/Windows.UI.Xaml.Hosting.h>
-#include <winrt/Windows.UI.ViewManagement.h>
-#include <winrt/Windows.Foundation.Collections.h>
-#include <Windows.h>
 
 namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
 {
@@ -17,8 +14,8 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
     class XamlApplication : public XamlApplicationT<XamlApplication, Windows::UI::Xaml::Markup::IXamlMetadataProvider>
     {
     public:
-        XamlApplication();
-        XamlApplication(winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider> providers);
+        XamlApplication() = default;
+        XamlApplication(const winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider>& providers);
         ~XamlApplication();
 
         void Initialize();
@@ -38,7 +35,6 @@ namespace winrt::Microsoft::Toolkit::Win32::UI::XamlHost::implementation
         }
 
     private:
-        ExecutionMode m_executionMode = ExecutionMode::Win32;
         winrt::Windows::UI::Xaml::Hosting::WindowsXamlManager m_windowsXamlManager = nullptr;
         winrt::Windows::Foundation::Collections::IVector<winrt::Windows::UI::Xaml::Markup::IXamlMetadataProvider> m_providers = winrt::single_threaded_vector<Windows::UI::Xaml::Markup::IXamlMetadataProvider>();
         bool m_bIsClosed = false;
